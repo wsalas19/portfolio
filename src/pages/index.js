@@ -1,9 +1,13 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import { Flex, Heading } from "@chakra-ui/react";
+import AboutMe from "../components/AboutMe";
 
 const inter = Inter({ subsets: ["latin"] });
 
+/* <Heading textAlign={"center"} size={"xl"}>
+	This is My Portfolio!
+</Heading> */
 export default function Home() {
 	return (
 		<>
@@ -13,11 +17,8 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Flex justifyContent={"center"}>
-				<Heading textAlign={"center"} size={"xl"}>
-					This is My Portfolio!
-				</Heading>
-			</Flex>
+
+			<AboutMe />
 		</>
 	);
 }
