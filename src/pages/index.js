@@ -1,14 +1,14 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { Flex, Heading } from "@chakra-ui/react";
-import AboutMe from "../components/AboutMe";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 /* <Heading textAlign={"center"} size={"xl"}>
 	This is My Portfolio!
 </Heading> */
-export default function Home() {
+
+export default function Home({ url }) {
 	return (
 		<>
 			<Head>
@@ -17,8 +17,33 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Box h={"100vh"} bg={"#323232"}>
+				<Heading p={"25"} color={"white"} textAlign={"center"}>
+					{"Let's meet each other..."}
+				</Heading>
+				<Flex flexDirection={"row"} w={"100%"} h={"90vh"}>
+					<Flex w={"50%"}>
+						<Box position={"absolute"} left={"10%"} w={"400px"} h={"400px"}>
+							<Image
+								rounded={"full"}
+								objectFit={"contain"}
+								src={url}
+								alt="me"
+							/>
+						</Box>
+					</Flex>
+					<Flex w={"50%"}></Flex>
+				</Flex>
 
-			<AboutMe />
+				<Flex w={"100%"} h={"100vh"}></Flex>
+			</Box>
 		</>
 	);
+}
+
+export async function getStaticProps() {
+	const response = await fetch("http://localhost:3000/api/image");
+
+	const data = await response.json();
+	return { props: { ...data } };
 }

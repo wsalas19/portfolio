@@ -39,3 +39,16 @@
 	--card-rgb: 180, 185, 188;
 	--card-border-rgb: 131, 134, 135;
 }
+
+html {
+	margin: 0px;
+	padding: 0px;
+	scroll-behavior: smooth;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0; /* Remove scrollbar space */
+	background: transparent; /* Optional: just make scrollbar invisible */
+}
