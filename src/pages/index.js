@@ -17,7 +17,7 @@ export default function Home({ url }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Box h={"100vh"} bg={"#323232"}>
+			<Box className="mainContainer " h={"100vh"} bg={"#323232"}>
 				<Heading p={"25"} color={"white"} textAlign={"center"}>
 					{"Let's meet each other..."}
 				</Heading>
