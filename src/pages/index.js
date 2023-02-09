@@ -27,23 +27,17 @@ export default function Home({ url }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Box className="mainContainer " bg={"#323232"}>
+			<Box id="aboutme" className="mainContainer " bg={"#323232"}>
 				<Flex
 					p={"30px"}
 					color={"white"}
 					className={"expandHeading"}
 					pt={"50px"}
 				>
-					<h1>{"Let me present myself..."}</h1>
+					<h1>{"Let me introduce myself..."}</h1>
 				</Flex>
 
-				<Flex
-					id="aboutme"
-					className="imageText"
-					flexDirection={"row"}
-					w={"100%"}
-					h={"90vh"}
-				>
+				<Flex className="imageText" flexDirection={"row"} w={"100%"} h={"90vh"}>
 					<Flex
 						gap={"3px"}
 						alignItems={"center"}
@@ -90,9 +84,24 @@ export default function Home({ url }) {
 						>
 							<BsTerminal color="white" />
 							<Flex alignItems={"center"} gap={2}>
-								<Box rounded={"full"} w={"10px"} h={"10px"} bg={"red"}></Box>
-								<Box rounded={"full"} w={"10px"} h={"10px"} bg={"yellow"}></Box>
-								<Box rounded={"full"} w={"10px"} h={"10px"} bg={"green"}></Box>
+								<Box
+									rounded={"full"}
+									w={"10px"}
+									h={"10px"}
+									bg={"#F75D59"}
+								></Box>
+								<Box
+									rounded={"full"}
+									w={"10px"}
+									h={"10px"}
+									bg={"#FBBE2F"}
+								></Box>
+								<Box
+									rounded={"full"}
+									w={"10px"}
+									h={"10px"}
+									bg={"#29CD3F"}
+								></Box>
 							</Flex>
 						</Flex>
 						<Flex gap={5} flexDirection={"column"}>
