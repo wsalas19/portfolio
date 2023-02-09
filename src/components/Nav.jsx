@@ -4,8 +4,6 @@ import React from "react";
 /* import cvEng from "../../public/assets/CV-ENG-WSALAS.pdf"; */
 
 function Nav() {
-	const handleDownload = () => {};
-
 	return (
 		<>
 			<Flex w={"100%"} h={"60px"} bg={"#1E1E1E"}>
@@ -15,10 +13,10 @@ function Nav() {
 					</Heading>
 					<Flex ml={"10"} gap={8} justifyContent={"space-between"}>
 						<Text color={"white"}>
-							<Link href={"/aboutme"}>About</Link>
+							<Link href={"#aboutme"}>About</Link>
 						</Text>
 						<Text color={"white"}>
-							<Link href={"/projects"}>Projects</Link>
+							<a href={"#projects"}>Projects</a>
 						</Text>
 						<Text color={"white"}>
 							<Link href={"/contact"}>Contact</Link>

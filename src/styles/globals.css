@@ -1,44 +1,4 @@
-:root {
-	--max-width: 1100px;
-	--border-radius: 12px;
-	--font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-		"Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-		"Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
-
-	--primary-glow: conic-gradient(
-		from 180deg at 50% 50%,
-		#16abff33 0deg,
-		#0885ff33 55deg,
-		#54d6ff33 120deg,
-		#0071ff33 160deg,
-		transparent 360deg
-	);
-	--secondary-glow: radial-gradient(
-		rgba(255, 255, 255, 1),
-		rgba(255, 255, 255, 0)
-	);
-
-	--tile-start-rgb: 239, 245, 249;
-	--tile-end-rgb: 228, 232, 233;
-	--tile-border: conic-gradient(
-		#00000080,
-		#00000040,
-		#00000030,
-		#00000020,
-		#00000010,
-		#00000010,
-		#00000080
-	);
-
-	--callout-rgb: 238, 240, 241;
-	--callout-border-rgb: 172, 175, 176;
-	--card-rgb: 180, 185, 188;
-	--card-border-rgb: 131, 134, 135;
-}
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap");
 
 html {
 	margin: 0px;
@@ -47,8 +7,66 @@ html {
 	overflow: scroll;
 	overflow-x: hidden;
 }
+a {
+	text-decoration: none;
+}
 
 ::-webkit-scrollbar {
 	width: 0; /* Remove scrollbar space */
 	background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+/* The typing effect */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 28%;
+	}
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: white;
+	}
+}
+
+.expandHeading h1 {
+	font-family: "Source Code Pro", monospace;
+	font-size: x-large;
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	border-right: 3px solid #2f855a; /* The typwriter cursor */
+	white-space: nowrap; /* Keeps the content on a single line */
+	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+	letter-spacing: 6px; /* Adjust as needed */
+	animation: typing 3.5s steps(45, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes scale-up-center {
+	0% {
+		transform: scale(0.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+.projectButton {
+	transition: transform 0.2s ease-in-out;
+}
+.projectButton:hover {
+	transform: scale(1.1);
+}
+
+.mainImage {
+	transition: transform 0.2s ease-in-out;
+}
+
+.mainImage:hover {
+	transform: scale(1.1);
 }
