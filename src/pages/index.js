@@ -10,6 +10,7 @@ import {
 	Tag,
 	Text,
 } from "@chakra-ui/react";
+import { NEXT_URL } from "@/config/config";
 import { BsChevronDoubleDown, BsTerminal } from "react-icons/bs";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -155,7 +156,7 @@ export default function Home({ url }) {
 }
 
 export async function getStaticProps() {
-	const response = await fetch("http://localhost:3000/api/image");
+	const response = await fetch(`${NEXT_URL}/image`);
 
 	const data = await response.json();
 	return { props: { ...data } };
