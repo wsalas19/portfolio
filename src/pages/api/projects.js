@@ -6,6 +6,7 @@ export default function handler(req, res) {
 				" A simple client-side-only weather app, that displays information about the current weather of any city or country using the OpenWeather API",
 			image:
 				"https://i.ibb.co/S0MW2fP/Captura-de-pantalla-2023-02-13-155819.png",
+			url: "https://weather-app-2-0-nu.vercel.app/",
 			technologies: ["React", "Javascript", "CSS"],
 		},
 		{
@@ -13,6 +14,7 @@ export default function handler(req, res) {
 			description:
 				" A country App that included: searches, filtering, ordering and creation. I built the app using React, Redux, CSS for the client and developed it in Node.js with Express for the backend. Database in PostgreSQL and Sequelize.",
 			image: "https://i.ibb.co/VLQvd86/countryfinder.png",
+			url: "https://country-finder-wsb.vercel.app/",
 			technologies: [
 				"React",
 				"Node",
@@ -29,6 +31,7 @@ export default function handler(req, res) {
 			description:
 				" a complete E-Commerce with payment gateway,authentication, comments, profile and inventory management, using agile methodologies such as SCRUM to keep track of the overall process and goals.",
 			image: "https://i.ibb.co/60jmFMh/tomate.png",
+			url: "https://testpf.vercel.app/",
 			technologies: [
 				"React",
 				"Node",
@@ -48,6 +51,7 @@ export default function handler(req, res) {
 			description:
 				"a static website that showcases my profile and my previous work.",
 			image: "null",
+			url: "You're Here!",
 			technologies: [
 				"Next",
 				"React",
