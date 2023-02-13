@@ -1,6 +1,14 @@
 export default function handler(req, res) {
 	let projects = [
 		{
+			name: "Weather App",
+			description:
+				" A simple client-side-only weather app, that displays information about the current weather of any city or country using the OpenWeather API",
+			image:
+				"https://i.ibb.co/S0MW2fP/Captura-de-pantalla-2023-02-13-155819.png",
+			technologies: ["React", "Javascript", "CSS"],
+		},
+		{
 			name: "Country Finder",
 			description:
 				" A country App that included: searches, filtering, ordering and creation. I built the app using React, Redux, CSS for the client and developed it in Node.js with Express for the backend. Database in PostgreSQL and Sequelize.",
