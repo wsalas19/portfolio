@@ -11,7 +11,9 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { NEXT_URL } from "@/config/config";
-import { BsChevronDoubleDown, BsTerminal } from "react-icons/bs";
+import { BsTerminal } from "react-icons/bs";
+import { AiOutlineDown } from "react-icons/ai";
+import ProjectCard from "@/components/ProjectCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +21,7 @@ const inter = Inter({ subsets: ["latin"] });
 	This is My Portfolio!
 </Heading> */
 
-export default function Home({ url }) {
+export default function Home({ url, projects }) {
 	return (
 		<>
 			<Head>
@@ -57,7 +59,7 @@ export default function Home({ url }) {
 						<Heading mt={"30px"} textAlign={"center"} color={"white"}>
 							William Salas Bolaño
 						</Heading>
-						<HStack>
+						<HStack mt={"15px"}>
 							<Tag>Full Stack Developer</Tag>
 							<Tag colorScheme={"blue"}>React.js</Tag>
 							<Tag colorScheme={"green"}>Node.js</Tag>
@@ -75,6 +77,7 @@ export default function Home({ url }) {
 						h={"fit-content"}
 						pb={20}
 						overflow={"hidden"}
+						bg={"#212121"}
 					>
 						<Flex
 							flexDirection={"row"}
@@ -105,10 +108,15 @@ export default function Home({ url }) {
 								></Box>
 							</Flex>
 						</Flex>
-						<Flex gap={5} flexDirection={"column"}>
+						<Flex
+							mt={"-px"}
+							className="aboutText"
+							gap={5}
+							flexDirection={"column"}
+						>
 							<Text color={"white"} mx={20} mt={20}>
 								{
-									">Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia."
+									"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia."
 								}
 							</Text>
 							<Text color={"white"} mx={20}>
@@ -131,24 +139,51 @@ export default function Home({ url }) {
 								className="projectButton"
 								mx={20}
 								width={"fit-content"}
-								rightIcon={<BsChevronDoubleDown />}
+								rightIcon={<AiOutlineDown />}
 							>
-								<a href="#projects">Get to Know my Projects</a>
+								<a href="#projects">know my projects</a>
 							</Button>
 						</Flex>
 					</Flex>
 				</Flex>
 				<Flex
+					flexDirection={"column"}
 					id="projects"
-					bg={"red"}
 					className="projects"
 					w={"100%"}
 					h={"100vh"}
+					justifyContent={"space-between"}
 				>
-					<Heading m={"100px"} color={"white"}>
-						{" "}
-						{">myProjects"}
-					</Heading>
+					<Box
+						position={"absolute"}
+						w={"100%"}
+						h={"6%"}
+						className={"fade"}
+					></Box>
+					<Flex flexDirection={"column"}>
+						<Heading m={"90px"} color={"white"}>
+							{" "}
+							{">myProjects"}
+						</Heading>
+					</Flex>
+
+					<Flex>
+						<ProjectCard
+							name={projects[2].name}
+							description={projects[2].description}
+							image={projects[2].image}
+							url={projects[2].url}
+							technologies={projects[2].technologies}
+							key={Math.random().toString(36).substr(2)}
+						/>
+					</Flex>
+
+					<Box
+						alignItems={"flex-end"}
+						w={"100%"}
+						h={"6%"}
+						className={"fadeDown"}
+					></Box>
 				</Flex>
 			</Box>
 		</>
@@ -157,7 +192,10 @@ export default function Home({ url }) {
 
 export async function getStaticProps() {
 	const response = await fetch(`${NEXT_URL}/image`);
+	const projects = await fetch(`${NEXT_URL}/projects`);
 
 	const data = await response.json();
-	return { props: { ...data } };
+	const projectsData = await projects.json();
+	console.log(projectsData);
+	return { props: { url: data.url, projects: projectsData } };
 }

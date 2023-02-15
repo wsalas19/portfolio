@@ -29,7 +29,7 @@ export default function handler(req, res) {
 		{
 			name: "To-Mate E-Commerce",
 			description:
-				" a complete E-Commerce with payment gateway,authentication, comments, profile and inventory management, using agile methodologies such as SCRUM to keep track of the overall process and goals.",
+				" A complete E-Commerce with payment gateway,authentication, comments, profile and inventory management, using agile methodologies such as SCRUM to keep track of the overall process and goals.",
 			image: "https://i.ibb.co/60jmFMh/tomate.png",
 			url: "https://testpf.vercel.app/",
 			technologies: [
@@ -49,7 +49,7 @@ export default function handler(req, res) {
 		{
 			name: "myPortfolio",
 			description:
-				"a static website that showcases my profile and my previous work.",
+				"A static website that showcases my profile and my previous work.",
 			image: "null",
 			url: "You're Here!",
 			technologies: [
