@@ -167,15 +167,20 @@ export default function Home({ url, projects }) {
 						</Heading>
 					</Flex>
 
-					<Flex>
-						<ProjectCard
-							name={projects[2].name}
-							description={projects[2].description}
-							image={projects[2].image}
-							url={projects[2].url}
-							technologies={projects[2].technologies}
-							key={Math.random().toString(36).substr(2)}
-						/>
+					<Flex justifyContent={"space-around"}>
+						{projects.map((p) => {
+							return (
+								<ProjectCard
+									name={p.name}
+									description={p.description}
+									image={p.image}
+									url={p.url}
+									technologies={p.technologies}
+									id={p.id}
+									key={p.id}
+								/>
+							);
+						})}
 					</Flex>
 
 					<Box
@@ -185,6 +190,7 @@ export default function Home({ url, projects }) {
 						className={"fadeDown"}
 					></Box>
 				</Flex>
+				<Flex className="footer" h={"50px"} w={"100%"} bg={"#323232"}></Flex>
 			</Box>
 		</>
 	);
@@ -196,6 +202,6 @@ export async function getStaticProps() {
 
 	const data = await response.json();
 	const projectsData = await projects.json();
-	console.log(projectsData);
+
 	return { props: { url: data.url, projects: projectsData } };
 }

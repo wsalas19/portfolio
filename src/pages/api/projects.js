@@ -1,6 +1,7 @@
 export default function handler(req, res) {
 	let projects = [
 		{
+			id: Math.random().toString(36).substr(2),
 			name: "Weather App",
 			description:
 				" A simple client-side-only weather app, that displays information about the current weather of any city or country using the OpenWeather API",
@@ -10,6 +11,7 @@ export default function handler(req, res) {
 			technologies: ["React", "Javascript", "CSS"],
 		},
 		{
+			id: Math.random().toString(36).substr(2),
 			name: "Country Finder",
 			description:
 				" A country App that included: searches, filtering, ordering and creation. I built the app using React, Redux, CSS for the client and developed it in Node.js with Express for the backend. Database in PostgreSQL and Sequelize.",
@@ -27,6 +29,7 @@ export default function handler(req, res) {
 			],
 		},
 		{
+			id: Math.random().toString(36).substr(2),
 			name: "To-Mate E-Commerce",
 			description:
 				" A complete E-Commerce with payment gateway,authentication, comments, profile and inventory management, using agile methodologies such as SCRUM to keep track of the overall process and goals.",
@@ -47,6 +50,7 @@ export default function handler(req, res) {
 			],
 		},
 		{
+			id: Math.random().toString(36).substr(2),
 			name: "myPortfolio",
 			description:
 				"A static website that showcases my profile and my previous work.",
