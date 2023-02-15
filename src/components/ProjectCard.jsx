@@ -26,7 +26,7 @@ function ProjectCard({ name, image, url, id }) {
 				bg={"#212121"}
 				overflow={"hidden"}
 			>
-				<Link className="cardLink" as={NextLink} href={"##"}>
+				<Link className="cardLink" as={NextLink} href={`/projects/${id}`}>
 					<Box className="projectImage" w={"400px"} h={"200px"}>
 						<Image src={image} alt={"project preview"} objectFit={"contain"} />
 					</Box>
