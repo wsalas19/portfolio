@@ -151,3 +151,17 @@ a {
 		color: #7c007c;
 	}
 }
+
+.tech {
+	transition: translate 0.2s ease-in-out;
+}
+.tech:hover {
+	translate: 0px -10px;
+}
+.contact {
+	background-image: url("https://media4.giphy.com/media/2YOp8WqFDRHhe/giphy.gif?cid=ecf05e47hzcr025070zyzo362lzcgbbg69kotnoplutuoijg&rid=giphy.gif&ct=g");
+	background-size: cover;
+}
+/* .backButton{
+	
+} */

@@ -60,39 +60,3 @@ function ProjectCard({ name, image, url, id }) {
 }
 
 export default ProjectCard;
-
-/* {
-	projects.map((p) => {
-		return (
-			<ProjectCard
-				name={p.name}
-				description={p.description}
-				image={p.image}
-				url={p.url}
-				technologies={p.technologies}
-				key={Math.random().toString(36).substr(2)}
-			/>
-		);
-	});
-} */
-
-{
-	/* <Link
-						display={"flex"}
-						alignItems={"center"}
-						gap={1}
-						color={"#7E7E7E"}
-						href={url}
-						isExternal
-					>
-						Visit <FiExternalLink />
-					</Link>
-
- */
-}
-
-/* <Flex wrap={"wrap"} w={"50%"}>
-						{technologies.map((t) => {
-							return <Tag key={Math.random().toString(36).substr(2)}>{t}</Tag>;
-						})}
-					</Flex> */

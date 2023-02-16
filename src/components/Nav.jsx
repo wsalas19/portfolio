@@ -1,4 +1,14 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+	Button,
+	Flex,
+	Heading,
+	Image,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Text,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 /* import cvEng from "../../public/assets/CV-ENG-WSALAS.pdf"; */
@@ -18,10 +28,10 @@ function Nav() {
 						justifyContent={"space-between"}
 					>
 						<Text color={"white"}>
-							<Link href={"#aboutme"}>About</Link>
+							<Link href={"/#aboutme"}>About</Link>
 						</Text>
 						<Text color={"white"}>
-							<a href={"#projects"}>Projects</a>
+							<a href={"/#projects"}>Projects</a>
 						</Text>
 						<Text color={"white"}>
 							<Link href={"/contact"}>Contact</Link>
@@ -35,7 +45,47 @@ function Nav() {
 					w={"25%"}
 					pr={"5"}
 				>
-					<Button colorScheme={"green"} variant={"outline"}>
+					<Menu>
+						<MenuButton colorScheme={"orange"} variant={"outline"} as={Button}>
+							Download CV
+						</MenuButton>
+						<MenuList>
+							<MenuItem
+								as={"a"}
+								href={
+									"https://drive.google.com/file/d/1zOdpnJkIiTwedJ-Tm9le9VH5n01aA8cO/view?usp=sharing"
+								}
+								isExternal
+								minH="48px"
+							>
+								<Image
+									mr={1}
+									boxSize={"1.5rem"}
+									src="https://cdn-icons-png.flaticon.com/512/555/555526.png"
+									alt={"flag"}
+								/>
+								English
+							</MenuItem>
+							<MenuItem
+								as={"a"}
+								href={
+									"https://drive.google.com/file/d/1fdwW2qLwwYkLoE6k9Df52LO_teZwlDKr/view?usp=sharing"
+								}
+								isExternal
+								minH="48px"
+							>
+								<Image
+									mr={1}
+									boxSize={"1.5rem"}
+									src="https://icons.iconarchive.com/icons/wikipedia/flags/256/ES-Spain-Flag-icon.png"
+									alt={"flag"}
+								/>
+								Spanish
+							</MenuItem>
+						</MenuList>
+					</Menu>
+
+					{/* <Button colorScheme={"green"} variant={"outline"}>
 						<a
 							href="https://drive.google.com/file/d/1zOdpnJkIiTwedJ-Tm9le9VH5n01aA8cO/view?usp=sharing"
 							download
@@ -44,7 +94,7 @@ function Nav() {
 						>
 							Download CV
 						</a>
-					</Button>
+					</Button> */}
 				</Flex>
 			</Flex>
 		</>
