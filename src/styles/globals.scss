@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic");
+
+$codepro-font: "Source Code Pro", monospace;
+$roboto-font: "Roboto", sans-serif;
+
+$base-dark: #323232;
+
+html {
+	margin: 0px;
+	padding: 0px;
+	scroll-behavior: smooth;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+a {
+	text-decoration: none;
+}
+
+::-webkit-scrollbar {
+	width: 0; /* Remove scrollbar space */
+	background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+/* The typing effect */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 28%;
+	}
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: white;
+	}
+}
+
+.expandHeading h1 {
+	font-family: $codepro-font;
+	font-size: x-large;
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	border-right: 3px solid #2f855a; /* The typwriter cursor */
+	white-space: nowrap; /* Keeps the content on a single line */
+	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+	letter-spacing: 6px; /* Adjust as needed */
+	animation: typing 3.5s steps(45, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes scale-up-center {
+	0% {
+		transform: scale(0.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+.projectButton {
+	font-family: $codepro-font;
+	transition: transform 0.2s ease-in-out;
+}
+.projectButton:hover {
+	transform: scale(1.1);
+	background-color: #fff;
+	box-shadow: 1px 1px 15px 10px #fff;
+}
+
+.mainImage {
+	transition: transform 0.2s ease-in-out;
+}
+
+.mainImage:hover {
+	transform: scale(1.1);
+}
+
+.aboutText p {
+	font-family: $codepro-font;
+}
+
+.fade {
+	background: linear-gradient(to bottom, $base-dark, transparent);
+}
+.fadeDown {
+	background: linear-gradient(to top, $base-dark, transparent);
+}
+
+.projects {
+	background-image: url("https://img.freepik.com/foto-gratis/tiro-angulo-fascinante-cielo-estrellado_181624-27925.jpg?w=1380&t=st=1676478179~exp=1676478779~hmac=9df832fd8a1c278be89ec412b3cf4a9d220fda95ea8e57a0aa2fbe84e7c2ed9c");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.projectCards {
+	transition: translate 0.2s ease-in-out;
+	a.cardLink {
+		cursor: default;
+	}
+	span {
+		cursor: default;
+	}
+}
+
+.projectCards:hover {
+	translate: 0px -15px;
+}
+
+.navLinks {
+	a {
+		position: relative;
+	}
+	a::after {
+		content: "";
+		position: absolute;
+		display: block;
+		height: 0.4em;
+		width: 0%;
+		background-color: #ff5730;
+		bottom: -1em;
+		transition: all ease-in-out 250ms;
+	}
+	a:hover::after {
+		width: 110%;
+	}
+}
+
+.socials {
+	p {
+		color: white;
+	}
+	a {
+		color: white;
+		transition: transform 0.2s ease-in-out;
+	}
+	a:hover {
+		transform: scale(1.2);
+	}
+	.twitter:hover {
+		color: #1a8cd8;
+	}
+	.linkedin:hover {
+		color: #0a66c2;
+	}
+	.github:hover {
+		color: #7c007c;
+	}
+}
+
+.tech {
+	transition: translate 0.2s ease-in-out;
+}
+.tech:hover {
+	translate: 0px -10px;
+}
+.contact {
+	background-image: url("https://media4.giphy.com/media/2YOp8WqFDRHhe/giphy.gif?cid=ecf05e47hzcr025070zyzo362lzcgbbg69kotnoplutuoijg&rid=giphy.gif&ct=g");
+	background-size: cover;
+}
+/* .backButton{
+	
+} */

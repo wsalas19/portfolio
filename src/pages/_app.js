@@ -1,11 +1,15 @@
-import { theme } from "../chakra/theme";
-import "@/styles/globals.css";
+import { theme } from "../theme";
+import "@/styles/globals.scss";
+import Nav from "../components/Nav";
 import { ChakraProvider } from "@chakra-ui/react";
+import Footer from "@/components/Footer";
 
 export default function App({ Component, pageProps }) {
 	return (
 		<ChakraProvider theme={theme}>
+			<Nav />
 			<Component {...pageProps} />
+			<Footer />
 		</ChakraProvider>
 	);
 }
