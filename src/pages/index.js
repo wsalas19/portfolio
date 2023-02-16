@@ -195,7 +195,7 @@ export default function Home({ url, projects }) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const response = await fetch(`${NEXT_URL}/image`);
 	const projects = await fetch(`${NEXT_URL}/projects`);
 
