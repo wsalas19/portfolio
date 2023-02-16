@@ -190,7 +190,6 @@ export default function Home({ url, projects }) {
 						className={"fadeDown"}
 					></Box>
 				</Flex>
-				<Flex className="footer" h={"50px"} w={"100%"} bg={"#323232"}></Flex>
 			</Box>
 		</>
 	);

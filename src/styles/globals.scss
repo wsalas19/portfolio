@@ -110,3 +110,44 @@ a {
 .projectCards:hover {
 	translate: 0px -15px;
 }
+
+.navLinks {
+	a {
+		position: relative;
+	}
+	a::after {
+		content: "";
+		position: absolute;
+		display: block;
+		height: 0.4em;
+		width: 0%;
+		background-color: #ff5730;
+		bottom: -1em;
+		transition: all ease-in-out 250ms;
+	}
+	a:hover::after {
+		width: 110%;
+	}
+}
+
+.socials {
+	p {
+		color: white;
+	}
+	a {
+		color: white;
+		transition: transform 0.2s ease-in-out;
+	}
+	a:hover {
+		transform: scale(1.2);
+	}
+	.twitter:hover {
+		color: #1a8cd8;
+	}
+	.linkedin:hover {
+		color: #0a66c2;
+	}
+	.github:hover {
+		color: #7c007c;
+	}
+}

@@ -11,7 +11,12 @@ function Nav() {
 					<Heading color={"white"} p={"5"} size={"lg"}>
 						<Link href={"/"}>myPortfolio</Link>
 					</Heading>
-					<Flex ml={"10"} gap={8} justifyContent={"space-between"}>
+					<Flex
+						className="navLinks"
+						ml={"10"}
+						gap={8}
+						justifyContent={"space-between"}
+					>
 						<Text color={"white"}>
 							<Link href={"#aboutme"}>About</Link>
 						</Text>
