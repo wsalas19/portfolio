@@ -14,23 +14,29 @@ import NextLink from "next/link";
 import { FiExternalLink } from "react-icons/fi";
 
 function ProjectCard({ name, image, url, id }) {
+	const cardWidth = "346px";
 	return (
 		<>
 			<Flex
 				key={id}
 				className="projectCards"
 				flexDirection={"column"}
-				w={"400px"}
-				h={"320px"}
+				w={{ base: cardWidth }}
+				h={{ base: "255px" }}
 				borderRadius={"10px"}
 				bg={"#212121"}
 				overflow={"hidden"}
 			>
 				<Link className="cardLink" as={NextLink} href={`/projects/${id}`}>
-					<Box className="projectImage" w={"400px"} h={"200px"}>
+					<Box
+						overflow={"hidden"}
+						className="projectImage"
+						w={cardWidth}
+						h={"150px"}
+					>
 						<Image src={image} alt={"project preview"} objectFit={"contain"} />
 					</Box>
-					<VStack p={5}>
+					<VStack mt={-2} p={5}>
 						<Heading alignSelf={"flex-start"} size={"lg"} color={"white"}>
 							{name}
 						</Heading>

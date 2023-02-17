@@ -74,7 +74,7 @@ export default function Home({ url, projects }) {
 						borderRadius={"10px"}
 						className="info"
 						w={"50%"}
-						h={"fit-content"}
+						h={{ base: "80%" /* md: "fit-content", xl: "60vh" */ }}
 						pb={20}
 						overflow={"hidden"}
 						bg={"#212121"}
@@ -109,7 +109,7 @@ export default function Home({ url, projects }) {
 							</Flex>
 						</Flex>
 						<Flex
-							mt={"-px"}
+							mt={"-50px"}
 							className="aboutText"
 							gap={5}
 							flexDirection={"column"}
@@ -167,7 +167,7 @@ export default function Home({ url, projects }) {
 						</Heading>
 					</Flex>
 
-					<Flex justifyContent={"space-around"}>
+					<Flex rowGap={5} justifyContent={"space-around"} wrap={"wrap"}>
 						{projects.map((p) => {
 							return (
 								<ProjectCard
