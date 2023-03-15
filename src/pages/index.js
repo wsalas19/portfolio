@@ -20,6 +20,7 @@ const inter = Inter({ subsets: ["latin"] });
 /* <Heading textAlign={"center"} size={"xl"}>
 	This is My Portfolio!
 </Heading> */
+//
 
 export default function Home({ url, projects }) {
 	return (
