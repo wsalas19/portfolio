@@ -8,6 +8,7 @@ import {
 	GridItem,
 	Heading,
 	HStack,
+	IconButton,
 	Image,
 	Link,
 	Tag,
@@ -21,6 +22,7 @@ import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsGithub } from "react-icons/bs";
 import { FiExternalLink } from "react-icons/fi";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 export default function ProjectDetails({ project }) {
 	const router = useRouter();
@@ -43,12 +45,15 @@ export default function ProjectDetails({ project }) {
 				bg={"#323232"}
 			>
 				<Link className="backButton" as={NextLink} href={"/"}>
-					<HStack p={6}>
-						<AiOutlineArrowLeft color="white" />
-						<Text color={"white"} fontWeight={"medium"}>
-							go back
-						</Text>
-					</HStack>
+					<IconButton
+						p={3}
+						mb={2}
+						rounded={"full"}
+						size={"lg"}
+						variant={"ghost"}
+						color={"grey"}
+						icon={<MdKeyboardArrowLeft />}
+					/>
 				</Link>
 				<Grid
 					className="detailLayoutGrid"
@@ -57,8 +62,8 @@ export default function ProjectDetails({ project }) {
 					gridTemplateAreas={
 						'"img img img side" "img img img side" "img img img side" "tech tech tech side"'
 					}
-					rowGap={"5"}
-					columnGap={"5"}
+					rowGap={"3"}
+					columnGap={"3"}
 					w={"100%"}
 					h={"90vh"}
 					margin={"auto"}

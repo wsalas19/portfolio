@@ -187,7 +187,7 @@ export default function Home({ url, projects }) {
 						gridArea={"c"}
 					>
 						{" "}
-						something
+						something c
 					</GridItem>
 					<GridItem
 						border={"solid 1px grey"}
@@ -245,8 +245,9 @@ export default function Home({ url, projects }) {
 						borderRadius={"10px"}
 						gridArea={"e"}
 					>
-						{" "}
-						something
+						<Heading size={"md"} p={5} color={"white"}>
+							{">mySkills"}
+						</Heading>
 					</GridItem>
 				</Grid>
 			</Box>
