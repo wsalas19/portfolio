@@ -50,7 +50,7 @@ function ProjectCard({ name, image, url, id }) {
 							gap={1}
 							color={"#7E7E7E"}
 							href={url}
-							isExternal
+							isexternal="true"
 						>
 							Visit <FiExternalLink />
 						</Link>

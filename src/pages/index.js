@@ -4,16 +4,20 @@ import {
 	Box,
 	Button,
 	Flex,
+	Grid,
+	GridItem,
 	Heading,
 	HStack,
+	IconButton,
 	Image,
 	Tag,
 	Text,
 } from "@chakra-ui/react";
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
-import { AiOutlineDown } from "react-icons/ai";
 import ProjectCard from "@/components/ProjectCard";
+import { useState } from "react";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +27,28 @@ const inter = Inter({ subsets: ["latin"] });
 //
 
 export default function Home({ url, projects }) {
+	const scrollIndex = 700;
+	const projectsLength = (projects.length - 2) * 255;
+	const [scroll, setScroll] = useState(0);
+
+	const slideRight = () => {
+		return scroll <= -projectsLength
+			? null
+			: setScroll((state) => state - scrollIndex);
+	};
+	const slideLeft = () => {
+		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
+	};
+
+	const styleSlide = {
+		transform: `translateX(${scroll}px)`,
+		marginLeft: `${
+			projects.length === 0 || projects.length < 6 ? "inherit" : "auto"
+		}`,
+		marginRight: `${projects.length === 0 ? "inherit" : "auto"}`,
+		transition: "transform 330ms ease-in-out",
+	};
+
 	return (
 		<>
 			<Head>
@@ -32,7 +58,207 @@ export default function Home({ url, projects }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Box id="aboutme" className="mainContainer " bg={"#323232"}>
-				<Flex
+				<Grid
+					gridTemplateColumns="repeat(4,1fr)"
+					gridTemplateRows="repeat(2,1fr)"
+					gridTemplateAreas={'"a b b c" "d d e c"'}
+					rowGap={"3"}
+					columnGap={"3"}
+					height={"89svh"}
+					p={"5"}
+				>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"a"}
+					>
+						<Flex
+							flexDirection={"column"}
+							justifyContent={"center"}
+							alignItems={"center"}
+							p={"5"}
+						>
+							<Image
+								padding={5}
+								rounded={"full"}
+								objectFit={"contain"}
+								src={url}
+								alt="me"
+								width={"66%"}
+							/>
+							<Heading size={"lg"} textAlign={"center"} color={"white"}>
+								William Salas Bolaño
+							</Heading>
+							<HStack mt={"2"} justifyContent={"center"}>
+								<Tag display={"flex"} size={"sm"}>
+									Full Stack Developer
+								</Tag>
+								<Tag size={"sm"} colorScheme={"blue"}>
+									React.js
+								</Tag>
+								<Tag size={"sm"} colorScheme={"green"}>
+									Node.js
+								</Tag>
+								<Tag size={"sm"} colorScheme={"purple"}>
+									Redux
+								</Tag>
+								<Tag size={"sm"} colorScheme={"yellow"}>
+									Javascript
+								</Tag>
+							</HStack>
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"b"}
+						overflow={"hidden"}
+						bg={"#121212"}
+					>
+						<Flex flexDir={"column"}>
+							<Flex
+								px={2}
+								justifyContent={"space-between"}
+								bg={"#212121"}
+								borderBottom={"solid 1px grey"}
+								alignItems={"center"}
+								h={"19px"}
+							>
+								<BsTerminal color="white" />
+								<Flex alignItems={"center"} gap={2}>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#F75D59"}
+									></Box>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#FBBE2F"}
+									></Box>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#29CD3F"}
+									></Box>
+								</Flex>
+							</Flex>
+							<Flex
+								mt={"-50px"}
+								className="aboutText"
+								gap={5}
+								flexDirection={"column"}
+							>
+								<Text color={"white"} mx={20} mt={20}>
+									{
+										"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia."
+									}
+								</Text>
+								<Text color={"white"} mx={20}>
+									{
+										"I'm a Full Stack Developer with training as an Architect and Graphic Designer."
+									}
+								</Text>
+								<Text color={"white"} mx={20}>
+									{
+										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience, I also have knowledge about the backend in Javascript. In general, I am a person who loves teamwork but I also have no problem with being a leader when required."
+									}
+								</Text>
+								<Text color={"white"} mx={20}>
+									{
+										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free time."
+									}
+								</Text>
+							</Flex>
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"c"}
+					>
+						{" "}
+						something
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"d"}
+						overflow={"hidden"}
+					>
+						<Heading size={"md"} p={5} color={"white"}>
+							{">myProjects"}
+						</Heading>
+						<Flex
+							style={styleSlide}
+							className="carousel"
+							w={"2000px"}
+							gap={"3"}
+							p={"2"}
+							scrollBehavior={"smooth"}
+							justifyContent={"flex-start"}
+						>
+							{projects.map((p) => {
+								return (
+									<ProjectCard
+										name={p.name}
+										description={p.description}
+										image={p.image}
+										url={p.url}
+										technologies={p.technologies}
+										id={p.id}
+										key={p.id}
+									/>
+								);
+							})}
+						</Flex>
+						<HStack justifyContent={"center"}>
+							<IconButton
+								p={"0"}
+								rounded={"full"}
+								size={"lg"}
+								variant={"ghost"}
+								color={"grey"}
+								icon={<MdKeyboardArrowLeft />}
+								onClick={slideLeft}
+							/>
+							<IconButton
+								rounded={"full"}
+								variant={"ghost"}
+								color={"grey"}
+								icon={<MdKeyboardArrowRight />}
+								onClick={slideRight}
+							/>
+						</HStack>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"e"}
+					>
+						{" "}
+						something
+					</GridItem>
+				</Grid>
+			</Box>
+		</>
+	);
+}
+
+export async function getServerSideProps() {
+	const response = await fetch(`${NEXT_URL}/image`);
+	const projects = await fetch(`${NEXT_URL}/projects`);
+
+	const data = await response.json();
+	const projectsData = await projects.json();
+
+	return { props: { url: data.url, projects: projectsData } };
+}
+
+/* 		<Flex
 					p={"30px"}
 					color={"white"}
 					className={"expandHeading"}
@@ -75,7 +301,7 @@ export default function Home({ url, projects }) {
 						borderRadius={"10px"}
 						className="info"
 						w={"50%"}
-						h={{ base: "80%" /* md: "fit-content", xl: "60vh" */ }}
+						h={{ base: "80%" }}
 						pb={20}
 						overflow={"hidden"}
 						bg={"#212121"}
@@ -190,18 +416,4 @@ export default function Home({ url, projects }) {
 						h={"6%"}
 						className={"fadeDown"}
 					></Box>
-				</Flex>
-			</Box>
-		</>
-	);
-}
-
-export async function getServerSideProps() {
-	const response = await fetch(`${NEXT_URL}/image`);
-	const projects = await fetch(`${NEXT_URL}/projects`);
-
-	const data = await response.json();
-	const projectsData = await projects.json();
-
-	return { props: { url: data.url, projects: projectsData } };
-}
+				</Flex> */

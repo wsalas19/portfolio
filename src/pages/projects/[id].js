@@ -95,7 +95,7 @@ export default function ProjectDetails({ project }) {
 										gap={1}
 										color={"#7E7E7E"}
 										href={url}
-										isExternal
+										isexternal="true"
 									>
 										Visit <FiExternalLink />
 									</Link>
@@ -104,7 +104,7 @@ export default function ProjectDetails({ project }) {
 										{url}
 									</Tag>
 								)}
-								<Link href={repo} isExternal>
+								<Link href={repo} isexternal="true">
 									<Button colorScheme={"blackAlpha"} leftIcon={<BsGithub />}>
 										Github
 									</Button>
