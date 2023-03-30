@@ -59,6 +59,7 @@ export default function Home({ url, projects }) {
 			</Head>
 			<Box id="aboutme" className="mainContainer " bg={"#323232"}>
 				<Grid
+					className="dashboardContainer"
 					gridTemplateColumns="repeat(4,1fr)"
 					gridTemplateRows="repeat(2,1fr)"
 					gridTemplateAreas={'"a b b c" "d d e c"'}
@@ -86,7 +87,12 @@ export default function Home({ url, projects }) {
 								alt="me"
 								width={"66%"}
 							/>
-							<Heading size={"lg"} textAlign={"center"} color={"white"}>
+							<Heading
+								className="name"
+								size={"lg"}
+								textAlign={"center"}
+								color={"white"}
+							>
 								William Salas Bolaño
 							</Heading>
 							<HStack mt={"2"} justifyContent={"center"}>
@@ -167,9 +173,9 @@ export default function Home({ url, projects }) {
 										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience, I also have knowledge about the backend in Javascript. In general, I am a person who loves teamwork but I also have no problem with being a leader when required."
 									}
 								</Text>
-								<Text color={"white"} mx={20}>
+								<Text className="lastText" color={"white"} mx={20}>
 									{
-										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free time."
+										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
 									}
 								</Text>
 							</Flex>
