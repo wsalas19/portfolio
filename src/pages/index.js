@@ -10,6 +10,7 @@ import {
 	HStack,
 	IconButton,
 	Image,
+	Input,
 	Tag,
 	Text,
 } from "@chakra-ui/react";
@@ -30,6 +31,7 @@ export default function Home({ url, projects }) {
 	const scrollIndex = 700;
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
+	const [command, setCommand] = useState("");
 
 	const slideRight = () => {
 		return scroll <= -projectsLength
@@ -47,6 +49,20 @@ export default function Home({ url, projects }) {
 		}`,
 		marginRight: `${projects.length === 0 ? "inherit" : "auto"}`,
 		transition: "transform 330ms ease-in-out",
+	};
+	const runCommand = (line) => {
+		if (line === "npm run dev") {
+			window.alert("correct comand");
+		} else {
+			window.alert("wrong comand");
+		}
+	};
+	const handleCommand = (e) => {
+		if (e.key === "Enter") {
+			runCommand(command);
+		} else {
+			return;
+		}
 	};
 
 	return (
@@ -178,6 +194,21 @@ export default function Home({ url, projects }) {
 										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
 									}
 								</Text>
+								<Input
+									value={command}
+									onChange={(e) => {
+										setCommand(e.target.value);
+									}}
+									onKeyPress={handleCommand}
+									variant={"unstyled"}
+									border={"none"}
+									placeholder="> type 'npm run dev' to download my cv, press enter to run"
+									size={"sm"}
+									color={"white"}
+									className="commandLine"
+									mx={20}
+									w={"70%"}
+								></Input>
 							</Flex>
 						</Flex>
 					</GridItem>
