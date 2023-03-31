@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 import {
 	Box,
-	Button,
 	Flex,
 	Grid,
 	GridItem,
@@ -13,13 +12,14 @@ import {
 	Input,
 	Tag,
 	Text,
+	useToast,
 } from "@chakra-ui/react";
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
 import ProjectCard from "@/components/ProjectCard";
 import { useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-
+import { supabase } from "@/config/supabase";
 const inter = Inter({ subsets: ["latin"] });
 
 /* <Heading textAlign={"center"} size={"xl"}>
@@ -28,6 +28,7 @@ const inter = Inter({ subsets: ["latin"] });
 //
 
 export default function Home({ url, projects }) {
+	const toast = useToast();
 	const scrollIndex = 700;
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
@@ -50,11 +51,32 @@ export default function Home({ url, projects }) {
 		marginRight: `${projects.length === 0 ? "inherit" : "auto"}`,
 		transition: "transform 330ms ease-in-out",
 	};
-	const runCommand = (line) => {
+	const runCommand = async (line) => {
 		if (line === "npm run dev") {
-			window.alert("correct comand");
+			const { data, error } = await supabase.storage
+				.from("docs")
+				.download("WASB_CV_ENG.pdf");
+			console.log(data || error);
+			const url = window.URL.createObjectURL(new Blob([data]));
+			setCommand("");
+			// Create a link element and simulate a click to initiate the download
+			const link = document.createElement("a");
+			link.href = url;
+			link.setAttribute("download", "WASB_CV_ENG.pdf");
+			document.body.appendChild(link);
+			link.click();
+			toast({
+				title: `File downloaded successfully`,
+				status: "success",
+				isClosable: true,
+			});
 		} else {
-			window.alert("wrong comand");
+			toast({
+				title: `Oops! Wrong command. Please try again`,
+				status: "error",
+				isClosable: true,
+			});
+			return;
 		}
 	};
 	const handleCommand = (e) => {
