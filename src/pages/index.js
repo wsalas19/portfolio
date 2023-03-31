@@ -13,6 +13,7 @@ import {
 	Tag,
 	Text,
 	useToast,
+	VStack,
 } from "@chakra-ui/react";
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
@@ -20,7 +21,19 @@ import ProjectCard from "@/components/ProjectCard";
 import { useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { supabase } from "@/config/supabase";
-const inter = Inter({ subsets: ["latin"] });
+import { FaNodeJs, FaReact } from "react-icons/fa";
+import {
+	SiCss3,
+	SiExpress,
+	SiGit,
+	SiHtml5,
+	SiJavascript,
+	SiMongodb,
+	SiNextdotjs,
+	SiRedux,
+	SiSequelize,
+	SiTypescript,
+} from "react-icons/si";
 
 export default function Home({ url, projects }) {
 	const toast = useToast();
@@ -117,7 +130,7 @@ export default function Home({ url, projects }) {
 								objectFit={"contain"}
 								src={url}
 								alt="me"
-								width={"66%"}
+								width={"62%"}
 							/>
 							<Heading
 								className="name"
@@ -129,16 +142,13 @@ export default function Home({ url, projects }) {
 							</Heading>
 							<HStack mt={"2"} justifyContent={"center"}>
 								<Tag display={"flex"} size={"sm"}>
-									Full Stack Developer
+									Full Stack Dev
 								</Tag>
 								<Tag size={"sm"} colorScheme={"blue"}>
 									React.js
 								</Tag>
 								<Tag size={"sm"} colorScheme={"green"}>
 									Node.js
-								</Tag>
-								<Tag size={"sm"} colorScheme={"purple"}>
-									Redux
 								</Tag>
 								<Tag size={"sm"} colorScheme={"yellow"}>
 									Javascript
@@ -192,19 +202,15 @@ export default function Home({ url, projects }) {
 							>
 								<Text color={"white"} mx={20} mt={20}>
 									{
-										"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia."
+										"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia. I'm a Full Stack Developer with training as an Architect and Graphic Designer. I Have experience working in React, Redux, Node, Express, MongoDB among other technologies commonly used in the market."
 									}
 								</Text>
-								<Text color={"white"} mx={20}>
+
+								{/* <Text color={"white"} mx={20}>
 									{
-										"I'm a Full Stack Developer with training as an Architect and Graphic Designer."
+										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience."
 									}
-								</Text>
-								<Text color={"white"} mx={20}>
-									{
-										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience, I also have knowledge about the backend in Javascript. In general, I am a person who loves teamwork but I also have no problem with being a leader when required."
-									}
-								</Text>
+								</Text> */}
 								<Text className="lastText" color={"white"} mx={20}>
 									{
 										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
@@ -232,9 +238,11 @@ export default function Home({ url, projects }) {
 						border={"solid 1px grey"}
 						borderRadius={"10px"}
 						gridArea={"c"}
+						color={"white"}
 					>
-						{" "}
-						something c
+						<Heading size={"md"} p={5} color={"white"}>
+							{">News"}
+						</Heading>
 					</GridItem>
 					<GridItem
 						border={"solid 1px grey"}
@@ -245,47 +253,49 @@ export default function Home({ url, projects }) {
 						<Heading size={"md"} p={5} color={"white"}>
 							{">myProjects"}
 						</Heading>
-						<Flex
-							style={styleSlide}
-							className="carousel"
-							w={"2000px"}
-							gap={"3"}
-							p={"2"}
-							scrollBehavior={"smooth"}
-							justifyContent={"flex-start"}
-						>
-							{projects.map((p) => {
-								return (
-									<ProjectCard
-										name={p.name}
-										description={p.description}
-										image={p.image}
-										url={p.url}
-										technologies={p.technologies}
-										id={p.id}
-										key={p.id}
-									/>
-								);
-							})}
+						<Flex h={"30svh"} flexDir={"column"} justifyContent={"center"}>
+							<Flex
+								style={styleSlide}
+								className="carousel"
+								w={"2000px"}
+								gap={"5"}
+								p={"2"}
+								scrollBehavior={"smooth"}
+								justifyContent={"flex-start"}
+							>
+								{projects.map((p) => {
+									return (
+										<ProjectCard
+											name={p.name}
+											description={p.description}
+											image={p.image}
+											url={p.url}
+											technologies={p.technologies}
+											id={p.id}
+											key={p.id}
+										/>
+									);
+								})}
+							</Flex>
+							<HStack alignItems={"flex-end"} justifyContent={"center"}>
+								<IconButton
+									rounded={"full"}
+									size={"lg"}
+									variant={"ghost"}
+									color={"grey"}
+									icon={<MdKeyboardArrowLeft />}
+									onClick={slideLeft}
+								/>
+								<IconButton
+									size={"lg"}
+									rounded={"full"}
+									variant={"ghost"}
+									color={"grey"}
+									icon={<MdKeyboardArrowRight />}
+									onClick={slideRight}
+								/>
+							</HStack>
 						</Flex>
-						<HStack justifyContent={"center"}>
-							<IconButton
-								p={"0"}
-								rounded={"full"}
-								size={"lg"}
-								variant={"ghost"}
-								color={"grey"}
-								icon={<MdKeyboardArrowLeft />}
-								onClick={slideLeft}
-							/>
-							<IconButton
-								rounded={"full"}
-								variant={"ghost"}
-								color={"grey"}
-								icon={<MdKeyboardArrowRight />}
-								onClick={slideRight}
-							/>
-						</HStack>
 					</GridItem>
 					<GridItem
 						border={"solid 1px grey"}
@@ -295,6 +305,26 @@ export default function Home({ url, projects }) {
 						<Heading size={"md"} p={5} color={"white"}>
 							{">mySkills"}
 						</Heading>
+						<VStack>
+							<Flex gap={"3"} flexDir={"row"}>
+								<FaReact color="cyan" />
+								<SiNextdotjs color="white" />
+								<FaNodeJs color="green" />
+								<SiExpress color={"white"} />
+							</Flex>
+							<Flex gap={"3"} flexDir={"row"}>
+								<SiMongodb color="green" />
+								<SiSequelize color={"#52b0e7"} />
+								<SiTypescript color={"#277ac0"} />
+								<SiRedux color={"purple"} />
+							</Flex>
+							<Flex gap={"3"} flexDir={"row"}>
+								<SiJavascript color="yellow" />
+								<SiHtml5 color="orange" />
+								<SiCss3 color="#277ac0" />
+								<SiGit color="#e84e31" />
+							</Flex>
+						</VStack>
 					</GridItem>
 				</Grid>
 			</Box>
