@@ -22,11 +22,6 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { supabase } from "@/config/supabase";
 const inter = Inter({ subsets: ["latin"] });
 
-/* <Heading textAlign={"center"} size={"xl"}>
-	This is My Portfolio!
-</Heading> */
-//esto es una prueba
-
 export default function Home({ url, projects }) {
 	const toast = useToast();
 	const scrollIndex = 700;
@@ -59,7 +54,6 @@ export default function Home({ url, projects }) {
 			console.log(data || error);
 			const url = window.URL.createObjectURL(new Blob([data]));
 			setCommand("");
-			// Create a link element and simulate a click to initiate the download
 			const link = document.createElement("a");
 			link.href = url;
 			link.setAttribute("download", "WASB_CV_ENG.pdf");
