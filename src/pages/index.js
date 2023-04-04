@@ -1,12 +1,14 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
+import NewsCard from "@/components/NewsCard";
 import {
 	Box,
+	Divider,
 	Flex,
 	Grid,
 	GridItem,
 	Heading,
 	HStack,
+	Icon,
 	IconButton,
 	Image,
 	Input,
@@ -18,7 +20,7 @@ import {
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
 import ProjectCard from "@/components/ProjectCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { supabase } from "@/config/supabase";
 import { FaNodeJs, FaReact } from "react-icons/fa";
@@ -27,6 +29,7 @@ import {
 	SiExpress,
 	SiGit,
 	SiHtml5,
+	SiJava,
 	SiJavascript,
 	SiMongodb,
 	SiNextdotjs,
@@ -34,14 +37,16 @@ import {
 	SiSequelize,
 	SiTypescript,
 } from "react-icons/si";
-
+import axios from "axios";
 export default function Home({ url, projects }) {
 	const toast = useToast();
-	const scrollIndex = 700;
+	const scrollIndex = 400;
+	const iconSize = 10;
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
 	const [command, setCommand] = useState("");
-
+	const [news, setNews] = useState([]);
+	const first = news[0];
 	const slideRight = () => {
 		return scroll <= -projectsLength
 			? null
@@ -59,6 +64,7 @@ export default function Home({ url, projects }) {
 		marginRight: `${projects.length === 0 ? "inherit" : "auto"}`,
 		transition: "transform 330ms ease-in-out",
 	};
+
 	const runCommand = async (line) => {
 		if (line === "npm run dev") {
 			const { data, error } = await supabase.storage
@@ -93,6 +99,19 @@ export default function Home({ url, projects }) {
 			return;
 		}
 	};
+
+	useEffect(() => {
+		const url =
+			"https://newsapi.org/v2/everything?" +
+			"q=Programming&" +
+			"pageSize=3&" +
+			"sortBy=popularity&" +
+			"apiKey=7181e087fde144fc8f660273a1cd37b9";
+
+		axios.get(url).then((response) => {
+			setNews(response.data.articles);
+		});
+	}, []);
 
 	return (
 		<>
@@ -240,9 +259,25 @@ export default function Home({ url, projects }) {
 						gridArea={"c"}
 						color={"white"}
 					>
-						<Heading size={"md"} p={5} color={"white"}>
+						<Heading size={"md"} px={5} pt={5} color={"white"}>
 							{">News"}
 						</Heading>
+
+						<Flex flexDir={"column"}>
+							{news?.map((n) => {
+								{
+									return (
+										<NewsCard
+											title={n.title}
+											url={n.url}
+											publisher={n.source.name}
+											description={n.description}
+											date={n.publishedAt}
+										/>
+									);
+								}
+							})}
+						</Flex>
 					</GridItem>
 					<GridItem
 						border={"solid 1px grey"}
@@ -301,28 +336,29 @@ export default function Home({ url, projects }) {
 						border={"solid 1px grey"}
 						borderRadius={"10px"}
 						gridArea={"e"}
+						overflowX={"hidden"}
 					>
 						<Heading size={"md"} p={5} color={"white"}>
 							{">mySkills"}
 						</Heading>
-						<VStack>
-							<Flex gap={"3"} flexDir={"row"}>
-								<FaReact color="cyan" />
-								<SiNextdotjs color="white" />
-								<FaNodeJs color="green" />
-								<SiExpress color={"white"} />
+						<VStack /* className="logowrapper" */ spacing={5}>
+							<Flex /* className="logobatch" */ gap={"3"} flexDir={"row"}>
+								<Icon boxSize={iconSize} color="cyan" as={FaReact} />
+								<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
+								<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
+								<Icon boxSize={iconSize} color="white" as={SiExpress} />
 							</Flex>
 							<Flex gap={"3"} flexDir={"row"}>
-								<SiMongodb color="green" />
-								<SiSequelize color={"#52b0e7"} />
-								<SiTypescript color={"#277ac0"} />
-								<SiRedux color={"purple"} />
+								<Icon boxSize={iconSize} color="green" as={SiMongodb} />
+								<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
+								<Icon boxSize={iconSize} color="#277ac0" as={SiTypescript} />
+								<Icon boxSize={iconSize} color="purple" as={SiRedux} />
 							</Flex>
 							<Flex gap={"3"} flexDir={"row"}>
-								<SiJavascript color="yellow" />
-								<SiHtml5 color="orange" />
-								<SiCss3 color="#277ac0" />
-								<SiGit color="#e84e31" />
+								<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
+								<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
+								<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
+								<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
 							</Flex>
 						</VStack>
 					</GridItem>
