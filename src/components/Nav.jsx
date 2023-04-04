@@ -19,7 +19,7 @@ function Nav() {
 			<Flex w={"100%"} h={"60px"} bg={"#1E1E1E"}>
 				<Flex alignItems={"center"} w={"75%"}>
 					<Heading color={"white"} p={"5"} size={"lg"}>
-						<Link href={"/"}>myPortfolio</Link>
+						<Link href={"/"}>{">myPortfolio"}</Link>
 					</Heading>
 					<Flex
 						className="navLinks"
@@ -55,7 +55,7 @@ function Nav() {
 								href={
 									"https://drive.google.com/file/d/1zOdpnJkIiTwedJ-Tm9le9VH5n01aA8cO/view?usp=sharing"
 								}
-								isExternal
+								isexternal="true"
 								minH="48px"
 							>
 								<Image
@@ -71,7 +71,7 @@ function Nav() {
 								href={
 									"https://drive.google.com/file/d/1fdwW2qLwwYkLoE6k9Df52LO_teZwlDKr/view?usp=sharing"
 								}
-								isExternal
+								isexternal="true"
 								minH="48px"
 							>
 								<Image

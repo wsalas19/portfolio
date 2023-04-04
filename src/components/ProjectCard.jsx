@@ -8,13 +8,14 @@ import {
 	Image,
 	Box,
 	Button,
+	HStack,
 } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { FiExternalLink } from "react-icons/fi";
 
 function ProjectCard({ name, image, url, id }) {
-	const cardWidth = "346px";
+	const cardWidth = "250px";
 	return (
 		<>
 			<Flex
@@ -22,7 +23,7 @@ function ProjectCard({ name, image, url, id }) {
 				className="projectCards"
 				flexDirection={"column"}
 				w={{ base: cardWidth }}
-				h={{ base: "255px" }}
+				h={{ base: "150px" }}
 				borderRadius={"10px"}
 				bg={"#212121"}
 				overflow={"hidden"}
@@ -32,34 +33,17 @@ function ProjectCard({ name, image, url, id }) {
 						overflow={"hidden"}
 						className="projectImage"
 						w={cardWidth}
-						h={"150px"}
+						h={"100px"}
 					>
 						<Image src={image} alt={"project preview"} objectFit={"contain"} />
 					</Box>
-					<VStack mt={-2} p={5}>
-						<Heading alignSelf={"flex-start"} size={"lg"} color={"white"}>
+					<HStack justifyContent={"space-between"} p={2}>
+						<Heading alignSelf={"flex-start"} size={"sm"} color={"white"}>
 							{name}
 						</Heading>
-					</VStack>
+						<Tag size={"sm"}>Learn More</Tag>
+					</HStack>
 				</Link>
-				<Flex flexDirection={"row"} justifyContent={"space-between"} px={5}>
-					{url.includes(".app") ? (
-						<Link
-							display={"flex"}
-							alignItems={"center"}
-							gap={1}
-							color={"#7E7E7E"}
-							href={url}
-							isExternal
-						>
-							Visit <FiExternalLink />
-						</Link>
-					) : (
-						<Tag colorScheme={"yellow"}>{url}</Tag>
-					)}
-
-					<Tag>Learn More</Tag>
-				</Flex>
 			</Flex>
 		</>
 	);

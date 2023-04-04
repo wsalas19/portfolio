@@ -23,17 +23,21 @@ function Footer() {
 			>
 				<Text fontWeight={"medium"}>{">mySocials:"}</Text>
 				<Link
-					isExternal
+					isexternal="true"
 					className="linkedin"
 					href="https://www.linkedin.com/in/williamsalasb/"
 				>
 					<BsLinkedin />
 				</Link>
-				<Link isExternal className="github" href="https://github.com/wsalas19">
+				<Link
+					isexternal="true"
+					className="github"
+					href="https://github.com/wsalas19"
+				>
 					<BsGithub />
 				</Link>
 				<Link
-					isExternal
+					isexternal="true"
 					className="twitter"
 					href="https://twitter.com/wsalas1905"
 				>
@@ -58,7 +62,7 @@ function Footer() {
 					Donate
 				</Text>
 				<Link
-					isExternal
+					isexternal="true"
 					href="https://ihh.org.tr/en/donate/turkey-emergency?gclid=Cj0KCQiAorKfBhC0ARIsAHDzsltCZcK7aSSBcvCzV_4uP_L46xyxT5ft9t9a2CUwpiOmU5PZ2m5TJzUaAsJ3EALw_wcB"
 				>
 					<Image
@@ -70,7 +74,7 @@ function Footer() {
 					/>
 				</Link>
 
-				<Link href="https://war.ukraine.ua/donate/" isExternal>
+				<Link href="https://war.ukraine.ua/donate/" isexternal="true">
 					<Image
 						width={6}
 						src={

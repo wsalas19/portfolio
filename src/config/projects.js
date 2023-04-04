@@ -30,7 +30,7 @@ let projects = [
 	},
 	{
 		id: "tmate.ecommerce",
-		name: "To-Mate E-Commerce",
+		name: "To-Mate",
 		repo: "https://github.com/wsalas19/test-pf",
 		description:
 			" A complete E-Commerce with payment gateway,authentication, comments, profile and inventory management, using agile methodologies such as SCRUM to keep track of the overall process and goals.",

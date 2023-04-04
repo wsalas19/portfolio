@@ -1,27 +1,118 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
+import NewsCard from "@/components/NewsCard";
 import {
 	Box,
-	Button,
+	Divider,
 	Flex,
+	Grid,
+	GridItem,
 	Heading,
 	HStack,
+	Icon,
+	IconButton,
 	Image,
+	Input,
 	Tag,
 	Text,
+	useToast,
+	VStack,
 } from "@chakra-ui/react";
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
-import { AiOutlineDown } from "react-icons/ai";
 import ProjectCard from "@/components/ProjectCard";
-
-const inter = Inter({ subsets: ["latin"] });
-
-/* <Heading textAlign={"center"} size={"xl"}>
-	This is My Portfolio!
-</Heading> */
-
+import { useEffect, useState } from "react";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { supabase } from "@/config/supabase";
+import { FaNodeJs, FaReact } from "react-icons/fa";
+import {
+	SiCss3,
+	SiExpress,
+	SiGit,
+	SiHtml5,
+	SiJava,
+	SiJavascript,
+	SiMongodb,
+	SiNextdotjs,
+	SiRedux,
+	SiSequelize,
+	SiTypescript,
+} from "react-icons/si";
+import axios from "axios";
 export default function Home({ url, projects }) {
+	const toast = useToast();
+	const scrollIndex = 400;
+	const iconSize = 10;
+	const projectsLength = (projects.length - 2) * 255;
+	const [scroll, setScroll] = useState(0);
+	const [command, setCommand] = useState("");
+	const [news, setNews] = useState([]);
+	const first = news[0];
+	const slideRight = () => {
+		return scroll <= -projectsLength
+			? null
+			: setScroll((state) => state - scrollIndex);
+	};
+	const slideLeft = () => {
+		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
+	};
+
+	const styleSlide = {
+		transform: `translateX(${scroll}px)`,
+		marginLeft: `${
+			projects.length === 0 || projects.length < 6 ? "inherit" : "auto"
+		}`,
+		marginRight: `${projects.length === 0 ? "inherit" : "auto"}`,
+		transition: "transform 330ms ease-in-out",
+	};
+
+	const runCommand = async (line) => {
+		if (line === "npm run dev") {
+			const { data, error } = await supabase.storage
+				.from("docs")
+				.download("WASB_CV_ENG.pdf");
+			console.log(data || error);
+			const url = window.URL.createObjectURL(new Blob([data]));
+			setCommand("");
+			const link = document.createElement("a");
+			link.href = url;
+			link.setAttribute("download", "WASB_CV_ENG.pdf");
+			document.body.appendChild(link);
+			link.click();
+			toast({
+				title: `File downloaded successfully`,
+				status: "success",
+				isClosable: true,
+			});
+		} else {
+			toast({
+				title: `Oops! Wrong command. Please try again`,
+				status: "error",
+				isClosable: true,
+			});
+			return;
+		}
+	};
+	const handleCommand = (e) => {
+		if (e.key === "Enter") {
+			runCommand(command);
+		} else {
+			return;
+		}
+	};
+
+	useEffect(() => {
+		const url =
+			"https://newsapi.org/v2/everything?" +
+			"q=Programming&" +
+			"pageSize=3&" +
+			"sortBy=popularity&" +
+			"apiKey=7181e087fde144fc8f660273a1cd37b9";
+
+		axios.get(url).then((response) => {
+			setNews(response.data.articles);
+		});
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -31,7 +122,269 @@ export default function Home({ url, projects }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Box id="aboutme" className="mainContainer " bg={"#323232"}>
-				<Flex
+				<Grid
+					className="dashboardContainer"
+					gridTemplateColumns="repeat(4,1fr)"
+					gridTemplateRows="repeat(2,1fr)"
+					gridTemplateAreas={'"a b b c" "d d e c"'}
+					rowGap={"3"}
+					columnGap={"3"}
+					height={"89svh"}
+					p={"5"}
+				>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"a"}
+					>
+						<Flex
+							flexDirection={"column"}
+							justifyContent={"center"}
+							alignItems={"center"}
+							p={"5"}
+						>
+							<Image
+								padding={5}
+								rounded={"full"}
+								objectFit={"contain"}
+								src={url}
+								alt="me"
+								width={"62%"}
+							/>
+							<Heading
+								className="name"
+								size={"lg"}
+								textAlign={"center"}
+								color={"white"}
+							>
+								William Salas Bolaño
+							</Heading>
+							<HStack mt={"2"} justifyContent={"center"}>
+								<Tag display={"flex"} size={"sm"}>
+									Full Stack Dev
+								</Tag>
+								<Tag size={"sm"} colorScheme={"blue"}>
+									React.js
+								</Tag>
+								<Tag size={"sm"} colorScheme={"green"}>
+									Node.js
+								</Tag>
+								<Tag size={"sm"} colorScheme={"yellow"}>
+									Javascript
+								</Tag>
+							</HStack>
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"b"}
+						overflow={"hidden"}
+						bg={"#121212"}
+					>
+						<Flex flexDir={"column"}>
+							<Flex
+								px={2}
+								justifyContent={"space-between"}
+								bg={"#212121"}
+								borderBottom={"solid 1px grey"}
+								alignItems={"center"}
+								h={"19px"}
+							>
+								<BsTerminal color="white" />
+								<Flex alignItems={"center"} gap={2}>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#F75D59"}
+									></Box>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#FBBE2F"}
+									></Box>
+									<Box
+										rounded={"full"}
+										w={"10px"}
+										h={"10px"}
+										bg={"#29CD3F"}
+									></Box>
+								</Flex>
+							</Flex>
+							<Flex
+								mt={"-50px"}
+								className="aboutText"
+								gap={5}
+								flexDirection={"column"}
+							>
+								<Text color={"white"} mx={20} mt={20}>
+									{
+										"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia. I'm a Full Stack Developer with training as an Architect and Graphic Designer. I Have experience working in React, Redux, Node, Express, MongoDB among other technologies commonly used in the market."
+									}
+								</Text>
+
+								{/* <Text color={"white"} mx={20}>
+									{
+										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience."
+									}
+								</Text> */}
+								<Text className="lastText" color={"white"} mx={20}>
+									{
+										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
+									}
+								</Text>
+								<Input
+									value={command}
+									onChange={(e) => {
+										setCommand(e.target.value);
+									}}
+									onKeyPress={handleCommand}
+									variant={"unstyled"}
+									border={"none"}
+									placeholder="> type 'npm run dev' to download my cv, press enter to run"
+									size={"sm"}
+									color={"white"}
+									className="commandLine"
+									mx={20}
+									w={"70%"}
+								></Input>
+							</Flex>
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"c"}
+						color={"white"}
+					>
+						<Heading size={"md"} px={5} pt={5} color={"white"}>
+							{">News"}
+						</Heading>
+
+						<Flex flexDir={"column"}>
+							{news?.map((n) => {
+								{
+									return (
+										<NewsCard
+											title={n.title}
+											url={n.url}
+											publisher={n.source.name}
+											description={n.description}
+											date={n.publishedAt}
+										/>
+									);
+								}
+							})}
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"d"}
+						overflow={"hidden"}
+					>
+						<Heading size={"md"} p={5} color={"white"}>
+							{">myProjects"}
+						</Heading>
+						<Flex h={"30svh"} flexDir={"column"} justifyContent={"center"}>
+							<Flex
+								style={styleSlide}
+								className="carousel"
+								w={"2000px"}
+								gap={"5"}
+								p={"2"}
+								scrollBehavior={"smooth"}
+								justifyContent={"flex-start"}
+							>
+								{projects.map((p) => {
+									return (
+										<ProjectCard
+											name={p.name}
+											description={p.description}
+											image={p.image}
+											url={p.url}
+											technologies={p.technologies}
+											id={p.id}
+											key={p.id}
+										/>
+									);
+								})}
+							</Flex>
+							<HStack alignItems={"flex-end"} justifyContent={"center"}>
+								<IconButton
+									rounded={"full"}
+									size={"lg"}
+									variant={"ghost"}
+									color={"grey"}
+									icon={<MdKeyboardArrowLeft />}
+									onClick={slideLeft}
+								/>
+								<IconButton
+									size={"lg"}
+									rounded={"full"}
+									variant={"ghost"}
+									color={"grey"}
+									icon={<MdKeyboardArrowRight />}
+									onClick={slideRight}
+								/>
+							</HStack>
+						</Flex>
+					</GridItem>
+					<GridItem
+						border={"solid 1px grey"}
+						borderRadius={"10px"}
+						gridArea={"e"}
+						overflowX={"hidden"}
+					>
+						<Heading size={"md"} p={5} color={"white"}>
+							{">mySkills"}
+						</Heading>
+						<Flex
+							height={"25svh"}
+							justifyContent={"center"}
+							alignItems={"center"}
+						>
+							<VStack /* className="logowrapper" */ spacing={5}>
+								<Flex /* className="logobatch" */ gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="cyan" as={FaReact} />
+									<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
+									<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
+									<Icon boxSize={iconSize} color="white" as={SiExpress} />
+								</Flex>
+								<Flex gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="green" as={SiMongodb} />
+									<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
+									<Icon boxSize={iconSize} color="#277ac0" as={SiTypescript} />
+									<Icon boxSize={iconSize} color="purple" as={SiRedux} />
+								</Flex>
+								<Flex gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
+									<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
+									<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
+									<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
+								</Flex>
+							</VStack>
+						</Flex>
+					</GridItem>
+				</Grid>
+			</Box>
+		</>
+	);
+}
+
+export async function getServerSideProps() {
+	const response = await fetch(`${NEXT_URL}/image`);
+	const projects = await fetch(`${NEXT_URL}/projects`);
+
+	const data = await response.json();
+	const projectsData = await projects.json();
+
+	return { props: { url: data.url, projects: projectsData } };
+}
+
+/* 		<Flex
 					p={"30px"}
 					color={"white"}
 					className={"expandHeading"}
@@ -74,7 +427,7 @@ export default function Home({ url, projects }) {
 						borderRadius={"10px"}
 						className="info"
 						w={"50%"}
-						h={{ base: "80%" /* md: "fit-content", xl: "60vh" */ }}
+						h={{ base: "80%" }}
 						pb={20}
 						overflow={"hidden"}
 						bg={"#212121"}
@@ -189,18 +542,4 @@ export default function Home({ url, projects }) {
 						h={"6%"}
 						className={"fadeDown"}
 					></Box>
-				</Flex>
-			</Box>
-		</>
-	);
-}
-
-export async function getServerSideProps() {
-	const response = await fetch(`${NEXT_URL}/image`);
-	const projects = await fetch(`${NEXT_URL}/projects`);
-
-	const data = await response.json();
-	const projectsData = await projects.json();
-
-	return { props: { url: data.url, projects: projectsData } };
-}
+				</Flex> */
