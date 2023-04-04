@@ -341,26 +341,32 @@ export default function Home({ url, projects }) {
 						<Heading size={"md"} p={5} color={"white"}>
 							{">mySkills"}
 						</Heading>
-						<VStack /* className="logowrapper" */ spacing={5}>
-							<Flex /* className="logobatch" */ gap={"3"} flexDir={"row"}>
-								<Icon boxSize={iconSize} color="cyan" as={FaReact} />
-								<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
-								<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
-								<Icon boxSize={iconSize} color="white" as={SiExpress} />
-							</Flex>
-							<Flex gap={"3"} flexDir={"row"}>
-								<Icon boxSize={iconSize} color="green" as={SiMongodb} />
-								<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
-								<Icon boxSize={iconSize} color="#277ac0" as={SiTypescript} />
-								<Icon boxSize={iconSize} color="purple" as={SiRedux} />
-							</Flex>
-							<Flex gap={"3"} flexDir={"row"}>
-								<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
-								<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
-								<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
-								<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
-							</Flex>
-						</VStack>
+						<Flex
+							height={"25svh"}
+							justifyContent={"center"}
+							alignItems={"center"}
+						>
+							<VStack /* className="logowrapper" */ spacing={5}>
+								<Flex /* className="logobatch" */ gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="cyan" as={FaReact} />
+									<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
+									<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
+									<Icon boxSize={iconSize} color="white" as={SiExpress} />
+								</Flex>
+								<Flex gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="green" as={SiMongodb} />
+									<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
+									<Icon boxSize={iconSize} color="#277ac0" as={SiTypescript} />
+									<Icon boxSize={iconSize} color="purple" as={SiRedux} />
+								</Flex>
+								<Flex gap={"3"} flexDir={"row"}>
+									<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
+									<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
+									<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
+									<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
+								</Flex>
+							</VStack>
+						</Flex>
 					</GridItem>
 				</Grid>
 			</Box>
