@@ -38,15 +38,15 @@ import {
 	SiTypescript,
 } from "react-icons/si";
 import axios from "axios";
-export default function Home({ url, projects }) {
+export default function Home({ url, projects, news }) {
 	const toast = useToast();
 	const scrollIndex = 400;
 	const iconSize = 10;
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
 	const [command, setCommand] = useState("");
-	const [news, setNews] = useState([]);
-	const first = news[0];
+	//const [news, setNews] = useState([]);
+
 	const slideRight = () => {
 		return scroll <= -projectsLength
 			? null
@@ -100,19 +100,6 @@ export default function Home({ url, projects }) {
 		}
 	};
 
-	useEffect(() => {
-		const url =
-			"https://newsapi.org/v2/everything?" +
-			"q=Programming&" +
-			"pageSize=3&" +
-			"sortBy=popularity&" +
-			"apiKey=7181e087fde144fc8f660273a1cd37b9";
-
-		axios.get(url).then((response) => {
-			setNews(response.data.articles);
-		});
-	}, []);
-
 	return (
 		<>
 			<Head>
@@ -138,12 +125,15 @@ export default function Home({ url, projects }) {
 						gridArea={"a"}
 					>
 						<Flex
+							className="imageText"
 							flexDirection={"column"}
 							justifyContent={"center"}
 							alignItems={"center"}
 							p={"5"}
 						>
 							<Image
+								fallbackSrc="https://via.placeholder.com/300"
+								className="mainImage"
 								padding={5}
 								rounded={"full"}
 								objectFit={"contain"}
@@ -225,11 +215,6 @@ export default function Home({ url, projects }) {
 									}
 								</Text>
 
-								{/* <Text color={"white"} mx={20}>
-									{
-										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience."
-									}
-								</Text> */}
 								<Text className="lastText" color={"white"} mx={20}>
 									{
 										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
@@ -268,6 +253,7 @@ export default function Home({ url, projects }) {
 								{
 									return (
 										<NewsCard
+											key={n.title}
 											title={n.title}
 											url={n.url}
 											publisher={n.source.name}
@@ -375,171 +361,17 @@ export default function Home({ url, projects }) {
 }
 
 export async function getServerSideProps() {
-	const response = await fetch(`${NEXT_URL}/image`);
-	const projects = await fetch(`${NEXT_URL}/projects`);
+	const [response, projects, news] = await Promise.all([
+		fetch(`${NEXT_URL}/image`),
+		fetch(`${NEXT_URL}/projects`),
+		fetch(`${NEXT_URL}/news`),
+	]);
 
-	const data = await response.json();
-	const projectsData = await projects.json();
+	const [data, projectsData, newsData] = await Promise.all([
+		response.json(),
+		projects.json(),
+		news.json(),
+	]);
 
-	return { props: { url: data.url, projects: projectsData } };
+	return { props: { url: data.url, projects: projectsData, news: newsData } };
 }
-
-/* 		<Flex
-					p={"30px"}
-					color={"white"}
-					className={"expandHeading"}
-					pt={"50px"}
-				>
-					<h1>{"Let me introduce myself..."}</h1>
-				</Flex>
-
-				<Flex className="imageText" flexDirection={"row"} w={"100%"} h={"90vh"}>
-					<Flex
-						gap={"3px"}
-						alignItems={"center"}
-						flexDirection={"column"}
-						w={"50%"}
-					>
-						<Box className="mainImage" mt={"70px"} w={"400px"} h={"400px"}>
-							<Image
-								rounded={"full"}
-								objectFit={"contain"}
-								src={url}
-								alt="me"
-							/>
-						</Box>
-
-						<Heading mt={"30px"} textAlign={"center"} color={"white"}>
-							William Salas Bolaño
-						</Heading>
-						<HStack mt={"15px"}>
-							<Tag>Full Stack Developer</Tag>
-							<Tag colorScheme={"blue"}>React.js</Tag>
-							<Tag colorScheme={"green"}>Node.js</Tag>
-							<Tag colorScheme={"purple"}>Redux</Tag>
-							<Tag colorScheme={"yellow"}>Javascript</Tag>
-						</HStack>
-					</Flex>
-					<Flex
-						flexDirection={"column"}
-						margin={20}
-						border={"1px solid gray"}
-						borderRadius={"10px"}
-						className="info"
-						w={"50%"}
-						h={{ base: "80%" }}
-						pb={20}
-						overflow={"hidden"}
-						bg={"#212121"}
-					>
-						<Flex
-							flexDirection={"row"}
-							justifyContent={"space-between"}
-							p={2}
-							w={"100%"}
-							bg={"black"}
-						>
-							<BsTerminal color="white" />
-							<Flex alignItems={"center"} gap={2}>
-								<Box
-									rounded={"full"}
-									w={"10px"}
-									h={"10px"}
-									bg={"#F75D59"}
-								></Box>
-								<Box
-									rounded={"full"}
-									w={"10px"}
-									h={"10px"}
-									bg={"#FBBE2F"}
-								></Box>
-								<Box
-									rounded={"full"}
-									w={"10px"}
-									h={"10px"}
-									bg={"#29CD3F"}
-								></Box>
-							</Flex>
-						</Flex>
-						<Flex
-							mt={"-50px"}
-							className="aboutText"
-							gap={5}
-							flexDirection={"column"}
-						>
-							<Text color={"white"} mx={20} mt={20}>
-								{
-									"> Hello! my name is William Salas, I'm 23 years old and i live in Barranquilla, Colombia."
-								}
-							</Text>
-							<Text color={"white"} mx={20}>
-								{
-									"I'm a Full Stack Developer with training as an Architect and Graphic Designer."
-								}
-							</Text>
-							<Text color={"white"} mx={20}>
-								{
-									"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience, I also have knowledge about the backend in Javascript. In general, I am a person who loves teamwork but I also have no problem with being a leader when required."
-								}
-							</Text>
-							<Text color={"white"} mx={20}>
-								{
-									"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free time."
-								}
-							</Text>
-
-							<Button
-								className="projectButton"
-								mx={20}
-								width={"fit-content"}
-								rightIcon={<AiOutlineDown />}
-							>
-								<a href="#projects">know my projects</a>
-							</Button>
-						</Flex>
-					</Flex>
-				</Flex>
-				<Flex
-					flexDirection={"column"}
-					id="projects"
-					className="projects"
-					w={"100%"}
-					h={"100vh"}
-					justifyContent={"space-between"}
-				>
-					<Box
-						position={"absolute"}
-						w={"100%"}
-						h={"6%"}
-						className={"fade"}
-					></Box>
-					<Flex flexDirection={"column"}>
-						<Heading m={"90px"} color={"white"}>
-							{" "}
-							{">myProjects"}
-						</Heading>
-					</Flex>
-
-					<Flex rowGap={5} justifyContent={"space-around"} wrap={"wrap"}>
-						{projects.map((p) => {
-							return (
-								<ProjectCard
-									name={p.name}
-									description={p.description}
-									image={p.image}
-									url={p.url}
-									technologies={p.technologies}
-									id={p.id}
-									key={p.id}
-								/>
-							);
-						})}
-					</Flex>
-
-					<Box
-						alignItems={"flex-end"}
-						w={"100%"}
-						h={"6%"}
-						className={"fadeDown"}
-					></Box>
-				</Flex> */
