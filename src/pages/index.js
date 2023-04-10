@@ -38,15 +38,15 @@ import {
 	SiTypescript,
 } from "react-icons/si";
 import axios from "axios";
-export default function Home({ url, projects }) {
+export default function Home({ url, projects, news }) {
 	const toast = useToast();
 	const scrollIndex = 400;
 	const iconSize = 10;
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
 	const [command, setCommand] = useState("");
-	const [news, setNews] = useState([]);
-	const first = news[0];
+	//const [news, setNews] = useState([]);
+
 	const slideRight = () => {
 		return scroll <= -projectsLength
 			? null
@@ -100,7 +100,7 @@ export default function Home({ url, projects }) {
 		}
 	};
 
-	useEffect(() => {
+	/* useEffect(() => {
 		const url =
 			"https://newsapi.org/v2/everything?" +
 			"q=Programming&" +
@@ -111,7 +111,9 @@ export default function Home({ url, projects }) {
 		axios.get(url).then((response) => {
 			setNews(response.data.articles);
 		});
-	}, []);
+	}, []); */
+
+	console.log(news);
 
 	return (
 		<>
@@ -225,11 +227,6 @@ export default function Home({ url, projects }) {
 									}
 								</Text>
 
-								{/* <Text color={"white"} mx={20}>
-									{
-										"I Have experience working in React, Redux, Node, Express among other technologies commonly used in the market. I have a lot of affinity for the Front-End and the ability I have to incorporate my graphic and logical knowledge to develop a better user experience."
-									}
-								</Text> */}
 								<Text className="lastText" color={"white"} mx={20}>
 									{
 										"I'm a realy easygoing person, willing to help others as much as eager to request help if needed, i'm a self-instructed musician and i love gaming in my free "
@@ -268,6 +265,7 @@ export default function Home({ url, projects }) {
 								{
 									return (
 										<NewsCard
+											key={n.title}
 											title={n.title}
 											url={n.url}
 											publisher={n.source.name}
@@ -375,13 +373,19 @@ export default function Home({ url, projects }) {
 }
 
 export async function getServerSideProps() {
-	const response = await fetch(`${NEXT_URL}/image`);
-	const projects = await fetch(`${NEXT_URL}/projects`);
+	const [response, projects, news] = await Promise.all([
+		fetch(`${NEXT_URL}/image`),
+		fetch(`${NEXT_URL}/projects`),
+		fetch(`${NEXT_URL}/news`),
+	]);
 
-	const data = await response.json();
-	const projectsData = await projects.json();
+	const [data, projectsData, newsData] = await Promise.all([
+		response.json(),
+		projects.json(),
+		news.json(),
+	]);
 
-	return { props: { url: data.url, projects: projectsData } };
+	return { props: { url: data.url, projects: projectsData, news: newsData } };
 }
 
 /* 		<Flex
