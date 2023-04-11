@@ -1,3 +1,4 @@
+import Head from "next/head";
 import {
 	Button,
 	Flex,
@@ -16,6 +17,11 @@ import React from "react";
 function Nav() {
 	return (
 		<>
+			<Head>
+				<title>Contact</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 			<Flex w={"100%"} h={"60px"} bg={"#1E1E1E"}>
 				<Flex alignItems={"center"} w={"75%"}>
 					<Heading color={"white"} p={"5"} size={"lg"}>
@@ -28,10 +34,7 @@ function Nav() {
 						justifyContent={"space-between"}
 					>
 						<Text color={"white"}>
-							<Link href={"/#aboutme"}>About</Link>
-						</Text>
-						<Text color={"white"}>
-							<a href={"/#projects"}>Projects</a>
+							<Link href={"/"}>Home</Link>
 						</Text>
 						<Text color={"white"}>
 							<Link href={"/contact"}>Contact</Link>
