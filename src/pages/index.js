@@ -20,7 +20,7 @@ import {
 import { NEXT_URL } from "@/config/config";
 import { BsTerminal } from "react-icons/bs";
 import ProjectCard from "@/components/ProjectCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { supabase } from "@/config/supabase";
 import { FaNodeJs, FaReact } from "react-icons/fa";
@@ -29,7 +29,6 @@ import {
 	SiExpress,
 	SiGit,
 	SiHtml5,
-	SiJava,
 	SiJavascript,
 	SiMongodb,
 	SiNextdotjs,
@@ -37,7 +36,6 @@ import {
 	SiSequelize,
 	SiTypescript,
 } from "react-icons/si";
-import axios from "axios";
 export default function Home({ url, projects, news }) {
 	const toast = useToast();
 	const scrollIndex = 400;
@@ -243,6 +241,8 @@ export default function Home({ url, projects, news }) {
 						borderRadius={"10px"}
 						gridArea={"c"}
 						color={"white"}
+						overflowY={"scroll"}
+						overflow={"auto"}
 					>
 						<Heading size={"md"} px={5} pt={5} color={"white"}>
 							{">News"}
