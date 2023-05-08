@@ -40,6 +40,22 @@ const news = [
 		content:
 			"When portions of Twitter's source code appeared on Github earlier this year, the social media company asked the court to compel the collaborative programming network to reveal the identity of the use… [+1220 chars]",
 	},
+	{
+		source: {
+			id: null,
+			name: "ReadWrite",
+		},
+		author: "Ankit Patel",
+		title: "Top 7 Programming Languages To Develop Native Android Apps",
+		description:
+			"We spend our lives on our smartphones for purposes like communicating with our near and dear ones, researching different items, binge-watching, etc. This has led to the use of smartphones growing to a huge extent. Research suggests that the number of smartpho…",
+		url: "https://readwrite.com/top-programming-languages-to-develop-native-android-apps/",
+		urlToImage:
+			"https://readwrite.com/wp-content/uploads/2023/02/Programming-Languages.jpg",
+		publishedAt: "2023-04-12T18:00:41Z",
+		content:
+			"We spend our lives on our smartphones for purposes like communicating with our near and dear ones, researching different items, binge-watching, etc. This has led to the use of smartphones growing to … [+9189 chars]",
+	},
 ];
 
 module.exports = { news };
