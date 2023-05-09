@@ -97,7 +97,7 @@ export default function Home({ url, projects, news }) {
 			return;
 		}
 	};
-
+	//modified
 	return (
 		<>
 			<Head>
