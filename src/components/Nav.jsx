@@ -9,10 +9,10 @@ import {
 	MenuItem,
 	MenuList,
 	Text,
+	useMediaQuery,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-/* import cvEng from "../../public/assets/CV-ENG-WSALAS.pdf"; */
 
 function Nav() {
 	return (
@@ -22,7 +22,8 @@ function Nav() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Flex w={"100%"} h={"60px"} bg={"#1E1E1E"}>
+
+			<Flex w={"100%"} bg={"#1E1E1E"}>
 				<Flex alignItems={"center"} w={"75%"}>
 					<Heading color={"white"} p={"5"} size={"lg"}>
 						<Link href={"/"}>{">myPortfolio"}</Link>
@@ -87,17 +88,6 @@ function Nav() {
 							</MenuItem>
 						</MenuList>
 					</Menu>
-
-					{/* <Button colorScheme={"green"} variant={"outline"}>
-						<a
-							href="https://drive.google.com/file/d/1zOdpnJkIiTwedJ-Tm9le9VH5n01aA8cO/view?usp=sharing"
-							download
-							target="_blank"
-							rel="noreferrer"
-						>
-							Download CV
-						</a>
-					</Button> */}
 				</Flex>
 			</Flex>
 		</>
