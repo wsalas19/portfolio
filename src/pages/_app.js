@@ -1,6 +1,6 @@
 import "@/styles/globals.scss";
 import Nav from "../components/Nav";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useMediaQuery } from "@chakra-ui/react";
 import Footer from "@/components/Footer";
 
 export default function App({ Component, pageProps }) {

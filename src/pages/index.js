@@ -2,7 +2,6 @@ import Head from "next/head";
 import NewsCard from "@/components/NewsCard";
 import {
 	Box,
-	Divider,
 	Flex,
 	Grid,
 	GridItem,
@@ -43,7 +42,6 @@ export default function Home({ url, projects, news }) {
 	const projectsLength = (projects.length - 2) * 255;
 	const [scroll, setScroll] = useState(0);
 	const [command, setCommand] = useState("");
-	//const [news, setNews] = useState([]);
 
 	const slideRight = () => {
 		return scroll <= -projectsLength
@@ -110,11 +108,10 @@ export default function Home({ url, projects, news }) {
 				<Grid
 					className="dashboardContainer"
 					gridTemplateColumns="repeat(4,1fr)"
-					gridTemplateRows="repeat(2,1fr)"
+					gridTemplateRows="1fr 20%"
 					gridTemplateAreas={'"a b b c" "d d e c"'}
 					rowGap={"3"}
 					columnGap={"3"}
-					height={"89svh"}
 					p={"5"}
 				>
 					<GridItem
@@ -127,12 +124,12 @@ export default function Home({ url, projects, news }) {
 							flexDirection={"column"}
 							justifyContent={"center"}
 							alignItems={"center"}
-							p={"5"}
+							px={4}
 						>
 							<Image
 								fallbackSrc="https://via.placeholder.com/300"
 								className="mainImage"
-								padding={5}
+								padding={8}
 								rounded={"full"}
 								objectFit={"contain"}
 								src={url}
@@ -147,7 +144,7 @@ export default function Home({ url, projects, news }) {
 							>
 								William Salas Bolaño
 							</Heading>
-							<HStack mt={"2"} justifyContent={"center"}>
+							<HStack mt={"2"} justifyContent={"center"} wrap={"wrap"} gap={2}>
 								<Tag display={"flex"} size={"sm"}>
 									Full Stack Dev
 								</Tag>
@@ -274,7 +271,7 @@ export default function Home({ url, projects, news }) {
 						<Heading size={"md"} p={5} color={"white"}>
 							{">myProjects"}
 						</Heading>
-						<Flex h={"30svh"} flexDir={"column"} justifyContent={"center"}>
+						<Flex flexDir={"column"}>
 							<Flex
 								style={styleSlide}
 								className="carousel"
@@ -298,7 +295,7 @@ export default function Home({ url, projects, news }) {
 									);
 								})}
 							</Flex>
-							<HStack alignItems={"flex-end"} justifyContent={"center"}>
+							<HStack justifyContent={"center"}>
 								<IconButton
 									rounded={"full"}
 									size={"lg"}
@@ -322,36 +319,37 @@ export default function Home({ url, projects, news }) {
 						border={"solid 1px grey"}
 						borderRadius={"10px"}
 						gridArea={"e"}
-						overflowX={"hidden"}
 					>
-						<Heading size={"md"} p={5} color={"white"}>
-							{">mySkills"}
-						</Heading>
-						<Flex
-							height={"25svh"}
-							justifyContent={"center"}
-							alignItems={"center"}
-						>
-							<VStack /* className="logowrapper" */ spacing={5}>
-								<Flex /* className="logobatch" */ gap={"3"} flexDir={"row"}>
-									<Icon boxSize={iconSize} color="cyan" as={FaReact} />
-									<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
-									<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
-									<Icon boxSize={iconSize} color="white" as={SiExpress} />
-								</Flex>
-								<Flex gap={"3"} flexDir={"row"}>
-									<Icon boxSize={iconSize} color="green" as={SiMongodb} />
-									<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
-									<Icon boxSize={iconSize} color="#277ac0" as={SiTypescript} />
-									<Icon boxSize={iconSize} color="purple" as={SiRedux} />
-								</Flex>
-								<Flex gap={"3"} flexDir={"row"}>
-									<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
-									<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
-									<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
-									<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
-								</Flex>
-							</VStack>
+						<Flex flexDir={"column"}>
+							<Heading size={"md"} p={5} color={"white"}>
+								{">mySkills"}
+							</Heading>
+							<Flex justifyContent={"center"} pt={"5%"}>
+								<VStack spacing={5}>
+									<Flex gap={"3"} flexDir={"row"}>
+										<Icon boxSize={iconSize} color="cyan" as={FaReact} />
+										<Icon boxSize={iconSize} color="white" as={SiNextdotjs} />
+										<Icon boxSize={iconSize} color="green" as={FaNodeJs} />
+										<Icon boxSize={iconSize} color="white" as={SiExpress} />
+									</Flex>
+									<Flex gap={"3"} flexDir={"row"}>
+										<Icon boxSize={iconSize} color="green" as={SiMongodb} />
+										<Icon boxSize={iconSize} color="#52b0e7" as={SiSequelize} />
+										<Icon
+											boxSize={iconSize}
+											color="#277ac0"
+											as={SiTypescript}
+										/>
+										<Icon boxSize={iconSize} color="purple" as={SiRedux} />
+									</Flex>
+									<Flex gap={"3"} flexDir={"row"}>
+										<Icon boxSize={iconSize} color="yellow" as={SiJavascript} />
+										<Icon boxSize={iconSize} color="orange" as={SiHtml5} />
+										<Icon boxSize={iconSize} color="#277ac0" as={SiCss3} />
+										<Icon boxSize={iconSize} color="#e84e31" as={SiGit} />
+									</Flex>
+								</VStack>
+							</Flex>
 						</Flex>
 					</GridItem>
 				</Grid>
