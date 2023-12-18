@@ -7,22 +7,24 @@ function ProjectCard({ name, image, id }) {
 		<>
 			<Flex
 				key={id}
-				className="projectCards"
+				className='projectCards'
 				flexDirection={"column"}
 				w={"12%"}
 				borderRadius={"10px"}
 				bg={"#212121"}
 				overflow={"hidden"}
 			>
-				<Link className="cardLink" as={NextLink} href={`/projects/${id}`}>
-					<Box overflow={"hidden"} className="projectImage">
+				<Link className='cardLink' as={NextLink} href={`/projects/${id}`}>
+					<Box overflow={"hidden"} className='projectImage'>
 						<Image src={image} alt={"project preview"} objectFit={"contain"} />
 					</Box>
 					<HStack justifyContent={"space-between"} p={3}>
 						<Heading alignSelf={"flex-start"} size={"sm"} color={"white"}>
 							{name}
 						</Heading>
-						<Tag size={"sm"}>Learn More</Tag>
+						<Tag _hover={{ cursor: "pointer" }} size={"sm"}>
+							Learn More
+						</Tag>
 					</HStack>
 				</Link>
 			</Flex>
