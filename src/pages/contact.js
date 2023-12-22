@@ -15,11 +15,16 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 export default function Contact() {
 	const toast = useToast();
+	const [error, setError] = useState({});
+	const [buttonControl, setButtonControl] = useState({
+		sent: false,
+		name: "Send",
+	});
 	const [form, setForm] = useState({
 		title: "",
 		body: "",
 	});
-	const [error, setError] = useState({});
+
 	const hanldeInputChange = (e) => {
 		const { value, name } = e.target;
 		setForm({ ...form, [name]: value });
@@ -48,35 +53,35 @@ export default function Contact() {
 		return;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		emailjs
-			.send("service_aeit20k", "template_q0h47ua", form, "tR3_o_blEZwFNXqUz")
-			.then(
-				(response) => {
-					toast({
-						title: response.text,
-						status: "success",
-						isClosable: true,
-					});
-					setForm({ title: "", body: "" });
-				},
-				(error) => {
-					toast({
-						title: "There was an error, please try again",
-						status: "error",
-						isClosable: true,
-					});
-				}
+		setButtonControl({ sent: true, name: "Sending..." });
+		try {
+			const response = await emailjs.send(
+				"service_aeit20k",
+				"template_q0h47ua",
+				form,
+				"tR3_o_blEZwFNXqUz",
 			);
+			toast({
+				title: "Your message was ssuccessfully sent",
+				status: "success",
+				isClosable: true,
+			});
+			setButtonControl({ sent: false, name: "Send" });
+			setForm({ title: "", body: "" });
+		} catch (error) {
+			toast({
+				title: "There was an error, please try again",
+				status: "error",
+				isClosable: true,
+			});
+		} finally {
+			setButtonControl({ sent: false, name: "Send" });
+		}
 	};
 	return (
-		<Box
-			flexDirection={"row"}
-			display={"flex"}
-			h={"89svh"}
-			className={"contact"}
-		>
+		<Box flexDirection={"row"} display={"flex"} h={"89svh"} className={"contact"}>
 			<Flex
 				p={5}
 				flexDir={"column"}
@@ -86,55 +91,59 @@ export default function Contact() {
 				height={"full"}
 			>
 				<Image
-					className="formImage"
-					src="https://i.ibb.co/xXrSQS7/haze-hands-typing-on-the-keyboard.png"
-					alt="hands-artwork"
+					className='formImage'
+					src='https://i.ibb.co/xXrSQS7/haze-hands-typing-on-the-keyboard.png'
+					alt='hands-artwork'
 					w={"300px"}
 					alignSelf={"flex-end"}
 				/>
 				<Image
-					className="formImage"
-					src="https://i.ibb.co/sHFVHBX/haze-programmer-writing-code-on-laptop-1.png"
-					alt="hands-computer artwork"
+					className='formImage'
+					src='https://i.ibb.co/sHFVHBX/haze-programmer-writing-code-on-laptop-1.png'
+					alt='hands-computer artwork'
 					w={"300px"}
 				/>
 			</Flex>
 			<Flex gap={5} flexDir={"column"} p={"72px"} w={"60%"} height={"full"}>
 				<Heading>Get in touch with me!</Heading>
 				<FormControl isInvalid={error && error.title}>
-					<FormLabel>Title</FormLabel>
+					<FormLabel color={"gray.600"} fontWeight={"semibold"}>
+						Title
+					</FormLabel>
 					<Input
 						onChange={hanldeInputChange}
-						name="title"
+						name='title'
 						variant={"filled"}
-						type="text"
-						placeholder="title goes here..."
+						type='text'
+						placeholder='title goes here...'
 						value={form.title}
 					/>
 					<FormErrorMessage>{error.title}</FormErrorMessage>
 				</FormControl>
 				<FormControl isInvalid={error && error.body}>
-					<FormLabel>Body</FormLabel>
+					<FormLabel color={"gray.600"} fontWeight={"semibold"}>
+						Body
+					</FormLabel>
 					<Textarea
 						onChange={hanldeInputChange}
-						name="body"
-						className="textAreaInput"
+						name='body'
+						className='textAreaInput'
 						variant={"filled"}
-						type="text"
-						placeholder="message goes here..."
+						type='text'
+						placeholder='message goes here...'
 						h={"200px"}
 						value={form.body}
 					/>
 					<FormErrorMessage>{error.body}</FormErrorMessage>
 				</FormControl>
 				<Button
-					isDisabled={Object.keys(error).length !== 0}
+					isDisabled={Object.keys(error).length !== 0 || buttonControl.sent}
 					variant={"outline"}
-					colorScheme="orange"
+					colorScheme='orange'
 					w={"fit-content"}
 					onClick={handleSubmit}
 				>
-					Send
+					{buttonControl.name}
 				</Button>
 			</Flex>
 		</Box>
