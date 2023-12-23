@@ -43,8 +43,6 @@ export default function Navbar() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { size } = useWindowSize();
 
-	//console.log(size.width);
-
 	return (
 		<Box px={4} bg={"#1E1E1E"}>
 			<Flex h={16} alignItems='center' justifyContent='space-between' mx='auto'>
