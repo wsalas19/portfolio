@@ -101,7 +101,13 @@ export default function Home({ url, projects, news }) {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Box id='aboutme' className='mainContainer ' bg={"#323232"}>
+			<Box
+				h={windowSize.width >= breakPoint ? "93svh" : "auto"}
+				id='aboutme'
+				className='mainContainer '
+				bg={"#323232"}
+				pb={windowSize.width >= breakPoint ? "0" : "2rem"}
+			>
 				<Grid
 					className='dashboardContainer'
 					gridTemplateColumns={windowSize.width <= breakPoint ? "1fr" : "repeat(4, 1fr)"}

@@ -6,29 +6,19 @@ import {
 	Text,
 	Link,
 	Menu,
-	MenuButton,
 	MenuList,
 	MenuItem,
 	Stack,
-	Icon,
 	IconButton,
 	useDisclosure,
 	useColorModeValue,
 	Heading,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-import { BiChevronDown } from "react-icons/bi";
-import { RiFlashlightFill } from "react-icons/ri";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
-const navLinks = [
-	{ name: "Home", path: "/" },
-	{ name: "Contact", path: "/contact" },
-];
-
-const dropdownLinks = [
+const links = [
 	{
 		name: "Home",
 		path: "/",
@@ -42,34 +32,40 @@ const dropdownLinks = [
 export default function Navbar() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { size } = useWindowSize();
-
+	// Main structure
 	return (
 		<Box px={4} bg={"#1E1E1E"}>
 			<Flex h={16} alignItems='center' justifyContent='space-between' mx='auto'>
-				<Heading color={"white"}>{">MyPortfolio"}</Heading>
+				<Flex>
+					<Heading color={"white"}>{">MyPortfolio"}</Heading>
 
-				{size.width > 600 ? (
-					<HStack spacing={8} alignItems='center'>
-						<HStack as='nav' spacing={6} d={{ base: "none", md: "flex" }} alignItems='center'>
-							{navLinks.map((link, index) => (
-								<NavLink key={index} {...link} onClose={onClose} />
-							))}
+					{size.width > 600 ? (
+						<HStack spacing={8}>
+							<HStack as='nav' pl={4} pt={2} spacing={6} d={{ base: "none", md: "flex" }}>
+								{links.map((link, index) => (
+									<NavLink key={index} {...link} onClose={onClose} />
+								))}
 
-							{/* Dropdown Menu */}
-							<Menu autoSelect={false} isLazy>
-								{({ isOpen, onClose }) => (
-									<>
-										<MenuList zIndex={5} border='none'>
-											{dropdownLinks.map((link, index) => (
-												<MenuLink key={index} name={link.name} path={link.path} onClose={onClose} />
-											))}
-										</MenuList>
-									</>
-								)}
-							</Menu>
+								<Menu autoSelect={false} isLazy>
+									{({ isOpen, onClose }) => (
+										<>
+											<MenuList zIndex={5} border='none'>
+												{links.map((link, index) => (
+													<MenuLink
+														key={index}
+														name={link.name}
+														path={link.path}
+														onClose={onClose}
+													/>
+												))}
+											</MenuList>
+										</>
+									)}
+								</Menu>
+							</HStack>
 						</HStack>
-					</HStack>
-				) : null}
+					) : null}
+				</Flex>
 
 				{size.width > 600 ? <DownloadCVButton /> : null}
 
@@ -90,7 +86,7 @@ export default function Navbar() {
 			{isOpen ? (
 				<Box pb={4} d={{ base: "inherit", md: "none" }}>
 					<Stack as='nav' spacing={2}>
-						{navLinks.map((link, index) => (
+						{links.map((link, index) => (
 							<NavLink key={index} {...link} onClose={onClose} />
 						))}
 						<DownloadCVButton />
@@ -100,8 +96,6 @@ export default function Navbar() {
 		</Box>
 	);
 }
-
-// NavLink Component
 
 const DownloadCVButton = () => {
 	return (
@@ -119,11 +113,12 @@ const DownloadCVButton = () => {
 	);
 };
 
+// NavLink Component
+
 const NavLink = ({ name, path, onClose }) => {
 	return (
 		<Link
 			href={path}
-			lineHeight='inherit'
 			color={"whiteAlpha.500"}
 			_hover={{
 				textDecoration: "none",
@@ -141,7 +136,7 @@ const NavLink = ({ name, path, onClose }) => {
 const MenuLink = ({ name, path, onClose }) => {
 	return (
 		<Link href={path} onClick={() => onClose()}>
-			<MenuItem _hover={{ color: "blue.400", bg: useColorModeValue("gray.200", "gray.700") }}>
+			<MenuItem _hover={{ color: "orange.400", bg: useColorModeValue("gray.200", "gray.700") }}>
 				<Text>{name}</Text>
 			</MenuItem>
 		</Link>
