@@ -24,7 +24,6 @@ function Footer() {
 				justifyContent={"space-between"}
 			>
 				<Flex className='socials' gap={"5"} alignItems={"center"} flexDirection={"row"}>
-					<Text fontWeight={"medium"}>{">mySocials:"}</Text>
 					<Link
 						isexternal='true'
 						className='linkedin'

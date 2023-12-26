@@ -5,25 +5,19 @@ import {
 	Button,
 	Divider,
 	Flex,
-	Grid,
-	GridItem,
-	Heading,
 	HStack,
 	IconButton,
 	Image,
 	Link,
 	Tag,
 	Text,
-	VStack,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsGithub } from "react-icons/bs";
 import { FiExternalLink } from "react-icons/fi";
-import { MdKeyboardArrowLeft } from "react-icons/md";
 
 export default function ProjectDetails({ project }) {
 	const router = useRouter();
@@ -40,98 +34,79 @@ export default function ProjectDetails({ project }) {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Box className='detailLayout' p={3} h={"86%"} bg={"#323232"}>
-				<Link className='backButton' as={NextLink} href={"/"}>
-					<IconButton
-						p={3}
-						mb={2}
-						rounded={"full"}
-						size={"lg"}
-						variant={"ghost"}
-						color={"grey"}
-						icon={<MdKeyboardArrowLeft />}
-					/>
-				</Link>
-				<Grid
-					className='detailLayoutGrid'
-					/* gridTemplateColumns='repeat(4,1fr)'
-					gridTemplateRows='repeat(4,1fr)'
-					gridTemplateAreas={
-						'"img img img side" "img img img side" "img img img side" "tech tech tech side"'
-					} */
-					gridTemplateColumns={windowSize.width <= breakPoint ? "1fr" : "repeat(4, 1fr)"}
-					gridTemplateRows={windowSize.width <= breakPoint ? "auto" : "repeat(4, 1fr)"}
-					gridTemplateAreas={
-						windowSize.width <= breakPoint
-							? '"side" "img" "tech"'
-							: '"img img img side" "img img img side" "img img img side" "tech tech tech side"'
-					}
-					rowGap={"3"}
-					columnGap={"3"}
-					h={"90svh"}
-					margin={"auto"}
-				>
-					<GridItem
-						overflow={"hidden"}
-						borderRadius={"6"}
-						gridArea={"img"}
-						border={"1px solid grey"}
+			<Box p={4} h={"95svh"} bg={"#323232"} display={"flex"} flexDirection={"column"} gap={3}>
+				<Flex w={"100%"} flexDirection={{ base: "column", lg: "row" }} gap={3}>
+					<Flex
+						w={{ base: "100%", lg: "50%" }}
+						p={2}
+						border={"solid 1px gray"}
+						rounded={"md"}
+						flexDirection={"column"}
+						gap={2}
 					>
-						<Image objectFit={"contain"} src={image} alt='project preview' />
-					</GridItem>
-					<GridItem border={"1px solid grey"} p={6} borderRadius={"6"} gridArea={"side"}>
-						<Flex flexDirection={"column"} justifyContent={"flex-start"} gap={"5"}>
-							<Heading color={"white"} size={"md"}>
-								{name}
-							</Heading>
-							<Divider />
-							<Text color={"white"} size={"sm"} fontWeight={"medium"}>
-								{"Project Description"}
-							</Text>
-							<Text size={"sm"} color={"white"} flexWrap={"wrap"}>
-								{description}
-							</Text>
-
-							<Flex flexDirection={"row"} gap={3} alignItems={"center"}>
-								{url.includes(".app") ? (
-									<Link
-										display={"flex"}
-										alignItems={"center"}
-										gap={1}
-										color={"#7E7E7E"}
-										href={url}
-										isexternal='true'
-									>
-										Visit <FiExternalLink />
-									</Link>
-								) : (
-									<Text fontWeight={"bold"} color={"yellow.100"}>
-										{url}
-									</Text>
-								)}
-								<Link href={repo} isexternal='true'>
-									<Button colorScheme={"blackAlpha"} leftIcon={<BsGithub />}>
-										Github
-									</Button>
+						<Text fontWeight={"bold"} color={"white"}>{`Project ${name}`}</Text>
+						<Divider />
+						<Text color={"whiteAlpha.600"}>{description}</Text>
+						<Flex flexDirection={"row"} gap={2} alignItems={"center"}>
+							<Link href={repo} isexternal='true'>
+								<Button size={"sm"} colorScheme={"blackAlpha"} leftIcon={<BsGithub />}>
+									Github
+								</Button>
+							</Link>
+							{url.includes(".app") ? (
+								<Link
+									display={"flex"}
+									alignItems={"center"}
+									gap={1}
+									color={"#7E7E7E"}
+									href={url}
+									isexternal='true'
+								>
+									Visit <FiExternalLink />
 								</Link>
-							</Flex>
+							) : (
+								<Text fontWeight={"bold"} color={"yellow.100"}>
+									{url}
+								</Text>
+							)}
 						</Flex>
-					</GridItem>
-					<GridItem p={5} border={"1px solid grey"} borderRadius={"6"} gridArea={"tech"} h={"auto"}>
-						<Text fontWeight={"medium"} color={"white"}>
-							Technologies used:
+					</Flex>
+					<Flex
+						w={{ base: "100%", lg: "50%" }}
+						p={2}
+						border={"1px solid grey"}
+						borderRadius={"md"}
+						h={"auto"}
+						flexDirection={"column"}
+					>
+						<Text fontWeight={"bold"} color={"white"}>
+							Technologies
 						</Text>
-						<HStack mt={3} spacing={2}>
+						<Flex mt={2} wrap={"wrap"} gap={2}>
 							{technologies.map((t) => {
 								return (
-									<Tag className='tech' key={Math.random().toString(36).substr(2)}>
+									<Tag
+										cursor={"pointer"}
+										className='tech'
+										key={Math.random().toString(36).substr(2)}
+									>
 										{t}
 									</Tag>
 								);
 							})}
-						</HStack>
-					</GridItem>
-				</Grid>
+						</Flex>
+					</Flex>
+				</Flex>
+
+				<Flex overflow={"hidden"} borderRadius={"md"} border={"1px solid grey"}>
+					<Image
+						objectFit={"fill"}
+						placeSelf={"center"}
+						src={image}
+						alt='project preview'
+						className='projectPreview'
+					/>
+				</Flex>
 			</Box>
 		</>
 	);
