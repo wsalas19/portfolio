@@ -118,7 +118,7 @@ export default function Contact() {
 				<Flex
 					gap={5}
 					flexDir={"column"}
-					p={"5rem"}
+					p={{ base: "2rem", lg: "5rem" }}
 					width={size.width >= 900 ? "60%" : "100%"}
 					height={"100%"}
 				>
