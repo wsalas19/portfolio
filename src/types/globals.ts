@@ -12,7 +12,7 @@ export type ButtonControl = {
 };
 export type ProfileCardProps = {
 	data: {
-		publicUrl: string;
-	};
+		signedUrl: string;
+	} | null;
 	imgSize: number;
 };

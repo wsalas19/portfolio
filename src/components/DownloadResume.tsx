@@ -1,30 +1,43 @@
+"use client";
 import React from "react";
 import { Button } from "./ui/button";
 import { File } from "lucide-react";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 function DownloadResume() {
 	//TODO:
-	// 1. Create a new file in the storage bucket called "cv"
+	// Make the button work, solve current supase key porblem.
 	const downloadResume = async () => {
-		const { data, error } = await supabase.storage.from("portfolio-assets").download("cv");
-		if (error) {
-			console.error(error);
-			return;
-		}
-		console.log(data);
-		/* const url = window.URL.createObjectURL(new Blob([data]));
-		const link = document.createElement("a");
-		link.href = url;
-		link.setAttribute("download", "cv.pdf");
-		document.body.appendChild(link);
-		link.click();
-		link.remove(); */
-	};
+		try {
+			const { data, error } = await supabase.storage.from("portfolio-assets").download("cv");
+			if (data) {
+				// Create a blob with the downloaded data
+				const blob = new Blob([data], { type: "application/pdf" });
 
+				// Create a downloadable link
+				const url = window.URL.createObjectURL(blob);
+				const link = document.createElement("a");
+
+				// Set the link attributes
+				link.href = url;
+				link.download = "resume.pdf";
+
+				// Append the link to the document
+				document.body.appendChild(link);
+
+				// Programmatically click the link to trigger the download
+				link.click();
+
+				// Remove the link from the document
+				document.body.removeChild(link);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<Button
-			//onClick={downloadResume}
+			onClick={downloadResume}
 			className=' font-bold bg-gray-900 text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
 			variant={"outline"}
 			size={"sm"}

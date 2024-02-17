@@ -11,13 +11,13 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 				{data ? (
 					<Image
 						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square'
-						src={data.publicUrl}
+						src={data.signedUrl}
 						alt='personal-b&w-pic'
 						width={imgSize}
 						height={imgSize}
 					/>
 				) : (
-					<Skeleton className='rounded-md w-auto h-auto' />
+					<Skeleton className='rounded-md' />
 				)}
 				<div className=' gap-1 flex flex-col'>
 					<div className='flex flex-col justify-between md:flex-row'>
