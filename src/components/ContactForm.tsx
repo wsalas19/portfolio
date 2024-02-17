@@ -77,9 +77,9 @@ function ContactForm() {
 		<div
 			id='contact'
 			//className='global-p flex items-center flex-col gap-2 '
-			className='global-p flex  gap-2  h-[100svh] justify-center'
+			className='global-p flex  gap-2  h-screen items-center justify-center'
 		>
-			<Card className=' bg-palette-card text-white border-none self-center w-[70%]'>
+			<Card className=' bg-palette-card text-white border-none self-center w-[90%] md:w-[70%]'>
 				<CardHeader>
 					<CardTitle>CONTACT ME</CardTitle>
 					<CardDescription>Write a message and submit to send me an email.</CardDescription>
@@ -92,7 +92,7 @@ function ContactForm() {
 								name='name'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Name</FormLabel>
+										<FormLabel className=' font-semibold'>Name</FormLabel>
 										<FormControl>
 											<Input placeholder='name' {...field} />
 										</FormControl>
@@ -106,7 +106,7 @@ function ContactForm() {
 								name='title'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Title</FormLabel>
+										<FormLabel className=' font-semibold'>Title</FormLabel>
 										<FormControl>
 											<Input placeholder='title' {...field} />
 										</FormControl>
@@ -120,13 +120,9 @@ function ContactForm() {
 								name='message'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Message</FormLabel>
+										<FormLabel className=' font-semibold'>Message</FormLabel>
 										<FormControl>
-											<Textarea
-												placeholder='write your thoughts.'
-												className=' resize-none'
-												{...field}
-											/>
+											<Textarea placeholder='write your thoughts.' className='' {...field} />
 										</FormControl>
 
 										<FormMessage />

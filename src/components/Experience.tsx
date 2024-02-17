@@ -30,10 +30,10 @@ function Experience() {
 		},
 	];
 	return (
-		<div id='experience' className='gray-white-scheme global-p h-[100svh] pt-2 flex flex-col'>
+		<div id='experience' className='gray-white-scheme px-6 global-p h-[100svh] pt-2 flex flex-col'>
 			<h1 className='text-2xl font-bold text-center'>EXPERIENCE</h1>
 			{/*markup */}
-			<div className='flex justify-center m-auto'>
+			<div className='flex justify-center  m-auto'>
 				<ol className='relative border-s border-gray-200 '>
 					{jobs.map((job) => {
 						return <ExperienceCard key={job.company} {...job} />;

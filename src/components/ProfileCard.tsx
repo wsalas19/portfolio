@@ -6,8 +6,8 @@ import { ProfileCardProps } from "@/types/globals";
 
 function ProfileCard({ data, imgSize }: ProfileCardProps) {
 	return (
-		<div id='about' className='px-32  py-10 global-p flex h-[100svh]'>
-			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col md:flex-row gap-3 w-[70%] m-auto'>
+		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
+			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col md:flex-row gap-3 w-[90%] md:w-[70%]'>
 				{data ? (
 					<Image
 						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square'

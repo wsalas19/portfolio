@@ -78,7 +78,7 @@
 
 @layer utilities {
 	.global-p {
-		@apply px-10 md:px-32;
+		@apply md:px-32;
 	}
 
 	.gray-white-scheme {

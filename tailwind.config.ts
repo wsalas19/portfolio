@@ -58,6 +58,7 @@ const config = {
 				},
 				palette: {
 					lime: "#bef728",
+					olive: "#a2a206",
 					pink: "#fb8983",
 					card: "#1d1e2c",
 					alt: "#2e3320",
