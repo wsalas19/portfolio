@@ -1,0 +1,155 @@
+"use client";
+
+import React, { useState } from "react";
+import {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "./ui/form";
+import { Input } from "./ui/input";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
+import emailjs from "@emailjs/browser";
+import { useToast } from "./ui/use-toast";
+import { ButtonControl } from "../types/globals";
+
+const formSchema = z.object({
+	name: z.string().min(3, "Name is too short").max(30, "Name is too long"),
+	title: z.string().min(8, "Title is too short").max(30, "Title is too long"),
+	message: z.string().min(20, "Message is too short").max(200, "Message is too long"),
+});
+
+function ContactForm() {
+	const { toast } = useToast();
+	const [buttonControl, setButtonControl] = useState<ButtonControl>({
+		sent: false,
+		name: "Send",
+	});
+
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			name: "",
+			title: "",
+			message: "",
+		},
+	});
+
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setButtonControl({ sent: true, name: "Sending..." });
+		try {
+			await emailjs.send("mail_main", "template_q0h47ua", values, "tR3_o_blEZwFNXqUz");
+			setButtonControl({ sent: false, name: "Send" });
+			form.reset();
+			toast({
+				title: `Thanks ${values.name}!`,
+				description: `I will get back to you as soon as possible.`,
+				variant: "success",
+			});
+		} catch (error) {
+			toast({
+				title: `Something went wrong`,
+				description: `Please try again later.`,
+				variant: "destructive",
+			});
+			console.log(error);
+		} finally {
+			setButtonControl({ sent: false, name: "Send" });
+		}
+	}
+
+	return (
+		<div
+			id='contact'
+			//className='global-p flex items-center flex-col gap-2 '
+			className='global-p flex  gap-2  h-[100svh] justify-center'
+		>
+			<Card className=' bg-palette-card text-white border-none self-center w-[70%]'>
+				<CardHeader>
+					<CardTitle>CONTACT ME</CardTitle>
+					<CardDescription>Write a message and submit to send me an email.</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<Form {...form}>
+						<form className='space-y-2'>
+							<FormField
+								control={form.control}
+								name='name'
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Name</FormLabel>
+										<FormControl>
+											<Input placeholder='name' {...field} />
+										</FormControl>
+										<FormDescription>Your name.</FormDescription>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name='title'
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Title</FormLabel>
+										<FormControl>
+											<Input placeholder='title' {...field} />
+										</FormControl>
+										<FormDescription>Reference the main topic of your message.</FormDescription>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name='message'
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Message</FormLabel>
+										<FormControl>
+											<Textarea
+												placeholder='write your thoughts.'
+												className=' resize-none'
+												{...field}
+											/>
+										</FormControl>
+
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</form>
+					</Form>
+				</CardContent>
+				<CardFooter>
+					<Button
+						disabled={buttonControl.sent}
+						onClick={form.handleSubmit(onSubmit)}
+						className='w-full font-bold bg-palette-card text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
+						variant={"outline"}
+						size={"sm"}
+					>
+						{buttonControl.name}
+					</Button>
+				</CardFooter>
+			</Card>
+		</div>
+	);
+}
+
+export default ContactForm;
