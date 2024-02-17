@@ -1,7 +1,6 @@
 namespace NodeJS {
 	interface ProcessEnv {
-		SUPABASE_URL: string;
-		SUPABASE_ANON_KEY: string;
-		//add mroe variables here...
+		NEXT_PUBLIC_SUPABASE_URL: string;
+		NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
 	}
 }

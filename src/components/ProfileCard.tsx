@@ -11,7 +11,7 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 				{data ? (
 					<Image
 						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square'
-						src={data.signedUrl}
+						src={data.publicUrl}
 						alt='personal-b&w-pic'
 						width={imgSize}
 						height={imgSize}
