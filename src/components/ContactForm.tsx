@@ -53,7 +53,7 @@ function ContactForm() {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setButtonControl({ sent: true, name: "Sending..." });
 		try {
-			//await emailjs.send("mail_main", "template_q0h47ua", values, "tR3_o_blEZwFNXqUz");
+			await emailjs.send("mail_main", "template_q0h47ua", values, "tR3_o_blEZwFNXqUz");
 			setButtonControl({ sent: false, name: "Send" });
 			form.reset();
 			toast({
