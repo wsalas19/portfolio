@@ -41,7 +41,7 @@ function DownloadResume() {
 			variant={"outline"}
 			size={"sm"}
 		>
-			<Download className='inline-block w-4 h-4 ' />
+			<Download aria-label='download icon' className='inline-block w-4 h-4 ' />
 			{buttonControl.name}
 		</Button>
 	);

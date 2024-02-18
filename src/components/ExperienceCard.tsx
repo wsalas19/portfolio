@@ -6,7 +6,7 @@ function ExperienceCard({ role, company, endDate, startDate, description }: jobP
 	return (
 		<li className='mb-10 ms-8'>
 			<span className='absolute flex items-center justify-center w-10 h-10  rounded-full -start-5   ring-palette-pink bg-palette-pink'>
-				<Briefcase className='w-4 h-4 text-gray-900' />
+				<Briefcase aria-label='job briefcase icon' className='w-4 h-4 text-gray-900' />
 			</span>
 			<h3 className='flex items-center mb-1 text-2xl font-semibold text-white '>
 				{role}
@@ -17,7 +17,7 @@ function ExperienceCard({ role, company, endDate, startDate, description }: jobP
 				) : null}
 			</h3>
 			<p className='text-lg font-bold text-gray-400'>{company}</p>
-			<time className='block mb-2 text-sm font-normal leading-none text-gray-500'>
+			<time className='block mb-2 text-sm font-semibold leading-none text-gray-400'>
 				{startDate} - {endDate}
 			</time>
 			<p className='mb-4 text-md font-normal text-gray-400'>{description}</p>

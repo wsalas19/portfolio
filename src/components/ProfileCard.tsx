@@ -41,7 +41,7 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 						href='mailto:wa.salas1905@hotmail.com'
 						className='text-gray-400 flex gap-1 mt-auto justify-end items-center hover:text-gray-200'
 					>
-						Contact <ExternalLink className='w-4' />
+						Contact <ExternalLink aria-label='external link icon' className='w-4' />
 					</a>
 				</div>
 			</div>
