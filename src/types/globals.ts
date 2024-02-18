@@ -6,9 +6,9 @@ export type jobProps = {
 	description: string;
 };
 
-export type ButtonControl = {
+export type ButtonControl<T> = {
 	sent: boolean;
-	name: "Send" | "Sending...";
+	name: T;
 };
 export type ProfileCardProps = {
 	data: {

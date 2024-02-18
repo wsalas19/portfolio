@@ -36,7 +36,7 @@ const formSchema = z.object({
 
 function ContactForm() {
 	const { toast } = useToast();
-	const [buttonControl, setButtonControl] = useState<ButtonControl>({
+	const [buttonControl, setButtonControl] = useState<ButtonControl<"Send" | "Sending...">>({
 		sent: false,
 		name: "Send",
 	});
@@ -94,9 +94,9 @@ function ContactForm() {
 									<FormItem>
 										<FormLabel className=' font-semibold'>Name</FormLabel>
 										<FormControl>
-											<Input placeholder='name' {...field} />
+											<Input placeholder='John Doe' {...field} />
 										</FormControl>
-										<FormDescription>Your name.</FormDescription>
+
 										<FormMessage />
 									</FormItem>
 								)}
@@ -108,9 +108,9 @@ function ContactForm() {
 									<FormItem>
 										<FormLabel className=' font-semibold'>Title</FormLabel>
 										<FormControl>
-											<Input placeholder='title' {...field} />
+											<Input placeholder='Job Offer' {...field} />
 										</FormControl>
-										<FormDescription>Reference the main topic of your message.</FormDescription>
+
 										<FormMessage />
 									</FormItem>
 								)}
@@ -122,7 +122,11 @@ function ContactForm() {
 									<FormItem>
 										<FormLabel className=' font-semibold'>Message</FormLabel>
 										<FormControl>
-											<Textarea placeholder='write your thoughts.' className='' {...field} />
+											<Textarea
+												placeholder='Hey! I hope this email finds you well...'
+												className=''
+												{...field}
+											/>
 										</FormControl>
 
 										<FormMessage />

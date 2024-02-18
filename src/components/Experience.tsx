@@ -29,9 +29,10 @@ function Experience() {
 				"Served as a Programming Mentor at Henry Academy, playing a key role in guiding and supporting learners in their coding journey, fostering a collaborative and productive learning environment.",
 		},
 	];
+
 	return (
 		<div id='experience' className='gray-white-scheme px-6 global-p h-[100svh] pt-2 flex flex-col'>
-			<h1 className='text-2xl font-bold text-center'>EXPERIENCE</h1>
+			<h1 className='text-2xl font-bold text-center mb-16'>EXPERIENCE</h1>
 			{/*markup */}
 			<div className='flex justify-center  m-auto'>
 				<ol className='relative border-s border-gray-200 '>
