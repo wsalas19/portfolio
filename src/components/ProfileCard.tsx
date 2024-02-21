@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Skeleton } from "./ui/skeleton";
-import { Star, ExternalLink } from "lucide-react";
+import { Globe, MailPlus } from "lucide-react";
 import { ProfileCardProps } from "@/types/globals";
 
 function ProfileCard({ data, imgSize }: ProfileCardProps) {
@@ -9,10 +9,10 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 	// Remove stars and think of a better info to display on card.
 	return (
 		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
-			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col md:flex-row gap-3 w-[90%] md:w-[70%]'>
+			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col lg:flex-row gap-3 w-[90%] md:w-[70%]'>
 				{data ? (
 					<Image
-						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square'
+						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square align-middle'
 						src={data.publicUrl}
 						alt='personal-b&w-pic'
 						width={imgSize}
@@ -23,14 +23,15 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 				)}
 				<div className=' gap-1 flex flex-col'>
 					<div className='flex flex-col justify-between md:flex-row'>
-						<p className=' font-bold text-3xl transition-all hover:text-glow-lime'>William Salas</p>
-						{/* <div className='flex items-center gap-1'>
-							{"fives".split("").map((i) => {
-								return <Star key={i} className='w-6 h-6 text-palette-lime hover:icon-glow-lime' />;
-							})}
-						</div> */}
+						<p className=' font-bold text-3xl transition-all hover:text-glow-lime cursor-pointer'>
+							William Salas Bolaño
+						</p>
 					</div>
-					<p className=' text-gray-400 text-xl'>Software Engineer</p>
+					<p className=' text-gray-300 text-xl'>Software Engineer</p>
+					<div className=' text-gray-400 flex flex-row gap-1 items-center'>
+						<Globe aria-label='globe-wireframe' className='w-4 h-4' />
+						<p className=' text-md'>Barranquilla, Colombia</p>
+					</div>
 					<p className='text-palette-pink'>+1 yrs experience</p>
 					<p className='text-md mt-1'>
 						{
@@ -39,9 +40,9 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 					</p>
 					<a
 						href='mailto:wa.salas1905@hotmail.com'
-						className='text-gray-400 flex gap-1 mt-auto justify-end items-center hover:text-gray-200'
+						className='text-gray-400 flex gap-1 mt-auto justify-end items-center'
 					>
-						Contact <ExternalLink aria-label='external link icon' className='w-4' />
+						<MailPlus aria-label='mail plus icon' className='w-6 h-6 hover:text-palette-lime' />
 					</a>
 				</div>
 			</div>

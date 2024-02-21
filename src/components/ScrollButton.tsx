@@ -35,7 +35,7 @@ function ScrollButton() {
 		<Button
 			onClick={scrollToTop}
 			variant={"outline"}
-			className='fixed right-10 bottom-10 z-10 aspect-square rounded-full bg-gray-900 text-white hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime'
+			className='fixed right-10 bottom-10 z-10 aspect-square rounded-full bg-gray-900 text-white hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime font-semibold'
 			style={{ display: visible ? "inline" : "none" }}
 		>
 			{/* <ChevronUp /> */}

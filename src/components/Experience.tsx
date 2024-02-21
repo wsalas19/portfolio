@@ -4,38 +4,38 @@ import ExperienceCard from "./ExperienceCard";
 function Experience() {
 	const jobs = [
 		{
-			role: "Technical Mentor",
-			company: "App Academy",
-			startDate: "Dec 23",
+			role: "Technical Staff",
+			company: "App Academy - USA",
+			startDate: "Dec 2023",
 			endDate: "Present",
 			description:
-				"Provided technical mentorship at App Academy, contributing to various projects and initiatives aimed at skill development and innovation.",
+				"As a Technical Staff member at App Academy (USA), I provided thorough debugging support on portfolio projects. Additionally, hosted technical office hours to offer additional assistance, clarification, and guidance to Job Seekers, promoting a collaborative learning community.",
 		},
 
 		{
 			role: "Full Stack Developer",
-			company: "PNG Technology SAS",
-			startDate: "Jul 23",
-			endDate: "December 23",
+			company: "PNG Technology Solutions - Barranquilla",
+			startDate: "Jul 2023",
+			endDate: "Nov 2023",
 			description:
-				"Contributed as a Full Stack Developer at PNG Technology SAS, actively involved in the development and enhancement of diverse software solutions.",
+				"As a Full Stack Developer at PNG Technology Solutions (Barranquilla), I developed bespoke software solutions tailored to meet the unique needs of client companies. Actively participated in meetings to meticulously gather project requirements and ensure a comprehensive understanding of client expectations.",
 		},
 		{
 			role: "Programming Mentor",
-			company: "Henry Academy",
-			startDate: "Sep 22",
-			endDate: "Mar 22",
+			company: "Henry - Argentina",
+			startDate: "Sep 2022",
+			endDate: "Feb 2023",
 			description:
-				"Served as a Programming Mentor at Henry Academy, playing a key role in guiding and supporting learners in their coding journey, fostering a collaborative and productive learning environment.",
+				"As a Programming Mentor at Henry (Argentina), I facilitated the resolution of programming exercises, providing personalized assistance to learners to ensure comprehension and mastery.",
 		},
 	];
 
 	return (
-		<div id='experience' className='gray-white-scheme px-6 global-p h-[100svh] pt-2 flex flex-col'>
-			<h1 className='text-2xl font-bold text-center mb-16'>EXPERIENCE</h1>
+		<div id='experience' className='gray-white-scheme global-p h-[100svh] pt-2 flex flex-col'>
+			<h1 className='text-2xl font-bold text-center mb-20'>EXPERIENCE</h1>
 			{/*markup */}
-			<div className='flex justify-center  m-auto'>
-				<ol className='relative border-s border-gray-200 '>
+			<div className='flex self-center w-[90%] md:w-[70%] '>
+				<ol className='relative border-s border-gray-400 '>
 					{jobs.map((job) => {
 						return <ExperienceCard key={job.company} {...job} />;
 					})}
