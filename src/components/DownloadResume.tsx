@@ -13,7 +13,7 @@ function DownloadResume() {
 	const downloadResume = async () => {
 		setButtonControl({ sent: true, name: "Downloading" });
 		try {
-			const { data, error } = await supabase.storage.from("portfolio-assets").download("cv");
+			const { data } = await supabase.storage.from("portfolio-assets").download("cv");
 			if (data) {
 				const blob = new Blob([data], { type: "application/pdf" });
 
