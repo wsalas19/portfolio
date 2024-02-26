@@ -8,6 +8,12 @@ const nextConfig = {
 				port: "",
 				pathname: "/storage/v1/object/*/portfolio-assets/**",
 			},
+			{
+				protocol: "https",
+				hostname: "i.ibb.co",
+				port: "",
+				pathname: "/**",
+			},
 		],
 	},
 };

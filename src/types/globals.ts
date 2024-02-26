@@ -11,6 +11,5 @@ export type ButtonControl<T> = {
 	name: T;
 };
 export type ProfileCardProps = {
-	url: string | undefined;
 	imgSize: number;
 };
