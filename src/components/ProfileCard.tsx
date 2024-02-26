@@ -4,16 +4,16 @@ import { Skeleton } from "./ui/skeleton";
 import { Globe, MailPlus } from "lucide-react";
 import { ProfileCardProps } from "@/types/globals";
 
-function ProfileCard({ data, imgSize }: ProfileCardProps) {
+function ProfileCard({ url, imgSize }: ProfileCardProps) {
 	//TODO:
 	// Remove stars and think of a better info to display on card.
 	return (
 		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
 			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col lg:flex-row gap-3 w-[90%] md:w-[70%]'>
-				{data ? (
+				{url ? (
 					<Image
 						className=' rounded-md grayscale shadow-primary shadow-lg aspect-square align-middle'
-						src={data.publicUrl}
+						src={url}
 						alt='personal-b&w-pic'
 						width={imgSize}
 						height={imgSize}
@@ -42,7 +42,10 @@ function ProfileCard({ data, imgSize }: ProfileCardProps) {
 						href='mailto:wa.salas1905@hotmail.com'
 						className='text-gray-400 flex gap-1 mt-auto justify-end items-center'
 					>
-						<MailPlus aria-label='mail plus icon' className='w-6 h-6 hover:text-palette-lime' />
+						<MailPlus
+							aria-label='mail plus icon'
+							className='w-6 h-6 hover:text-palette-lime hover:scale-125 transition'
+						/>
 					</a>
 				</div>
 			</div>
