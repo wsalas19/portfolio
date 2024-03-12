@@ -4,12 +4,14 @@ import { Button } from "./ui/button";
 import { Download } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { ButtonControl } from "@/types/globals";
+import { useToast } from "./ui/use-toast";
 
 function DownloadResume() {
 	const [buttonControl, setButtonControl] = useState<ButtonControl<"Resume" | "Downloading">>({
 		sent: false,
 		name: "Resume",
 	});
+	const { toast } = useToast();
 	const downloadResume = async () => {
 		setButtonControl({ sent: true, name: "Downloading" });
 		try {
@@ -24,13 +26,19 @@ function DownloadResume() {
 				link.download = "resume.pdf";
 
 				document.body.appendChild(link);
-				setButtonControl({ sent: false, name: "Resume" });
 				link.click();
 
 				document.body.removeChild(link);
 			}
 		} catch (error) {
 			console.log(error);
+			toast({
+				title: `Something went wrong`,
+				description: `Please try again later.`,
+				variant: "destructive",
+			});
+		} finally {
+			setButtonControl({ sent: false, name: "Resume" });
 		}
 	};
 	return (
