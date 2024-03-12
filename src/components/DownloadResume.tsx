@@ -29,6 +29,8 @@ function DownloadResume() {
 				link.click();
 
 				document.body.removeChild(link);
+			} else {
+				throw new Error("No data");
 			}
 		} catch (error) {
 			console.log(error);
