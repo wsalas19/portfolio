@@ -1,9 +1,7 @@
 import React from "react";
-//import DownloadResume from "./DownloadResume";
-//TODO:
-// Supabase storage has a problem with CORS, the cv is stored in there, one that is fixed include the button.
+import DownloadResume from "./DownloadResume";
 
-function NavBar() {
+async function NavBar() {
 	const paths = [
 		{
 			name: "about",
@@ -40,7 +38,7 @@ function NavBar() {
 					})}
 				</div>
 			</div>
-			{/* <DownloadResume /> */}
+			<DownloadResume />
 		</nav>
 	);
 }
