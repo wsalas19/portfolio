@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import { ButtonControl } from "@/types/globals";
 import { useToast } from "./ui/use-toast";
+import { supabase } from "@/lib/supabase";
 
 function DownloadResume() {
 	const [buttonControl, setButtonControl] = useState<ButtonControl<"Resume" | "Downloading">>({
@@ -18,7 +18,6 @@ function DownloadResume() {
 			const { data } = await supabase.storage.from("portfolio-assets").download("cv");
 			if (data) {
 				const blob = new Blob([data], { type: "application/pdf" });
-
 				const url = window.URL.createObjectURL(blob);
 				const link = document.createElement("a");
 

@@ -1,7 +1,7 @@
 import React from "react";
 import DownloadResume from "./DownloadResume";
 
-function NavBar() {
+async function NavBar() {
 	const paths = [
 		{
 			name: "about",
