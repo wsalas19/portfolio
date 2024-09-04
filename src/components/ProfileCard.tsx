@@ -9,7 +9,7 @@ function ProfileCard({ imgSize }: ProfileCardProps) {
 		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
 			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col lg:flex-row gap-3 w-[90%] md:w-[70%]'>
 				<Image
-					className=' rounded-md shadow-primary shadow-lg aspect-square align-middle'
+					className=' rounded-md shadow-primary shadow-lg aspect-square m-auto'
 					src={"/images/profile-img.png"}
 					alt='personal-pic'
 					width={imgSize}

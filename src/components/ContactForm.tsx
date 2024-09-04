@@ -69,7 +69,7 @@ function ContactForm() {
 		<div
 			id='contact'
 			//className='global-p flex items-center flex-col gap-2 '
-			className='global-p flex  gap-2  h-screen items-center justify-center mt-20 md:m-0'
+			className='global-p flex  gap-2  h-screen items-center justify-center mt-28 md:m-0'
 		>
 			<Card className=' bg-palette-card text-white border-none self-center w-[90%] md:w-[70%]'>
 				<CardHeader>
