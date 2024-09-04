@@ -2,18 +2,16 @@ import React from "react";
 import Image from "next/image";
 
 import { Globe, MailPlus } from "lucide-react";
-import { ProfileCardProps } from "@/types/globals";
+import { ProfileCardProps } from "@/lib/types/globals";
 
 function ProfileCard({ imgSize }: ProfileCardProps) {
-	//TODO:
-	// Remove stars and think of a better info to display on card.
 	return (
 		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
 			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col lg:flex-row gap-3 w-[90%] md:w-[70%]'>
 				<Image
-					className=' rounded-md grayscale shadow-primary shadow-lg aspect-square align-middle'
-					src={"https://i.ibb.co/pK82nQp/FOTOCV2-2.png"}
-					alt='personal-b&w-pic'
+					className=' rounded-md shadow-primary shadow-lg aspect-square align-middle'
+					src={"/images/profile-img.png"}
+					alt='personal-pic'
 					width={imgSize}
 					height={imgSize}
 				/>
