@@ -2,9 +2,8 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { ButtonControl } from "@/types/globals";
+import { ButtonControl } from "@/lib/types/globals";
 import { useToast } from "./ui/use-toast";
-import { supabase } from "@/lib/supabase";
 
 function DownloadResume() {
 	const [buttonControl, setButtonControl] = useState<ButtonControl<"Resume" | "Downloading">>({
@@ -12,23 +11,20 @@ function DownloadResume() {
 		name: "Resume",
 	});
 	const { toast } = useToast();
-	const downloadResume = async () => {
+
+	const downloadResume = () => {
 		setButtonControl({ sent: true, name: "Downloading" });
+
 		try {
-			const { data } = await supabase.storage.from("portfolio-assets").download("cv");
-			if (data) {
-				const blob = new Blob([data], { type: "application/pdf" });
-				const url = window.URL.createObjectURL(blob);
-				const link = document.createElement("a");
+			const url = "/docs/resume.pdf";
+			const link = document.createElement("a");
 
-				link.href = url;
-				link.download = "resume.pdf";
+			link.href = url;
+			link.download = "resume.pdf";
 
-				document.body.appendChild(link);
-				link.click();
-
-				document.body.removeChild(link);
-			}
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		} catch (error) {
 			console.log(error);
 			toast({

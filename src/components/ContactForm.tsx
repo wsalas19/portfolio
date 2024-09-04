@@ -18,7 +18,7 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import emailjs from "@emailjs/browser";
 import { useToast } from "./ui/use-toast";
-import { ButtonControl } from "../types/globals";
+import { ButtonControl } from "../lib/types/globals";
 
 const formSchema = z.object({
 	name: z.string().min(3, "Name is too short").max(30, "Name is too long"),

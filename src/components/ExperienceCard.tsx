@@ -1,5 +1,5 @@
 import React from "react";
-import { jobProps } from "@/types/globals";
+import { jobProps } from "@/lib/types/globals";
 import { Briefcase } from "lucide-react";
 
 function ExperienceCard({ role, company, endDate, startDate, description }: jobProps) {
