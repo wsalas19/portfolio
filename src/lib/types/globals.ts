@@ -13,3 +13,8 @@ export type ButtonControl<T> = {
 export type ProfileCardProps = {
 	imgSize: number;
 };
+
+export type PathType = {
+	name: string;
+	path: string;
+};

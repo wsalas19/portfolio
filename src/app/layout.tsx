@@ -1,18 +1,9 @@
-import type { Metadata } from "next";
-//import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { Toaster } from "@/components/ui/toaster";
+import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
-
-//const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-	title: "William Salas | portfolio.",
-	description: "A brief showcase of my work.",
-};
-
+import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
 export default function RootLayout({
 	children,
 }: Readonly<{

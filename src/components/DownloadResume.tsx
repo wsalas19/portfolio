@@ -40,7 +40,7 @@ function DownloadResume() {
 		<Button
 			onClick={downloadResume}
 			disabled={buttonControl.sent}
-			className=' font-bold bg-gray-900 text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
+			className='hidden font-bold bg-gray-900 text-white md:flex gap-2 hover:bg-palette-pink hover:text-gray-900 hover:border-palette-pink/35 '
 			variant={"outline"}
 			size={"sm"}
 		>

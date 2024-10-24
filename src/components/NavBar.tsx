@@ -1,22 +1,10 @@
 import React from "react";
 import DownloadResume from "./DownloadResume";
+import { Button } from "./ui/button";
+import { Video } from "lucide-react";
+import { paths } from "@/lib/constants";
 
 async function NavBar() {
-	const paths = [
-		{
-			name: "about",
-			path: "#about",
-		},
-		{
-			name: "experience",
-			path: "#experience",
-		},
-		{
-			name: "contact",
-			path: "#contact",
-		},
-	];
-
 	return (
 		<nav
 			id='#nav'
@@ -24,7 +12,7 @@ async function NavBar() {
 		>
 			<div className='flex gap-5 items-center'>
 				<h1 className=' font-bold text-4xl mr-5'>portfolio.</h1>
-				<div className=' hidden md:flex gap-2 items-end'>
+				<div className=' hidden lg:flex gap-2 items-end'>
 					{paths.map((path) => {
 						return (
 							<a
@@ -38,7 +26,22 @@ async function NavBar() {
 					})}
 				</div>
 			</div>
-			<DownloadResume />
+			<div className='flex gap-5 justify-center items-center'>
+				<DownloadResume />
+				<a
+					href='https://calendar.app.google/Yi51g1LEbcyJpoBb9'
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					<Button
+						className='w-full font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2'
+						size={"sm"}
+					>
+						<Video />
+						Book a Meeting
+					</Button>
+				</a>
+			</div>
 		</nav>
 	);
 }

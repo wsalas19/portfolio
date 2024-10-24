@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import { imgSize } from "@/lib/constants";
 
 import { Globe, MailPlus } from "lucide-react";
-import { ProfileCardProps } from "@/lib/types/globals";
 
-function ProfileCard({ imgSize }: ProfileCardProps) {
+function ProfileCard() {
 	return (
 		<div id='about' className='flex items-center justify-center py-10 h-screen global-p'>
 			<div className='flex bg-palette-alt  p-6 rounded-lg flex-col lg:flex-row gap-3 w-[90%] md:w-[70%]'>
