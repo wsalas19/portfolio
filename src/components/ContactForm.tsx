@@ -66,82 +66,80 @@ function ContactForm() {
 	}
 
 	return (
-		<div
-			id='contact'
-			//className='global-p flex items-center flex-col gap-2 '
-			className='global-p flex  gap-2  h-screen items-center justify-center mt-20 md:m-0'
-		>
-			<Card className=' bg-palette-card text-white border-none self-center w-[90%] md:w-[70%]'>
-				<CardHeader>
-					<CardTitle>CONTACT ME</CardTitle>
-					<CardDescription className='text-gray-400 font-semibold'>
-						Write a message and submit to send me an email.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<Form {...form}>
-						<form className='space-y-2'>
-							<FormField
-								control={form.control}
-								name='name'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel className=' font-semibold'>Name</FormLabel>
-										<FormControl>
-											<Input placeholder='John Doe' {...field} />
-										</FormControl>
+		<div className='flex flex-col'>
+			<div id='contact' className='global-p flex  gap-2  h-screen items-center justify-center '>
+				<Card className=' bg-palette-card text-white border-none self-center w-[90%] lg:w-[70%]'>
+					<CardHeader>
+						<CardTitle>{"Lets's Talk"}</CardTitle>
+						<CardDescription className='text-gray-400 font-semibold'>
+							Write a message and submit to send me an email.
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<Form {...form}>
+							<form className='space-y-2'>
+								<FormField
+									control={form.control}
+									name='name'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel className=' font-semibold'>Name</FormLabel>
+											<FormControl>
+												<Input placeholder='John Doe' {...field} />
+											</FormControl>
 
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name='title'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel className=' font-semibold'>Title</FormLabel>
-										<FormControl>
-											<Input placeholder='Job Offer' {...field} />
-										</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name='title'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel className=' font-semibold'>Title</FormLabel>
+											<FormControl>
+												<Input placeholder='Job Offer' {...field} />
+											</FormControl>
 
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name='message'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel className=' font-semibold'>Message</FormLabel>
-										<FormControl>
-											<Textarea
-												placeholder='Hey! I hope this email finds you well...'
-												className=''
-												{...field}
-											/>
-										</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name='message'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel className=' font-semibold'>Message</FormLabel>
+											<FormControl>
+												<Textarea
+													placeholder='Hey! I hope this email finds you well...'
+													className=''
+													{...field}
+												/>
+											</FormControl>
 
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</form>
-					</Form>
-				</CardContent>
-				<CardFooter>
-					<Button
-						disabled={buttonControl.sent}
-						onClick={form.handleSubmit(onSubmit)}
-						className='w-full font-bold bg-palette-card text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
-						variant={"outline"}
-						size={"sm"}
-					>
-						{buttonControl.name}
-					</Button>
-				</CardFooter>
-			</Card>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</form>
+						</Form>
+					</CardContent>
+					<CardFooter className='flex items-center justify-center'>
+						<Button
+							disabled={buttonControl.sent}
+							onClick={form.handleSubmit(onSubmit)}
+							className='w-full font-bold bg-palette-card text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
+							variant={"outline"}
+							size={"sm"}
+						>
+							{buttonControl.name}
+						</Button>
+					</CardFooter>
+				</Card>
+			</div>
 		</div>
 	);
 }
