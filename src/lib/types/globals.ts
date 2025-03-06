@@ -20,3 +20,12 @@ export type PathType = {
 	path: string;
 	description: string;
 };
+export interface Project {
+	title: string;
+	description: string;
+	technologies: string[];
+	liveUrl?: string;
+	githubUrl?: string;
+	imageUrl: string;
+	highlights: string[];
+}

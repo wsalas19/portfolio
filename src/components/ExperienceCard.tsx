@@ -1,4 +1,3 @@
-import React from "react";
 import { jobProps } from "@/lib/types/globals";
 import { Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
@@ -44,8 +43,8 @@ function ExperienceCard({
 						</h3>
 
 						{companyUrl ? (
-							<Button variant='ghost' size='sm' className='group' asChild>
-								<a href={companyUrl}>...</a>
+							<Button variant='link' size='sm' className='group flex gap-1 text-lg'>
+								<a href={companyUrl}>{company}</a>
 							</Button>
 						) : (
 							<span className='text-gray-400 text-lg font-medium'>{company}</span>
