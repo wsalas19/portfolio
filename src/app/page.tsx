@@ -2,6 +2,7 @@ import ProfileCard from "@/components/ProfileCard";
 import Experience from "@/components/Experience";
 import ContactForm from "@/components/ContactForm";
 import { Metadata } from "next";
+import ProjectShowcase from "@/components/ProjectShowcase";
 
 export const metadata: Metadata = {
 	title: "William Salas | Full Stack Developer",
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
 		"Experienced web developer specializing in React, TypeScript, and modern web technologies",
 	openGraph: {
 		title: "William Salas - Portfolio",
-		description: "Experienced web developer specializing in React, TypeScript, and modern web technologies",
+		description:
+			"Experienced web developer specializing in React, TypeScript, and modern web technologies",
 		images: [
 			{
 				url: "path-to-og-image",
@@ -29,6 +31,7 @@ export default async function Home() {
 		<>
 			<ProfileCard />
 			<Experience />
+			<ProjectShowcase />
 			<ContactForm />
 		</>
 	);

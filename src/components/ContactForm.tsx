@@ -49,9 +49,9 @@ function ContactForm() {
 	}
 
 	return (
-		<section id='contact' className='gray-white-scheme mt-4 global-p'>
+		<section id='contact' className=' gray-white-scheme mt-4 md:global-p'>
 			<h2 className='text-2xl font-bold text-center mb-10'>GET IN TOUCH</h2>
-			<div className='max-w-md mx-auto'>
+			<div className='max-w-md mx-auto px-3 md:px-0'>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
 					<div>
 						<Input
