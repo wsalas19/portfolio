@@ -5,13 +5,14 @@ import * as z from "zod";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
 import { useToast } from "./ui/use-toast";
 import { Loader2 } from "lucide-react";
-import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
 	name: z.string().min(2, "Name must be at least 2 characters"),
 	email: z.string().email("Please enter a valid email"),
+	title: z.string().min(3, "Subject must be at least 3 characters"),
 	message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -22,6 +23,7 @@ function ContactForm() {
 		defaultValues: {
 			name: "",
 			email: "",
+			title: "",
 			message: "",
 		},
 	});
@@ -32,12 +34,24 @@ function ContactForm() {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			await emailjs.send("mail_main", "template_q0h47ua", values, "your_key");
+			const response = await fetch("/api/email", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(values),
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to send email");
+			}
+
 			form.reset();
 			toast({
 				title: `Thanks ${values.name}!`,
 				description: "I'll get back to you soon.",
 				variant: "success",
+				duration: 2500,
 			});
 		} catch (error) {
 			toast({
@@ -45,16 +59,19 @@ function ContactForm() {
 				description: "Something went wrong. Please try again.",
 				variant: "destructive",
 			});
+			console.error("Error sending email:", error);
 		}
 	}
 
 	return (
-		<section id='contact' className=' gray-white-scheme mt-4 md:global-p'>
+		<section id='contact' className='gray-white-scheme mt-4 md:global-p'>
 			<h2 className='text-2xl font-bold text-center mb-10'>GET IN TOUCH</h2>
 			<div className='max-w-md mx-auto px-3 md:px-0'>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
 					<div>
+						<Label htmlFor='name'>Name</Label>
 						<Input
+							id='name'
 							placeholder='Your Name'
 							{...form.register("name")}
 							aria-invalid={!!errors.name}
@@ -63,7 +80,9 @@ function ContactForm() {
 					</div>
 
 					<div>
+						<Label htmlFor='email'>Email</Label>
 						<Input
+							id='email'
 							placeholder='Your Email'
 							type='email'
 							{...form.register("email")}
@@ -73,7 +92,20 @@ function ContactForm() {
 					</div>
 
 					<div>
+						<Label htmlFor='title'>Subject</Label>
+						<Input
+							id='title'
+							placeholder='Message Subject'
+							{...form.register("title")}
+							aria-invalid={!!errors.title}
+						/>
+						{errors.title && <p className='text-red-500 text-sm mt-1'>{errors.title.message}</p>}
+					</div>
+
+					<div>
+						<Label htmlFor='message'>Message</Label>
 						<Textarea
+							id='message'
 							placeholder='Your Message'
 							{...form.register("message")}
 							aria-invalid={!!errors.message}
