@@ -4,14 +4,17 @@ export const paths: PathType[] = [
 	{
 		name: "about",
 		path: "#about",
+		description: "Learn more about my background and skills.",
 	},
 	{
 		name: "experience",
 		path: "#experience",
+		description: "Explore my professional journey and accomplishments.",
 	},
 	{
 		name: "contact",
 		path: "#contact",
+		description: "Get in touch with me for opportunities or inquiries.",
 	},
 ];
 
@@ -19,19 +22,19 @@ export const imgSize: number = 300;
 export const jobs: jobProps[] = [
 	{
 		role: "Full Stack Developer",
-		company: "Freenlancer",
+		company: "Freelancer",
 		startDate: "Dec 2023",
 		endDate: "Present",
 		description:
-			" As a Full Stack Developer at Freenlancer, I developed bespoke software solutions tailored to meet the unique needs of client companies. Actively participated in meetings to meticulously gather project requirements and ensure a comprehensive understanding of client expectations.",
+			"Crafted custom software applications to address specific client needs, ensuring solutions were both effective and scalable. Collaborated closely with clients through regular meetings to thoroughly understand and refine project goals.",
 	},
 	{
 		role: "Technical Staff",
 		company: "App Academy - USA",
 		startDate: "Dec 2023",
-		endDate: "Present",
+		endDate: "Jan 2025",
 		description:
-			"As a Technical Staff member at App Academy (USA), I provided thorough debugging support on portfolio projects. Additionally, hosted technical office hours to offer additional assistance, clarification, and guidance to Job Seekers, promoting a collaborative learning community.",
+			"Provided in-depth debugging and technical assistance on portfolio projects, helping students overcome challenges and improve their code. Conducted office hours to clarify concepts and guide job seekers, fostering a supportive and educational environment.",
 	},
 
 	{
@@ -40,7 +43,7 @@ export const jobs: jobProps[] = [
 		startDate: "Jul 2023",
 		endDate: "Nov 2023",
 		description:
-			"As a Full Stack Developer at PNG Technology Solutions (Barranquilla), I developed bespoke software solutions tailored to meet the unique needs of client companies. Actively participated in meetings to meticulously gather project requirements and ensure a comprehensive understanding of client expectations.",
+			"Designed and implemented tailored software solutions for diverse clients, ensuring projects aligned with their specific requirements. Engaged in regular consultations to capture project details and maintain clear communication throughout the development process.",
 	},
 	{
 		role: "Programming Mentor",
@@ -48,6 +51,6 @@ export const jobs: jobProps[] = [
 		startDate: "Sep 2022",
 		endDate: "Feb 2023",
 		description:
-			"As a Programming Mentor at Henry (Argentina), I facilitated the resolution of programming exercises, providing personalized assistance to learners to ensure comprehension and mastery.",
+			"Supported students by guiding them through programming exercises, providing targeted help to build their confidence and skills. Focused on creating a learning experience that encouraged problem-solving and mastery of core concepts.",
 	},
 ];
