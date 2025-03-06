@@ -3,46 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Github, Link as LinkIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
-
-interface Project {
-	title: string;
-	description: string;
-	technologies: string[];
-	liveUrl?: string;
-	githubUrl?: string;
-	imageUrl: string;
-	highlights: string[];
-}
-
-const projects: Project[] = [
-	{
-		title: "Portfolio Website",
-		description:
-			"Personal portfolio built with Next.js and TypeScript to showcase experience and personal work.",
-		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-		liveUrl: "https://wsalas.tech",
-		githubUrl: "https://github.com/wsalas19/portfolio",
-		imageUrl: "/images/portfolio.png",
-		highlights: ["Responsive Design", "Server-Side Rendering", "UX/UI", "Personal Work"],
-	},
-	{
-		title: "Office Supplies Manager",
-		description:
-			"Custom built private web-based procurement system designed to streamline the ordering and management of office supplies within a corporate environment.",
-		technologies: ["Next.js", "TypeScript", "Material UI", "Postgres", "AWS", "CI/CD", "ORM"],
-		imageUrl: "/images/gdc.png",
-		highlights: ["Responsive Design", "Migration", "API Integration", "Coorporate Client"],
-	},
-	{
-		title: "Hunt Club Portal",
-		description:
-			"is a modern Next.js application designed to streamline lodge reservations, wildlife outings, and member profile management.",
-		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Zoho CRM", "GCP", "CI/CD", "Redis"],
-		imageUrl: "/images/cottonwood.png",
-		highlights: ["Responsive Design", "UX/UI", "API Integration", "SSR", "Image Optimization"],
-	},
-	// ... your other projects
-];
+import { Project } from "@/lib/types/globals";
+import { projects } from "@/lib/constants";
 
 function ProjectCard({ project, isActive }: { project: Project; isActive: boolean }) {
 	return (
