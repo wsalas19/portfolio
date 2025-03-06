@@ -4,8 +4,9 @@ export type jobProps = {
 	startDate: string;
 	endDate: string;
 	description: string;
+	technologies?: string[];
+	companyUrl?: string;
 };
-
 export type ButtonControl<T> = {
 	sent: boolean;
 	name: T;
@@ -17,4 +18,5 @@ export type ProfileCardProps = {
 export type PathType = {
 	name: string;
 	path: string;
+	description: string;
 };

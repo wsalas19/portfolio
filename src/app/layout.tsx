@@ -1,5 +1,5 @@
 import "./globals.css";
-import Footer from "@/components/Footer";
+
 import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
 import { Toaster } from "@/components/ui/toaster";
@@ -16,7 +16,6 @@ export default function RootLayout({
 				{children}
 				<Toaster />
 				<ScrollButton />
-				<Footer />
 			</body>
 		</html>
 	);

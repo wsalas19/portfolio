@@ -1,7 +1,7 @@
 import React from "react";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
-function Footer() {
+async function Footer() {
 	return (
 		<footer className='mt-auto flex justify-center w-full px-32 py-2 bg-gray-900 text-white'>
 			<div className='flex flex-row gap-5 items-center'>

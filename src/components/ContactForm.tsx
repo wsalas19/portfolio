@@ -1,146 +1,101 @@
 "use client";
-
-import React, { useState } from "react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
-import { Input } from "./ui/input";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import z from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import emailjs from "@emailjs/browser";
 import { useToast } from "./ui/use-toast";
-import { ButtonControl } from "../lib/types/globals";
+import { Loader2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
-	name: z.string().min(3, "Name is too short").max(30, "Name is too long"),
-	title: z.string().min(8, "Title is too short").max(30, "Title is too long"),
-	message: z.string().min(20, "Message is too short").max(200, "Message is too long"),
+	name: z.string().min(2, "Name must be at least 2 characters"),
+	email: z.string().email("Please enter a valid email"),
+	message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
 function ContactForm() {
 	const { toast } = useToast();
-	const [buttonControl, setButtonControl] = useState<ButtonControl<"Send" | "Sending...">>({
-		sent: false,
-		name: "Send",
-	});
-
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
-			title: "",
+			email: "",
 			message: "",
 		},
 	});
 
+	const {
+		formState: { isSubmitting, errors },
+	} = form;
+
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		setButtonControl({ sent: true, name: "Sending..." });
 		try {
-			await emailjs.send("mail_main", "template_q0h47ua", values, "tR3_o_blEZwFNXqUz");
-			setButtonControl({ sent: false, name: "Send" });
+			await emailjs.send("mail_main", "template_q0h47ua", values, "your_key");
 			form.reset();
 			toast({
 				title: `Thanks ${values.name}!`,
-				description: `I will get back to you as soon as possible.`,
+				description: "I'll get back to you soon.",
 				variant: "success",
 			});
 		} catch (error) {
 			toast({
-				title: `Something went wrong`,
-				description: `Please try again later.`,
+				title: "Error",
+				description: "Something went wrong. Please try again.",
 				variant: "destructive",
 			});
-			console.log(error);
-		} finally {
-			setButtonControl({ sent: false, name: "Send" });
 		}
 	}
 
 	return (
-		<div className='flex flex-col'>
-			<div id='contact' className='global-p flex  gap-2  h-screen items-center justify-center '>
-				<Card className=' bg-palette-card text-white border-none self-center w-[90%] lg:w-[70%]'>
-					<CardHeader>
-						<CardTitle>{"Lets's Talk"}</CardTitle>
-						<CardDescription className='text-gray-400 font-semibold'>
-							Write a message and submit to send me an email.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Form {...form}>
-							<form className='space-y-2'>
-								<FormField
-									control={form.control}
-									name='name'
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel className=' font-semibold'>Name</FormLabel>
-											<FormControl>
-												<Input placeholder='John Doe' {...field} />
-											</FormControl>
+		<section id='contact' className='gray-white-scheme mt-4 global-p'>
+			<h2 className='text-2xl font-bold text-center mb-10'>GET IN TOUCH</h2>
+			<div className='max-w-md mx-auto'>
+				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+					<div>
+						<Input
+							placeholder='Your Name'
+							{...form.register("name")}
+							aria-invalid={!!errors.name}
+						/>
+						{errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>}
+					</div>
 
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name='title'
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel className=' font-semibold'>Title</FormLabel>
-											<FormControl>
-												<Input placeholder='Job Offer' {...field} />
-											</FormControl>
+					<div>
+						<Input
+							placeholder='Your Email'
+							type='email'
+							{...form.register("email")}
+							aria-invalid={!!errors.email}
+						/>
+						{errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
+					</div>
 
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name='message'
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel className=' font-semibold'>Message</FormLabel>
-											<FormControl>
-												<Textarea
-													placeholder='Hey! I hope this email finds you well...'
-													className=''
-													{...field}
-												/>
-											</FormControl>
+					<div>
+						<Textarea
+							placeholder='Your Message'
+							{...form.register("message")}
+							aria-invalid={!!errors.message}
+						/>
+						{errors.message && (
+							<p className='text-red-500 text-sm mt-1'>{errors.message.message}</p>
+						)}
+					</div>
 
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							</form>
-						</Form>
-					</CardContent>
-					<CardFooter className='flex items-center justify-center'>
-						<Button
-							disabled={buttonControl.sent}
-							onClick={form.handleSubmit(onSubmit)}
-							className='w-full font-bold bg-palette-card text-white flex gap-2 hover:bg-palette-lime hover:text-gray-900 hover:border-palette-lime '
-							variant={"outline"}
-							size={"sm"}
-						>
-							{buttonControl.name}
-						</Button>
-					</CardFooter>
-				</Card>
+					<Button type='submit' className='w-full font-semibold' disabled={isSubmitting}>
+						{isSubmitting ? (
+							<>
+								<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+								Sending...
+							</>
+						) : (
+							"Send Message"
+						)}
+					</Button>
+				</form>
 			</div>
-		</div>
+		</section>
 	);
 }
 

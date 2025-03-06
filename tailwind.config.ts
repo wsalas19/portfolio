@@ -19,43 +19,44 @@ const config = {
 		},
 		extend: {
 			colors: {
-				border: "hsl(var(--border))",
-				input: "hsl(var(--input))",
-				ring: "hsl(var(--ring))",
-				background: "hsl(var(--background))",
-				foreground: "hsl(var(--foreground))",
+				border: "#2e3320", // Using palette.alt for borders
+				input: "#1d1e2c", // Using palette.card for input backgrounds
+				ring: "#fb8983", // Using palette.pink for focus rings
+				background: "#1d1e2c", // Using palette.card for main background
+				foreground: "#ffffff", // White text for contrast
 				primary: {
-					DEFAULT: "hsl(var(--primary))",
-					foreground: "hsl(var(--primary-foreground))",
+					DEFAULT: "#fb8983", // palette.pink as primary
+					foreground: "#1d1e2c", // palette.card for contrast
 				},
 				secondary: {
-					DEFAULT: "hsl(var(--secondary))",
-					foreground: "hsl(var(--secondary-foreground))",
+					DEFAULT: "#bef728", // palette.lime as secondary
+					foreground: "#1d1e2c", // palette.card for contrast
 				},
 				destructive: {
-					DEFAULT: "hsl(var(--destructive))",
-					foreground: "hsl(var(--destructive-foreground))",
+					DEFAULT: "#ff4343", // New red for destructive actions
+					foreground: "#ffffff",
 				},
 				muted: {
-					DEFAULT: "hsl(var(--muted))",
-					foreground: "hsl(var(--muted-foreground))",
+					DEFAULT: "#2e3320", // palette.alt for muted backgrounds
+					foreground: "#a1a1aa", // Subtle text color
 				},
 				accent: {
-					DEFAULT: "hsl(var(--accent))",
-					foreground: "hsl(var(--accent-foreground))",
+					DEFAULT: "#a2a206", // palette.olive as accent
+					foreground: "#ffffff",
 				},
 				popover: {
-					DEFAULT: "hsl(var(--popover))",
-					foreground: "hsl(var(--popover-foreground))",
+					DEFAULT: "#1d1e2c", // palette.card for popovers
+					foreground: "#ffffff",
 				},
 				card: {
-					DEFAULT: "hsl(var(--card))",
-					foreground: "hsl(var(--card-foreground))",
+					DEFAULT: "#1d1e2c", // palette.card
+					foreground: "#ffffff",
 				},
 				alt: {
 					DEFAULT: "#2e3320",
-					foreground: "hsl(var(--card-foreground))",
+					foreground: "#ffffff",
 				},
+				// Keep original palette
 				palette: {
 					lime: "#bef728",
 					olive: "#a2a206",
@@ -78,10 +79,21 @@ const config = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0" },
 				},
+				fadeIn: {
+					"0%": { opacity: "0" },
+					"100%": { opacity: "1" },
+				},
+				slideIn: {
+					"0%": { transform: "translateY(20px)", opacity: "0" },
+					"100%": { transform: "translateY(0)", opacity: "1" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				fadeIn: "fadeIn 0.5s ease-in-out",
+				slideIn: "slideIn 0.5s ease-in-out",
+				slideInDelayed: "slideIn 0.5s ease-in-out 0.2s",
 			},
 		},
 	},
