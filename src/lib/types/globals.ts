@@ -29,3 +29,19 @@ export interface Project {
 	imageUrl: string;
 	highlights: string[];
 }
+// Types
+export interface ContributionDay {
+	date: string;
+	count: number;
+	level: number;
+}
+export interface ContributionWeek {
+	days: ContributionDay[];
+}
+export interface ContributionStats {
+	total: number;
+	maxContributions: number;
+}
+export interface GitHubContributionsProps {
+	username: string;
+}
