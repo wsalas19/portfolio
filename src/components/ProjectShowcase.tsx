@@ -124,7 +124,7 @@ function ProjectShowcase() {
 	};
 
 	return (
-		<section id='projects' className='gray-white-scheme global-p min-h-screen'>
+		<section id='projects' className='gray-white-scheme global-p '>
 			<div className='max-w-6xl mx-auto'>
 				<h2
 					className='text-4xl font-bold text-center mb-4 bg-clip-text text-transparent 
@@ -138,7 +138,7 @@ function ProjectShowcase() {
 
 				<div className='relative'>
 					{/* Projects Container */}
-					<div className='relative h-[800px] overflow-hidden'>
+					<div className='relative overflow-hidden'>
 						{projects.map((project, index) => (
 							<ProjectCard
 								key={project.title}
