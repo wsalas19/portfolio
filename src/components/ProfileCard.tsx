@@ -176,7 +176,7 @@ function ProfileCard() {
 						</a>
 					</Button>
 					<Button
-						className=" bg-[#495533]/40"
+						className=" bg-[#495533]/40 font-semibold"
 						variant="ghost"
 						size="lg"
 						asChild

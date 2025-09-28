@@ -91,9 +91,9 @@ function ContactForm() {
 	return (
 		<section
 			id="contact"
-			className="py-20 min-h-screen flex items-center justify-center global-p mx-5 md:m-0"
+			className="pt-20 min-h-screen flex items-center justify-center "
 		>
-			<div className="w-full max-w-6xl">
+			<div className="w-full mx-6 mb-6">
 				{/* Header */}
 				<motion.div
 					initial={{ opacity: 0, y: -20 }}
@@ -105,7 +105,7 @@ function ContactForm() {
 						className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent 
                      bg-gradient-to-r from-white to-palette-pink"
 					>
-						Let&apos;s Work Together
+						Let&apos;s Work!
 					</h2>
 					<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
 						Have a project in mind or just want to chat? I&apos;d love to hear
@@ -289,7 +289,7 @@ function ContactForm() {
 								<motion.div variants={itemVariants}>
 									<Button
 										variant={"green"}
-										className="w-full"
+										className="w-full text-[16px]"
 										type="submit"
 										/* className="w-full h-12 font-semibold text-white bg-gradient-to-r 
                                  from-palette-pink to-palette-pink/80 hover:from-palette-pink/90 
