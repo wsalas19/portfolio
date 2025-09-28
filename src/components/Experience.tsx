@@ -19,25 +19,28 @@ function Experience() {
 	const visibleJobs = isExpanded ? jobs : jobs.slice(0, 2);
 
 	return (
-		<div id='experience' className='gray-white-scheme global-p pt-2 flex flex-col min-h-screen'>
-			<div className='max-w-6xl mx-auto w-full px-4'>
+		<div
+			id="experience"
+			className="gray-white-scheme global-p pt-2 flex flex-col min-h-screen"
+		>
+			<div className="max-w-6xl mx-auto w-full px-4">
 				{/* Section Header */}
-				<div className='text-center mb-12 space-y-4'>
+				<div className="text-center mb-12 space-y-4">
 					<h1
-						className='text-4xl font-bold bg-clip-text text-transparent 
-                         bg-gradient-to-r from-white to-palette-pink'
+						className="text-4xl font-bold bg-clip-text text-transparent 
+                         bg-gradient-to-r from-white to-palette-pink"
 					>
 						EXPERIENCE
 					</h1>
-					<p className='text-gray-400 max-w-2xl mx-auto'>
+					<p className="text-gray-400 max-w-2xl mx-auto">
 						A timeline of my professional journey and key milestones
 					</p>
 				</div>
 
 				{/* Timeline */}
-				<div className='flex justify-center'>
-					<div className='w-full max-w-4xl'>
-						<ol className='relative border-s-2 border-gray-400 space-y-10'>
+				<div className="flex justify-center">
+					<div className="w-full max-w-4xl">
+						<ol className="relative border-s-2 border-gray-400 space-y-10">
 							{visibleJobs.map((job, index) => (
 								<div
 									key={job.company}
@@ -52,26 +55,28 @@ function Experience() {
 							))}
 
 							{/* Starting Year Marker */}
-							<li className='ms-8 font-semibold text-2xl text-gray-400 animate-pulse'>2022</li>
+							<li className="ms-8 font-semibold text-2xl text-gray-400 animate-pulse">
+								2022
+							</li>
 						</ol>
 
 						{/* Show More/Less Button */}
 						{jobs.length > 3 && (
-							<div className='text-center mt-8'>
+							<div className="text-center mt-8">
 								<Button
-									variant='outline'
+									variant="link"
 									onClick={() => setIsExpanded(!isExpanded)}
-									className='group transition-all duration-300'
+									className="group transition-all duration-300"
 								>
 									{isExpanded ? (
 										<>
 											Show Less
-											<ChevronUp className='w-4 h-4 ml-2 group-hover:transform group-hover:-translate-y-1 transition-transform' />
+											<ChevronUp className="w-4 h-4 ml-2 group-hover:transform group-hover:scale-125 transition-transform" />
 										</>
 									) : (
 										<>
 											Show More
-											<ChevronDown className='w-4 h-4 ml-2 group-hover:transform group-hover:translate-y-1 transition-transform' />
+											<ChevronDown className="w-4 h-4 ml-2 group-hover:transform group-hover:scale-125 transition-transform" />
 										</>
 									)}
 								</Button>

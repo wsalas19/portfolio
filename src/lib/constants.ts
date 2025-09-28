@@ -21,9 +21,28 @@ export const paths: PathType[] = [
 export const imgSize: number = 300;
 export const jobs: jobProps[] = [
 	{
+		role: "Front-End Developer",
+		company: "PatientStudio",
+		companyUrl: "https://www.patientstudio.com/",
+		startDate: "May 2025",
+		endDate: "Present",
+		technologies: [
+			"React",
+			"Typescript",
+			"Tailwind",
+			"Vite",
+			"Storybook",
+			"Jira",
+			"GraphQL",
+		],
+		description:
+			"Collaborated with a cross-functional team of backend developers and UX/UI designers to develop and enhance features for PatientStudio's healthcare platform, serving medical professionals. Built responsive, user-friendly interfaces using React and TypeScript, while maintaining design consistency through Storybook components. Actively participated in agile development cycles using Jira for project management, and promptly addressed client issues to ensure optimal platform performance and user experience for healthcare providers.",
+	},
+	{
 		role: "Full Stack Developer",
 		company: "Freelancer",
-		companyUrl: "https://www.upwork.com/freelancers/~016ef2baac2d1684a6?mp_source=share",
+		companyUrl:
+			"https://www.upwork.com/freelancers/~016ef2baac2d1684a6?mp_source=share",
 		startDate: "Dec 2023",
 		endDate: "Present",
 		technologies: [
@@ -42,7 +61,7 @@ export const jobs: jobProps[] = [
 		role: "Solutions Engineer",
 		company: "Gwocu Studio",
 		startDate: "Nov 2024",
-		endDate: "Present",
+		endDate: "March 2024",
 		companyUrl: "https://wiki.gwocu.com/",
 		technologies: ["Jira", "React", "REST API", "AI"],
 		description:
@@ -97,23 +116,55 @@ export const projects: Project[] = [
 		liveUrl: "https://wsalas.tech",
 		githubUrl: "https://github.com/wsalas19/portfolio",
 		imageUrl: "/images/portfolio.png",
-		highlights: ["Responsive Design", "Server-Side Rendering", "UX/UI", "Personal Work"],
+		highlights: [
+			"Responsive Design",
+			"Server-Side Rendering",
+			"UX/UI",
+			"Personal Work",
+		],
 	},
 	{
 		title: "Office Supplies Manager",
 		description:
 			"Custom built private web-based procurement system designed to streamline the ordering and management of office supplies within a corporate environment.",
-		technologies: ["Next.js", "TypeScript", "Material UI", "Postgres", "AWS", "CI/CD", "ORM"],
+		technologies: [
+			"Next.js",
+			"TypeScript",
+			"Material UI",
+			"Postgres",
+			"AWS",
+			"CI/CD",
+			"ORM",
+		],
 		imageUrl: "/images/gdc.png",
-		highlights: ["Responsive Design", "Migration", "API Integration", "Coorporate Client"],
+		highlights: [
+			"Responsive Design",
+			"Migration",
+			"API Integration",
+			"Coorporate Client",
+		],
 	},
 	{
 		title: "Hunt Club Portal",
 		description:
 			"is a modern Next.js application designed to streamline lodge reservations, wildlife outings, and member profile management.",
-		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Zoho CRM", "GCP", "CI/CD", "Redis"],
+		technologies: [
+			"Next.js",
+			"TypeScript",
+			"Tailwind CSS",
+			"Zoho CRM",
+			"GCP",
+			"CI/CD",
+			"Redis",
+		],
 		imageUrl: "/images/cottonwood.png",
-		highlights: ["Responsive Design", "UX/UI", "API Integration", "SSR", "Image Optimization"],
+		highlights: [
+			"Responsive Design",
+			"UX/UI",
+			"API Integration",
+			"SSR",
+			"Image Optimization",
+		],
 	},
 	// ... your other projects
 ];

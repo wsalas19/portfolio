@@ -10,15 +10,18 @@ function NavBar() {
 	return (
 		<>
 			<nav
-				id='#nav'
-				className='w-full flex flex-row justify-between items-center py-3 gray-white-scheme self-center px-[10%] md:px-[20%] relative z-20'
+				id="#nav"
+				className="w-full flex flex-row justify-between items-center py-3 gray-white-scheme self-center px-[10%] md:px-[20%] relative z-20"
 			>
-				<div className='flex gap-5 items-center'>
-					<h1 className='font-bold text-4xl'>portfolio.</h1>
-					<ul className='hidden xl:flex gap-2 items-end'>
+				<div className="flex gap-5 items-center">
+					<h1 className="font-bold text-4xl">portfolio.</h1>
+					<ul className="hidden xl:flex gap-2">
 						{paths.map((path) => (
 							<li key={path.name}>
-								<a className='hover:text-palette-pink font-semibold' href={path.path}>
+								<a
+									className="hover:text-palette-pink font-semibold"
+									href={path.path}
+								>
 									{path.name}
 								</a>
 							</li>
@@ -26,9 +29,9 @@ function NavBar() {
 					</ul>
 				</div>
 
-				<div className='hidden lg:flex gap-5 justify-center items-center'>
+				<div className="hidden lg:flex gap-5 justify-center items-center">
 					<DownloadResume />
-					<a
+					{/* 	<a
 						href='https://calendar.app.google/Yi51g1LEbcyJpoBb9'
 						target='_blank'
 						rel='noopener noreferrer'
@@ -40,10 +43,13 @@ function NavBar() {
 							<Video />
 							Book a Meeting
 						</Button>
-					</a>
+					</a> */}
 				</div>
 
-				<button className='lg:hidden text-white' onClick={() => setIsOpen(!isOpen)}>
+				<button
+					className="lg:hidden text-white"
+					onClick={() => setIsOpen(!isOpen)}
+				>
 					{isOpen ? <X size={24} /> : <Menu size={24} />}
 				</button>
 			</nav>
@@ -53,28 +59,28 @@ function NavBar() {
 					isOpen ? "translate-y-0" : "-translate-y-full"
 				} lg:hidden`}
 			>
-				<div className='flex flex-col items-center pt-20 px-4 space-y-6'>
+				<div className="flex flex-col items-center pt-20 px-4 space-y-6">
 					{paths.map((path) => (
 						<a
 							key={path.name}
 							href={path.path}
-							className='text-xl font-semibold hover:text-palette-pink'
+							className="text-xl font-semibold hover:text-palette-pink"
 							onClick={() => setIsOpen(false)}
 						>
 							{path.name}
 						</a>
 					))}
 
-					<div className='flex flex-col w-full gap-4 pt-6'>
+					<div className="flex flex-col w-full gap-4 pt-6">
 						<DownloadResume />
 						<a
-							href='https://calendar.app.google/Yi51g1LEbcyJpoBb9'
-							target='_blank'
-							rel='noopener noreferrer'
-							className='w-full'
+							href="https://calendar.app.google/Yi51g1LEbcyJpoBb9"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="w-full"
 						>
 							<Button
-								className='w-full font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2 justify-center'
+								className="w-full font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2 justify-center"
 								size={"sm"}
 							>
 								<Video />

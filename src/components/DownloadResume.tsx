@@ -2,18 +2,20 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { ButtonControl } from "@/lib/types/globals";
+import { ButtonControl, ButtonLabel } from "@/lib/types/globals";
 import { useToast } from "./ui/use-toast";
 
 function DownloadResume() {
-	const [buttonControl, setButtonControl] = useState<ButtonControl<"Resume" | "Downloading">>({
+	const [buttonControl, setButtonControl] = useState<
+		ButtonControl<ButtonLabel>
+	>({
 		sent: false,
-		name: "Resume",
+		name: ButtonLabel.DOWNLOAD,
 	});
 	const { toast } = useToast();
 
 	const downloadResume = () => {
-		setButtonControl({ sent: true, name: "Downloading" });
+		setButtonControl({ sent: true, name: ButtonLabel.DOWNLOADING });
 
 		try {
 			const url = "/docs/resume.pdf";
@@ -33,18 +35,19 @@ function DownloadResume() {
 				variant: "destructive",
 			});
 		} finally {
-			setButtonControl({ sent: false, name: "Resume" });
+			setButtonControl({ sent: false, name: ButtonLabel.DOWNLOAD });
 		}
 	};
 	return (
 		<Button
 			onClick={downloadResume}
 			disabled={buttonControl.sent}
-			className='hidden font-bold bg-gray-900 text-white md:flex gap-2 hover:bg-palette-pink hover:text-gray-900 hover:border-palette-pink/35 '
-			variant={"outline"}
+			//className='hidden font-bold bg-gray-900 text-white md:flex gap-2 hover:bg-palette-pink hover:text-gray-900 hover:border-palette-pink/35 '
+			className="text-[16px]"
+			variant={"green"}
 			size={"sm"}
 		>
-			<Download aria-label='download icon' className='inline-block w-4 h-4 ' />
+			<Download aria-label="download icon" className="inline-block w-5 h-5 " />
 			{buttonControl.name}
 		</Button>
 	);

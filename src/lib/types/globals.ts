@@ -11,6 +11,11 @@ export type ButtonControl<T> = {
 	sent: boolean;
 	name: T;
 };
+
+export enum ButtonLabel {
+	DOWNLOAD = "Download CV",
+	DOWNLOADING = "Downloading",
+}
 export type ProfileCardProps = {
 	imgSize: number;
 };

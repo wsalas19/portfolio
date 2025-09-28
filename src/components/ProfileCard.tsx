@@ -176,8 +176,8 @@ function ProfileCard() {
 						</a>
 					</Button>
 					<Button
-						className=" bg-palette-alt hover:bg-palette-pink"
-						variant="outline"
+						className=" bg-[#495533]/40"
+						variant="ghost"
 						size="lg"
 						asChild
 					>
