@@ -2,6 +2,7 @@ import "./globals.css";
 
 import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
+import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 export default function RootLayout({
@@ -10,12 +11,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
-			<body className='flex flex-col min-h-screen gray-white-scheme'>
+		<html lang="en">
+			<body className="flex flex-col min-h-screen gray-white-scheme">
 				<NavBar />
 				{children}
 				<Toaster />
 				<ScrollButton />
+				<Analytics />
 			</body>
 		</html>
 	);
