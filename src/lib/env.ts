@@ -6,11 +6,18 @@ const envSchema = z.object({
   RESEND_FROM_EMAIL: z.string().email().optional(),
   RESEND_TO_EMAIL: z.string().email().optional(),
 
-  // Client-side variables
-  NEXT_PUBLIC_SITE_URL: z.string().url(),
+  // Client-side variables (with defaults for production)
+  NEXT_PUBLIC_SITE_URL: z.string().url().default('https://wsalasdev.site'),
 });
 
-export const env = envSchema.parse(process.env);
+const parsedEnv = envSchema.safeParse(process.env);
+
+export const env = parsedEnv.success ? parsedEnv.data : {
+  RESEND_API_KEY: undefined,
+  RESEND_FROM_EMAIL: undefined,
+  RESEND_TO_EMAIL: undefined,
+  NEXT_PUBLIC_SITE_URL: 'https://wsalasdev.site'
+};
 
 // Validate on import (throws in development if missing)
 if (process.env.NODE_ENV === 'development') {
