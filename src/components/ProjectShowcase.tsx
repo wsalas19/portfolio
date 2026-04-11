@@ -34,7 +34,7 @@ function ProjectCard({
 				</div>
 
 				<div className="p-8">
-					<h3 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-palette-pink">
+					<h3 className="text-2xl uppercase font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-palette-pink">
 						{project.title}
 					</h3>
 
@@ -141,12 +141,12 @@ function ProjectShowcase() {
 		<section id="projects" className="gray-white-scheme global-p ">
 			<div className="max-w-6xl mx-auto">
 				<h2
-					className="text-4xl font-bold text-center mb-4 bg-clip-text text-transparent 
+					className="text-4xl font-bold text-center mb-4 bg-clip-text text-transparent
                        bg-gradient-to-r from-white to-palette-pink"
 				>
 					PROJECTS
 				</h2>
-				<p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+				<p className="text-gray-400 text-center uppercase font-semibold mb-12 max-w-2xl mx-auto">
 					A showcase of my recent work and side projects
 				</p>
 
@@ -165,14 +165,14 @@ function ProjectShowcase() {
 					{/* Navigation Arrows */}
 					<button
 						onClick={previousProject}
-						className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-palette-card/50 
+						className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-palette-card/50
                      hover:bg-palette-pink/20 transition-all duration-300"
 					>
 						<ChevronLeft className="w-6 h-6" />
 					</button>
 					<button
 						onClick={nextProject}
-						className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-palette-card/50 
+						className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-palette-card/50
                      hover:bg-palette-pink/20 transition-all duration-300"
 					>
 						<ChevronRight className="w-6 h-6" />
@@ -184,7 +184,7 @@ function ProjectShowcase() {
 							<button
 								key={index}
 								onClick={() => goToProject(index)}
-								className={`w-2 h-2 rounded-full transition-all duration-300 
+								className={`w-2 h-2 rounded-full transition-all duration-300
                   ${
 										index === currentIndex
 											? "w-8 bg-palette-pink"

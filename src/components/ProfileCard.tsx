@@ -25,6 +25,8 @@ const socialLinks = [
 ];
 
 function ProfileCard() {
+	const today = new Date();
+	const year = today.getFullYear();
 	return (
 		<div
 			id="about"
@@ -55,7 +57,7 @@ function ProfileCard() {
 							priority
 						/>
 						<div
-							className="absolute inset-0 bg-palette-pink/10 rounded-full opacity-0 
+							className="absolute inset-0 bg-palette-pink/10 rounded-full opacity-0
                           group-hover:opacity-100 transition-opacity duration-300"
 						/>
 					</motion.div>
@@ -68,7 +70,7 @@ function ProfileCard() {
 						className="mb-4"
 					>
 						<h1
-							className="font-bold text-3xl md:text-5xl lg:text-6xl mb-2 bg-clip-text text-transparent 
+							className="font-bold text-3xl md:text-5xl lg:text-6xl mb-2 bg-clip-text text-transparent
                          bg-gradient-to-r from-white to-palette-pink"
 						>
 							William Salas Bolaño
@@ -87,11 +89,13 @@ function ProfileCard() {
 					>
 						<div className="flex items-center gap-2 text-gray-400">
 							<MapPin className="w-4 h-4" />
-							<span className="font-medium">Barranquilla, Colombia</span>
+							<span className="font-semibold uppercase">
+								Barranquilla, Colombia
+							</span>
 						</div>
 						<div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
-						<div className="text-palette-pink font-semibold">
-							3+ Years of Experience
+						<div className="text-palette-pink font-semibold uppercase">
+							+{year - 2022} Years of Experience
 						</div>
 					</motion.div>
 
@@ -110,7 +114,7 @@ function ProfileCard() {
 								rel="noopener noreferrer"
 								whileHover={{ scale: 1.1 }}
 								whileTap={{ scale: 0.95 }}
-								className="p-3 rounded-full bg-gray-800/50 hover:bg-palette-pink/20 
+								className="p-3 rounded-full bg-gray-800/50 hover:bg-palette-pink/20
                            transition-colors duration-300 border border-gray-700/50"
 							>
 								<Icon className="w-5 h-5" />
@@ -152,7 +156,7 @@ function ProfileCard() {
 								initial={{ opacity: 0, scale: 0.8 }}
 								animate={{ opacity: 1, scale: 1 }}
 								transition={{ delay: 0.7 + index * 0.1 }}
-								className="px-4 py-2 bg-palette-pink/20 text-palette-pink rounded-full 
+								className="px-4 py-2 bg-palette-pink/20 text-palette-pink rounded-full
                            text-sm font-medium hover:bg-palette-pink/30 transition-colors
                            border border-palette-pink/20"
 							>

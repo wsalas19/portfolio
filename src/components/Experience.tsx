@@ -27,12 +27,12 @@ function Experience() {
 				{/* Section Header */}
 				<div className="text-center mb-12 space-y-4">
 					<h1
-						className="text-4xl font-bold bg-clip-text text-transparent 
+						className="text-4xl font-bold bg-clip-text text-transparent
                          bg-gradient-to-r from-white to-palette-pink"
 					>
 						EXPERIENCE
 					</h1>
-					<p className="text-gray-400 max-w-2xl mx-auto">
+					<p className="text-gray-400 max-w-2xl mx-auto uppercase font-semibold">
 						A timeline of my professional journey and key milestones
 					</p>
 				</div>
@@ -44,7 +44,7 @@ function Experience() {
 							{visibleJobs.map((job, index) => (
 								<div
 									key={job.company}
-									className={`transform transition-all duration-500 
+									className={`transform transition-all duration-500
                     ${activeIndex === index ? "scale-105" : "scale-100"}
                     hover:scale-[1.02]`}
 									onMouseEnter={() => setActiveIndex(index)}

@@ -108,19 +108,39 @@ export const jobs: jobProps[] = [
 	},
 ];
 export const projects: Project[] = [
+	// {
+	// 	title: "Portfolio Website",
+	// 	description:
+	// 		"Personal portfolio built with Next.js and TypeScript to showcase experience and personal work.",
+	// 	technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+	// 	liveUrl: "https://wsalas.tech",
+	// 	githubUrl: "https://github.com/wsalas19/portfolio",
+	// 	imageUrl: "/images/portfolio.png",
+	// 	highlights: [
+	// 		"Responsive Design",
+	// 		"Server-Side Rendering",
+	// 		"UX/UI",
+	// 		"Personal Work",
+	// 	],
+	// },
 	{
-		title: "Portfolio Website",
-		description:
-			"Personal portfolio built with Next.js and TypeScript to showcase experience and personal work.",
-		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-		liveUrl: "https://wsalas.tech",
-		githubUrl: "https://github.com/wsalas19/portfolio",
-		imageUrl: "/images/portfolio.png",
+		title: "Doctor Portal",
+		description: "Developed new features for PatientStudio doctor portal, integrated some new AI function and improved user experience.",
+		technologies: [
+			"React",
+			'Vite',
+			"TypeScript",
+			"Tailwind CSS",
+			"Storybook",
+			"Figma",
+			"GraphQL",
+		],
+		imageUrl: "/images/ps-1.png",
 		highlights: [
-			"Responsive Design",
-			"Server-Side Rendering",
-			"UX/UI",
-			"Personal Work",
+			"AI Integration",
+			"User Experience Improvement",
+			"Medical Software",
+			"UX/UI"
 		],
 	},
 	{
