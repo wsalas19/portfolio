@@ -78,7 +78,7 @@ export async function POST(request: Request) {
   // Check origin for CORS
   const origin = request.headers.get('origin');
   const allowedOrigins = [
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://wsalas.tech',
+    process.env.SITE_URL || 'https://wsalasdev.site',
     'http://localhost:3000'
   ];
 
