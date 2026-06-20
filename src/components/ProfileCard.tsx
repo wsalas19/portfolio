@@ -182,14 +182,19 @@ function ProfileCard() {
 					transition={{ delay: 0.8 }}
 					className="flex flex-col sm:flex-row justify-center gap-4"
 				>
-					<Button variant="green" size="lg" asChild className="glow-lime-hover">
+					<Button
+						variant="green"
+						size="lg"
+						asChild
+						className="glow-lime-hover w-full md:w-fit"
+					>
 						<a href="mailto:wa.salas1905@hotmail.com">
 							<MailPlus className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
 							Get in Touch
 						</a>
 					</Button>
 					<Button
-						className="bg-[#495533]/40 font-semibold"
+						className="bg-[#495533]/40 font-semibold w-full md:w-fit justify-center"
 						variant="ghost"
 						size="lg"
 						asChild

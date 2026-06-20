@@ -91,9 +91,9 @@ function ContactForm() {
 	return (
 		<div
 			id="contact"
-			className="pt-20 min-h-screen flex items-center justify-center "
+			className="min-h-screen flex items-center justify-center pb-24 md:pb-0"
 		>
-			<div className="w-full mx-6 mb-6">
+			<div className="w-full mx-6">
 				{/* Single Unified Card */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}

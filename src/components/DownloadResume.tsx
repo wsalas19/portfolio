@@ -42,8 +42,7 @@ function DownloadResume() {
 		<Button
 			onClick={downloadResume}
 			disabled={buttonControl.sent}
-			//className='hidden font-bold bg-gray-900 text-white md:flex gap-2 hover:bg-palette-pink hover:text-gray-900 hover:border-palette-pink/35 '
-			className="text-[16px]"
+			className="text-[16px] w-full md:w-fit"
 			variant={"green"}
 			size={"sm"}
 		>
