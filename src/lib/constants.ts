@@ -21,11 +21,29 @@ export const paths: PathType[] = [
 export const imgSize: number = 300;
 export const jobs: jobProps[] = [
 	{
+		role: "Full Stack Developer",
+		company: "Everus",
+		companyUrl:
+			"https://everuscares.com",
+		startDate: "Oct 2025",
+		endDate: "Present",
+		technologies: [
+			"Next.js",
+			"Typescript",
+			"Vercel",
+			"Supabase",
+			"Tailwind CSS",
+			"AI integration",
+		],
+		description:
+			"Engineered and scaled the core full-stack web applications and robust backend APIs for an AI-powered smart-matching platform.",
+	},
+	{
 		role: "Front-End Developer",
 		company: "PatientStudio",
 		companyUrl: "https://www.patientstudio.com/",
 		startDate: "May 2025",
-		endDate: "Present",
+		endDate: "April 2026",
 		technologies: [
 			"React",
 			"Typescript",
@@ -37,25 +55,6 @@ export const jobs: jobProps[] = [
 		],
 		description:
 			"Collaborated with a cross-functional team of backend developers and UX/UI designers to develop and enhance features for PatientStudio's healthcare platform, serving medical professionals. Built responsive, user-friendly interfaces using React and TypeScript, while maintaining design consistency through Storybook components. Actively participated in agile development cycles using Jira for project management, and promptly addressed client issues to ensure optimal platform performance and user experience for healthcare providers.",
-	},
-	{
-		role: "Full Stack Developer",
-		company: "Freelancer",
-		companyUrl:
-			"https://www.upwork.com/freelancers/~016ef2baac2d1684a6?mp_source=share",
-		startDate: "Dec 2023",
-		endDate: "Present",
-		technologies: [
-			"Next.js",
-			"Typescript",
-			"AWS",
-			"GCP",
-			"Vercel",
-			"Tailwind CSS",
-			"CRM Integration",
-		],
-		description:
-			"Crafted custom software applications to address specific client needs, ensuring solutions were both effective and scalable. Collaborated closely with clients through regular meetings to thoroughly understand and refine project goals.",
 	},
 	{
 		role: "Solutions Engineer",
@@ -188,3 +187,5 @@ export const projects: Project[] = [
 	},
 	// ... your other projects
 ];
+
+export const gradientColors = ["#fb8983", "#bef728", "#a2a206", "#1d1e2c", "#2e3320"];

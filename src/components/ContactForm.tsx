@@ -101,10 +101,7 @@ function ContactForm() {
 					transition={{ duration: 0.6 }}
 					className="text-center mb-16"
 				>
-					<h2
-						className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent 
-                     bg-gradient-to-r from-white to-palette-pink"
-					>
+					<h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-primary">
 						Let&apos;s Work!
 					</h2>
 					<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
@@ -119,7 +116,7 @@ function ContactForm() {
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.2 }}
-					className=" rounded-2xl border border-gray-800/50 shadow-2xl overflow-hidden"
+					className="glass-strong rounded-2xl border border-white/10 shadow-2xl overflow-hidden glow-pink-hover"
 				>
 					<div className="grid lg:grid-cols-2">
 						{/* Left Section - Contact Info */}
@@ -127,16 +124,16 @@ function ContactForm() {
 							initial={{ opacity: 0, x: -30 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.6, delay: 0.4 }}
-							className="p-8 lg:p-12 bg-gradient-to-br bg-palette-alt from-palette-pink/5 to-transparent 
-                         border-r border-gray-800/50 lg:border-r lg:border-b-0 border-b"
+							className="p-8 lg:p-12 bg-gradient-to-br from-palette-pink/10 to-transparent
+	                         border-r border-white/10 lg:border-r lg:border-b-0 border-b"
 						>
-							<h3 className="text-2xl font-bold mb-6 text-white">
+							<h3 className="text-2xl font-bold mb-6 text-gradient-pink">
 								Get in Touch
 							</h3>
 
 							<div className="space-y-6 mb-8">
 								<div className="flex items-center gap-4">
-									<div className="p-3 bg-palette-pink/20 rounded-full">
+									<div className="p-3 glass-pink rounded-full glow-pink-hover">
 										<Mail className="w-6 h-6 text-palette-pink" />
 									</div>
 									<div>
@@ -148,7 +145,7 @@ function ContactForm() {
 								</div>
 
 								<div className="flex items-center gap-4">
-									<div className="p-3 bg-palette-pink/20 rounded-full">
+									<div className="p-3 glass-pink rounded-full glow-pink-hover">
 										<MessageSquare className="w-6 h-6 text-palette-pink" />
 									</div>
 									<div>
@@ -161,8 +158,7 @@ function ContactForm() {
 							</div>
 
 							<div
-								className="p-6 bg-gradient-to-br from-palette-pink/10 to-transparent 
-                          rounded-xl border border-palette-pink/20"
+								className="p-6 glass-pink rounded-xl border border-palette-pink/30 glow-pink"
 							>
 								<h4 className="text-white font-semibold mb-2">
 									Let&apos;s Build Something Amazing
@@ -199,8 +195,8 @@ function ContactForm() {
 										<Input
 											id="name"
 											placeholder="John Doe"
-											className="bg-gray-800/50 border-gray-700 focus:border-palette-pink 
-                                     transition-colors h-12 text-white placeholder:text-gray-500"
+											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                     transition-all duration-300 h-12 text-white placeholder:text-gray-500"
 											{...form.register("name")}
 											aria-invalid={!!errors.name}
 										/>
@@ -223,8 +219,8 @@ function ContactForm() {
 											id="email"
 											placeholder="john@example.com"
 											type="email"
-											className="bg-gray-800/50 border-gray-700 focus:border-palette-pink 
-                                     transition-colors h-12 text-white placeholder:text-gray-500"
+											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                     transition-all duration-300 h-12 text-white placeholder:text-gray-500"
 											{...form.register("email")}
 											aria-invalid={!!errors.email}
 										/>
@@ -248,8 +244,8 @@ function ContactForm() {
 									<Input
 										id="title"
 										placeholder="Let's discuss a project"
-										className="bg-gray-800/50 border-gray-700 focus:border-palette-pink 
-                                 transition-colors h-12 text-white placeholder:text-gray-500"
+										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                 transition-all duration-300 h-12 text-white placeholder:text-gray-500"
 										{...form.register("title")}
 										aria-invalid={!!errors.title}
 									/>
@@ -272,9 +268,9 @@ function ContactForm() {
 									<Textarea
 										id="message"
 										placeholder="Tell me about your project, ideas, or just say hello!"
-										className="bg-gray-800/50 border-gray-700 focus:border-palette-pink 
-                                 transition-colors min-h-[120px] text-white placeholder:text-gray-500 
-                                 resize-none"
+										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                 transition-all duration-300 min-h-[120px] text-white placeholder:text-gray-500
+	                                 resize-none"
 										{...form.register("message")}
 										aria-invalid={!!errors.message}
 									/>
@@ -289,13 +285,8 @@ function ContactForm() {
 								<motion.div variants={itemVariants}>
 									<Button
 										variant={"green"}
-										className="w-full text-[16px]"
+										className="w-full text-[16px] glow-lime-hover"
 										type="submit"
-										/* className="w-full h-12 font-semibold text-white bg-gradient-to-r 
-                                 from-palette-pink to-palette-pink/80 hover:from-palette-pink/90 
-                                 hover:to-palette-pink/70 transition-all duration-300 
-                                 transform hover:scale-[1.02] disabled:opacity-70 
-                                 disabled:cursor-not-allowed disabled:transform-none" */
 										disabled={isSubmitting}
 									>
 										{isSubmitting ? (

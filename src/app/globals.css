@@ -93,4 +93,87 @@
 	.show {
 		@apply border-2 border-palette-lime;
 	}
+
+	/* Glassmorphism utility classes */
+	.glass {
+		background: rgba(29, 30, 44, 0.6);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.glass-strong {
+		background: rgba(29, 30, 44, 0.4);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.glass-light {
+		background: rgba(29, 30, 44, 0.4);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	.glass-pink {
+		background: rgba(251, 137, 131, 0.1);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(251, 137, 131, 0.2);
+	}
+
+	.glass-lime {
+		background: rgba(190, 247, 40, 0.1);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(190, 247, 40, 0.2);
+	}
+
+	/* Glow effects */
+	.glow-pink {
+		box-shadow:
+			0 0 20px rgba(251, 137, 131, 0.3),
+			0 0 40px rgba(251, 137, 131, 0.1);
+	}
+
+	.glow-lime {
+		box-shadow:
+			0 0 20px rgba(190, 247, 40, 0.3),
+			0 0 40px rgba(190, 247, 40, 0.1);
+	}
+
+	.glow-pink-hover:hover {
+		box-shadow:
+			0 0 25px rgba(251, 137, 131, 0.4),
+			0 0 50px rgba(251, 137, 131, 0.2);
+	}
+
+	.glow-lime-hover:hover {
+		box-shadow:
+			0 0 25px rgba(190, 247, 40, 0.4),
+			0 0 50px rgba(190, 247, 40, 0.2);
+	}
+
+	/* Gradient text utilities */
+	.text-gradient-primary {
+		background: linear-gradient(135deg, #ffffff 0%, #fb8983 50%, #bef728 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.text-gradient-pink {
+		background: linear-gradient(135deg, #ffffff 0%, #fb8983 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.text-gradient-lime {
+		background: linear-gradient(135deg, #ffffff 0%, #bef728 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
 }

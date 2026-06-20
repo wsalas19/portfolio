@@ -24,7 +24,7 @@ const emailSchema = z.object({
     .refine(msg => !msg.includes('\r'), "Message contains invalid characters")
 });
 
-// In-memory rate limiting (for Cloudflare Workers)
+// In-memory rate limiting (resets on deployment)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 function checkRateLimit(identifier: string): { allowed: boolean; resetAt?: number } {
@@ -72,8 +72,8 @@ export async function OPTIONS(request: Request) {
 }
 
 export async function POST(request: Request) {
-  // Get client IP from Cloudflare headers
-  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  // Get client IP from Vercel headers
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
 
   // Check origin for CORS
   const origin = request.headers.get('origin');

@@ -5,21 +5,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+	"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
 	{
 		variants: {
 			variant: {
-				default: "bg-primary text-primary-foreground hover:bg-primary/90",
+				default:
+					"bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20",
 				destructive:
-					"bg-destructive text-destructive-foreground hover:bg-destructive/90",
+					"bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-lg hover:shadow-destructive/20",
 				outline:
-					"border border-foreground bg-background hover:bg-accent hover:text-accent-foreground",
+					"border border-foreground/20 bg-background/50 hover:bg-accent hover:text-accent-foreground hover:border-foreground/40 backdrop-blur-sm",
 				secondary:
-					"bg-secondary text-secondary-foreground hover:bg-secondary/80",
-				ghost: "hover:bg-accent hover:text-accent-foreground",
-				link: "text-white font-semibold underline-offset-4 hover:underline",
+					"bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md",
+				ghost:
+					"hover:bg-accent/20 hover:text-accent-foreground backdrop-blur-sm",
+				link:
+					"text-white font-semibold underline-offset-4 hover:underline decoration-palette-pink decoration-2",
 				green:
-					"w-fit font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex items-center gap-2 justify-center",
+					"w-fit font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex items-center gap-2 justify-center hover:shadow-lg hover:shadow-palette-lime/30 hover:scale-105",
+				pink:
+					"bg-palette-pink text-gray-900 hover:bg-palette-pink/80 hover:text-white flex items-center gap-2 justify-center hover:shadow-lg hover:shadow-palette-pink/30 hover:scale-105",
+				glass:
+					"glass text-white hover:bg-white/10 hover:border-white/20 border border-white/10",
 			},
 			size: {
 				default: "h-10 px-4 py-2",

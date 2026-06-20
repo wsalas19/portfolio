@@ -2,9 +2,9 @@ import "./globals.css";
 
 import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
-import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
-import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -12,7 +12,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="flex flex-col min-h-screen gray-white-scheme">
+			<body>
+				{/* GradientBlinds fixed background - pointer-events-auto for mouse tracking */}
+
 				<NavBar />
 				{children}
 				<Toaster />

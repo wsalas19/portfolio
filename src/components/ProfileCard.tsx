@@ -3,7 +3,14 @@ import React from "react";
 import Image from "next/image";
 import { imgSize } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { MailPlus, Github, Linkedin, Code2, MapPin } from "lucide-react";
+import {
+	MailPlus,
+	Github,
+	Linkedin,
+	Code2,
+	MapPin,
+	Briefcase,
+} from "lucide-react";
 import { Button } from "./ui/button";
 
 const skills = [
@@ -22,12 +29,16 @@ const socialLinks = [
 		href: "https://www.linkedin.com/in/williamsalasb/",
 		label: "LinkedIn",
 	},
+	{
+		icon: Briefcase,
+		href: "https://www.upwork.com/freelancers/williams59",
+		label: "Upwork",
+	},
 ];
 
 function ProfileCard() {
 	const today = new Date();
 	const year = today.getFullYear();
-	//test deploy
 	return (
 		<div
 			id="about"
@@ -37,7 +48,7 @@ function ProfileCard() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="bg-palette-alt p-8 md:p-12 mx-5 md:m-0 rounded-2xl w-full max-w-4xl shadow-2xl"
+				className="glass p-8 md:p-12 mx-5 md:m-0 rounded-2xl w-full max-w-4xl shadow-2xl glow-pink-hover transition-all duration-300"
 			>
 				{/* Header Section - Centered */}
 				<div className="flex flex-col items-center text-center mb-8">
@@ -50,7 +61,7 @@ function ProfileCard() {
 					>
 						<Image
 							className="rounded-full shadow-primary shadow-lg aspect-square md:w-40 md:h-40 object-cover
-                         transition-transform duration-300 group-hover:scale-[1.02]"
+	                         transition-transform duration-300 group-hover:scale-[1.02]"
 							src={"/images/profile-img.png"}
 							alt="William Salas - Software Engineer"
 							width={imgSize}
@@ -59,7 +70,7 @@ function ProfileCard() {
 						/>
 						<div
 							className="absolute inset-0 bg-palette-pink/10 rounded-full opacity-0
-                          group-hover:opacity-100 transition-opacity duration-300"
+	                          group-hover:opacity-100 transition-opacity duration-300"
 						/>
 					</motion.div>
 
@@ -70,13 +81,10 @@ function ProfileCard() {
 						transition={{ delay: 0.2 }}
 						className="mb-4"
 					>
-						<h1
-							className="font-bold text-3xl md:text-5xl lg:text-6xl mb-2 bg-clip-text text-transparent
-                         bg-gradient-to-r from-white to-palette-pink"
-						>
+						<h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-2 text-gradient-primary">
 							William Salas Bolaño
 						</h1>
-						<p className="text-gray-300 text-xl md:text-2xl font-semibold">
+						<p className="text-gradient-pink text-xl md:text-2xl font-semibold">
 							Software Engineer
 						</p>
 					</motion.div>
@@ -89,13 +97,13 @@ function ProfileCard() {
 						className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 mb-6"
 					>
 						<div className="flex items-center gap-2 text-gray-400">
-							<MapPin className="w-4 h-4" />
+							<MapPin className="w-4 h-4 text-palette-lime" />
 							<span className="font-semibold uppercase">
 								Barranquilla, Colombia
 							</span>
 						</div>
 						<div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
-						<div className="text-palette-pink font-semibold uppercase">
+						<div className="text-gradient-lime font-semibold uppercase">
 							+{year - 2022} Years of Experience
 						</div>
 					</motion.div>
@@ -115,10 +123,10 @@ function ProfileCard() {
 								rel="noopener noreferrer"
 								whileHover={{ scale: 1.1 }}
 								whileTap={{ scale: 0.95 }}
-								className="p-3 rounded-full bg-gray-800/50 hover:bg-palette-pink/20
-                           transition-colors duration-300 border border-gray-700/50"
+								className="p-3 rounded-full glass-light hover:bg-palette-pink/20
+	                           transition-colors duration-300 border border-white/10 glow-pink-hover"
 							>
-								<Icon className="w-5 h-5" />
+								<Icon className="w-5 h-5 text-gray-300" />
 								<span className="sr-only">{label}</span>
 							</motion.a>
 						))}
@@ -157,9 +165,9 @@ function ProfileCard() {
 								initial={{ opacity: 0, scale: 0.8 }}
 								animate={{ opacity: 1, scale: 1 }}
 								transition={{ delay: 0.7 + index * 0.1 }}
-								className="px-4 py-2 bg-palette-pink/20 text-palette-pink rounded-full
-                           text-sm font-medium hover:bg-palette-pink/30 transition-colors
-                           border border-palette-pink/20"
+								className="px-4 py-2 glass-pink text-palette-pink rounded-full
+	                           text-sm font-medium hover:bg-palette-pink/30 transition-all duration-300
+	                           border border-palette-pink/20 glow-pink-hover"
 							>
 								{skill}
 							</motion.span>
@@ -174,14 +182,14 @@ function ProfileCard() {
 					transition={{ delay: 0.8 }}
 					className="flex flex-col sm:flex-row justify-center gap-4"
 				>
-					<Button variant="green" size="lg" asChild>
+					<Button variant="green" size="lg" asChild className="glow-lime-hover">
 						<a href="mailto:wa.salas1905@hotmail.com">
 							<MailPlus className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
 							Get in Touch
 						</a>
 					</Button>
 					<Button
-						className=" bg-[#495533]/40 font-semibold"
+						className="bg-[#495533]/40 font-semibold"
 						variant="ghost"
 						size="lg"
 						asChild

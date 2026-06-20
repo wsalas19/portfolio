@@ -19,10 +19,7 @@ function Experience() {
 	const visibleJobs = isExpanded ? jobs : jobs.slice(0, 2);
 
 	return (
-		<div
-			id="experience"
-			className="gray-white-scheme global-p pt-2 flex flex-col min-h-screen"
-		>
+		<div id="experience" className="global-p pt-2 flex flex-col min-h-screen">
 			<div className="max-w-6xl mx-auto w-full px-4">
 				{/* Section Header */}
 				<div className="text-center mb-12 space-y-4">
@@ -64,9 +61,9 @@ function Experience() {
 						{jobs.length > 3 && (
 							<div className="text-center mt-8">
 								<Button
-									variant="link"
+									variant="outline"
 									onClick={() => setIsExpanded(!isExpanded)}
-									className="group transition-all duration-300"
+									className="group rounded-lg transition-all "
 								>
 									{isExpanded ? (
 										<>
@@ -84,25 +81,6 @@ function Experience() {
 						)}
 					</div>
 				</div>
-				{/* Skills & Technologies */}
-				{/* <div className='mt-16 text-center'>
-					<h2 className='text-2xl font-semibold mb-6'>Technologies Used</h2>
-					<div className='flex flex-wrap justify-center gap-3'>
-						{getTechnologies().map((tech, index) => (
-							<span
-								key={tech}
-								className={`px-4 py-2 rounded-full text-sm font-medium
-		bg-palette-pink/20 text-palette-pink
-		hover:bg-palette-pink/30 transition-all duration-300
-		transform hover:scale-105
-		animate-fadeIn`}
-								style={{ animationDelay: `${index * 100}ms` }}
-							>
-								{tech}
-							</span>
-						))}
-					</div>
-				</div> */}
 			</div>
 		</div>
 	);
