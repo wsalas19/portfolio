@@ -2,9 +2,9 @@
 import { projects } from "@/lib/constants";
 import { Project } from "@/lib/types/globals";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PanInfo, motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
-import { motion, PanInfo, useMotionValue, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 const GAP = 24;
 const BASE_WIDTH = 700;
@@ -40,7 +40,7 @@ function ProjectCard({
 	return (
 		<motion.div
 			key={project.title}
-			className="relative shrink-0"
+			className="relative shrink-0 "
 			style={{
 				width: itemWidth,
 				rotateY,
@@ -50,7 +50,16 @@ function ProjectCard({
 			drag="x"
 			dragConstraints={{ left: 0, right: 0 }}
 		>
-			<div className="glass rounded-2xl overflow-hidden shadow-2xl glow-pink-hover transition-all duration-300 h-full">
+			<div
+				style={{
+					background: "rgba(18, 18, 18, 0.4)",
+					borderRadius: "16px",
+					backdropFilter: "blur(16px)",
+					WebkitBackdropFilter: "blur(16px)",
+					border: "1px solid rgba(255, 255, 255, 0.12)",
+				}}
+				className=" rounded-2xl overflow-hidden glow-lime-hover transition-all duration-300 h-full"
+			>
 				<div className="relative aspect-video">
 					<Image
 						src={project.imageUrl}
@@ -119,7 +128,7 @@ function ProjectShowcase() {
 
 	useEffect(() => {
 		x.set(-1 * trackItemOffset);
-	}, [projects.length, trackItemOffset, x]);
+	}, [trackItemOffset, x]);
 
 	const effectiveTransition = SPRING_OPTIONS;
 
@@ -181,7 +190,7 @@ function ProjectShowcase() {
 	return (
 		<section id="projects" className="global-p py-20">
 			<div className="max-w-6xl mx-auto">
-				<h2 className="text-4xl font-bold text-center mb-4 text-gradient-primary">
+				<h2 className="text-4xl font-bold text-center mb-4 text-red-400">
 					PROJECTS
 				</h2>
 				<p className="text-gray-400 text-center uppercase font-semibold mb-12 max-w-2xl mx-auto">

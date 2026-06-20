@@ -48,7 +48,7 @@ function ProfileCard() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="glass p-8 md:p-12 mx-5 md:m-0 rounded-2xl w-full max-w-4xl shadow-2xl glow-pink-hover transition-all duration-300"
+				className="glass p-8 md:p-12 mx-5 md:m-0 rounded-2xl w-full max-w-4xl shadow-2xl glow-lime-hover transition-all duration-300"
 			>
 				{/* Header Section - Centered */}
 				<div className="flex flex-col items-center text-center mb-8">

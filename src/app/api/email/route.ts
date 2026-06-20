@@ -82,7 +82,8 @@ export async function POST(request: Request) {
     'http://localhost:3000'
   ];
 
-  if (!origin || !allowedOrigins.includes(origin)) {
+	if (!origin || !allowedOrigins.includes(origin)) {
+		Logger.error(new Error('Forbidden'), { origin, allowedOrigins });
     return NextResponse.json(
       { error: 'Forbidden' },
       { status: 403 }

@@ -22,7 +22,7 @@ function Experience() {
 		<div id="experience" className="global-p pt-2 flex flex-col min-h-screen">
 			<div className="max-w-6xl mx-auto w-full px-4">
 				{/* Section Header */}
-				<div className="text-center mb-12 space-y-4">
+				<div className="text-center mb-12 space-y-4 z-50">
 					<h1
 						className="text-4xl font-bold bg-clip-text text-transparent
                          bg-gradient-to-r from-white to-palette-pink"
@@ -52,7 +52,7 @@ function Experience() {
 							))}
 
 							{/* Starting Year Marker */}
-							<li className="ms-8 font-semibold text-2xl text-gray-400 animate-pulse">
+							<li className="ms-8 font-semibold text-2xl text-white animate-pulse">
 								2022
 							</li>
 						</ol>

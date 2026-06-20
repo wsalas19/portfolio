@@ -89,28 +89,11 @@ function ContactForm() {
 	};
 
 	return (
-		<section
+		<div
 			id="contact"
 			className="pt-20 min-h-screen flex items-center justify-center "
 		>
 			<div className="w-full mx-6 mb-6">
-				{/* Header */}
-				<motion.div
-					initial={{ opacity: 0, y: -20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					className="text-center mb-16"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-primary">
-						Let&apos;s Work!
-					</h2>
-					<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-						Have a project in mind or just want to chat? I&apos;d love to hear
-						from you. Drop me a message and I&apos;ll get back to you as soon as
-						possible.
-					</p>
-				</motion.div>
-
 				{/* Single Unified Card */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -137,7 +120,7 @@ function ContactForm() {
 										<Mail className="w-6 h-6 text-palette-pink" />
 									</div>
 									<div>
-										<p className="text-gray-400 text-sm">Email</p>
+										<p className="text-white font-bold text-sm">Email</p>
 										<p className="text-white font-medium">
 											wa.salas1905@hotmail.com
 										</p>
@@ -149,7 +132,9 @@ function ContactForm() {
 										<MessageSquare className="w-6 h-6 text-palette-pink" />
 									</div>
 									<div>
-										<p className="text-gray-400 text-sm">Response Time</p>
+										<p className="text-white font-bold text-sm">
+											Response Time
+										</p>
 										<p className="text-white font-medium">
 											Usually within 24 hours
 										</p>
@@ -157,9 +142,7 @@ function ContactForm() {
 								</div>
 							</div>
 
-							<div
-								className="p-6 glass-pink rounded-xl border border-palette-pink/30 glow-pink"
-							>
+							<div className="p-6 glass-pink rounded-xl border border-palette-pink/30">
 								<h4 className="text-white font-semibold mb-2">
 									Let&apos;s Build Something Amazing
 								</h4>
@@ -307,7 +290,7 @@ function ContactForm() {
 					</div>
 				</motion.div>
 			</div>
-		</section>
+		</div>
 	);
 }
 
