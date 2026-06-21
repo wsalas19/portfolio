@@ -36,7 +36,7 @@ function NavBar() {
 							{paths.map((path) => (
 								<li key={path.name}>
 									<a
-										className="text-gray-300 font-medium hover:text-palette-lime transition-colors duration-300"
+										className="font-medium hover:text-palette-lime transition-colors duration-300"
 										href={path.path}
 									>
 										{path.name}

@@ -68,7 +68,7 @@ export const jobs: jobProps[] = [
 	},
 	{
 		role: "Technical Staff",
-		company: "App Academy - USA",
+		company: "App Academy",
 		companyUrl: "https://www.appacademy.io/",
 		startDate: "Dec 2023",
 		endDate: "Jan 2025",
@@ -79,7 +79,7 @@ export const jobs: jobProps[] = [
 
 	{
 		role: "Full Stack Developer",
-		company: "PNG Technology Solutions - Barranquilla",
+		company: "PNG Technology Solutions",
 		companyUrl: "https://www.linkedin.com/company/png-technology-solutions/",
 		startDate: "Jul 2023",
 		endDate: "Nov 2023",
@@ -98,7 +98,7 @@ export const jobs: jobProps[] = [
 	},
 	{
 		role: "Programming Mentor",
-		company: "Henry - Argentina",
+		company: "Henry",
 		companyUrl: "https://www.soyhenry.com/",
 		startDate: "Sep 2022",
 		endDate: "Feb 2023",
@@ -188,4 +188,4 @@ export const projects: Project[] = [
 	// ... your other projects
 ];
 
-export const gradientColors = ["#fb8983", "#bef728", "#a2a206", "#1d1e2c", "#2e3320"];
+export const gradientColors = ["#fb8983", "#bef728", "#a2a206", "#2e3320"];

@@ -36,7 +36,7 @@ function Experience() {
 
 				{/* Timeline */}
 				<div className="flex justify-center">
-					<div className="w-full max-w-4xl">
+					<div className="w-[80%] md:w-full max-w-4xl">
 						<ol className="relative border-s-2 border-gray-400 space-y-10">
 							{visibleJobs.map((job, index) => (
 								<div
@@ -52,9 +52,7 @@ function Experience() {
 							))}
 
 							{/* Starting Year Marker */}
-							<li className="ms-8 font-semibold text-2xl text-white animate-pulse">
-								2022
-							</li>
+							<li className="ms-8 font-semibold text-2xl text-white">2022</li>
 						</ol>
 
 						{/* Show More/Less Button */}

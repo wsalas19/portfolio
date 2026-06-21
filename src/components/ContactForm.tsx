@@ -1,21 +1,14 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { Loader2, Mail, MessageSquare, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
 import { useToast } from "./ui/use-toast";
-import {
-	Loader2,
-	Send,
-	Mail,
-	User,
-	MessageSquare,
-	FileText,
-} from "lucide-react";
-import { motion } from "framer-motion";
 
 const formSchema = z.object({
 	name: z.string().min(2, "Name must be at least 2 characters"),
@@ -163,23 +156,22 @@ function ContactForm() {
 						>
 							<form
 								onSubmit={form.handleSubmit(onSubmit)}
-								className="space-y-6"
+								className="space-y-4"
 							>
 								{/* Name and Email Row */}
 								<div className="grid md:grid-cols-2 gap-6">
 									<motion.div variants={itemVariants}>
 										<Label
 											htmlFor="name"
-											className="flex items-center gap-2 text-gray-300 mb-2 font-bold text-base"
+											className="flex items-center gap-2  mb-2 font-bold text-base"
 										>
-											<User className="w-4 h-4" />
 											Name
 										</Label>
 										<Input
 											id="name"
 											placeholder="John Doe"
 											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                     transition-all duration-300 h-12 text-white placeholder:text-gray-500"
+	                                     transition-all duration-300  placeholder:text-gray-500 rounded-lg"
 											{...form.register("name")}
 											aria-invalid={!!errors.name}
 										/>
@@ -193,9 +185,8 @@ function ContactForm() {
 									<motion.div variants={itemVariants}>
 										<Label
 											htmlFor="email"
-											className="flex items-center gap-2 text-gray-300 mb-2 font-bold text-base"
+											className="flex items-center gap-2  mb-2 font-bold text-base"
 										>
-											<Mail className="w-4 h-4" />
 											Email
 										</Label>
 										<Input
@@ -203,7 +194,7 @@ function ContactForm() {
 											placeholder="john@example.com"
 											type="email"
 											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                     transition-all duration-300 h-12 text-white placeholder:text-gray-500"
+	                                     transition-all duration-300  placeholder:text-gray-500 rounded-lg"
 											{...form.register("email")}
 											aria-invalid={!!errors.email}
 										/>
@@ -219,16 +210,15 @@ function ContactForm() {
 								<motion.div variants={itemVariants}>
 									<Label
 										htmlFor="title"
-										className="flex items-center gap-2 text-gray-300 mb-2 font-bold text-base"
+										className="flex items-center gap-2  mb-2 font-bold text-base"
 									>
-										<FileText className="w-4 h-4" />
 										Subject
 									</Label>
 									<Input
 										id="title"
 										placeholder="Let's discuss a project"
 										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                 transition-all duration-300 h-12 text-white placeholder:text-gray-500"
+	                                 transition-all duration-300  placeholder:text-gray-500 rounded-lg"
 										{...form.register("title")}
 										aria-invalid={!!errors.title}
 									/>
@@ -243,17 +233,16 @@ function ContactForm() {
 								<motion.div variants={itemVariants}>
 									<Label
 										htmlFor="message"
-										className="flex items-center gap-2 text-gray-300 mb-2 font-bold text-base"
+										className="flex items-center gap-2 mb-2 font-bold text-base"
 									>
-										<MessageSquare className="w-4 h-4" />
 										Message
 									</Label>
 									<Textarea
 										id="message"
 										placeholder="Tell me about your project, ideas, or just say hello!"
 										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                 transition-all duration-300 min-h-[120px] text-white placeholder:text-gray-500
-	                                 resize-none"
+	                                 transition-all duration-300 min-h-[120px] placeholder:text-gray-500
+	                                 resize-none rounded-lg"
 										{...form.register("message")}
 										aria-invalid={!!errors.message}
 									/>

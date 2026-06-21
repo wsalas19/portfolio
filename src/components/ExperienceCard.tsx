@@ -38,11 +38,6 @@ function ExperienceCard({
 					<div className="flex flex-wrap items-center justify-between mb-2">
 						<h3 className="flex items-center gap-3 text-2xl font-bold text-gradient-pink">
 							{role}
-							{endDate === "Present" && (
-								<span className="text-sm font-semibold px-2 py-0.5 rounded-full text-gray-600">
-									Current
-								</span>
-							)}
 						</h3>
 
 						{companyUrl ? (

@@ -4,6 +4,13 @@ import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
+import { Carme } from "next/font/google";
+
+const carme = Carme({
+	weight: "400",
+	style: "normal",
+	subsets: ["latin"],
+});
 
 export default function RootLayout({
 	children,
@@ -11,10 +18,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={carme.className}>
 			<body>
-				{/* GradientBlinds fixed background - pointer-events-auto for mouse tracking */}
-
 				<NavBar />
 				{children}
 				<Toaster />

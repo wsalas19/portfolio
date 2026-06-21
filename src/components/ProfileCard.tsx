@@ -96,7 +96,7 @@ function ProfileCard() {
 						transition={{ delay: 0.3 }}
 						className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 mb-6"
 					>
-						<div className="flex items-center gap-2 text-gray-400">
+						<div className="flex items-center gap-2 ">
 							<MapPin className="w-4 h-4 text-palette-lime" />
 							<span className="font-semibold uppercase">
 								Barranquilla, Colombia
@@ -155,7 +155,7 @@ function ProfileCard() {
 					transition={{ delay: 0.6 }}
 					className="mb-8"
 				>
-					<h3 className="text-center text-gray-400 font-semibold mb-4 text-sm uppercase tracking-wider">
+					<h3 className="text-center font-semibold mb-4 text-sm uppercase tracking-wider">
 						Technologies & Skills
 					</h3>
 					<div className="flex flex-wrap justify-center gap-3">

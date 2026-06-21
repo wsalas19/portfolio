@@ -6,8 +6,6 @@ import { PanInfo, motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const GAP = 24;
-const BASE_WIDTH = 700;
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const SPRING_OPTIONS = { type: "spring" as const, stiffness: 300, damping: 30 };
@@ -114,10 +112,67 @@ function ProjectShowcase() {
 	const x = useMotionValue(0);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [dimensions, setDimensions] = useState({
+		containerWidth: 700,
+		itemWidth: 652,
+		gap: 24,
+		trackItemOffset: 676,
+		containerPadding: 24,
+	});
 
-	const containerPadding = 24;
-	const itemWidth = BASE_WIDTH - containerPadding * 2;
-	const trackItemOffset = itemWidth + GAP;
+	// Calculate dimensions based on container size
+	const updateDimensions = () => {
+		if (!containerRef.current) return;
+
+		const containerWidth = containerRef.current.offsetWidth;
+		const isMobile = window.innerWidth < 768;
+
+		// Responsive padding and gap
+		const containerPadding = isMobile ? 12 : 24;
+		const gap = isMobile ? 12 : 24;
+
+		// Calculate item width based on container
+		// On mobile: use almost full width
+		// On desktop: cap at a reasonable size
+		let itemWidth;
+		if (isMobile) {
+			itemWidth = containerWidth - containerPadding * 2;
+		} else {
+			// Desktop: use min of container width and max card width
+			const maxCardWidth = Math.min(containerWidth - 48, 600);
+			itemWidth = maxCardWidth;
+		}
+
+		const trackItemOffset = itemWidth + gap;
+
+		setDimensions({
+			containerWidth,
+			itemWidth,
+			gap,
+			trackItemOffset,
+			containerPadding,
+		});
+	};
+
+	useEffect(() => {
+		// Initial calculation
+		updateDimensions();
+
+		// Recalculate on resize
+		const handleResize = () => {
+			updateDimensions();
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	// Reset position when dimensions change significantly
+	useEffect(() => {
+		x.set(-1 * dimensions.trackItemOffset);
+	}, [dimensions.trackItemOffset, x]);
+
+	const { trackItemOffset } = dimensions;
 
 	// Create items with clones for infinite loop effect
 	const itemsForRender = [
@@ -125,10 +180,6 @@ function ProjectShowcase() {
 		...projects,
 		projects[0],
 	];
-
-	useEffect(() => {
-		x.set(-1 * trackItemOffset);
-	}, [trackItemOffset, x]);
 
 	const effectiveTransition = SPRING_OPTIONS;
 
@@ -217,12 +268,12 @@ function ProjectShowcase() {
 					{/* Carousel */}
 					<div
 						ref={containerRef}
-						className="relative overflow-hidden"
+						className="relative w-full px-4 md:px-8 lg:px-12"
 						style={{
-							width: `${BASE_WIDTH}px`,
-							height: "800px",
+							height: "auto",
+							minHeight: "600px",
 							perspective: 1000,
-							perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%`,
+							perspectiveOrigin: `${position * trackItemOffset + dimensions.itemWidth / 2}px 50%`,
 						}}
 					>
 						<motion.div
@@ -233,7 +284,7 @@ function ProjectShowcase() {
 								right: 0,
 							}}
 							style={{
-								gap: `${GAP}px`,
+								gap: `${dimensions.gap}px`,
 								x,
 							}}
 							onDragEnd={handleDragEnd}
@@ -246,7 +297,7 @@ function ProjectShowcase() {
 									key={`${project.title}-${index}`}
 									project={project}
 									index={index}
-									itemWidth={itemWidth}
+									itemWidth={dimensions.itemWidth}
 									trackItemOffset={trackItemOffset}
 									x={x}
 								/>
