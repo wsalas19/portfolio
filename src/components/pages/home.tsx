@@ -1,12 +1,10 @@
 "use client";
-
-import { gradientColors } from "@/lib/constants";
 import ContactForm from "../ContactForm";
 import Experience from "../Experience";
-import GradientBlinds from "../GradientBlinds";
 import ProfileCard from "../ProfileCard";
 import ProjectShowcase from "../ProjectShowcase";
 import ClickSpark from "../ClickSpark";
+import FaultyTerminal from "../FaultyTerminal";
 
 export default function Home() {
 	return (
@@ -19,19 +17,24 @@ export default function Home() {
 		>
 			<div>
 				<div className="fixed inset-0">
-					<GradientBlinds
-						gradientColors={gradientColors}
-						angle={33}
-						noise={0.25}
-						blindCount={16}
-						mouseDampening={0.4}
-						mirrorGradient={false}
-						spotlightRadius={0.5}
-						spotlightSoftness={1}
-						spotlightOpacity={1}
-						distortAmount={2}
-						shineDirection="left"
-						mixBlendMode="lighten"
+					<FaultyTerminal
+						scale={2.2}
+						gridMul={[2, 1]}
+						digitSize={1.5}
+						timeScale={0.5}
+						pause={false}
+						scanlineIntensity={0.5}
+						glitchAmount={1}
+						flickerAmount={1}
+						noiseAmp={0.8}
+						chromaticAberration={0}
+						dither={0}
+						curvature={0.26}
+						tint="#bef728"
+						mouseReact
+						mouseStrength={0.5}
+						pageLoadAnimation
+						brightness={0.6}
 					/>
 				</div>
 				{/*eslint-disable-next-line*/}

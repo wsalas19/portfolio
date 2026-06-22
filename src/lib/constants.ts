@@ -7,6 +7,11 @@ export const paths: PathType[] = [
 		description: "Learn more about my background and skills.",
 	},
 	{
+		name: "projects",
+		path: "#projects",
+		description: "A showcase of my recent work and side projects.",
+	},
+	{
 		name: "experience",
 		path: "#experience",
 		description: "Explore my professional journey and accomplishments.",
@@ -188,4 +193,4 @@ export const projects: Project[] = [
 	// ... your other projects
 ];
 
-export const gradientColors = ["#fb8983", "#bef728", "#a2a206", "#2e3320"];
+export const gradientColors = [ "#bef728", "#a2a206", "#2e3320", "#fb8983",];

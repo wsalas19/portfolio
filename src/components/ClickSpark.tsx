@@ -18,6 +18,9 @@ interface Spark {
 	startTime: number;
 }
 
+// Mobile detection helper
+const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
+
 const ClickSpark: React.FC<ClickSparkProps> = ({
 	sparkColor = "#fff",
 	sparkSize = 10,
@@ -31,6 +34,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const sparksRef = useRef<Spark[]>([]);
 	const startTimeRef = useRef<number | null>(null);
+	const isVisibleRef = useRef(true);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -65,6 +69,28 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		};
 	}, []);
 
+	// Intersection Observer to pause when not visible
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		if (!canvas) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					isVisibleRef.current = entry.isIntersecting;
+					if (!entry.isIntersecting) {
+						// Clear sparks when not visible to save resources
+						sparksRef.current = [];
+					}
+				});
+			},
+			{ threshold: 0 },
+		);
+		observer.observe(canvas);
+
+		return () => observer.disconnect();
+	}, []);
+
 	const easeFunc = useCallback(
 		(t: number) => {
 			switch (easing) {
@@ -87,9 +113,24 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		const ctx = canvas.getContext("2d");
 		if (!ctx) return;
 
+		// Check for prefers-reduced-motion
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+
 		let animationId: number;
 
 		const draw = (timestamp: number) => {
+			animationId = requestAnimationFrame(draw);
+
+			// Early exit if no sparks or not visible
+			if (sparksRef.current.length === 0 || !isVisibleRef.current) {
+				return;
+			}
+
+			// Skip if prefers reduced motion
+			if (prefersReducedMotion) return;
+
 			if (!startTimeRef.current) {
 				startTimeRef.current = timestamp;
 			}
@@ -121,8 +162,6 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
 				return true;
 			});
-
-			animationId = requestAnimationFrame(draw);
 		};
 
 		animationId = requestAnimationFrame(draw);
@@ -143,17 +182,34 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
 		const canvas = canvasRef.current;
 		if (!canvas) return;
+
+		// Check for prefers-reduced-motion
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+		if (prefersReducedMotion) return;
+
 		const rect = canvas.getBoundingClientRect();
 		const x = e.clientX - rect.left;
 		const y = e.clientY - rect.top;
 
 		const now = performance.now();
-		const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
-			x,
-			y,
-			angle: (2 * Math.PI * i) / sparkCount,
-			startTime: now,
-		}));
+
+		// Reduce particle count on mobile for performance
+		const mobile = isMobile();
+		const effectiveSparkCount = mobile
+			? Math.max(4, Math.floor(sparkCount / 2))
+			: sparkCount;
+
+		const newSparks: Spark[] = Array.from(
+			{ length: effectiveSparkCount },
+			(_, i) => ({
+				x,
+				y,
+				angle: (2 * Math.PI * i) / effectiveSparkCount,
+				startTime: now,
+			}),
+		);
 
 		sparksRef.current.push(...newSparks);
 	};
@@ -163,6 +219,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 			<canvas
 				ref={canvasRef}
 				className="absolute inset-0 pointer-events-none z-50"
+				style={{ willChange: "transform" }}
 			/>
 			{children}
 		</div>

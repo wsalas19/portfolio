@@ -21,19 +21,6 @@ function Experience() {
 	return (
 		<div id="experience" className="global-p pt-2 flex flex-col min-h-screen">
 			<div className="max-w-6xl mx-auto w-full px-4">
-				{/* Section Header */}
-				<div className="text-center mb-12 space-y-4 z-50">
-					<h1
-						className="text-4xl font-bold bg-clip-text text-transparent
-                         bg-gradient-to-r from-white to-palette-pink"
-					>
-						EXPERIENCE
-					</h1>
-					<p className="text-gray-400 max-w-2xl mx-auto uppercase font-semibold">
-						A timeline of my professional journey and key milestones
-					</p>
-				</div>
-
 				{/* Timeline */}
 				<div className="flex justify-center">
 					<div className="w-[80%] md:w-full max-w-4xl">

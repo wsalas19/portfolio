@@ -241,13 +241,6 @@ function ProjectShowcase() {
 	return (
 		<section id="projects" className="global-p py-20">
 			<div className="max-w-6xl mx-auto">
-				<h2 className="text-4xl font-bold text-center mb-4 text-red-400">
-					PROJECTS
-				</h2>
-				<p className="text-gray-400 text-center uppercase font-semibold mb-12 max-w-2xl mx-auto">
-					A showcase of my recent work and side projects
-				</p>
-
 				<div className="relative flex items-center justify-center">
 					{/* Navigation Arrows */}
 					<button
