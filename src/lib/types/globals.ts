@@ -24,6 +24,7 @@ export type PathType = {
 	name: string;
 	path: string;
 	description: string;
+	isRoute?: boolean; // If true, use Next.js Link instead of anchor tag
 };
 export interface Project {
 	title: string;

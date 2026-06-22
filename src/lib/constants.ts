@@ -7,19 +7,25 @@ export const paths: PathType[] = [
 		description: "Learn more about my background and skills.",
 	},
 	{
-		name: "projects",
-		path: "#projects",
-		description: "A showcase of my recent work and side projects.",
-	},
-	{
 		name: "experience",
 		path: "#experience",
 		description: "Explore my professional journey and accomplishments.",
 	},
 	{
+		name: "projects",
+		path: "#projects",
+		description: "A showcase of my recent work and side projects.",
+	},
+	{
 		name: "contact",
 		path: "#contact",
 		description: "Get in touch with me for opportunities or inquiries.",
+	},
+	{
+		name: "blog",
+		path: "/blog",
+		description: "Technical articles about React, Next.js, and web development.",
+		isRoute: true,
 	},
 ];
 

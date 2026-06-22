@@ -1,0 +1,15 @@
+# robots.txt for William Salas Portfolio
+# Website: https://wsalasdev.site
+
+User-agent: *
+Allow: /
+
+# Disallow specific paths if needed
+# Disallow: /api/
+# Disallow: /private/
+
+# Sitemap
+Sitemap: https://wsalasdev.site/sitemap.xml
+
+# Crawl delay (optional)
+# Crawl-delay: 1

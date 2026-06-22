@@ -1,13 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import DownloadResume from "./DownloadResume";
 import { Button } from "./ui/button";
 import { Video, Menu, X } from "lucide-react";
 import { paths } from "@/lib/constants";
+import { usePathname } from "next/navigation";
 
 function NavBar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -17,11 +20,63 @@ function NavBar() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
+	const NavItem = ({ path }: { path: (typeof paths)[0] }) => {
+		const isActive = pathname === path.path;
+
+		if (path.isRoute) {
+			return (
+				<Link
+					className="font-medium hover:text-palette-lime transition-colors duration-300"
+					href={path.path}
+				>
+					{path.name}
+				</Link>
+			);
+		}
+
+		return (
+			<a
+				className={`font-medium transition-colors duration-300 ${
+					isActive ? "text-palette-lime" : "hover:text-palette-lime"
+				}`}
+				href={path.path}
+			>
+				{path.name}
+			</a>
+		);
+	};
+
+	const MobileNavItem = ({ path }: { path: (typeof paths)[0] }) => {
+		if (path.isRoute) {
+			return (
+				<Link
+					key={path.name}
+					href={path.path}
+					className="text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
+					onClick={() => setIsOpen(false)}
+				>
+					{path.name}
+				</Link>
+			);
+		}
+
+		return (
+			<a
+				key={path.name}
+				href={path.path}
+				className="text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
+				onClick={() => setIsOpen(false)}
+			>
+				{path.name}
+			</a>
+		);
+	};
+
 	return (
 		<>
 			<nav
 				id="#nav"
-				className={`fixed bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-auto md:min-w-[750px] rounded-2xl z-50 transition-all duration-300 ${
+				className={`fixed bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%]  md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
 					isScrolled
 						? "glass-strong shadow-2xl glow-pink-hover "
 						: "glass shadow-lg "
@@ -29,18 +84,15 @@ function NavBar() {
 			>
 				<div className="flex flex-row justify-between items-center px-6 md:px-8">
 					<div className="flex gap-6 items-center">
-						<h1 className="font-bold text-2xl md:text-3xl text-gradient-primary">
-							portfolio.
-						</h1>
+						<Link href="/">
+							<h1 className="font-bold text-2xl md:text-3xl text-gradient-primary">
+								portfolio.
+							</h1>
+						</Link>
 						<ul className="hidden lg:flex gap-6">
 							{paths.map((path) => (
 								<li key={path.name}>
-									<a
-										className="font-medium hover:text-palette-lime transition-colors duration-300"
-										href={path.path}
-									>
-										{path.name}
-									</a>
+									<NavItem path={path} />
 								</li>
 							))}
 						</ul>
@@ -67,14 +119,7 @@ function NavBar() {
 			>
 				<div className="flex flex-col items-center pt-32 px-4 space-y-8">
 					{paths.map((path) => (
-						<a
-							key={path.name}
-							href={path.path}
-							className="text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
-							onClick={() => setIsOpen(false)}
-						>
-							{path.name}
-						</a>
+						<MobileNavItem key={path.name} path={path} />
 					))}
 
 					<div className="flex flex-col w-full gap-4 pt-6 max-w-xs">
