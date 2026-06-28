@@ -4,7 +4,7 @@ import Link from "next/link";
 import DownloadResume from "./DownloadResume";
 import { Button } from "./ui/button";
 import { Video, Menu, X } from "lucide-react";
-import { paths } from "@/lib/constants";
+import { paths as systemPaths } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 
 function NavBar() {
@@ -19,6 +19,10 @@ function NavBar() {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
+
+	const paths = pathname.includes("blog")
+		? systemPaths.filter((p) => p.name === "blog")
+		: systemPaths;
 
 	const NavItem = ({ path }: { path: (typeof paths)[0] }) => {
 		const isActive = pathname === path.path;
@@ -122,7 +126,7 @@ function NavBar() {
 						<MobileNavItem key={path.name} path={path} />
 					))}
 
-					<div className="flex flex-col w-full gap-4 pt-6 max-w-xs">
+					<div className="flex flex-col text-[16px] w-full gap-4 pt-6 max-w-xs">
 						<DownloadResume />
 						<a
 							href="https://calendar.app.google/Yi51g1LEbcyJpoBb9"
@@ -131,7 +135,7 @@ function NavBar() {
 							className="w-full"
 						>
 							<Button
-								className="w-full font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2 justify-center"
+								className="w-full  font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2 justify-center"
 								size={"sm"}
 							>
 								<Video />

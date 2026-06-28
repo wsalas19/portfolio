@@ -239,7 +239,7 @@ function ProjectShowcase() {
 	};
 
 	return (
-		<section id="projects" className="global-p py-20">
+		<section id="projects" className="global-p w-[100%] py-20">
 			<div className="max-w-6xl mx-auto">
 				<div className="relative flex items-center justify-center">
 					{/* Navigation Arrows */}
@@ -261,7 +261,7 @@ function ProjectShowcase() {
 					{/* Carousel */}
 					<div
 						ref={containerRef}
-						className="relative w-full px-4 md:px-8 lg:px-12"
+						className="relative w-full px-4 md:px-8 lg:px-12 overflow-hidden"
 						style={{
 							height: "auto",
 							minHeight: "600px",

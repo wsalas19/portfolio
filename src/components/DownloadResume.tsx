@@ -42,7 +42,7 @@ function DownloadResume() {
 		<Button
 			onClick={downloadResume}
 			disabled={buttonControl.sent}
-			className="text-[16px] w-full md:w-fit"
+			className=" w-full md:w-fit"
 			variant={"green"}
 			size={"sm"}
 		>
