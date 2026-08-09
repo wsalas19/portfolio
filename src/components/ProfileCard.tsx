@@ -42,13 +42,13 @@ function ProfileCard() {
 	return (
 		<div
 			id="about"
-			className="flex items-center justify-center py-10 min-h-screen global-p"
+			className="flex items-center justify-center py-20 md:py-32 min-h-screen global-p"
 		>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="glass p-8 md:p-12 mx-5 md:m-0 rounded-2xl w-full max-w-4xl shadow-2xl glow-lime-hover transition-all duration-300"
+				className="glass p-10 md:p-16 mx-5 md:m-0 rounded-2xl w-full max-w-5xl shadow-2xl glow-lime-hover transition-all duration-300"
 			>
 				{/* Header Section - Centered */}
 				<div className="flex flex-col items-center text-center mb-8">
@@ -79,13 +79,13 @@ function ProfileCard() {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="mb-4"
+						className="mb-6"
 					>
-						<h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-2 text-gradient-primary">
+						<h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl mb-3 text-gradient-primary text-balance">
 							William Salas Bolaño
 						</h1>
-						<p className="text-gradient-pink text-xl md:text-2xl font-semibold">
-							Software Engineer
+						<p className="font-display text-gradient-lime text-xl md:text-2xl lg:text-3xl font-semibold">
+							Software Engineer crafting exceptional digital experiences
 						</p>
 					</motion.div>
 

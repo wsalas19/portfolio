@@ -3,6 +3,8 @@ import { BlogPost } from "@/lib/blog/types";
 import { TagBadge } from "./TagBadge";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import { scrollRevealVariants } from "@/lib/animations";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -24,15 +26,16 @@ export function BlogCard({ post, className }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={cn(
-        "block glass p-6 rounded-lg transition-all duration-200",
-        "hover:glass-strong hover:scale-[1.02]",
-        "group",
-        className
-      )}
+      className={cn("block", className)}
     >
-      <article>
-        <h2 className="text-2xl font-bold text-gradient-primary mb-3 group-hover:text-lime-300 transition-colors">
+      <motion.article
+        variants={scrollRevealVariants}
+        whileHover={{ scale: 1.02 }}
+        className="glass flex flex-col justify-between h-[360px] p-6 rounded-lg transition-all duration-200 hover:glass-strong group"
+			>
+				<div className="flex flex-col gap-2">
+
+        <h2 className="font-display text-2xl font-bold text-gradient-primary  group-hover:text-lime-300 transition-colors">
           {post.title}
         </h2>
 
@@ -46,10 +49,14 @@ export function BlogCard({ post, className }: BlogCardProps) {
             <span>{post.readingTime} min</span>
           </div>
         </div>
+				</div>
 
-        <p className="text-gray-300 mb-4 line-clamp-3">{post.excerpt}</p>
+				<p className="text-gray-300 mb-4 line-clamp-3">{post.excerpt}</p>
 
-        <div className="flex flex-wrap gap-2 mb-4">
+				<div className="flex flex-col gap-3">
+
+
+				<div className="flex flex-wrap gap-2">
           {post.tags.slice(0, 3).map((tag) => (
             <TagBadge key={tag} tag={tag} />
           ))}
@@ -64,7 +71,8 @@ export function BlogCard({ post, className }: BlogCardProps) {
           <span className="font-medium">Read more</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
         </div>
-      </article>
+				</div>
+      </motion.article>
     </Link>
   );
 }

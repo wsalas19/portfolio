@@ -89,7 +89,7 @@ function NavBar() {
 				<div className="flex flex-row justify-between items-center px-6 md:px-8">
 					<div className="flex gap-6 items-center">
 						<Link href="/">
-							<h1 className="font-bold text-2xl md:text-3xl text-gradient-primary">
+							<h1 className="font-display font-bold text-2xl md:text-3xl text-gradient-primary">
 								portfolio.
 							</h1>
 						</Link>

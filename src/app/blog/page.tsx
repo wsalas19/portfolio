@@ -34,7 +34,7 @@ export default async function BlogPage() {
 		<div className="min-h-screen py-12 px-4 md:px-8 lg:px-16">
 			<div className="max-w-7xl mx-auto">
 				<header className="mb-12">
-					<h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+					<h1 className="font-display text-4xl md:text-5xl font-bold mb-4">Blog</h1>
 					<p className="text-xl text-gray-300">
 						Thoughts, tutorials, and discoveries from my development journey.
 					</p>

@@ -70,7 +70,7 @@ function ProjectCard({
 				</div>
 
 				<div className="p-8">
-					<h3 className="text-2xl uppercase font-bold mb-3 text-gradient-pink">
+					<h3 className="font-display text-2xl uppercase font-bold mb-3 text-gradient-pink">
 						{project.title}
 					</h3>
 
@@ -239,7 +239,7 @@ function ProjectShowcase() {
 	};
 
 	return (
-		<section id="projects" className="global-p w-[100%] py-20">
+		<section id="projects" className="global-p w-[100%] py-20 md:py-32">
 			<div className="max-w-6xl mx-auto">
 				<div className="relative flex items-center justify-center">
 					{/* Navigation Arrows */}

@@ -84,7 +84,7 @@ function ContactForm() {
 	return (
 		<div
 			id="contact"
-			className="min-h-screen flex items-center justify-center pb-24 md:pb-0"
+			className="min-h-screen flex items-center justify-center py-20 md:py-32"
 		>
 			<div className="w-full mx-6">
 				{/* Single Unified Card */}
@@ -103,7 +103,7 @@ function ContactForm() {
 							className="p-8 lg:p-12 bg-gradient-to-br from-palette-pink/10 to-transparent
 	                         border-r border-white/10 lg:border-r lg:border-b-0 border-b"
 						>
-							<h3 className="text-2xl font-bold mb-6 text-gradient-pink">
+							<h3 className="font-display text-2xl font-bold mb-6 text-gradient-pink">
 								Get in Touch
 							</h3>
 

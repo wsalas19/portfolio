@@ -35,7 +35,7 @@ export function ProjectCardContent({
 			</div>
 
 			<div className="p-8">
-				<h3 className="text-2xl uppercase font-bold mb-3 text-gradient-pink">
+				<h3 className="font-display text-2xl uppercase font-bold mb-3 text-gradient-pink">
 					{project.title}
 				</h3>
 

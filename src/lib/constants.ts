@@ -72,7 +72,6 @@ export const jobs: jobProps[] = [
 		company: "Gwocu Studio",
 		startDate: "Nov 2024",
 		endDate: "March 2024",
-		companyUrl: "https://wiki.gwocu.com/",
 		technologies: ["Jira", "React", "REST API", "AI"],
 		description:
 			"Assisted API consumers by leveraging advanced workflow automation tools to optimize processes, while providing consultative support to enhance product functionality and drive continuous improvement.",
@@ -199,4 +198,4 @@ export const projects: Project[] = [
 	// ... your other projects
 ];
 
-export const gradientColors = [ "#bef728", "#a2a206", "#2e3320", "#fb8983",];
+export const gradientColors = [ "#d4ff4d", "#a2a206", "#2e3320", "#fb8983",];

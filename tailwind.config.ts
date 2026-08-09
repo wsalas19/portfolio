@@ -18,6 +18,15 @@ const config = {
 			},
 		},
 		extend: {
+			fontFamily: {
+				sans: ["var(--font-inter)", "sans-serif"],
+				display: ["var(--font-carme)", "sans-serif"],
+			},
+			fontSize: {
+				"display-xl": ["4.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+				"display-2xl": ["6rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+				"display-3xl": ["7.5rem", { lineHeight: "1", letterSpacing: "-0.02em" }],
+			},
 			colors: {
 				border: "#2e3320", // Using palette.alt for borders
 				input: "#1d1e2c", // Using palette.card for input backgrounds
@@ -29,8 +38,8 @@ const config = {
 					foreground: "#1d1e2c", // palette.card for contrast
 				},
 				secondary: {
-					DEFAULT: "#bef728", // palette.lime as secondary
-					foreground: "#1d1e2c", // palette.card for contrast
+					DEFAULT: "#d4ff4d", // Lighter lime for better contrast on dark
+					foreground: "#1a3300", // Darker green for light backgrounds
 				},
 				destructive: {
 					DEFAULT: "#ff4343", // New red for destructive actions
@@ -58,7 +67,7 @@ const config = {
 				},
 				// Keep original palette
 				palette: {
-					lime: "#bef728",
+					lime: "#d4ff4d", // Improved for WCAG AA on dark backgrounds
 					olive: "#a2a206",
 					pink: "#fb8983",
 					card: "#1d1e2c",

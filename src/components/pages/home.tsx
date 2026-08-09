@@ -9,7 +9,7 @@ import FaultyTerminal from "../FaultyTerminal";
 export default function Home() {
 	return (
 		<ClickSpark
-			sparkColor="#bef728"
+			sparkColor="#d4ff4d"
 			sparkSize={10}
 			sparkRadius={15}
 			sparkCount={8}
@@ -30,7 +30,7 @@ export default function Home() {
 						chromaticAberration={0}
 						dither={0}
 						curvature={0.26}
-						tint="#bef728"
+						tint="#d4ff4d"
 						mouseReact
 						mouseStrength={0.5}
 						pageLoadAnimation

@@ -34,7 +34,7 @@ const components: Partial<Components> = {
 	),
 
 	h4: ({ children }) => (
-		<h4 className="text-xl font-semibold text-gray-200 mt-6 mb-3 tracking-tight">
+		<h4 className="font-display text-xl font-semibold text-gray-200 mt-6 mb-3 tracking-tight">
 			{children}
 		</h4>
 	),
