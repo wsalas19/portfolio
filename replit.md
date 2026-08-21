@@ -15,7 +15,7 @@ Next.js 14 portfolio website for William Salas Bolaño, featuring a modern desig
 
 ### Development
 - Port: 5000 (bound to 0.0.0.0)
-- Workflow: "Next.js Dev Server" runs `npm run dev -- -p 5000 -H 0.0.0.0`
+- Workflow: "Next.js Dev Server" runs `pnpm run dev -- -p 5000 -H 0.0.0.0`
 
 ### Environment Variables
 The following secrets are configured in Replit Secrets:
@@ -26,8 +26,8 @@ The following secrets are configured in Replit Secrets:
 
 ### Deployment
 - Type: Autoscale (stateless website)
-- Build: `npm run build`
-- Run: `npm start`
+- Build: `pnpm run build`
+- Run: `pnpm start`
 
 ## Project Structure
 ```

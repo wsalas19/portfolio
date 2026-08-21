@@ -17,8 +17,8 @@ The contact form uses EmailJS to send messages directly to my personal email add
 To run this project locally:
 
 1.  Clone the repo
-2.  Run `npm install`
-3.  Run `npm run dev`
+2.  Run `pnpm install`
+3.  Run `pnpm dev`
 4.  Open [http://localhost:3000](http://localhost:3000/)
 
 ## Learn More

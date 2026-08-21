@@ -9,7 +9,7 @@
 		"lint": "next lint",
 		"clean:git": "git reset --hard HEAD && git clean -fd",
 		"clean:build": "rm -rf .next node_modules/.cache",
-		"clean:all": "npm run clean:git && npm run clean:build"
+		"clean:all": "pnpm run clean:git && pnpm run clean:build"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
