@@ -102,7 +102,7 @@ function NavBar() {
 						</ul>
 					</div>
 
-					<div className="hidden lg:flex gap-4 justify-center items-center">
+					<div className="hidden xl::flex gap-4 justify-center items-center">
 						<DownloadResume />
 					</div>
 

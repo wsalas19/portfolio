@@ -70,7 +70,7 @@ const config = {
 					lime: "#d4ff4d", // Improved for WCAG AA on dark backgrounds
 					olive: "#a2a206",
 					pink: "#fb8983",
-					card: "#1d1e2c",
+					card: "#121212",
 					alt: "#2e3320",
 				},
 			},
