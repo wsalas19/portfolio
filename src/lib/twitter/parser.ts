@@ -19,10 +19,37 @@ async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3)
   throw new Error('Rate limit exceeded after retries');
 }
 
+// ponytail: per-process budget on paid TwtAPI calls; blunts a single hammering
+// instance. Cross-instance capping needs Vercel KV — add when the page stops deduping.
+const TWTAPI_MAX_PER_WINDOW = 20;
+const TWTAPI_WINDOW_MS = 60_000;
+
+declare global {
+  // eslint-disable-next-line no-var
+  var twtapiBudget: { count: number; windowStart: number } | undefined;
+}
+
+function checkTwtApiBudget() {
+  const now = Date.now();
+  const state = (globalThis.twtapiBudget ??= { count: 0, windowStart: now });
+  if (now - state.windowStart > TWTAPI_WINDOW_MS) {
+    state.count = 0;
+    state.windowStart = now;
+  }
+  if (++state.count > TWTAPI_MAX_PER_WINDOW) {
+    throw new Error('Rate limit exceeded. Please try again later.');
+  }
+}
+
 /**
  * Fetches and unrolls thread data using TwtAPI (www.twtapi.com)
  */
 export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThread> {
+  // Single choke point for every caller (page + any future route).
+  if (!/^\d+$/.test(tweetId)) {
+    throw new Error('Invalid tweet ID');
+  }
+
   const apiKey = process.env.TWTAPI_KEY;
   const disableCache = process.env.DISABLE_CACHE === 'true';
 
@@ -40,6 +67,7 @@ export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThr
   });
 
   // Disable caching during development
+  checkTwtApiBudget();
 
   const response = await fetchWithRetry(
     apiUrl,
