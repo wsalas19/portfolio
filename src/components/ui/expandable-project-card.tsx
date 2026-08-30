@@ -18,7 +18,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 			<motion.div
 				layoutId={layoutId}
 				onClick={() => setIsOpen(true)}
-				className="cursor-pointer relative min-h-[320px] w-full overflow-hidden rounded-2xl border border-white/10 group"
+				className="cursor-pointer relative min-h-[340px] w-full  bg-[#121212]/60 overflow-hidden rounded-2xl border border-white/10 group"
 				whileHover={{ scale: 1.02 }}
 				transition={{ duration: 0.2 }}
 			>
@@ -30,9 +30,9 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 						src={project.imageUrl}
 						alt={project.title}
 						fill
-						className="object-cover"
+						className="object-cover rounded-t-2xl"
 					/>
-					<div className="absolute inset-0 bg-gradient-to-t from-palette-card via-palette-card/50 to-transparent opacity-90" />
+					<div className="absolute inset-0"/>
 				</motion.div>
 
 				<div className="absolute bottom-0 left-0 right-0 p-5">
@@ -56,7 +56,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 						{project.technologies.slice(0, 3).map((tech) => (
 							<span
 								key={tech}
-								className="px-2 py-0.5 glass-pink text-palette-pink text-[#fb8983] rounded-full text-xs border border-palette-pink/20"
+								className="px-2 py-0.5 glass-pink text-palette-pink  rounded-full text-xs border border-palette-pink/20"
 							>
 								{tech}
 							</span>
@@ -155,7 +155,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 									{project.technologies.map((tech) => (
 										<span
 											key={tech}
-											className="px-3 py-1 glass-pink text-palette-pink text-[#fb8983] rounded-full text-sm hover:bg-palette-pink/30 transition-all duration-300 cursor-default border border-palette-pink/20 glow-pink-hover"
+											className="px-3 py-1 glass-pink text-palette-pink rounded-full text-sm hover:bg-palette-pink/30 transition-all duration-300 cursor-default border border-palette-pink/20 glow-pink-hover"
 										>
 											{tech}
 										</span>

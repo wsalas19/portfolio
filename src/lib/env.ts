@@ -5,6 +5,7 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().min(1).optional(),
   RESEND_FROM_EMAIL: z.string().email().optional(),
   RESEND_TO_EMAIL: z.string().email().optional(),
+  TWTAPI_KEY: z.string().min(1).optional(),
 
   // Client-side variables (with defaults for production)
   NEXT_PUBLIC_SITE_URL: z.string().url().default('https://wsalasdev.site'),
@@ -16,6 +17,7 @@ export const env = parsedEnv.success ? parsedEnv.data : {
   RESEND_API_KEY: undefined,
   RESEND_FROM_EMAIL: undefined,
   RESEND_TO_EMAIL: undefined,
+  TWTAPI_KEY: undefined,
   NEXT_PUBLIC_SITE_URL: 'https://wsalasdev.site'
 };
 

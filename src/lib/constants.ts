@@ -27,6 +27,12 @@ export const paths: PathType[] = [
 		description: "Technical articles about React, Next.js, and web development.",
 		isRoute: true,
 	},
+	{
+		name: "thread viewer",
+		path: "/twitter-threads",
+		description: "View and analyze Twitter threads and conversations.",
+		isRoute: true,
+	},
 ];
 
 export const imgSize: number = 300;
