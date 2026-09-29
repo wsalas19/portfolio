@@ -169,7 +169,7 @@ export function simularUVR(p: UVRParams): Simulacion<FilaUVR> {
 	const cuotaUVRFija =
 		p.sistema === "cuotaConstante" ? cuotaFrancesa(montoUVR, iMensual, n) : 0;
 	const abonoConstanteUVR = montoUVR / n;
-	const paso = Math.max(1, Math.ceil(n / 120));
+	const paso = Math.max(1, Math.ceil(n / 60));
 
 	let saldoUVR = montoUVR;
 	let uvrActual = p.valorUVR;
@@ -270,7 +270,7 @@ export function simularPesos(p: BaseParams): Simulacion<FilaPesos> {
 	const iMensual = EARaMensual(tasaFinalEA);
 	const cuotaFija = p.sistema === "cuotaConstante" ? cuotaFrancesa(montoCOP, iMensual, n) : 0;
 	const abonoConstanteCOP = montoCOP / n;
-	const paso = Math.max(1, Math.ceil(n / 120));
+	const paso = Math.max(1, Math.ceil(n / 60));
 
 	let saldo = montoCOP;
 	let mesFinCredito = n;

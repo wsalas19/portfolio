@@ -299,8 +299,9 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 						borderColor: C_LIME,
 						backgroundColor: "rgba(212, 255, 77, 0.12)",
 						borderWidth: 2,
-						pointRadius: 0,
-						pointHoverRadius: 4,
+						// puntos siempre visibles: el usuario ve dónde hacer hover
+						pointRadius: 3,
+						pointHoverRadius: 6,
 						pointBackgroundColor: C_LIME,
 						fill: true,
 						tension: 0.3,
@@ -330,6 +331,8 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 			options: {
 				responsive: true,
 				maintainAspectRatio: false,
+				// hover perdonador: el tooltip aparece sin puntería exacta
+				interaction: { mode: "nearest", axis: "x", intersect: false },
 				plugins: {
 					tooltip: {
 						callbacks: {
@@ -340,8 +343,11 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 						position: "bottom",
 						labels: {
 							usePointStyle: true,
-							pointStyle: "line",
-							font: { family: serif, size: 12 },
+							pointStyle: "circle",
+							boxWidth: 8,
+							boxHeight: 8,
+							padding: 20,
+							font: { family: serif, size: 13 },
 							color: "#d1d5db",
 						},
 					},
