@@ -33,6 +33,13 @@ export const paths: PathType[] = [
 		description: "View and analyze Twitter threads and conversations.",
 		isRoute: true,
 	},
+	{
+		name: "credito",
+		path: "/visor-credito",
+		description:
+			"Mortgage credit simulator for Colombia: amortization, insurance and extra payments (Ley 546/1999).",
+		isRoute: true,
+	},
 ];
 
 export const imgSize: number = 300;
