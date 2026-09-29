@@ -28,16 +28,10 @@ export const paths: PathType[] = [
 		isRoute: true,
 	},
 	{
-		name: "thread viewer",
-		path: "/twitter-threads",
-		description: "View and analyze Twitter threads and conversations.",
-		isRoute: true,
-	},
-	{
-		name: "credito",
-		path: "/visor-credito",
+		name: "tools",
+		path: "/tools",
 		description:
-			"Mortgage credit simulator for Colombia: amortization, insurance and extra payments (Ley 546/1999).",
+			"Free browser tools: X/Twitter thread reader and a Colombian mortgage credit simulator.",
 		isRoute: true,
 	},
 ];
