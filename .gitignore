@@ -42,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 .claude/
 .claude/*
+
+
+# AI
+.claude/
+.claude/*
+CLAUDE.md

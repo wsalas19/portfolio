@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 
 const mono = JetBrains_Mono({
 	subsets: ["latin"],
 	variable: "--font-credito-mono",
-});
-
-const serif = Source_Serif_4({
-	subsets: ["latin"],
-	variable: "--font-credito-serif",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +17,6 @@ export default function VisorCreditoLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<div className={`${mono.variable} ${serif.variable} contents`}>
-			{children}
-		</div>
+		<div className={`${mono.variable} contents`}>{children}</div>
 	);
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Banknote, Calculator, FileDown, Landmark } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import {
 	Chart,
 	Filler,
@@ -38,8 +39,7 @@ Chart.register(
 const fmt = (n: number) => "$" + Math.round(n).toLocaleString("es-CO");
 const cop = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 });
 
-// Texto del tool en serif (var del layout); los números van en mono.
-const SERIF = "[font-family:var(--font-credito-serif),Georgia,serif]";
+// Texto general hereda la sans del app (Inter); los números van en mono.
 const MONO = "[font-family:var(--font-credito-mono),monospace]";
 
 type Option = { value: string; label: string };
@@ -68,7 +68,7 @@ const pct = (desde: number, hasta: number): Option[] => {
 };
 
 const UVR_FIELDS: Field[] = [
-	{ id: "valorInmueble", label: "Valor Total del Inmueble (COP)", step: "1000000" },
+	{ id: "valorInmueble", label: "Valor del Inmueble (COP)", step: "1000000" },
 	{ id: "porcentajeCredito", label: "Porcentaje a Financiar", options: pct(50, 90) },
 	{
 		id: "plazoAnios",
@@ -87,20 +87,20 @@ const UVR_FIELDS: Field[] = [
 	},
 	{
 		id: "tasaBase",
-		label: "Tasa Remuneratoria Base (% EA)",
+		label: "Tasa Remuneratoria Base (E.A)",
 		step: "0.1",
 		note: 'Tasa sobre UVR · ej FNA cotiza "UVR + 8,1%"',
 	},
 	{
 		id: "descuentoTasa",
-		label: "Descuento Programa (% EA)",
+		label: "Descuento Programa (E.A)",
 		step: "0.1",
 		min: "0",
 		note: "Ej: FRECH disminuye puntos EA",
 	},
 	{
 		id: "inflacion",
-		label: "Inflación Proyectada Anual (%)",
+		label: "Inflación Anual (%)",
 		step: "0.1",
 		note: "Proyección realista Banrep (meta 3% + margen)",
 	},
@@ -128,7 +128,7 @@ const UVR_FIELDS: Field[] = [
 ];
 
 const PESOS_FIELDS: Field[] = [
-	{ id: "pValorInmueble", label: "Valor Total del Inmueble (COP)", step: "1000000" },
+	{ id: "pValorInmueble", label: "Valor del Inmueble (COP)", step: "1000000" },
 	{ id: "pPorcentajeCredito", label: "Porcentaje a Financiar", options: pct(50, 100) },
 	{
 		id: "pPlazoAnios",
@@ -148,13 +148,13 @@ const PESOS_FIELDS: Field[] = [
 	},
 	{
 		id: "pTasaBase",
-		label: "Tasa de Interés (% EA)",
+		label: "Tasa de Interés (E.A)",
 		step: "0.1",
 		note: "Tasa total en pesos · ej FNA línea pesos cotiza 12.6% EA",
 	},
 	{
 		id: "pDescuentoTasa",
-		label: "Descuento Programa (% EA)",
+		label: "Descuento Programa (E.A)",
 		step: "0.1",
 		min: "0",
 		note: "Ej: FRECH disminuye puntos EA",
@@ -285,7 +285,7 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 		if (!canvasRef.current) return;
 		const el = canvasRef.current;
 		const mono = cssFont(el, "--font-credito-mono");
-		const serif = cssFont(el, "--font-credito-serif") || "serif";
+		const sans = cssFont(el, "--font-inter") || "sans-serif";
 
 		chartRef.current?.destroy();
 		chartRef.current = new Chart(el, {
@@ -336,19 +336,8 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 				plugins: {
 					tooltip: {
 						callbacks: {
-							label: (ctx) => "$" + Number(ctx.raw).toLocaleString("es-CO"),
-						},
-					},
-					legend: {
-						position: "bottom",
-						labels: {
-							usePointStyle: true,
-							pointStyle: "circle",
-							boxWidth: 8,
-							boxHeight: 8,
-							padding: 20,
-							font: { family: serif, size: 13 },
-							color: "#d1d5db",
+							label: (ctx) =>
+								`${ctx.dataset.label}: $${Number(ctx.raw).toLocaleString("es-CO")}`,
 						},
 					},
 				},
@@ -358,7 +347,7 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 						position: "left",
 						beginAtZero: false,
 						grid: { color: "#6f6f6f" },
-						title: { display: true, text: "Cuota mensual", font: { family: serif, size: 11 } },
+						title: { display: true, text: "Cuota mensual", font: { family: sans, size: 11 } },
 						ticks: {
 							maxTicksLimit: 15,
 							font: { family: mono, size: 10 },
@@ -372,7 +361,7 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 						title: {
 							display: true,
 							text: "Saldo / Intereses acumulados",
-							font: { family: serif, size: 11 },
+							font: { family: sans, size: 11 },
 						},
 						ticks: {
 							maxTicksLimit: 15,
@@ -390,7 +379,7 @@ function AmortChart({ data }: { data: Simulacion<unknown>["chart"] }) {
 	}, [data]);
 
 	return (
-		<div className="relative h-[420px]">
+		<div className="relative h-[clamp(200px,30vh,320px)]">
 			<canvas ref={canvasRef} />
 		</div>
 	);
@@ -419,9 +408,16 @@ function FormFields({
 	onChange: (id: string, v: string) => void;
 }) {
 	return (
-		<div className="grid grid-cols-1 gap-4">
-			{fields.map((f) => (
-				<div key={f.id}>
+		<div className="grid grid-cols-1 gap-4 gap-x-4 sm:grid-cols-2">
+			{fields.map((f, i) => (
+				<div
+					key={f.id}
+					className={
+						fields.length % 2 === 1 && i === fields.length - 1
+							? "sm:col-span-2"
+							: ""
+					}
+				>
 					<label
 						className="mb-1.5 block text-xs font-medium tracking-wide text-gray-400"
 						htmlFor={f.id}
@@ -431,7 +427,7 @@ function FormFields({
 					{f.options ? (
 						<select
 							id={f.id}
-							className="w-full rounded-md border border-white/10 bg-[#121212] px-3 py-2 text-sm text-white outline-none transition-colors focus:border-palette-lime"
+							className={`w-full rounded-md border border-white/10 bg-[#121212] px-3 py-2.5 text-sm text-white outline-none transition-colors focus:border-palette-lime ${MONO}`}
 							value={values[f.id]}
 							onChange={(e) => onChange(f.id, e.target.value)}
 						>
@@ -442,18 +438,20 @@ function FormFields({
 							))}
 						</select>
 					) : (
-						<input
+						<Input
 							type="number"
 							id={f.id}
 							step={f.step}
 							min={f.min}
-							className={`w-full rounded-md border border-white/10 bg-[#121212] px-3 py-2 text-sm text-white outline-none transition-colors placeholder:text-gray-600 focus:border-palette-lime ${MONO}`}
+							className={`hide-spinners h-10 w-full border-white/10 bg-[#121212] text-sm text-white focus-visible:ring-palette-lime ${MONO}`}
 							value={values[f.id]}
 							onChange={(e) => onChange(f.id, e.target.value)}
 						/>
 					)}
 					{f.note && (
-						<p className="mt-1 text-[11px] text-gray-500">{f.note}</p>
+						<p className="mt-1 text-[11px] leading-snug text-gray-500">
+							{f.note}
+						</p>
 					)}
 				</div>
 			))}
@@ -470,15 +468,15 @@ type Col<F> = {
 
 const COLS_UVR: Col<FilaUVR>[] = [
 	{ h: "Mes", cell: (f) => String(f.mes) },
-	{ h: "Valor UVR (Est.)", tip: TIPS.uvr, num: true, cell: (f) => f.uvr.toFixed(2) },
+	{ h: "Valor UVR", tip: TIPS.uvr, num: true, cell: (f) => f.uvr.toFixed(2) },
 	{ h: "Cuota (UVR)", tip: TIPS.cuotaUVR, num: true, cell: (f) => f.cuotaUVR.toFixed(2) },
 	{ h: "Interés (UVR)", tip: TIPS.interesUVR, num: true, cell: (f) => f.interesUVR.toFixed(2) },
-	{ h: "Abono Capital (UVR)", tip: TIPS.abonoUVR, num: true, cell: (f) => f.abonoCapitalUVR.toFixed(2) },
-	{ h: "Saldo Capital (UVR)", tip: TIPS.saldoUVR, num: true, cell: (f) => f.saldoUVR.toFixed(2) },
-	{ h: "Aporte Extra (COP)", tip: TIPS.extra, num: true, cell: (f) => fmt(f.aporteExtraCOP) },
+	{ h: "Abono (UVR)", tip: TIPS.abonoUVR, num: true, cell: (f) => f.abonoCapitalUVR.toFixed(2) },
+	{ h: "Saldo (UVR)", tip: TIPS.saldoUVR, num: true, cell: (f) => f.saldoUVR.toFixed(2) },
+	{ h: "Aporte (COP)", tip: TIPS.extra, num: true, cell: (f) => fmt(f.aporteExtraCOP) },
 	{ h: "Seguros (COP)", tip: TIPS.seguros, num: true, cell: (f) => fmt(f.segurosCOP) },
-	{ h: "Cuota Total (COP)", tip: TIPS.cuotaTotal, num: true, cell: (f) => fmt(f.cuotaTotalCOP) },
-	{ h: "Saldo Capital (COP)", tip: TIPS.saldoCOP, num: true, cell: (f) => fmt(f.saldoCOP) },
+	{ h: "Cuota Total", tip: TIPS.cuotaTotal, num: true, cell: (f) => fmt(f.cuotaTotalCOP) },
+	{ h: "Saldo (COP)", tip: TIPS.saldoCOP, num: true, cell: (f) => fmt(f.saldoCOP) },
 ];
 
 const COLS_PESOS: Col<FilaPesos>[] = [
@@ -495,17 +493,17 @@ const COLS_PESOS: Col<FilaPesos>[] = [
 		num: true,
 		cell: (f) => fmt(f.interes),
 	},
-	{ h: "Abono Capital (COP)", tip: TIPS.abonoUVR, num: true, cell: (f) => fmt(f.abonoCapital) },
+	{ h: "Abono (COP)", tip: TIPS.abonoUVR, num: true, cell: (f) => fmt(f.abonoCapital) },
 	{
-		h: "Saldo Capital (COP)",
+		h: "Saldo (COP)",
 		tip: "Deuda pendiente tras el pago del mes: saldo anterior − abono − extra. Base del interés del mes siguiente.",
 		num: true,
 		cell: (f) => fmt(f.saldo),
 	},
-	{ h: "Aporte Extra (COP)", tip: TIPS.extra, num: true, cell: (f) => fmt(f.aporteExtraCOP) },
+	{ h: "Aporte (COP)", tip: TIPS.extra, num: true, cell: (f) => fmt(f.aporteExtraCOP) },
 	{ h: "Seguros (COP)", tip: TIPS.seguros, num: true, cell: (f) => fmt(f.segurosCOP) },
 	{
-		h: "Cuota Total (COP)",
+		h: "Cuota Total",
 		tip: "Lo que pagas este mes: cuota + aporte extra + seguros. Suma el 'Total Pagado' del resumen.",
 		num: true,
 		cell: (f) => fmt(f.cuotaTotalCOP),
@@ -514,16 +512,16 @@ const COLS_PESOS: Col<FilaPesos>[] = [
 
 function Resultados<F>({ filas, cols }: { filas: F[]; cols: Col<F>[] }) {
 	return (
-		<div className="max-h-[460px] overflow-auto rounded-md border border-white/10">
+		<div className="min-h-0 flex-1 overflow-auto rounded-md border border-white/10">
 			<table className="w-full border-collapse">
 				<thead>
 					<tr>
-						{cols.map((c) => (
+						{cols.map((c, i) => (
 							<th
 								key={c.h}
-								className={`sticky top-0 z-[1] whitespace-nowrap border-b border-white/10 bg-[#121212] px-3 py-2 text-[11px] font-medium uppercase tracking-wider text-gray-300 ${
+								className={`sticky top-0 z-[1] whitespace-nowrap border-b border-white/10 bg-[#121212] px-2 py-2 text-[11px] font-medium uppercase tracking-wider text-gray-300 ${
 									c.num ? "text-right" : "text-left"
-								}`}
+								} ${i === 0 ? "pl-4" : ""}`}
 							>
 								{c.h}
 								{c.tip && <Tip text={c.tip} />}
@@ -534,14 +532,14 @@ function Resultados<F>({ filas, cols }: { filas: F[]; cols: Col<F>[] }) {
 				<tbody>
 					{filas.map((f, i) => (
 						<tr key={i} className="transition-colors hover:bg-white/[0.04]">
-							{cols.map((c) => (
+							{cols.map((c, j) => (
 								<td
 									key={c.h}
-									className={`whitespace-nowrap border-b border-white/5 px-4 py-2 text-[12.5px] [font-variant-numeric:tabular-nums] ${
+									className={`px-2 py-1.5 whitespace-nowrap border-b border-white/5 text-[12px] [font-variant-numeric:tabular-nums] ${
 										c.num
 											? `text-right text-white ${MONO}`
 											: "text-left text-gray-400"
-									}`}
+									} ${j === 0 ? "pl-4" : ""}`}
 								>
 									{c.cell(f)}
 								</td>
@@ -642,9 +640,9 @@ export default function CreditoSimulator() {
 		: "";
 
 	return (
-		<div className={` px-4 pb-32 pt-10 text-white md:px-8 ${SERIF}`}>
-			<div className="p-5 md:p-8">
-				<header className="mb-6">
+		<div className="flex min-h-screen flex-col px-4 pb-24 pt-4 text-white md:px-6 lg:h-screen lg:overflow-hidden">
+			<div className="flex min-h-0 flex-1 flex-col gap-4">
+				<header className="shrink-0">
 					<h1 className="text-3xl font-semibold tracking-[-0.02em]">
 						Visor de Crédito Hipotecario Colombia
 					</h1>
@@ -655,8 +653,8 @@ export default function CreditoSimulator() {
 				</header>
 
 				{/* Inputs a la izquierda (sticky, con tabs dentro) · chart + tabla a la derecha */}
-				<div className="grid grid-cols-1 gap-6 lg:grid-cols-[500px_minmax(0,1fr)]">
-					<aside className="h-fit rounded-lg border border-white/10 bg-[#121212]/50 p-5 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
+				<div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[380px_minmax(0,1fr)]">
+					<aside className="lg:flex lg:flex-col lg:min-h-0 lg:overflow-y-auto rounded-lg border border-white/10 bg-[#121212]/50 p-5">
 						{/* Tabs dentro de la tarjeta de inputs */}
 						<div className="mb-5 flex gap-4 border-b border-white/10">
 							{(["UVR", "Pesos"] as const).map((t) => (
@@ -682,18 +680,20 @@ export default function CreditoSimulator() {
 							))}
 						</div>
 
-						<FormFields
-						fields={tab === "UVR" ? UVR_FIELDS : PESOS_FIELDS}
-						values={tab === "UVR" ? uvrValues : pesosValues}
-						onChange={(id, v) =>
-							(tab === "UVR" ? setUvrValues : setPesosValues)((prev) => ({
-								...prev,
-								[id]: v,
-							}))
-						}
-					/>
+						<div className="lg:flex-1">
+							<FormFields
+								fields={tab === "UVR" ? UVR_FIELDS : PESOS_FIELDS}
+								values={tab === "UVR" ? uvrValues : pesosValues}
+								onChange={(id, v) =>
+									(tab === "UVR" ? setUvrValues : setPesosValues)((prev) => ({
+										...prev,
+										[id]: v,
+									}))
+								}
+							/>
+						</div>
 
-					<div className="mt-5 flex gap-3 w-full flex-1 *:flex-1">
+						<div className="mt-5 flex gap-2 *:flex-1">
 						<button
 							onClick={calcular}
 							className="flex justify-center items-center gap-2 rounded-md bg-palette-lime px-4 py-2 text-sm font-bold text-gray-900 transition-colors hover:bg-palette-olive hover:text-white"
@@ -753,15 +753,15 @@ export default function CreditoSimulator() {
 					)}
 				</aside>
 
-				<section className="min-w-0">
+				<section className="flex min-h-0 flex-col gap-4">
 					{!r ? (
-						<div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-white/10 text-sm text-gray-500">
+						<div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border border-dashed border-white/10 text-sm text-gray-500">
 							Configura los parámetros y presiona “Calcular Proyección”.
 						</div>
 					) : (
 						<>
 							{/* Stats compactos */}
-							<div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+							<div className="shrink-0 grid grid-cols-2 gap-2 lg:grid-cols-7">
 								<Stat
 									label="Monto a Financiar"
 									value={fmt(r.resumen.montoCOP)}
@@ -802,7 +802,7 @@ export default function CreditoSimulator() {
 							</div>
 
 							{/* Chart */}
-							<div className="mb-6 rounded-lg border border-white/10 bg-white/[0.03] p-5">
+							<div className="shrink-0 rounded-lg border border-white/10 bg-white/[0.03] p-3">
 								{activo && <AmortChart data={activo.chart} />}
 							</div>
 
@@ -820,7 +820,7 @@ export default function CreditoSimulator() {
 			</div>
 			</div>
 
-			<footer className="mt-8 text-center text-xs text-gray-600">
+			<footer className="mt-8 shrink-0 text-center text-xs text-gray-600">
 				Simulación informativa · No constituye cotización formal · Verifique tasas
 				y seguros con su entidad financiera
 			</footer>
