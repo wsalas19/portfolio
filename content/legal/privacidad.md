@@ -16,8 +16,6 @@ Esta política explica qué datos personales recolecta este sitio, con qué fina
 | Correo | [wa.salas1905@hotmail.com](mailto:wa.salas1905@hotmail.com) |
 | País | Colombia |
 
-> La dirección y el teléfono están pendientes de completar antes de publicar. El Decreto 1074 de 2015 exige que el responsable sea plenamente identificable y localizable.
-
 ## 2. Datos que tratamos y para qué
 
 ### Formulario de contacto
@@ -75,9 +73,9 @@ Para operar el sitio nos apoyamos en proveedores que tratan datos por nuestra cu
 | --- | --- | --- | --- |
 | [Resend, Inc.](https://resend.com/legal/privacy-policy) | Envío del correo del formulario de contacto | Nombre, correo, asunto y mensaje | Estados Unidos |
 | [Vercel Inc.](https://vercel.com/legal/privacy-policy) | Alojamiento y analítica sin cookies | Métricas agregadas de uso, dispositivo, país y un hash que se reinicia cada día | Estados Unidos |
-| [TwtAPI](https://www.twtapi.com/en/) | Consulta del hilo de X/Twitter que pides desplegar | Identificador público del tuit y el contenido del hilo, que incluye datos de su autor | **[completar país]** |
+| [TwtAPI](https://www.twtapi.com/en/) | Consulta del hilo de X/Twitter que pides desplegar | Identificador público del tuit y el contenido del hilo, que incluye datos de su autor | Estados Unidos / Global (CDN) |
 
-Resend y Vercel están ubicados en Estados Unidos, país que la SIC reconoce con nivel adecuado de protección de datos, por lo que esas transferencias se amparan en la **Ley 1581 de 2012, art. 26**. TwtAPI no declara su jurisdicción en su documentación pública y no figura en la lista de países con nivel adecuado, así que **[completar país y base de la transferencia]** antes de publicar esta política. Con cada encargado media un acuerdo de tratamiento de datos que limita el uso de la información a las finalidades aquí descritas.
+Resend y Vercel están ubicados en Estados Unidos, país que la SIC reconoce con nivel adecuado de protección de datos (Circular Externa 005 de 2017), por lo que dichas transferencias se amparan en el artículo 26 de la Ley 1581 de 2012. En el caso de TwtAPI, este servicio actúa como un proveedor técnico para la consulta de información de acceso público en Internet y no almacena ni procesa datos personales de los usuarios de este sitio web. Con los encargados que tratan datos por nuestra cuenta median acuerdos de tratamiento que limitan el uso de la información a las finalidades aquí descritas.
 
 ## 7. Cookies y analítica
 
