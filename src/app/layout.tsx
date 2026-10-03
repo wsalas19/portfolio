@@ -1,11 +1,18 @@
 import "./globals.css";
 
+import type { Metadata } from "next";
 import NavBar from "@/components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
 import { Carme, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { env } from "@/lib/env";
+
+// metadataBase hace absolutas las `alternates.canonical` relativas de cada ruta.
+export const metadata: Metadata = {
+	metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
+};
 
 const carme = Carme({
 	weight: "400",
