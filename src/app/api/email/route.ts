@@ -21,7 +21,12 @@ const emailSchema = z.object({
   message: z.string()
     .min(10, "Message must be at least 10 characters")
     .max(5000, "Message too long")
-    .refine(msg => !msg.includes('\r'), "Message contains invalid characters")
+    .refine(msg => !msg.includes('\r'), "Message contains invalid characters"),
+  // Ley 1581/2012 art. 9: sin autorización previa y expresa no se trata el dato.
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Personal data authorization is required" }),
+  }),
+  policyVersion: z.string().min(1).max(32),
 });
 
 // In-memory rate limiting (resets on deployment)
@@ -133,7 +138,13 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
-    console.log(env.RESEND_API_KEY)
+    // Evidencia de la autorización (Ley 527/1999): versión aceptada + sello del
+    // servidor, no del cliente.
+    Logger.security('CONSENT_RECORDED', {
+      policyVersion: data.policyVersion,
+      consentAt: new Date().toISOString(),
+    });
+
     // Send email using Resend
     const resend = new Resend(env.RESEND_API_KEY);
 
@@ -147,6 +158,8 @@ export async function POST(request: Request) {
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Message:</strong></p>
         <p>${data.message.replace(/\n/g, '<br>')}</p>
+        <hr>
+        <p style="color:#777;font-size:12px">Autorización de tratamiento aceptada · Política v${data.policyVersion}</p>
       `
     };
 

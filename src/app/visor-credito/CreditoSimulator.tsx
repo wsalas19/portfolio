@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Banknote, Calculator, FileDown, Landmark } from "lucide-react";
 import {
 	FilaPesos,
@@ -90,7 +91,7 @@ export default function CreditoSimulator() {
 							<FormFields
 								fields={tab === "UVR" ? UVR_FIELDS : PESOS_FIELDS}
 								values={tab === "UVR" ? uvrValues : pesosValues}
-								onChange={(id, v) =>
+								onChangeAction={(id, v) =>
 									(tab === "UVR" ? setUvrValues : setPesosValues)((prev) => ({
 										...prev,
 										[id]: v,
@@ -198,7 +199,13 @@ export default function CreditoSimulator() {
 
 			<footer className="mt-8 shrink-0 text-center text-xs text-gray-600">
 				Simulación informativa · No constituye cotización formal · Verifique tasas
-				y seguros con su entidad financiera
+				y seguros con su entidad financiera ·{" "}
+				<Link
+					href="/terminos"
+					className="underline decoration-white/20 transition-colors hover:text-palette-lime"
+				>
+					Términos
+				</Link>
 			</footer>
 		</div>
 	);

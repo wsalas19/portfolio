@@ -2,8 +2,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Loader2, Mail, MessageSquare, Send } from "lucide-react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { POLITICA_VERSION } from "@/lib/legal";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -15,6 +17,11 @@ const formSchema = z.object({
 	email: z.string().email("Please enter a valid email"),
 	title: z.string().min(3, "Subject must be at least 3 characters"),
 	message: z.string().min(10, "Message must be at least 10 characters"),
+	// Ley 1581/2012 art. 9: la autorización debe ser previa y expresa, así que la
+	// casilla nunca va premarcada y el silencio no vale como consentimiento.
+	consent: z
+		.boolean()
+		.refine((v) => v, "Please accept the privacy policy to continue"),
 });
 
 function ContactForm() {
@@ -26,6 +33,7 @@ function ContactForm() {
 			email: "",
 			title: "",
 			message: "",
+			consent: false,
 		},
 	});
 
@@ -40,7 +48,12 @@ function ContactForm() {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(values),
+				body: JSON.stringify({
+					...values,
+					// Evidencia de la autorización: qué versión aceptó. El sello de
+					// tiempo lo pone el servidor, no el cliente.
+					policyVersion: POLITICA_VERSION,
+				}),
 			});
 
 			if (!response.ok) {
@@ -249,6 +262,35 @@ function ContactForm() {
 									{errors.message && (
 										<p className="text-red-400 text-sm mt-2">
 											{errors.message.message}
+										</p>
+									)}
+								</motion.div>
+
+								{/* Consentimiento informado previo al envío */}
+								<motion.div variants={itemVariants}>
+									<label className="flex items-start gap-3 cursor-pointer">
+										<input
+											type="checkbox"
+											{...form.register("consent")}
+											aria-invalid={!!errors.consent}
+											className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-white/20 bg-transparent accent-palette-lime"
+										/>
+										<span className="text-xs leading-relaxed text-gray-400">
+											Autorizo el tratamiento de mis datos personales para
+											responder esta solicitud, según la{" "}
+											<Link
+												href="/privacidad"
+												target="_blank"
+												className="text-palette-lime underline decoration-white/20 transition-colors hover:text-palette-olive"
+											>
+												Política de Tratamiento de Datos Personales
+											</Link>
+											.
+										</span>
+									</label>
+									{errors.consent && (
+										<p className="text-red-400 text-sm mt-2">
+											{errors.consent.message}
 										</p>
 									)}
 								</motion.div>

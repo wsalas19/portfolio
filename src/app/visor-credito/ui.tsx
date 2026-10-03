@@ -97,11 +97,11 @@ export function Stat({
 export function FormFields({
 	fields,
 	values,
-	onChange,
+	onChangeAction,
 }: {
 	fields: Field[];
 	values: Record<string, string>;
-	onChange: (id: string, v: string) => void;
+	onChangeAction: (id: string, v: string) => void;
 }) {
 	return (
 		<div className="grid grid-cols-1 gap-4 gap-x-4 sm:grid-cols-2">
@@ -125,7 +125,7 @@ export function FormFields({
 							id={f.id}
 							className={`w-full rounded-md border border-white/10 bg-[#121212] px-3 py-2.5 text-sm text-white outline-none transition-colors focus:border-palette-lime ${MONO}`}
 							value={values[f.id]}
-							onChange={(e) => onChange(f.id, e.target.value)}
+							onChange={(e) => onChangeAction(f.id, e.target.value)}
 						>
 							{f.options.map((o) => (
 								<option key={o.value} value={o.value}>
@@ -141,7 +141,7 @@ export function FormFields({
 							min={f.min}
 							className={`hide-spinners h-10 w-full border-white/10 bg-[#121212] text-sm text-white focus-visible:ring-palette-lime ${MONO}`}
 							value={values[f.id]}
-							onChange={(e) => onChange(f.id, e.target.value)}
+							onChange={(e) => onChangeAction(f.id, e.target.value)}
 						/>
 					)}
 					{f.note && (
