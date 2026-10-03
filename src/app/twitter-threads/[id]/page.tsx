@@ -1,58 +1,54 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { fetchAndUnrollThread } from '@/lib/twitter/parser';
+import { cache } from 'react';
+import { fetchAndUnrollThread, ThreadUnavailableError } from '@/lib/twitter/parser';
 import { ThreadArticle } from '@/components/twitter/ThreadArticle';
 
 type PageProps = {
   params: Promise<{ id: string }>;
 };
 
-// Fetch function that can be used by both metadata and page
-async function getThreadData(tweetId: string) {
-  try {
-    console.log('🔍 Fetching thread data:', { tweetId });
-    return await fetchAndUnrollThread(tweetId);
-  } catch (error) {
-    console.error('❌ Failed to fetch thread:', error);
-    return null;
-  }
-}
+// React's cache() memoizes per request. generateMetadata and the page render
+// concurrently and each used to miss the data cache independently, so every cold
+// thread cost TWO paid TwtAPI calls. This collapses them into one.
+const getThreadData = cache(async (tweetId: string) => fetchAndUnrollThread(tweetId));
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const thread = await getThreadData(id);
 
-  if (!thread) return { title: 'Thread Not Found' };
-
-  return {
-    title: `${thread.title} — @${thread.author.screen_name}`,
-    description: thread.markdownContent.substring(0, 150),
-    openGraph: {
-      title: thread.title,
-      description: thread.markdownContent.substring(0, 150),
-      type: 'article',
-    },
-  };
+  try {
+    const thread = await getThreadData(id);
+    // thread.excerpt already has the image markdown stripped, so a photo-first
+    // thread doesn't get a pbs.twimg.com URL as its description.
+    return {
+      title: `${thread.title} — @${thread.author.screen_name}`,
+      description: thread.excerpt,
+      openGraph: {
+        title: thread.title,
+        description: thread.excerpt,
+        type: 'article',
+      },
+    };
+  } catch (error) {
+    // Metadata must never be the reason a page fails to render: the error
+    // boundary below handles the body, so degrade to a generic title here.
+    console.error('Thread metadata failed:', error);
+    return { title: 'X Thread Unrolled' };
+  }
 }
 
 export default async function ThreadPage({ params }: PageProps) {
   const { id } = await params;
 
-  console.log('🔍 Thread Page Loading:', { id });
-
-  // ✅ Fetch data securely on the server
-  const thread = await getThreadData(id);
-
-  if (!thread) {
-    console.log('❌ Thread not found or failed to parse');
-    notFound();
+  let thread;
+  try {
+    thread = await getThreadData(id);
+  } catch (error) {
+    // A missing thread is a 404. Anything else (quota, bad key, TwtAPI down) is
+    // rethrown so error.tsx can say so honestly instead of a fake "not found".
+    if (error instanceof ThreadUnavailableError) notFound();
+    throw error;
   }
-
-  console.log('✅ Rendering thread article:', {
-    title: thread.title,
-    author: thread.author.name,
-    markdownLength: thread.markdownContent.length
-  });
 
   return <ThreadArticle thread={thread} />;
 }

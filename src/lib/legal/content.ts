@@ -1,6 +1,8 @@
 // Carga de los documentos legales en Markdown (content/legal/*.md). Server-only:
 // usa fs. Los datos que necesita el cliente viven en "@/lib/legal".
 
+import "server-only"; // usa fs: el contenido se lee en el servidor, no se bundlea.
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";

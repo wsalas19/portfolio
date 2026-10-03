@@ -80,14 +80,14 @@ function NavBar() {
 		<>
 			<nav
 				id="#nav"
-				className={`fixed bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%]  md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
+				className={`fixed bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
 					isScrolled
 						? "glass-strong shadow-2xl glow-pink-hover "
 						: "glass shadow-lg "
 				}`}
 			>
-				<div className="flex flex-row justify-between items-center px-6 md:px-8">
-					<div className="flex gap-6 items-center">
+				<div className="flex items-center justify-between px-6 md:px-8">
+
 						<Link href="/">
 							<h1 className="font-display font-bold text-2xl md:text-3xl text-gradient-primary">
 								portfolio.
@@ -100,11 +100,9 @@ function NavBar() {
 								</li>
 							))}
 						</ul>
-					</div>
 
-					<div className="hidden xl::flex gap-4 justify-center items-center">
-						<DownloadResume />
-					</div>
+
+
 
 					<button
 						className="lg:hidden text-white"

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { BookOpen, Check, Infinity as InfinityIcon, Link2, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
@@ -91,9 +92,15 @@ function Demo() {
 }
 
 const steps = [
-  { icon: '🔗', title: 'Paste a thread URL', desc: 'Copy any X/Twitter thread link.' },
-  { icon: '⚙️', title: 'We fetch it', desc: 'The full conversation is extracted in seconds.' },
-  { icon: '📖', title: 'Get your article', desc: 'A clean, readable, shareable article.' },
+  { icon: Link2, title: 'Paste a thread URL', desc: 'Copy any X/Twitter thread link.' },
+  { icon: Zap, title: 'We fetch it', desc: 'The full conversation is extracted in seconds.' },
+  { icon: BookOpen, title: 'Get your article', desc: 'A clean, readable, shareable article.' },
+];
+
+const perks = [
+  { icon: Check, label: 'No signup required' },
+  { icon: Zap, label: 'Instant — under 3 seconds' },
+  { icon: InfinityIcon, label: 'Free forever' },
 ];
 
 export default function TwitterThreadsPage() {
@@ -123,7 +130,7 @@ export default function TwitterThreadsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#121212] text-white mb-10">
+    <main className="min-h-screen bg-[#121212] text-white pb-10">
       <section className="mx-auto max-w-3xl px-4 py-14 md:py-20">
         {/* Hero */}
         <div className="text-center">
@@ -191,26 +198,37 @@ export default function TwitterThreadsPage() {
 
         {/* Trust markers */}
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-400">
-          <li>✓ No signup required</li>
-          <li>⚡ Instant — under 3 seconds</li>
-          <li>🆓 Free forever</li>
+          {perks.map(({ icon: Icon, label }) => (
+            <li key={label} className="inline-flex items-center gap-1.5">
+              <Icon className="h-4 w-4 shrink-0 text-lime-400" strokeWidth={2.25} aria-hidden />
+              {label}
+            </li>
+          ))}
         </ul>
 
         {/* How it works */}
         <h2 className="mt-16 text-center text-2xl font-bold">How it works</h2>
-        <ol className="mt-6 grid gap-4 md:grid-cols-3">
-          {steps.map((step, i) => (
-            <li
-              key={i}
-              className="rounded-xl border border-white/10 bg-[#1a1a1a] p-5 text-center"
-            >
-              <div className="text-3xl" aria-hidden>
-                {step.icon}
+        <ol className="mt-10 grid gap-12 md:grid-cols-3 md:gap-8">
+          {steps.map(({ icon: Icon, title, desc }, i) => (
+            <li key={title} className="relative text-center">
+              {/* Hilo que encadena los pasos: sólo donde van en fila, porque en móvil
+                  se apilan y una línea horizontal no conectaría nada. */}
+              {i < steps.length - 1 && (
+                <span
+                  aria-hidden
+                  className="absolute left-[calc(50%+1.75rem)] top-7 hidden h-px w-[calc(100%-1.5rem)] bg-gradient-to-r from-lime-400/50 via-white/10 to-pink-400/50 md:block"
+                />
+              )}
+              <div className="relative inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent">
+                <Icon className="h-6 w-6 text-lime-400" strokeWidth={1.75} aria-hidden />
+                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-pink-400 text-[11px] font-bold text-gray-900">
+                  {i + 1}
+                </span>
               </div>
-              <h3 className="mt-3 font-semibold">
-                <span className="text-pink-400">{i + 1}.</span> {step.title}
-              </h3>
-              <p className="mt-1 text-sm text-gray-400">{step.desc}</p>
+              <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+              <p className="mx-auto mt-1.5 max-w-[16rem] text-sm leading-relaxed text-gray-400">
+                {desc}
+              </p>
             </li>
           ))}
         </ol>

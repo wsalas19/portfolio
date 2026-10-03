@@ -1,3 +1,7 @@
+// Este módulo es dueño de TODOS los secretos (RESEND_*, TWTAPI_KEY). server-only
+// garantiza que un import accidental desde un Client Component rompa el build.
+import 'server-only';
+
 import { z } from 'zod';
 
 const envSchema = z.object({

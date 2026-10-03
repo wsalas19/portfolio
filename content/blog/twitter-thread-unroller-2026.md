@@ -71,6 +71,8 @@ And some tweets come back wrapped in something called `TweetWithVisibilityResult
 
 I also added a failsafe that dumps the full raw payload to the console when the root tweet can't be found. When Twitter silently renames a field, a parser doesn't crash — it just quietly returns garbage. The dump is the only way to see the new shape. That dump is literally how I wrote this file.
 
+I later turned that dump into a [field-by-field map of the payload](/blog/twitter-api-nesting-map-2026) — every path, every fallback, written down so nobody has to do this archaeology twice.
+
 The deepest irony: there's no algorithm here. Just **defensive navigation of a data structure that refuses to commit to a shape.** That's not engineering, that's archaeology.
 
 ## Three Hundred Calls a Month

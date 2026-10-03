@@ -1,3 +1,9 @@
+// Reads TWTAPI_KEY and spends paid quota on every call: must never reach the
+// client bundle. `server-only` turns that mistake into a build failure instead
+// of a silently broken fetch from the browser.
+import 'server-only';
+
+import { unstable_cache } from 'next/cache';
 import { UnrolledThread, TweetDetailConversationResponse, TwtAPIRawResponse, TimelineInstruction, TimelineEntry, TweetNode, ThreadItem, TweetMedia } from '@/lib/twitter/types';
 import crypto from 'crypto';
 
@@ -19,10 +25,30 @@ async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3)
   throw new Error('Rate limit exceeded after retries');
 }
 
-// ponytail: per-process budget on paid TwtAPI calls; blunts a single hammering
-// instance. Cross-instance capping needs Vercel KV — add when the page stops deduping.
-const TWTAPI_MAX_PER_WINDOW = 20;
-const TWTAPI_WINDOW_MS = 60_000;
+// A daily window, not a minute one: a minute window has no relationship to a
+// monthly quota, so a loop could sustain any rate forever.
+// ponytail: still per-process, so the real ceiling is instances x cap. Only a
+// shared store would make it global — not worth a dependency at this traffic.
+const TWTAPI_MAX_PER_DAY = Number(process.env.TWTAPI_DAILY_CAP ?? 10);
+const TWTAPI_WINDOW_MS = 86_400_000;
+
+// 30 days, not 24 hours. The Data Cache expires on the TTL, and the next request
+// after expiry pays again — so a 24h TTL costs one call per thread PER DAY, and
+// a single busy thread could eat 30 calls a month on its own.
+const CACHE_TTL_SECONDS = 2_592_000;
+
+/**
+ * The thread itself is the problem — a bad ID, a deleted tweet, or a payload we
+ * can't read. Callers turn this into a 404. Everything else thrown from here
+ * (missing key, exhausted quota, TwtAPI 5xx, network) is operational and must
+ * NOT be disguised as "this thread doesn't exist".
+ */
+export class ThreadUnavailableError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ThreadUnavailableError';
+  }
+}
 
 declare global {
   // eslint-disable-next-line no-var
@@ -36,25 +62,33 @@ function checkTwtApiBudget() {
     state.count = 0;
     state.windowStart = now;
   }
-  if (++state.count > TWTAPI_MAX_PER_WINDOW) {
+  if (++state.count > TWTAPI_MAX_PER_DAY) {
     throw new Error('Rate limit exceeded. Please try again later.');
   }
 }
 
 /**
- * Fetches and unrolls thread data using TwtAPI (www.twtapi.com)
+ * Fetches and unrolls thread data using TwtAPI (www.twtapi.com).
+ * Never call this directly — go through `fetchAndUnrollThread` below, which
+ * memoizes it. Reaching the network without the memo is paying for nothing.
  */
-export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThread> {
+async function fetchAndUnrollUncached(tweetId: string): Promise<UnrolledThread> {
   // Single choke point for every caller (page + any future route).
   if (!/^\d+$/.test(tweetId)) {
-    throw new Error('Invalid tweet ID');
+    throw new ThreadUnavailableError('Invalid tweet ID');
   }
 
   const apiKey = process.env.TWTAPI_KEY;
-  const disableCache = process.env.DISABLE_CACHE === 'true';
+  // Hard-wired off in production: a stray DISABLE_CACHE on Vercel would turn
+  // every single page view into a paid call.
+  const disableCache =
+    process.env.NODE_ENV !== 'production' && process.env.DISABLE_CACHE === 'true';
 
   if (!apiKey) {
-    throw new Error('TWTAPI_KEY environment variable is not configured.');
+    // Operational, not a missing thread: without the key nothing can be served,
+    // so this must surface as a real error rather than a 404.
+    console.error('TWTAPI_KEY is not configured — the thread viewer cannot fetch.');
+    throw new Error('Thread service is not configured.');
   }
 
   // TwtAPI conversation endpoint (optimized for thread fetching)
@@ -63,10 +97,11 @@ export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThr
   console.log('🔍 Fetching from TwtAPI:', {
     tweetId,
     apiUrl,
-    cacheStatus: disableCache ? 'DISABLED (dev mode)' : 'ENABLED (24h)'
+    cacheStatus: disableCache ? 'DISABLED (dev mode)' : 'ENABLED (30d)'
   });
 
-  // Disable caching during development
+  // Reached only on a cache miss now, because the memo above skips this whole
+  // function on a hit — a visitor served from cache used to burn a unit anyway.
   checkTwtApiBudget();
 
   const response = await fetchWithRetry(
@@ -76,20 +111,20 @@ export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThr
         'X-API-Key': apiKey,
         'Content-Type': 'application/json'
       },
-      next: disableCache ? { revalidate: 0 } : { revalidate: 86400 },
+      next: disableCache ? { revalidate: 0 } : { revalidate: CACHE_TTL_SECONDS },
     }
   );
 
   if (!response.ok) {
-    if (response.status === 429) {
-      throw new Error('Rate limit exceeded. Please try again later.');
+    // Only a genuine "no such tweet" is a 404. The rest are the service failing,
+    // and collapsing them into a 404 is what hides an exhausted quota or a bad
+    // key behind a "thread not found" page.
+    if (response.status === 404) {
+      throw new ThreadUnavailableError('Tweet not found upstream.');
     }
-    if (response.status === 401) {
-      throw new Error('Invalid TwtAPI key.');
-    }
-    if (response.status === 402) {
-      throw new Error('Insufficient TwtAPI balance.');
-    }
+    if (response.status === 429) throw new Error('Rate limit exceeded. Please try again later.');
+    if (response.status === 401) throw new Error('Invalid TwtAPI key.');
+    if (response.status === 402) throw new Error('Insufficient TwtAPI balance.');
     throw new Error(`TwtAPI responded with status: ${response.status}`);
   }
 
@@ -103,6 +138,17 @@ export async function fetchAndUnrollThread(tweetId: string): Promise<UnrolledThr
   // Parse the raw GraphQL structure into your component's UnrolledThread type
   return parseThreadToArticle(rawData);
 }
+
+/**
+ * Public entry point. `unstable_cache` skips the body entirely on a hit, so a
+ * cached thread costs no network call and no budget unit, and the
+ * generateMetadata + page double-call collapses into one real fetch.
+ */
+export const fetchAndUnrollThread = unstable_cache(
+  fetchAndUnrollUncached,
+  ['twtapi-thread'],
+  { revalidate: CACHE_TTL_SECONDS },
+);
 
 export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread {
   try {
@@ -168,8 +214,13 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
     // FAIL-SAFE
     // ---------------------------------------------------------
     if (!rootTweetNode) {
-      console.error('🚨 FAILED TO FIND ROOT TWEET. RAW DATA DUMP:', JSON.stringify(rawData?.data || rawData, null, 2));
-      throw new Error('Root tweet not found in payload (Check console for raw data dump)');
+      // Shape only, never content: tweet bodies are third-party personal data and
+      // this lands in Vercel's logs. The old full dump contradicted /privacidad.
+      console.error('🚨 FAILED TO FIND ROOT TWEET. Top-level keys:', {
+        envelope: Object.keys(rawData ?? {}),
+        data: Object.keys(rawData?.data ?? {}),
+      });
+      throw new ThreadUnavailableError('Root tweet not found in payload');
     }
 
     // ---------------------------------------------------------
@@ -186,7 +237,7 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
     let markdownContent = '';
     const images: { url: string; alt: string }[] = [];
 
-    allTweets.forEach((node) => {
+    allTweets.forEach((node, tweetIndex) => {
       let text = node.legacy?.full_text || '';
 
       // Clean up standalone t.co links that just point to attached media
@@ -196,15 +247,23 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
         markdownContent += `${text}\n\n`;
       }
 
-      // Extract media
+      // Each photo is emitted as inline Markdown directly under the text of the
+      // tweet that attached it, to keep the thread's context: they used to be
+      // flattened to the top of the article, which destroyed the ordering.
       const mediaArr = node.legacy?.extended_entities?.media || node.legacy?.entities?.media || [];
-      mediaArr.forEach((media: TweetMedia) => {
-        if (media.type === 'photo' && media.media_url_https) {
-          images.push({
-            url: media.media_url_https,
-            alt: 'Tweet image',
-          });
-        }
+      const photos = mediaArr.filter(
+        (media: TweetMedia) => media.type === 'photo' && media.media_url_https
+      );
+
+      photos.forEach((media: TweetMedia, photoIndex: number) => {
+        const url = media.media_url_https as string;
+        const alt =
+          photos.length > 1
+            ? `Image ${photoIndex + 1} from tweet ${tweetIndex + 1}`
+            : `Image from tweet ${tweetIndex + 1}`;
+
+        images.push({ url, alt });
+        markdownContent += `![${alt}](${url})\n\n`;
       });
     });
 
@@ -214,8 +273,14 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
     const firstLine = rootTweetNode.legacy?.full_text?.split('\n')[0] || 'Thread';
     const tweetId = rootTweetNode.rest_id || '';
 
-    // Generate excerpt from markdown content
-    const excerpt = markdownContent.trim().substring(0, 160).replace(/\n/g, ' ') + '...';
+    // Strip image markdown before trimming, otherwise a photo-first thread gets a
+    // raw pbs.twimg.com URL as its meta description.
+    const excerpt =
+      markdownContent
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 160) + '…';
 
     return {
       id: crypto.randomUUID(),

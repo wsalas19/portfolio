@@ -5,31 +5,7 @@ import { UnrolledThread } from '@/lib/twitter/types';
 import 'highlight.js/styles/github-dark.css';
 import Image from 'next/image';
 import type { Components } from 'react-markdown';
-
-// Helper functions for adaptive image grid layout
-function getGridClasses(imageCount: number): string {
-  if (imageCount === 1) return 'grid grid-cols-1 max-w-2xl mx-auto gap-3';
-  if (imageCount === 2) return 'grid grid-cols-2 gap-3';
-  if (imageCount === 3) return 'grid grid-cols-2 gap-3';
-  return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3';
-}
-
-function getAspectClass(imageCount: number, index: number): string {
-  if (imageCount === 1) return 'aspect-video';
-  if (imageCount === 2) return 'aspect-video';
-  if (imageCount === 3 && index === 0) return 'aspect-video';
-  return 'aspect-square';
-}
-
-function getMaxImages(imageCount: number): number {
-  return imageCount > 3 ? 3 : imageCount;
-}
-
-function getImageSizes(imageCount: number): string {
-  if (imageCount === 1) return '(max-width: 768px) 100vw, 75vw';
-  if (imageCount === 2) return '(max-width: 768px) 100vw, 50vw';
-  return '(max-width: 768px) 100vw, 33vw';
-}
+import { ThreadImage } from './ThreadImage';
 
 // Custom markdown components for proper text hierarchy and spacing
 const components: Partial<Components> = {
@@ -92,6 +68,12 @@ const components: Partial<Components> = {
   strong: ({ children }) => (
     <strong className="text-white font-semibold">{children}</strong>
   ),
+
+  // Photos arrive as inline Markdown, below the tweet that attached them.
+  img: ({ src, alt }) =>
+    typeof src === 'string' ? (
+      <ThreadImage src={src} alt={alt || 'Tweet image'} />
+    ) : null,
 
   // Inline code vs code blocks
   code: ({ className, children, ...props }) => {
@@ -172,16 +154,8 @@ const components: Partial<Components> = {
 };
 
 export function ThreadArticle({ thread }: { thread: UnrolledThread }) {
-  console.log('🎨 ThreadArticle rendering:', {
-    title: thread.title,
-    markdownLength: thread.markdownContent.length,
-    markdownPreview: thread.markdownContent.substring(0, 100),
-    author: thread.author.name,
-    hasImages: !!thread.images && thread.images.length > 0
-  });
-
   return (
-    <main className="min-h-screen bg-[#121212] py-12 px-4">
+    <main className="min-h-screen bg-[#121212] pt-12 pb-28 px-4 ">
       <article className="max-w-4xl mx-auto">
 
         {/* Content */}
@@ -223,40 +197,30 @@ export function ThreadArticle({ thread }: { thread: UnrolledThread }) {
               </div>
             </div>
           </header>
-        {/* Images Section */}
-        {thread.images && thread.images.length > 0 && (() => {
-          const images = thread.images;
-          return (
-            <div className="mb-6 mx-6 max-w-4xl">
-              <div className={getGridClasses(images.length)}>
-                {images.filter(img => img.url).slice(0, getMaxImages(images.length)).map((image, index) => (
-                  <div key={index} className={`relative ${getAspectClass(images.length, index)} bg-gray-800 rounded-xl overflow-hidden glass-strong`}>
-                    <Image
-                      src={image.url}
-                      alt={image.alt || 'Tweet image'}
-                      fill
-                      priority={index === 0}
-                      className="object-cover"
-                      sizes={getImageSizes(images.length)}
-                    />
-                  </div>
-                ))}
-              </div>
-              {images.length > 3 && (
-                <div className="text-center text-sm text-gray-400 mt-2">
-                  +{images.length - 3} more images
-                </div>
-              )}
-            </div>
-          );
-        })()}
-
-          {/* Markdown Content */}
+          {/* Markdown Content: each tweet's text and, below it, its photos */}
           <section className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-lime-400 prose-strong:text-white">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={components}>
               {thread.markdownContent}
             </ReactMarkdown>
           </section>
+
+          {/* Cached-copy notice: the 30-day TTL is a cost control, and the visitor
+              deserves to know the article can be behind the live thread. */}
+          <footer className="border-t border-white/10 px-8 py-5">
+            <p className="text-xs leading-relaxed text-gray-500">
+              This is a cached copy of the thread, up to 30 days old. Later edits or
+              deletions by the author are not reflected here.{' '}
+              <a
+                href={`https://x.com/i/status/${thread.tweetId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 underline decoration-gray-600 underline-offset-2 transition-colors hover:text-lime-400"
+              >
+                View the original on X
+              </a>
+              .
+            </p>
+          </footer>
         </div>
       </article>
     </main>

@@ -36,6 +36,10 @@ El sitio usa Vercel Web Analytics y Speed Insights, que **no emplean cookies** n
 
 Las simulaciones se calculan íntegramente en tu navegador. Los valores que ingresas **no se envían ni se almacenan** en ningún servidor.
 
+### Visor de hilos de X/Twitter
+
+Cuando despliegas un hilo, el servidor le pide su contenido a TwtAPI (ver encargados en el punto 6) y guarda el resultado en su caché durante 30 días. **No** guardamos tu dirección IP ni identificamos quién consultó qué hilo: la caché está indexada por el identificador público del tuit, que es el mismo que aparece en la URL del hilo. Ten en cuenta que el contenido de un hilo incluye datos de su autor (nombre, usuario, foto y textos), no tuyos; si eres el autor de un hilo y quieres que dejemos de servirlo, escríbenos y lo eliminamos de la caché.
+
 No tratamos datos sensibles ni datos de niños, niñas y adolescentes, y no realizamos perfilamiento ni decisiones automatizadas sobre ti.
 
 ## 3. Autorización
@@ -71,8 +75,9 @@ Para operar el sitio nos apoyamos en proveedores que tratan datos por nuestra cu
 | --- | --- | --- | --- |
 | [Resend, Inc.](https://resend.com/legal/privacy-policy) | Envío del correo del formulario de contacto | Nombre, correo, asunto y mensaje | Estados Unidos |
 | [Vercel Inc.](https://vercel.com/legal/privacy-policy) | Alojamiento y analítica sin cookies | Métricas agregadas de uso, dispositivo, país y un hash que se reinicia cada día | Estados Unidos |
+| [TwtAPI](https://www.twtapi.com/en/) | Consulta del hilo de X/Twitter que pides desplegar | Identificador público del tuit y el contenido del hilo, que incluye datos de su autor | **[completar país]** |
 
-Ambos están ubicados en Estados Unidos, país que la SIC reconoce con nivel adecuado de protección de datos, por lo que la transferencia se ampara en la **Ley 1581 de 2012, art. 26**. Con cada encargado media un acuerdo de tratamiento de datos que limita el uso de la información a las finalidades aquí descritas.
+Resend y Vercel están ubicados en Estados Unidos, país que la SIC reconoce con nivel adecuado de protección de datos, por lo que esas transferencias se amparan en la **Ley 1581 de 2012, art. 26**. TwtAPI no declara su jurisdicción en su documentación pública y no figura en la lista de países con nivel adecuado, así que **[completar país y base de la transferencia]** antes de publicar esta política. Con cada encargado media un acuerdo de tratamiento de datos que limita el uso de la información a las finalidades aquí descritas.
 
 ## 7. Cookies y analítica
 
@@ -90,6 +95,7 @@ Aplicamos medidas técnicas y administrativas razonables: cifrado en tránsito (
 | Dirección IP (límite de envíos y seguridad) | 1 hora, en memoria del servidor |
 | Evidencia de la autorización (fecha y versión de la política) | Mientras se trate el dato y 24 meses después |
 | Analítica agregada (Vercel) | Según la política de Vercel; el sitio no almacena copia |
+| Contenido de un hilo desplegado (caché del visor) | 30 días desde su consulta |
 
 Cumplidos los plazos, los datos se eliminan de forma segura. Cuando exista un deber legal de conservarlos, se mantendrán bloqueados y solo para ese fin.
 

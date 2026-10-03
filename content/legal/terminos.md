@@ -32,6 +32,8 @@ Verifica siempre las condiciones con tu banco o fondo antes de tomar una decisi�
 
 El sitio enlaza a recursos externos (normativa, entidades públicas, documentación técnica). No controlamos ni respondemos por su contenido, disponibilidad o políticas de privacidad.
 
+El **visor de hilos** reconstruye en formato artículo el contenido de un hilo público de X/Twitter, que obtiene a través de TwtAPI. Ese contenido es de sus autores y no nuestro: el artículo es una **copia en caché de hasta 30 días**, por lo que puede no reflejar ediciones o eliminaciones posteriores. Cada artículo enlaza al hilo original. Si eres autor de un hilo y prefieres que no se sirva, escríbenos y lo retiramos.
+
 ## 6. Disponibilidad, garantías y responsabilidad
 
 El sitio se ofrece “tal como está”, de forma gratuita y sin garantía de disponibilidad continua ni de ausencia de errores. En la medida máxima permitida por la ley, no somos responsables por decisiones tomadas a partir de los resultados de las herramientas, ni por daños derivados de la interrupción del servicio.
