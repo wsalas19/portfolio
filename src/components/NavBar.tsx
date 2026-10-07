@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { Video, Menu, X } from "lucide-react";
 import { paths as systemPaths } from "@/lib/constants";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 function NavBar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +81,7 @@ function NavBar() {
 		<>
 			<nav
 				id="#nav"
-				className={`fixed bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
+				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
 					isScrolled
 						? "glass-strong shadow-2xl glow-pink-hover "
 						: "glass shadow-lg "
@@ -88,10 +89,15 @@ function NavBar() {
 			>
 				<div className="flex items-center justify-between px-6 md:px-8">
 
-						<Link href="/">
-							<h1 className="font-display font-bold text-2xl md:text-3xl text-gradient-primary">
-								portfolio.
-							</h1>
+					<Link href="/" className="flex items-center">
+						<span className="font-bold text-palette-lime">{"<"}</span>
+						<Image
+							src="/images/logo-page.png"
+							alt="Logo"
+							width={40}
+							height={40}
+						/>
+							<span className="font-bold text-palette-lime">{">"}</span>
 						</Link>
 						<ul className="hidden lg:flex gap-6">
 							{paths.map((path) => (
