@@ -83,7 +83,7 @@ function NavBar() {
 				id="#nav"
 				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
 					isScrolled
-						? "glass-strong shadow-2xl glow-pink-hover "
+						? "glass-strong shadow-2xl glow-lime-hover"
 						: "glass shadow-lg "
 				}`}
 			>

@@ -26,7 +26,7 @@ Esa relación es débil, y no es nueva. Nuñez, Hoyos y Arellana (2023) comparar
 
 > **Fuente y método.** La vegetación sale de Sentinel-2 (colección `S2_SR_HARMONIZED`), en composición de mediana sobre las estaciones secas de diciembre a marzo de 2023 y 2024, a 10 metros de resolución. El NDVI es `(B8 - B4) / (B8 + B4)`; los píxeles con nube, sombra o agua se enmascaran con la banda SCL. El estrato por manzana es la capa oficial de estratificación (2018). Todo se mide en el sistema de coordenadas nacional EPSG:9377. De 7.799 manzanas se analizan 7.761; 38 se excluyen por agua o por falta de dato. La relación entre estrato y NDVI por manzana tiene un coeficiente de Spearman de −0.183 (p = 2.1 × 10⁻⁵⁹).
 
-## Dónde se concentra ese verde
+## Dónde se concentra el verde?
 
 ![Conglomerados LISA de NDVI promedio](/images/blog/barranquilla-verde-desigualdad-2026/02_conglomerados_lisa.webp)
 
@@ -38,7 +38,7 @@ El verde alto se agrupa en los barrios más pobres. El verde bajo también. La c
 
 > **Fuente y método.** Índice local de Moran (LISA) sobre el NDVI promedio por manzana, con 999 permutaciones. La contigüidad se calcula con 8 vecinos más cercanos y no por fronteras compartidas: las manzanas están separadas por el eje de la vía, así que el 97% no comparte borde con ninguna otra. Los valores p se corrigen por FDR al 5%. Alto-Alto significa una manzana verde entre vecinas verdes; Bajo-Bajo, lo contrario. El cruce completo de conglomerado contra estrato está en `lisa_cluster_by_stratum.csv`.
 
-## Qué verde es: baldíos, no parques
+## Baldíos o parques?
 
 ![Suelo vegetado sin construir, por píxel de 10 m](/images/blog/barranquilla-verde-desigualdad-2026/03_verde_baldio.webp)
 
@@ -127,7 +127,7 @@ La ciudad ha resuelto el riesgo donde está el dinero. También hay obra en curs
 
 > **Fuente y método.** La red y su estado son el levantamiento de arroyos de la ciudad, con el campo `estado` de cada canal. Cuentan como atendidos los estados `Canalizado_abierto`, `Canalizado_cerrado`, `Canalizado_natural` y `Viacanal`; `No_canalizado` no lo está. Los kilómetros se atribuyen a la manzana que el canal atraviesa. Esta es la única capa del trabajo que mide una **decisión** de la ciudad y no una condición del terreno.
 
-## Qué no dice este trabajo
+## Limitaciones
 
 Estos datos tienen límites. Los enumero porque un mapa sin límites declarados invita a leerlo de más.
 
@@ -150,26 +150,12 @@ El mapa no mide el color de la ciudad. Mide quién puede usarla.
 
 ## Fuentes
 
-### Antecedente académico
-
 - **Nuñez, Hoyos y Arellana (2023).** «High land surface temperatures (LSTs) disproportionately affect vulnerable socioeconomic groups in Barranquilla, Colombia», *Urban Climate* 52: 101757. Antecedente directo de este trabajo: misma ciudad, misma manzana censal y la misma pregunta al revés, desde el calor en lugar del verde. Su área de estudio es la conurbación Barranquilla–Soledad; la de este trabajo es Barranquilla sola. [Artículo en Elsevier](https://doi.org/10.1016/j.uclim.2023.101757)
-
-### Datos satelitales y ambientales
-
 - **Sentinel-2 L2A** (`COPERNICUS/S2_SR_HARMONIZED`) — composición de mediana de las estaciones secas 2023–2024, 10 m de resolución. De aquí sale el NDVI de todas las figuras. [Catálogo de Google Earth Engine](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED)
 - **ESA WorldCover v200** — cobertura del suelo a 10 m, versión de 2021. Separa el verde construido del verde espontáneo (figuras 3 y 4) y el agua del suelo desnudo. [esa-worldcover.org](https://esa-worldcover.org/en)
 - **WorldPop** — estimación modelada de población donde el censo de 2018 no llega. [worldpop.org](https://www.worldpop.org/)
-
-### Capas de la ciudad de Barranquilla
-
 - **Portal Mi Ciudad** (Gerencia de Gestión Catastral) — de aquí salen cuatro de las capas de este trabajo: la estratificación socioeconómica por manzana, el censo de población de 2018, el Espacio Público Efectivo con corredores verdes y la red de arroyos con su estado de canalización. [miciudad.barranquilla.gov.co](https://miciudad.barranquilla.gov.co/) · [Servicio ArcGIS de las capas](https://services3.arcgis.com/oGYAc07w6wsvgUYr/arcgis/rest/services)
 - **Inventario de árboles en espacio público, 2017** — silvicultura urbana del Distrito. [Barranquilla Verde](https://barranquillaverde.gov.co/)
-
-### Red vial y percepción
-
 - **Red vial de OpenStreetMap** — sobre ella se calcula el tiempo real de caminata de la figura 5. [openstreetmap.org](https://www.openstreetmap.org/) · [OSMnx](https://github.com/gboeing/osmnx)
 - **Imágenes a nivel de calle de Mapillary** — índice de vista verde. [mapillary.com](https://www.mapillary.com/)
-
-### Código y resultados
-
 - **Repositorio `green-bq`** — código, figuras y tablas de resultados. Sin URL pública todavía.

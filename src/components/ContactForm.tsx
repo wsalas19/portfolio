@@ -268,7 +268,7 @@ function ContactForm() {
 
 								{/* Consentimiento informado previo al envío */}
 								<motion.div variants={itemVariants}>
-									<label className="flex items-start gap-3 cursor-pointer">
+									<label className="flex items-center gap-2 cursor-pointer">
 										<input
 											type="checkbox"
 											{...form.register("consent")}
@@ -276,8 +276,8 @@ function ContactForm() {
 											className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-white/20 bg-transparent accent-palette-lime"
 										/>
 										<span className="text-xs leading-relaxed text-gray-400">
-											Autorizo el tratamiento de mis datos personales para
-											responder esta solicitud, según la{" "}
+											I agree to the processing of my personal data to respond
+											to this request, according to the{" "}
 											<Link
 												href="/privacidad"
 												target="_blank"
