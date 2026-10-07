@@ -6,6 +6,7 @@ import { ExternalLink } from "lucide-react";
 import ReactMarkdown, { Components } from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import { ZoomImage } from "@/components/ZoomImage";
 
 interface BlogPostProps {
 	content: string;
@@ -74,6 +75,19 @@ const components: Partial<Components> = {
 	strong: ({ children }) => (
 		<strong className="text-white font-semibold">{children}</strong>
 	),
+
+	// Figures: without this the markdown emitted a bare <img>, so the charts came
+	// out unsized and full source weight (some are 3.5 MB PNGs). No sm:max-w cap
+	// here — a chart is the article's content, not an aside.
+	img: ({ src, alt }) =>
+		typeof src === "string" ? (
+			<ZoomImage
+				src={src}
+				alt={alt || ""}
+				sizes="(max-width: 896px) 100vw, 896px"
+				wrapperClassName="mx-auto my-8 block w-full cursor-zoom-in"
+			/>
+		) : null,
 
 	// Inline code vs code blocks
 	code: ({ className, children, ...props }) => {

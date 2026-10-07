@@ -5,17 +5,27 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X } from "lucide-react";
 
-// pbs.twimg.com acepta ?name=large para servir la foto en tamaño completo.
-// Si la URL ya trae query, se encadena con &.
-function largeUrl(url: string): string {
-	return `${url}${url.includes("?") ? "&" : "?"}name=large`;
+interface ZoomImageProps {
+	src: string;
+	alt: string;
+	/** Lo que carga el visor, cuando no es la misma imagen que la miniatura. */
+	expandSrc?: string;
+	/** Clases del botón que envuelve la miniatura. Limita el ancho, nunca la altura. */
+	wrapperClassName?: string;
+	sizes?: string;
 }
 
 // Miniatura clicable que abre la imagen completa. El <dialog> se monta en un
-// portal (: es flow content y no puede anidarse dentro del <p> que
-// react-markdown genera alrededor de cada imagen). showModal() aporta gratis el
-// cierre con Escape, el fondo inerte y el focus trap.
-export function ThreadImage({ src, alt }: { src: string; alt: string }) {
+// portal: es flow content y no puede anidarse dentro del <p> que react-markdown
+// genera alrededor de cada imagen. showModal() aporta gratis el cierre con
+// Escape, el fondo inerte y el focus trap.
+export function ZoomImage({
+	src,
+	alt,
+	expandSrc = src,
+	wrapperClassName = "mx-auto block w-full cursor-zoom-in sm:max-w-md",
+	sizes = "(max-width: 640px) 100vw, 448px",
+}: ZoomImageProps) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const [mounted, setMounted] = useState(false);
 
@@ -28,8 +38,8 @@ export function ThreadImage({ src, alt }: { src: string; alt: string }) {
 			<button
 				type="button"
 				onClick={() => dialogRef.current?.showModal()}
-				aria-label={`Ampliar imagen: ${alt}`}
-				className="mx-auto block w-full cursor-zoom-in sm:max-w-md"
+				aria-label={`Expand image: ${alt}`}
+				className={wrapperClassName}
 			>
 				{/* width/height en 0 + w-full h-auto: Next genera el srcset sin
 				    imponer una relación de aspecto que la foto no tiene. */}
@@ -38,7 +48,7 @@ export function ThreadImage({ src, alt }: { src: string; alt: string }) {
 					alt={alt}
 					width={0}
 					height={0}
-					sizes="(max-width: 640px) 100vw, 448px"
+					sizes={sizes}
 					className="h-auto w-full rounded-lg border border-white/10 transition-opacity duration-200 hover:opacity-90"
 				/>
 			</button>
@@ -56,10 +66,10 @@ export function ThreadImage({ src, alt }: { src: string; alt: string }) {
 						}}
 						className="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-black/90 open:flex open:flex-col open:items-center open:gap-6"
 					>
-						{/*eslint-disable-next-line @next/next/no-img-element -- el visor debe
-						    servir la foto original de Twitter, no una copia del optimizador */}
+						{/*eslint-disable-next-line @next/next/no-img-element -- el visor
+						    sirve la imagen original, no una copia del optimizador */}
 						<img
-							src={largeUrl(src)}
+							src={expandSrc}
 							alt={alt}
 							className="max-h-[74vh] max-w-[88vw] rounded-2xl border border-white/20 object-contain"
 						/>
@@ -68,7 +78,7 @@ export function ThreadImage({ src, alt }: { src: string; alt: string }) {
 						<button
 							type="button"
 							onClick={() => dialogRef.current?.close()}
-							aria-label="Cerrar imagen"
+							aria-label="Close image"
 							className="shrink-0 rounded-full border border-white/30 p-3.5 text-white/70 transition-colors hover:border-palette-lime hover:text-palette-lime"
 						>
 							<X size={20} />

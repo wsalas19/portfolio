@@ -5,7 +5,13 @@ import { UnrolledThread } from '@/lib/twitter/types';
 import 'highlight.js/styles/github-dark.css';
 import Image from 'next/image';
 import type { Components } from 'react-markdown';
-import { ThreadImage } from './ThreadImage';
+import { ZoomImage } from '@/components/ZoomImage';
+
+// pbs.twimg.com acepta ?name=large para servir la foto en tamaño completo.
+// Si la URL ya trae query, se encadena con &.
+function largeUrl(url: string): string {
+  return `${url}${url.includes('?') ? '&' : '?'}name=large`;
+}
 
 // Custom markdown components for proper text hierarchy and spacing
 const components: Partial<Components> = {
@@ -72,7 +78,7 @@ const components: Partial<Components> = {
   // Photos arrive as inline Markdown, below the tweet that attached them.
   img: ({ src, alt }) =>
     typeof src === 'string' ? (
-      <ThreadImage src={src} alt={alt || 'Tweet image'} />
+      <ZoomImage src={src} alt={alt || 'Tweet image'} expandSrc={largeUrl(src)} />
     ) : null,
 
   // Inline code vs code blocks
