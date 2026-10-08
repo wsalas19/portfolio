@@ -37,7 +37,7 @@ export async function generateMetadata({
 			publishedTime: post.date,
 			authors: [post.author],
 			tags: post.tags,
-			url: `https://wsalasdev.site/blog/${post.slug}`,
+			url: `https://www.wsalas.com/blog/${post.slug}`,
 		},
 		twitter: {
 			card: "summary_large_image",
@@ -67,12 +67,12 @@ export default async function BlogPostPage({
 		author: {
 			"@type": "Person",
 			name: post.author,
-			url: "https://wsalasdev.site",
+			url: "https://www.wsalas.com",
 		},
 		datePublished: post.date,
 		description: post.excerpt,
 		keywords: post.tags.join(", "),
-		url: `https://wsalasdev.site/blog/${post.slug}`,
+		url: `https://www.wsalas.com/blog/${post.slug}`,
 	};
 
 	return (

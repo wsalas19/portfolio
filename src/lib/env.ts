@@ -12,7 +12,7 @@ const envSchema = z.object({
   TWTAPI_KEY: z.string().min(1).optional(),
 
   // Client-side variables (with defaults for production)
-  NEXT_PUBLIC_SITE_URL: z.string().url().default('https://wsalasdev.site'),
+  NEXT_PUBLIC_SITE_URL: z.string().url().default('https://www.wsalas.com'),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
@@ -22,7 +22,7 @@ export const env = parsedEnv.success ? parsedEnv.data : {
   RESEND_FROM_EMAIL: undefined,
   RESEND_TO_EMAIL: undefined,
   TWTAPI_KEY: undefined,
-  NEXT_PUBLIC_SITE_URL: 'https://wsalasdev.site'
+  NEXT_PUBLIC_SITE_URL: 'https://www.wsalas.com'
 };
 
 // Validate on import (throws in development if missing)

@@ -1,4 +1,3 @@
-"use client";
 import ContactForm from "../ContactForm";
 import Experience from "../Experience";
 import ProfileCard from "../ProfileCard";

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 		description:
 			"Paste any X/Twitter thread URL and get a clean, shareable article in seconds. No signup required.",
 		type: "website",
-		url: "https://wsalasdev.site/twitter-threads",
+		url: "https://www.wsalas.com/twitter-threads",
 		siteName: "William Salas",
 	},
 	twitter: {
@@ -25,7 +25,7 @@ const webAppJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "WebApplication",
 	name: "X Thread to Article Converter",
-	url: "https://wsalasdev.site/twitter-threads",
+	url: "https://www.wsalas.com/twitter-threads",
 	applicationCategory: "UtilitiesApplication",
 	operatingSystem: "Web",
 	description:
@@ -34,7 +34,7 @@ const webAppJsonLd = {
 	author: {
 		"@type": "Person",
 		name: "William Salas",
-		url: "https://wsalasdev.site",
+		url: "https://www.wsalas.com",
 	},
 };
 

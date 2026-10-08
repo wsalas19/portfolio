@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 		title: "Blog | William Salas",
 		description:
 			"Technical articles about React, Next.js, TypeScript, and modern web development by William Salas.",
-		url: "https://wsalasdev.site/blog",
+		url: "https://www.wsalas.com/blog",
 		siteName: "William Salas Portfolio",
 		type: "website",
 	},

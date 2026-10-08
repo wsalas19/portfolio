@@ -31,7 +31,7 @@ const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "Person",
 	name: "William Salas",
-	url: "https://wsalasdev.site",
+	url: "https://www.wsalas.com",
 	sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
 	jobTitle: "Full Stack Developer",
 	description:

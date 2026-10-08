@@ -135,86 +135,128 @@ export const jobs: jobProps[] = [
 			"Supported students by guiding them through programming exercises, providing targeted help to build their confidence and skills. Focused on creating a learning experience that encouraged problem-solving and mastery of core concepts.",
 	},
 ];
+// El orden es el que ve el visitante: primero el trabajo propio y público (que se
+// puede abrir y verificar), después el trabajo de cliente y, al final, la
+// contribución a un proyecto de otro.
+// Se quitaron Hunt Club Portal y Office Supplies Manager: los dos son software
+// privado sin nada público que enlazar (Hunt Club solo lo abren socios; del otro
+// no hay más material), y una tarjeta sin botón es un callejón sin salida que
+// resta credibilidad en vez de sumarla.
 export const projects: Project[] = [
-	// {
-	// 	title: "Portfolio Website",
-	// 	description:
-	// 		"Personal portfolio built with Next.js and TypeScript to showcase experience and personal work.",
-	// 	technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-	// 	liveUrl: "https://wsalas.tech",
-	// 	githubUrl: "https://github.com/wsalas19/portfolio",
-	// 	imageUrl: "/images/portfolio.png",
-	// 	highlights: [
-	// 		"Responsive Design",
-	// 		"Server-Side Rendering",
-	// 		"UX/UI",
-	// 		"Personal Work",
-	// 	],
-	// },
+	{
+		title: "Frieda Player",
+		slug: "frieda-player",
+		description:
+			"A frameless desktop card that mirrors whatever is playing through Windows' media controls and tints itself from the album artwork.",
+		technologies: ["Rust", "Tauri 2", "React", "TypeScript", "Windows SMTC"],
+		githubUrl: "https://github.com/wsalas19/frieda-player",
+		imageUrl: "/images/frieda-player.png",
+		highlights: [
+			"Event-driven, zero polling",
+			"Album-artwork color grading",
+			"System tray resident",
+			"Native Windows integration",
+			"Alpha",
+		],
+	},
+	{
+		title: "Visor de Crédito Hipotecario",
+		slug: "visor-credito",
+		description:
+			"Free mortgage simulator for Colombia that models UVR and pesos amortization under Ley 546/1999 — no other free tool applies the local rules.",
+		technologies: ["Next.js", "TypeScript", "Chart.js", "Tailwind CSS"],
+		liveUrl: "/visor-credito",
+		imageUrl: "/images/visor-credito.png",
+		highlights: [
+			"UVR and pesos amortization",
+			"Ley 546/1999 and FRECH/FNA rules",
+			"CSV export",
+			"Free, no signup",
+		],
+	},
+	{
+		title: "Twitter Thread Unroller",
+		slug: "twitter-threads",
+		description:
+			"Paste an X/Twitter thread URL and get back a clean, readable article — built to route around the complexity of the X API.",
+		technologies: ["Next.js", "TypeScript", "X API", "Tailwind CSS"],
+		liveUrl: "/twitter-threads",
+		imageUrl: "/images/twitter-threads.png",
+		highlights: [
+			"One-click unroll",
+			"Readable article output",
+			"No signup required",
+			"Free tool",
+		],
+	},
+	{
+		title: "Barranquilla Verde",
+		slug: "barranquilla-verde",
+		description:
+			"Block-level spatial study of Barranquilla: Sentinel-2 vegetation crossed with socioeconomic stratum across 7,761 city blocks.",
+		technologies: [
+			"Google Earth Engine",
+			"Sentinel-2",
+			"OSMnx",
+			"Python",
+			"ArcGIS",
+		],
+		liveUrl: "/blog/barranquilla-verde-desigualdad-2026",
+		imageUrl:
+			"/images/blog/barranquilla-verde-desigualdad-2026/01_estrato_y_ndvi.webp",
+		highlights: [
+			"7,761 city blocks analysed",
+			"NDVI at 10 m resolution",
+			"Local Moran's I (LISA) clustering",
+			"Walkability computed from OpenStreetMap",
+			"Open data only",
+		],
+	},
 	{
 		title: "Doctor Portal",
-		description: "Developed new features for PatientStudio doctor portal, integrated some new AI function and improved user experience.",
+		slug: "doctor-portal",
+		description:
+			"Developed new features for the PatientStudio doctor portal, integrated new AI functionality and improved the user experience.",
 		technologies: [
 			"React",
-			'Vite',
+			"Vite",
 			"TypeScript",
 			"Tailwind CSS",
 			"Storybook",
 			"Figma",
 			"GraphQL",
 		],
-		imageUrl: "/images/ps-1.png",
+		// El portal en sí es privado (solo entra personal médico), así que el enlace
+		// va al sitio del producto para el que se construyó.
+		liveUrl: "https://www.patientstudio.com/",
+		imageUrl: "/images/projects/doctor-portal/01-portal.png",
 		highlights: [
 			"AI Integration",
 			"User Experience Improvement",
 			"Medical Software",
-			"UX/UI"
-		],
-	},
-	{
-		title: "Office Supplies Manager",
-		description:
-			"Custom built private web-based procurement system designed to streamline the ordering and management of office supplies within a corporate environment.",
-		technologies: [
-			"Next.js",
-			"TypeScript",
-			"Material UI",
-			"Postgres",
-			"AWS",
-			"CI/CD",
-			"ORM",
-		],
-		imageUrl: "/images/gdc.png",
-		highlights: [
-			"Responsive Design",
-			"Migration",
-			"API Integration",
-			"Coorporate Client",
-		],
-	},
-	{
-		title: "Hunt Club Portal",
-		description:
-			"is a modern Next.js application designed to streamline lodge reservations, wildlife outings, and member profile management.",
-		technologies: [
-			"Next.js",
-			"TypeScript",
-			"Tailwind CSS",
-			"Zoho CRM",
-			"GCP",
-			"CI/CD",
-			"Redis",
-		],
-		imageUrl: "/images/cottonwood.png",
-		highlights: [
-			"Responsive Design",
 			"UX/UI",
-			"API Integration",
-			"SSR",
-			"Image Optimization",
 		],
 	},
-	// ... your other projects
+	{
+		title: "Invoify — OSS Contribution",
+		slug: "invoify",
+		// Contribución, no proyecto propio: el texto lo dice para que la tarjeta no
+		// se lea como si el repo fuera mío.
+		description:
+			"Open-source contribution to Invoify, a 6.3k-star invoice generator: fixed PDF generation in Firefox and rebuilt the theme toggle.",
+		technologies: ["Next.js", "TypeScript", "React-PDF", "Shadcn"],
+		// El enlace va al PR mergeado y no al repo: la tarjeta trata sobre el aporte,
+		// y desde el PR el repo queda a un clic. El PR es la única prueba pública de
+		// que el código entró.
+		githubUrl: "https://github.com/al1abb/invoify/pull/664",
+		imageUrl: "/images/invoify.png",
+		highlights: [
+			"Merged into a 6.3k-star project",
+			"Fixed Firefox PDF generation (issue #11)",
+			"PDFs download as attachments again",
+			"3 files changed, +303/−392",
+		],
+	},
 ];
 
 export const gradientColors = [ "#d4ff4d", "#a2a206", "#2e3320", "#fb8983",];

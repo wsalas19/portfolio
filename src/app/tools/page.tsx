@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 		title: "Tools | William Salas",
 		description:
 			"Free browser tools: X/Twitter thread reader and a Colombian mortgage credit simulator.",
-		url: "https://wsalasdev.site/tools",
+		url: "https://www.wsalas.com/tools",
 		siteName: "William Salas Portfolio",
 		type: "website",
 	},

@@ -1,7 +1,9 @@
-"use client";
 import { projects } from "@/lib/constants";
+import { galleryFor } from "@/lib/project-images";
 import { ExpandableProjectCard } from "@/components/ui/expandable-project-card";
 
+// Sin "use client": necesita el sistema de archivos para listar las galerías y no
+// usa ningún hook. La tarjeta, que sí es cliente, recibe las rutas ya resueltas.
 function ProjectShowcase() {
 	return (
 		<section id="projects" className="w-full py-20 md:py-32">
@@ -12,8 +14,14 @@ function ProjectShowcase() {
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 					{projects.map((project, index) => (
 						<ExpandableProjectCard
-							key={`${project.title}-${index}`}
-							project={project}
+							key={project.slug}
+							project={{
+								...project,
+								// La portada ya se ve arriba en grande; la galería es el resto.
+								images: galleryFor(project.slug).filter(
+									(src) => src !== project.imageUrl
+								),
+							}}
 							index={index}
 						/>
 					))}

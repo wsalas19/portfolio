@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: doc?.title,
 		description: doc?.excerpt,
-		url: "https://wsalasdev.site/privacidad",
+		url: "https://www.wsalas.com/privacidad",
 		siteName: "William Salas",
 		locale: "es_CO",
 		type: "website",

@@ -1,3 +1,4 @@
+"use client";
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/lib/types/globals';
@@ -15,16 +16,17 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 	return (
 		<>
 			{/* Preview Card */}
+			{/* Preview Card */}
 			<motion.div
 				layoutId={layoutId}
 				onClick={() => setIsOpen(true)}
-				className="cursor-pointer relative min-h-[340px] w-full  bg-[#121212]/60 overflow-hidden rounded-2xl border border-white/10 group"
+				className="cursor-pointer relative flex min-h-[340px] w-full flex-col bg-[#121212]/60 overflow-hidden rounded-2xl border border-white/10 group"
 				whileHover={{ scale: 1.02 }}
 				transition={{ duration: 0.2 }}
 			>
 				<motion.div
 					layoutId={`image-container-${layoutId}`}
-					className="relative h-48 w-full overflow-hidden"
+					className="relative h-48 w-full shrink-0 overflow-hidden"
 				>
 					<Image
 						src={project.imageUrl}
@@ -36,10 +38,12 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 						sizes="(max-width: 768px) 100vw, 380px"
 						className="object-cover rounded-t-2xl"
 					/>
-					<div className="absolute inset-0"/>
 				</motion.div>
 
-				<div className="absolute bottom-0 left-0 right-0 p-5">
+				{/* En flujo, no `absolute bottom-0`: posicionado no aportaba altura, así
+				    que cuando las etiquetas ocupaban dos filas (p. ej. "Google Earth
+				    Engine") el bloque crecía hacia arriba y se montaba sobre la imagen. */}
+				<div className="p-5 flex-1">
 					<motion.div layoutId={`title-${layoutId}`} className="mb-2">
 						<h3 className="font-display text-lg uppercase font-bold text-gradient-pink text-[#fb8983]">
 							{project.title}
@@ -189,6 +193,42 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 										))}
 									</div>
 								</motion.div>
+
+								{/* Galería. En columna y con el scroll que ya tiene el modal, no
+								    en carrusel: esconder capturas detrás de flechas cuando un
+								    scroll las muestra todas es interfaz de más. Va después de
+								    los highlights y antes del CTA. */}
+								{!!project.images?.length && (
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: 10 }}
+										transition={{ delay: 0.18 }}
+										className="mt-8"
+									>
+										<h4 className="text-sm font-semibold text-palette-lime uppercase tracking-wide mb-3">
+											Gallery
+										</h4>
+										<div className="space-y-4">
+											{project.images.map((src) => (
+												<div
+													key={src}
+													// `contain` y no `cover`: son pantallas de una app y
+													// recortarlas se come justo el detalle que se quiere ver.
+													className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-white/10 bg-black/40"
+												>
+													<Image
+														src={src}
+														alt={`${project.title} — screenshot`}
+														fill
+														sizes="(max-width: 1024px) 100vw, 1024px"
+														className="object-contain"
+													/>
+												</div>
+											))}
+										</div>
+									</motion.div>
+								)}
 
 								{/* Action Buttons */}
 								<motion.div

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 		"Portfolio",
 		"wsalas",
 	],
-	authors: [{ name: "William Salas", url: "https://wsalasdev.site" }],
+	authors: [{ name: "William Salas", url: "https://www.wsalas.com" }],
 	creator: "William Salas",
 	publisher: "William Salas",
 
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
 		title: "William Salas | Full Stack Developer & Software Engineer",
 		description:
 			"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies. Explore the portfolio of William Salas featuring projects, experience, and technical expertise.",
-		url: "https://wsalasdev.site",
+		url: "https://www.wsalas.com",
 		siteName: "William Salas Portfolio",
 		locale: "en_US",
 		type: "website",
 		images: [
 			{
-				url: "https://wsalasdev.site/og-image.png",
+				url: "https://www.wsalas.com/og-image.png",
 				width: 1200,
 				height: 630,
 				alt: "William Salas - Full Stack Developer Portfolio",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 		title: "William Salas | Full Stack Developer & Software Engineer",
 		description:
 			"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies. Explore the portfolio of William Salas featuring projects, experience, and technical expertise.",
-		images: ["https://wsalasdev.site/og-image.png"],
+		images: ["https://www.wsalas.com/og-image.png"],
 		creator: "@wsalas19",
 		site: "@wsalas19",
 	},

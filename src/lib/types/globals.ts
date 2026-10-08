@@ -28,11 +28,18 @@ export type PathType = {
 };
 export interface Project {
 	title: string;
+	// Identifica el proyecto en el sistema de archivos: la carpeta de galería es
+	// `public/images/projects/<slug>/`. Se escribe a mano y no se deriva del
+	// título, que lleva tildes y espacios.
+	slug: string;
 	description: string;
 	technologies: string[];
 	liveUrl?: string;
 	githubUrl?: string;
 	imageUrl: string;
+	// Capturas extra para el modal. No se escribe en `constants.ts`: la llena
+	// ProjectShowcase leyendo la carpeta, excluyendo la portada.
+	images?: string[];
 	highlights: string[];
 }
 // Types
