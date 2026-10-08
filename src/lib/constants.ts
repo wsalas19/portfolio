@@ -37,6 +37,18 @@ export const paths: PathType[] = [
 ];
 
 export const imgSize: number = 300;
+
+// Una sola fuente para los datos que aparecen en más de un sitio. El LinkedIn
+// estaba escrito dos veces con handles distintos: `layout.tsx` (JSON-LD del
+// Person) apuntaba a /in/william-salas-19 y el botón de la home a
+// /in/williamsalasb/.
+export const SOCIAL_LINKS = {
+	github: "https://github.com/wsalas19",
+	linkedin: "https://www.linkedin.com/in/williamsalasb/",
+	upwork: "https://www.upwork.com/freelancers/williams59",
+} as const;
+
+export const CONTACT_EMAIL = "wa.salas1905@hotmail.com";
 export const jobs: jobProps[] = [
 	{
 		role: "Full Stack Developer",

@@ -33,8 +33,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const sparksRef = useRef<Spark[]>([]);
-	const startTimeRef = useRef<number | null>(null);
 	const isVisibleRef = useRef(true);
+	// El rAF solo corre mientras haya sparks. Antes quedaba encendido toda la
+	// sesión, redibujando (y haciendo getContext) a 60fps para enseñar un canvas
+	// vacío. handleClick usa este starter para reencenderlo.
+	const startLoopRef = useRef<(() => void) | null>(null);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -79,8 +82,13 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 				entries.forEach((entry) => {
 					isVisibleRef.current = entry.isIntersecting;
 					if (!entry.isIntersecting) {
-						// Clear sparks when not visible to save resources
+						// Fuera de pantalla no quedan sparks y el rAF se apaga, así que
+						// hay que limpiar el canvas aquí o el último frame se queda
+						// pintado.
 						sparksRef.current = [];
+						canvas
+							.getContext("2d")
+							?.clearRect(0, 0, canvas.width, canvas.height);
 					}
 				});
 			},
@@ -118,33 +126,23 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 			"(prefers-reduced-motion: reduce)",
 		).matches;
 
-		let animationId: number;
+		let animationId = 0;
 
 		const draw = (timestamp: number) => {
-			animationId = requestAnimationFrame(draw);
-
-			// Early exit if no sparks or not visible
-			if (sparksRef.current.length === 0 || !isVisibleRef.current) {
+			if (prefersReducedMotion || !isVisibleRef.current) {
+				sparksRef.current = [];
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				return;
 			}
 
-			// Skip if prefers reduced motion
-			if (prefersReducedMotion) return;
-
-			if (!startTimeRef.current) {
-				startTimeRef.current = timestamp;
-			}
-			ctx?.clearRect(0, 0, canvas.width, canvas.height);
-
+			// Limpia y repinta lo que siga vivo; el filtro es también la condición
+			// de parada, así que no hay que recorrer los sparks dos veces.
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			sparksRef.current = sparksRef.current.filter((spark: Spark) => {
 				const elapsed = timestamp - spark.startTime;
-				if (elapsed >= duration) {
-					return false;
-				}
+				if (elapsed >= duration) return false;
 
-				const progress = elapsed / duration;
-				const eased = easeFunc(progress);
-
+				const eased = easeFunc(elapsed / duration);
 				const distance = eased * sparkRadius * extraScale;
 				const lineLength = sparkSize * (1 - eased);
 
@@ -162,12 +160,20 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
 				return true;
 			});
+
+			// Sin sparks no se reprograma: el loop se apaga solo.
+			if (sparksRef.current.length > 0) {
+				animationId = requestAnimationFrame(draw);
+			}
 		};
 
-		animationId = requestAnimationFrame(draw);
+		startLoopRef.current = () => {
+			animationId = requestAnimationFrame(draw);
+		};
 
 		return () => {
 			cancelAnimationFrame(animationId);
+			startLoopRef.current = null;
 		};
 	}, [
 		sparkColor,
@@ -211,7 +217,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 			}),
 		);
 
+		// Si ya había sparks en vuelo el loop está encendido; solo se arranca
+		// cuando estaba parado, o se duplicaría el rAF.
+		const wasIdle = sparksRef.current.length === 0;
 		sparksRef.current.push(...newSparks);
+		if (wasIdle) startLoopRef.current?.();
 	};
 
 	return (
@@ -219,7 +229,6 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 			<canvas
 				ref={canvasRef}
 				className="absolute inset-0 pointer-events-none z-50"
-				style={{ willChange: "transform" }}
 			/>
 			{children}
 		</div>

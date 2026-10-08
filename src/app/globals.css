@@ -5,6 +5,10 @@
 @layer base {
 	:root {
 		scroll-behavior: smooth;
+		/* El sitio es oscuro, así que se lo decimos al navegador y deja de pintar
+		   los controles nativos (checkbox, scrollbars, <select>, date pickers) en
+		   modo claro. Evita tener que re-estilizar a mano cada uno. */
+		color-scheme: dark;
 		--background: 0 0% 100%;
 		--foreground: 222.2 84% 4.9%;
 
@@ -78,6 +82,24 @@
 }
 
 @layer utilities {
+	/* Entrada de secciones en CSS, no con framer-motion. La versión anterior
+	   arrancaba al hidratar, así que el HTML del servidor salía con
+	   `style="opacity:0"` en 22 elementos —el <h1> incluido— y el LCP quedaba
+	   amarrado a la descarga del JS. Una animación CSS corre en el primer paint
+	   y el contenido existe aunque el JS no llegue.
+	   El retardo se pasa con `[--rise-delay:200ms]`, porque el shorthand
+	   `animation` resetea `animation-delay`.
+	   `backwards` y no `both`: cubre el retardo con el estado inicial, pero al
+	   terminar no deja un `transform` congelado que anularía un hover:scale. */
+	.rise {
+		animation: rise 0.5s ease-out backwards;
+		animation-delay: var(--rise-delay, 0ms);
+	}
+	.pop {
+		animation: pop 0.4s ease-out backwards;
+		animation-delay: var(--rise-delay, 0ms);
+	}
+
 	.global-p {
 		@apply md:px-32;
 	}
@@ -95,23 +117,31 @@
 		@apply border-2 border-palette-lime;
 	}
 
-	/* Glassmorphism utility classes */
+	/* Glassmorphism utility classes.
+	   Los canales van en decimal: `rgba(#121212, 0.7)` no es CSS válido —rgba()
+	   quiere números, no un token hex— así que la declaración se descartaba al
+	   parsear y todas estas clases quedaban sin fondo. Las tres primeras eran
+	   las rotas; `glass-pink`/`glass-lime` ya estaban bien. */
 	.glass {
-		background: rgba(#121212, 0.7);
+		background: rgba(18, 18, 18, 0.7);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border: 1px solid rgba(255, 255, 255, 0.15);
 	}
 
 	.glass-strong {
-		background: rgba(#121212, 0.5);
+		background: rgba(18, 18, 18, 0.5);
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
 		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
-	.glass-light {
-		background: rgba(#fafafa, 0.5);
+	/* Antes `glass-light`, con un panel casi blanco. El sitio entero es oscuro y
+	   sus siete consumidores llevan texto e iconos claros encima, así que un
+	   panel claro los dejaba ilegibles; ahora es vidrio sutil y el nombre dice
+	   lo que hace. */
+	.glass-subtle {
+		background: rgba(255, 255, 255, 0.06);
 		backdrop-filter: blur(8px);
 		-webkit-backdrop-filter: blur(8px);
 		border: 1px solid rgba(255, 255, 255, 0.1);
@@ -240,5 +270,37 @@
 	.hide-spinners {
 		-moz-appearance: textfield;
 		appearance: textfield;
+	}
+}
+
+/* Los keyframes van fuera de @layer para que no los purgue la capa. */
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes pop {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Sin animación, el elemento queda visible de una: `animation:none` no aplica
+   el estado `from`, así que no hay que recuperar la opacidad a mano. */
+@media (prefers-reduced-motion: reduce) {
+	.rise,
+	.pop {
+		animation: none;
 	}
 }

@@ -18,6 +18,9 @@ function formatDateShort(dateString: string): string {
     year: "numeric",
     month: "short",
     day: "numeric",
+    // "2026-10-03" es medianoche UTC; sin fijar la zona, en UTC-5 se muestra
+    // como 2 de octubre.
+    timeZone: "UTC",
   };
   return date.toLocaleDateString("en-US", options);
 }

@@ -17,7 +17,7 @@ function ExperienceCard({
 	isActive = false,
 }: ExperienceCardProps) {
 	return (
-		<li className="relative mb-10 ms-8">
+		<div className="relative mb-10 ms-8">
 			{/* Briefcase icon container - moved outside the scaling container */}
 			<span
 				className={`absolute flex items-center justify-center w-12 h-12
@@ -77,7 +77,7 @@ function ExperienceCard({
 					)}
 				</div>
 			</div>
-		</li>
+		</div>
 	);
 }
 

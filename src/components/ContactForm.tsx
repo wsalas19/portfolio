@@ -1,10 +1,10 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
 import { Loader2, Mail, MessageSquare, Send } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { POLITICA_VERSION } from "@/lib/legal";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -77,43 +77,19 @@ function ContactForm() {
 		}
 	}
 
-	const containerVariants = {
-		hidden: { opacity: 0, y: 20 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.6,
-				staggerChildren: 0.1,
-			},
-		},
-	};
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 20 },
-		visible: { opacity: 1, y: 0 },
-	};
 
 	return (
 		<div
 			id="contact"
-			className="min-h-screen flex items-center justify-center py-20 md:py-32"
+			className="py-20 md:py-32"
 		>
-			<div className="w-full mx-6">
+			<div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Single Unified Card */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6, delay: 0.2 }}
-					className="glass-strong rounded-2xl border border-white/10 shadow-2xl overflow-hidden glow-pink-hover"
-				>
+				<div className="glass-strong rise [--rise-delay:200ms] rounded-2xl border border-white/10 shadow-2xl overflow-hidden glow-pink-hover">
 					<div className="grid lg:grid-cols-2">
 						{/* Left Section - Contact Info */}
-						<motion.div
-							initial={{ opacity: 0, x: -30 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.6, delay: 0.4 }}
-							className="p-8 lg:p-12 bg-gradient-to-br from-palette-pink/10 to-transparent
+						<div
+							className="p-8 lg:p-12 rise [--rise-delay:400ms] bg-gradient-to-br from-palette-pink/10 to-transparent
 	                         border-r border-white/10 lg:border-r lg:border-b-0 border-b"
 						>
 							<h3 className="font-display text-2xl font-bold mb-6 text-gradient-pink">
@@ -128,7 +104,7 @@ function ContactForm() {
 									<div>
 										<p className="text-white font-bold text-sm">Email</p>
 										<p className="text-white font-medium">
-											wa.salas1905@hotmail.com
+											{CONTACT_EMAIL}
 										</p>
 									</div>
 								</div>
@@ -158,22 +134,17 @@ function ContactForm() {
 									collaborate on new projects.
 								</p>
 							</div>
-						</motion.div>
+						</div>
 
 						{/* Right Section - Contact Form */}
-						<motion.div
-							variants={containerVariants}
-							initial="hidden"
-							animate="visible"
-							className="p-8 lg:p-12"
-						>
+						<div className="p-8 lg:p-12 rise [--rise-delay:400ms]">
 							<form
 								onSubmit={form.handleSubmit(onSubmit)}
 								className="space-y-4"
 							>
 								{/* Name and Email Row */}
 								<div className="grid md:grid-cols-2 gap-6">
-									<motion.div variants={itemVariants}>
+									<div className="rise [--rise-delay:500ms]">
 										<Label
 											htmlFor="name"
 											className="flex items-center gap-2  mb-2 font-bold text-base"
@@ -183,19 +154,19 @@ function ContactForm() {
 										<Input
 											id="name"
 											placeholder="John Doe"
-											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                     transition-all duration-300  placeholder:text-gray-500 rounded-lg"
+											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 											{...form.register("name")}
-											aria-invalid={!!errors.name}
+											aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined}
 										/>
 										{errors.name && (
-											<p className="text-red-400 text-sm mt-2">
+											<p role="alert" id="name-error" className="text-red-400 text-sm mt-2">
 												{errors.name.message}
 											</p>
 										)}
-									</motion.div>
+									</div>
 
-									<motion.div variants={itemVariants}>
+									<div className="rise [--rise-delay:600ms]">
 										<Label
 											htmlFor="email"
 											className="flex items-center gap-2  mb-2 font-bold text-base"
@@ -206,21 +177,21 @@ function ContactForm() {
 											id="email"
 											placeholder="john@example.com"
 											type="email"
-											className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                     transition-all duration-300  placeholder:text-gray-500 rounded-lg"
+											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 											{...form.register("email")}
-											aria-invalid={!!errors.email}
+											aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined}
 										/>
 										{errors.email && (
-											<p className="text-red-400 text-sm mt-2">
+											<p role="alert" id="email-error" className="text-red-400 text-sm mt-2">
 												{errors.email.message}
 											</p>
 										)}
-									</motion.div>
+									</div>
 								</div>
 
 								{/* Subject */}
-								<motion.div variants={itemVariants}>
+								<div className="rise [--rise-delay:700ms]">
 									<Label
 										htmlFor="title"
 										className="flex items-center gap-2  mb-2 font-bold text-base"
@@ -230,20 +201,20 @@ function ContactForm() {
 									<Input
 										id="title"
 										placeholder="Let's discuss a project"
-										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                 transition-all duration-300  placeholder:text-gray-500 rounded-lg"
+										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                 transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 										{...form.register("title")}
-										aria-invalid={!!errors.title}
+										aria-invalid={!!errors.title} aria-describedby={errors.title ? "title-error" : undefined}
 									/>
 									{errors.title && (
-										<p className="text-red-400 text-sm mt-2">
+										<p role="alert" id="title-error" className="text-red-400 text-sm mt-2">
 											{errors.title.message}
 										</p>
 									)}
-								</motion.div>
+								</div>
 
 								{/* Message */}
-								<motion.div variants={itemVariants}>
+								<div className="rise [--rise-delay:800ms]">
 									<Label
 										htmlFor="message"
 										className="flex items-center gap-2 mb-2 font-bold text-base"
@@ -253,27 +224,30 @@ function ContactForm() {
 									<Textarea
 										id="message"
 										placeholder="Tell me about your project, ideas, or just say hello!"
-										className="glass-light border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
-	                                 transition-all duration-300 min-h-[120px] placeholder:text-gray-500
+										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+	                                 transition-[border-color,box-shadow] duration-300 min-h-[120px] placeholder:text-gray-400
 	                                 resize-none rounded-lg"
 										{...form.register("message")}
-										aria-invalid={!!errors.message}
+										aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}
 									/>
 									{errors.message && (
-										<p className="text-red-400 text-sm mt-2">
+										<p role="alert" id="message-error" className="text-red-400 text-sm mt-2">
 											{errors.message.message}
 										</p>
 									)}
-								</motion.div>
+								</div>
 
 								{/* Consentimiento informado previo al envío */}
-								<motion.div variants={itemVariants}>
+								<div className="rise [--rise-delay:900ms]">
 									<label className="flex items-center gap-2 cursor-pointer">
 										<input
 											type="checkbox"
 											{...form.register("consent")}
-											aria-invalid={!!errors.consent}
-											className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-white/20 bg-transparent accent-palette-lime"
+											aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "consent-error" : undefined}
+											// `border-white/20` y `bg-transparent` no aplican: en un checkbox
+											// nativo (appearance: auto) los ignora el navegador. El color
+											// lo pone `accent-palette-lime` y el resto `color-scheme: dark`.
+											className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-palette-lime"
 										/>
 										<span className="text-xs leading-relaxed text-gray-400">
 											I agree to the processing of my personal data to respond
@@ -289,14 +263,14 @@ function ContactForm() {
 										</span>
 									</label>
 									{errors.consent && (
-										<p className="text-red-400 text-sm mt-2">
+										<p role="alert" id="consent-error" className="text-red-400 text-sm mt-2">
 											{errors.consent.message}
 										</p>
 									)}
-								</motion.div>
+								</div>
 
 								{/* Submit Button */}
-								<motion.div variants={itemVariants}>
+								<div className="rise [--rise-delay:1000ms]">
 									<Button
 										variant={"green"}
 										className="w-full text-[16px] glow-lime-hover"
@@ -315,11 +289,11 @@ function ContactForm() {
 											</>
 										)}
 									</Button>
-								</motion.div>
+								</div>
 							</form>
-						</motion.div>
+						</div>
 					</div>
-				</motion.div>
+				</div>
 			</div>
 		</div>
 	);

@@ -13,6 +13,8 @@ function formatDate(dateString: string): string {
     year: "numeric",
     month: "long",
     day: "numeric",
+    // Fecha de calendario, no instante: sin UTC, en UTC-5 cae al día anterior.
+    timeZone: "UTC",
   };
   return date.toLocaleDateString("en-US", options);
 }

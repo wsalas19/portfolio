@@ -30,6 +30,10 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 						src={project.imageUrl}
 						alt={project.title}
 						fill
+						// La tarjeta topa en 380px. Sin `sizes`, Next asume 100vw y el
+						// navegador pide una imagen del ancho del viewport para pintarla
+						// a 380.
+						sizes="(max-width: 768px) 100vw, 380px"
 						className="object-cover rounded-t-2xl"
 					/>
 					<div className="absolute inset-0"/>
@@ -124,6 +128,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 									src={project.imageUrl}
 									alt={project.title}
 									fill
+									sizes="(max-width: 1024px) 100vw, 1024px"
 									className="object-cover"
 									priority
 								/>
@@ -208,7 +213,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 											href={project.githubUrl}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="px-5 py-2.5 glass-light hover:bg-white/10 text-gray-300 rounded-lg border border-white/20 transition-all duration-300 font-medium"
+											className="px-5 py-2.5 glass-subtle hover:bg-white/10 text-gray-300 rounded-lg border border-white/20 transition-all duration-300 font-medium"
 										>
 											View Code
 										</a>

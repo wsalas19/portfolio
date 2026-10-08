@@ -17,7 +17,9 @@ function NavBar() {
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 20);
 		};
-		window.addEventListener("scroll", handleScroll);
+		// passive: el handler solo lee scrollY, marcarlo así evita que el navegador
+		// espere a que termine antes de pintar el scroll.
+		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
@@ -80,8 +82,7 @@ function NavBar() {
 	return (
 		<>
 			<nav
-				id="#nav"
-				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-all duration-300 ${
+				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
 					isScrolled
 						? "glass-strong shadow-2xl glow-lime-hover"
 						: "glass shadow-lg "
@@ -113,6 +114,9 @@ function NavBar() {
 					<button
 						className="lg:hidden text-white"
 						onClick={() => setIsOpen(!isOpen)}
+						aria-expanded={isOpen}
+						aria-controls="mobile-menu"
+						aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
 					>
 						{isOpen ? <X size={24} /> : <Menu size={24} />}
 					</button>
@@ -121,6 +125,10 @@ function NavBar() {
 
 			{/* Mobile Menu */}
 			<div
+				id="mobile-menu"
+				// Cerrado sigue en el DOM (para poder animar la salida), así que sin
+				// esto el tabulador entra a links que están fuera de pantalla.
+				inert={!isOpen}
 				className={`fixed inset-0 glass-strong z-40 transform transition-transform duration-300 ease-in-out ${
 					isOpen ? "translate-y-0" : "-translate-y-full"
 				} lg:hidden`}

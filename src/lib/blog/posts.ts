@@ -42,7 +42,12 @@ export function getPostBySlug(slug: string): BlogPost | null {
     return {
       slug,
       title: frontmatter.title,
-      date: frontmatter.date,
+      // Normalizado a "YYYY-MM-DD" acá y no en cada consumidor: gray-matter
+      // devuelve Date para `date: 2026-10-06` y string para `date: "2026-10-06"`,
+      // y comparar un Date.toString() contra un ISO dejaba al post nuevo de
+      // último. Como fecha de calendario, además, el string ordena igual que
+      // cronológicamente.
+      date: new Date(frontmatter.date).toISOString().slice(0, 10),
       excerpt: frontmatter.excerpt,
       content,
       tags: frontmatter.tags || [],
@@ -60,7 +65,8 @@ export function getAllPosts(): BlogPost[] {
   const posts = slugs
     .map((slug) => getPostBySlug(slug))
     .filter((post): post is BlogPost => post !== null)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    // Descendente: lo más reciente primero, sobre fechas ya normalizadas.
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   return posts;
 }

@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Carme, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { env } from "@/lib/env";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 // metadataBase hace absolutas las `alternates.canonical` relativas de cada ruta.
 export const metadata: Metadata = {
@@ -31,10 +32,7 @@ const jsonLd = {
 	"@type": "Person",
 	name: "William Salas",
 	url: "https://wsalasdev.site",
-	sameAs: [
-		"https://www.linkedin.com/in/william-salas-19",
-		"https://github.com/wsalas19",
-	],
+	sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
 	jobTitle: "Full Stack Developer",
 	description:
 		"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies.",

@@ -54,14 +54,22 @@ function checkRateLimit(identifier: string): { allowed: boolean; resetAt?: numbe
   return { allowed: true };
 }
 
+// Una sola lista para los dos handlers. Antes cada uno tenía la suya y habían
+// divergido: OPTIONS leía NEXT_PUBLIC_SITE_URL y POST leía SITE_URL, que no
+// existe en el schema de env.ts, así que en producción POST caía siempre al
+// literal. Se lee de `env` y no de `process.env` para que el valor pase por la
+// validación de zod. En producción no se admite localhost.
+function allowedOrigins(): string[] {
+  return [
+    env.NEXT_PUBLIC_SITE_URL,
+    ...(process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]),
+  ];
+}
+
 export async function OPTIONS(request: Request) {
   const origin = request.headers.get('origin');
-  const allowedOrigins = [
-    process.env.NEXT_PUBLIC_SITE_URL ||  'http://localhost:3000' || 'https://wsalasdev.site',
 
-  ];
-
-  if (!origin || !allowedOrigins.includes(origin)) {
+  if (!origin || !allowedOrigins().includes(origin)) {
     return new NextResponse(null, { status: 403 });
   }
 
@@ -82,13 +90,10 @@ export async function POST(request: Request) {
 
   // Check origin for CORS
   const origin = request.headers.get('origin');
-  const allowedOrigins = [
-    process.env.SITE_URL || 'https://wsalasdev.site',
-    'http://localhost:3000'
-  ];
+  const allowed = allowedOrigins();
 
-	if (!origin || !allowedOrigins.includes(origin)) {
-		Logger.error(new Error('Forbidden'), { origin, allowedOrigins });
+	if (!origin || !allowed.includes(origin)) {
+		Logger.error(new Error('Forbidden'), { origin, allowedOrigins: allowed });
     return NextResponse.json(
       { error: 'Forbidden' },
       { status: 403 }

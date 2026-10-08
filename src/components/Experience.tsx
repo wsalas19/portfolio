@@ -19,14 +19,14 @@ function Experience() {
 	const visibleJobs = isExpanded ? jobs : jobs.slice(0, 2);
 
 	return (
-		<div id="experience" className="global-p pt-2 flex flex-col min-h-screen">
-			<div className="max-w-6xl mx-auto w-full px-4">
+		<div id="experience" className="py-20 md:py-32">
+			<div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
 				{/* Timeline */}
 				<div className="flex justify-center">
 					<div className="w-[80%] md:w-full max-w-4xl">
 						<ol className="relative border-s-2 border-gray-400 space-y-10">
 							{visibleJobs.map((job, index) => (
-								<div
+								<li
 									key={job.company}
 									className={`transform transition-all duration-500
                     ${activeIndex === index ? "scale-105" : "scale-100"}
@@ -35,15 +35,19 @@ function Experience() {
 									onMouseLeave={() => setActiveIndex(null)}
 								>
 									<ExperienceCard {...job} isActive={activeIndex === index} />
-								</div>
+								</li>
 							))}
 
 							{/* Starting Year Marker */}
-							<li className="ms-8 font-semibold text-2xl text-white">2022</li>
+							{/* El origen del timeline, subordinado a los títulos de puesto: antes
+							    iba en text-2xl, el mismo tamaño que "Full Stack Developer". */}
+							<li className="ms-8 text-lg font-semibold text-gray-400">2022</li>
 						</ol>
 
 						{/* Show More/Less Button */}
-						{jobs.length > 3 && (
+						{/* El corte de arriba es slice(0, 2); con > 3 el botón no aparecía
+						    con exactamente 3 cargos y el tercero quedaba inalcanzable. */}
+						{jobs.length > 2 && (
 							<div className="text-center mt-8">
 								<Button
 									variant="outline"
@@ -70,15 +74,5 @@ function Experience() {
 		</div>
 	);
 }
-
-// Helper function to extract unique technologies from jobs
-/* function getTechnologies(): string[] {
-	const techSet = new Set<string>();
-	jobs.forEach((job) => {
-		// Assuming you add a technologies array to your job type
-		job.technologies?.forEach((tech) => techSet.add(tech));
-	});
-	return Array.from(techSet);
-} */
 
 export default Experience;

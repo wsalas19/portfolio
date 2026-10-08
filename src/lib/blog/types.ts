@@ -11,7 +11,8 @@ export interface BlogPost {
 
 export interface BlogPostFrontmatter {
   title: string;
-  date: string;
+  /** Date si el YAML lo escribe sin comillas; string si va entre comillas. */
+  date: string | Date;
   excerpt: string;
   tags: string[];
   author: string;
