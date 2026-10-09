@@ -8,7 +8,7 @@ author: "William Salas"
 
 Barranquilla es una ciudad verde y también es una ciudad desigual. Este trabajo mide las dos cosas a la vez, manzana por manzana, con imágenes de satélite y con los datos que publica la propia ciudad. Y encuentra una contradicción: el satélite ve más verde donde vive la gente con menos recursos, pero esa misma gente tiene menos verde a la mano.
 
-Las dos frases son ciertas. La diferencia está en qué cuenta como verde.
+Las dos frases son ciertas. La diferencia radica en qué cuenta como verde.
 
 ---
 
