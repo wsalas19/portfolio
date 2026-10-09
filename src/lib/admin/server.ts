@@ -36,15 +36,29 @@ export function json(body: unknown, status = 200): NextResponse {
 	});
 }
 
-const DEV_ORIGIN = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
+/**
+ * El `Origin` tiene que ser el del propio sitio. Se compara contra el host de la
+ * petición y no contra `NEXT_PUBLIC_SITE_URL`, que es lo que había antes: esa
+ * variable apuntaba al apex mientras el sitio canonicaliza en www, así que
+ * *todo* guardado daba 403 en producción y funcionaba en local — el peor
+ * reparto posible para un fallo, porque solo se ve desplegado. Además las
+ * `NEXT_PUBLIC_*` se inlinean en el build: corregir la variable en Vercel no
+ * arregla el deploy que ya está corriendo.
+ *
+ * Comparar contra el host de la petición es la defensa estándar contra CSRF y
+ * cubre apex, www, deploys de preview y localhost con un solo chequeo, sin
+ * ninguna variable que mantener sincronizada.
+ */
+export function isAllowedOrigin(request: Request): boolean {
+	const origin = request.headers.get("origin");
+	const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+	if (!origin || !host) return false;
 
-// En desarrollo cualquier puerto: `next dev` cae a 3001 si el 3000 está ocupado,
-// y enumerar puertos fue exactamente lo que dejó al POST del formulario de
-// contacto comparando contra una lista que no incluía el suyo.
-export function isAllowedOrigin(origin: string | null): boolean {
-	if (!origin) return false;
-	if (origin === env.NEXT_PUBLIC_SITE_URL) return true;
-	return process.env.NODE_ENV !== "production" && DEV_ORIGIN.test(origin);
+	try {
+		return new URL(origin).host === host;
+	} catch {
+		return false;
+	}
 }
 
 export function cookieValue(request: Request, name: string): string | undefined {
@@ -66,7 +80,7 @@ export function cookieValue(request: Request, name: string): string | undefined 
  * bloquea el envío de la cookie desde otro sitio, esto es la segunda capa.
  */
 export function requireAdmin(request: Request, method: string): NextResponse | null {
-	if (method !== "GET" && method !== "HEAD" && !isAllowedOrigin(request.headers.get("origin"))) {
+	if (method !== "GET" && method !== "HEAD" && !isAllowedOrigin(request)) {
 		return json({ error: "Forbidden" }, 403);
 	}
 

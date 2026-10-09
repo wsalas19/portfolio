@@ -86,7 +86,7 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-	if (!isAllowedOrigin(request.headers.get("origin"))) {
+	if (!isAllowedOrigin(request)) {
 		return json({ error: "Forbidden" }, 403);
 	}
 
