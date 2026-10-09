@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 
 function ScrollButton() {
 	const [visible, setVisible] = useState(false);
+	const pathname = usePathname();
 
 	const toggleVisible = () => {
 		const scrolled = document.documentElement.scrollTop;
@@ -31,6 +33,10 @@ function ScrollButton() {
 			};
 		}
 	}, []);
+
+	// Igual que la nav: en el panel estorba.
+	if (pathname.startsWith("/admin")) return null;
+
 	return (
 		<Button
 			onClick={scrollToTop}

@@ -27,6 +27,10 @@ function NavBar() {
 		? systemPaths.filter((p) => p.name === "blog")
 		: systemPaths;
 
+	// El panel tiene su propia barra. La nav del sitio flota abajo al centro y le
+	// tapa la esquina del editor.
+	if (pathname.startsWith("/admin")) return null;
+
 	const NavItem = ({ path }: { path: (typeof paths)[0] }) => {
 		const isActive = pathname === path.path;
 

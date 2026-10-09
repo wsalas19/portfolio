@@ -4,6 +4,9 @@
 User-agent: *
 Allow: /
 
+# Panel de edición: privado, fuera del índice.
+Disallow: /admin
+
 # Disallow specific paths if needed
 # Disallow: /api/
 # Disallow: /private/

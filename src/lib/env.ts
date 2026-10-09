@@ -11,6 +11,14 @@ const envSchema = z.object({
   RESEND_TO_EMAIL: z.string().email().optional(),
   TWTAPI_KEY: z.string().min(1).optional(),
 
+  // Panel /admin. Si faltan, el panel falla cerrado: sin contraseña no hay
+  // sesión posible y sin token no se llama a GitHub.
+  ADMIN_PASSWORD: z.string().min(1).optional(),
+  ADMIN_SECRET: z.string().min(16).optional(),
+  GITHUB_TOKEN: z.string().min(1).optional(),
+  // Solo para probar contra una rama de tiro; en producción se usa master.
+  GITHUB_BRANCH: z.string().min(1).optional(),
+
   // Client-side variables (with defaults for production)
   NEXT_PUBLIC_SITE_URL: z.string().url().default('https://www.wsalas.com'),
 });
@@ -22,6 +30,10 @@ export const env = parsedEnv.success ? parsedEnv.data : {
   RESEND_FROM_EMAIL: undefined,
   RESEND_TO_EMAIL: undefined,
   TWTAPI_KEY: undefined,
+  ADMIN_PASSWORD: undefined,
+  ADMIN_SECRET: undefined,
+  GITHUB_TOKEN: undefined,
+  GITHUB_BRANCH: undefined,
   NEXT_PUBLIC_SITE_URL: 'https://www.wsalas.com'
 };
 
