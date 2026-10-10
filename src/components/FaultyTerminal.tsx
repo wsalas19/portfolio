@@ -347,9 +347,9 @@ export default function FaultyTerminal({
 
 		const mesh = new Mesh(gl, { geometry, program });
 
-		function resize() {
-			if (!ctn || !renderer) return;
-			renderer.setSize(ctn.offsetWidth, ctn.offsetHeight);
+		function setSize(width: number, height: number) {
+			if (!renderer || !width || !height) return;
+			renderer.setSize(width, height);
 			program.uniforms.iResolution.value = new Color(
 				gl.canvas.width,
 				gl.canvas.height,
@@ -357,12 +357,26 @@ export default function FaultyTerminal({
 			);
 		}
 
-		const resizeObserver = new ResizeObserver(() => resize());
+		function resize() {
+			if (!ctn) return;
+			setSize(ctn.offsetWidth, ctn.offsetHeight);
+		}
+
+		// El `contentRect` del observer ya trae el tamaño medido: usarlo evita el
+		// `offsetWidth` síncrono que Lighthouse marcaba como forced reflow.
+		const resizeObserver = new ResizeObserver(([entry]) => {
+			if (!entry) return;
+			setSize(entry.contentRect.width, entry.contentRect.height);
+		});
 		resizeObserver.observe(ctn);
 		resize();
 
 		const update = (t: number) => {
 			rafRef.current = requestAnimationFrame(update);
+
+			// Pestaña en segundo plano: ni se avanza el tiempo ni se recompone el
+			// shader. El rAF queda programado y reanuda solo al volver a visible.
+			if (document.hidden) return;
 
 			if (pageLoadAnimation && loadAnimationStartRef.current === 0) {
 				loadAnimationStartRef.current = t;

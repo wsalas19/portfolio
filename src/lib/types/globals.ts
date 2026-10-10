@@ -16,8 +16,27 @@ export enum ButtonLabel {
 	DOWNLOAD = "Download CV",
 	DOWNLOADING = "Downloading",
 }
-export type ProfileCardProps = {
-	imgSize: number;
+// Un camino de servicio ("build", "advise"): lo que se puede contratar.
+export type ServiceTrack = {
+	id: string;
+	eyebrow: string;
+	title: string;
+	description: string;
+	items: string[];
+};
+
+export type FaqItem = {
+	question: string;
+	answer: string;
+};
+
+export type Testimonial = {
+	quote: string;
+	name: string;
+	role: string;
+	company?: string;
+	portraitUrl?: string;
+	linkedinUrl?: string;
 };
 
 export type PathType = {

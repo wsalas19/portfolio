@@ -1,53 +1,51 @@
 import Home from "@/components/pages/home";
 import { Metadata } from "next";
 
+const TITLE = "William Salas — Full-Stack Developer for Hire | Next.js, React, TypeScript";
+const DESCRIPTION =
+	"Freelance full-stack developer in Barranquilla, Colombia. I build production web software in Next.js, React and TypeScript — and review the architecture before it gets expensive to change. Book a call.";
+
+// El título y la descripción nombran la oferta, no solo a la persona: quien
+// busca "hire react developer" tiene que reconocer en el resultado lo que se
+// puede contratar. El nombre sigue presente en el título y en las keywords.
 export const metadata: Metadata = {
-	title: "William Salas | Full Stack Developer & Software Engineer",
-	description:
-		"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies. Explore the portfolio of William Salas featuring projects, experience, and technical expertise.",
+	title: TITLE,
+	description: DESCRIPTION,
 	keywords: [
+		"hire full stack developer",
+		"freelance React developer",
+		"freelance Next.js developer",
+		"TypeScript developer",
+		"Next.js consultant",
+		"technical code review",
+		"software consultant Colombia",
+		"web application development",
+		"API development",
+		"full stack development",
 		"William Salas",
-		"William",
-		"Salas",
-		"Full Stack Developer",
-		"Software Engineer",
-		"React Developer",
-		"TypeScript Developer",
-		"Next.js Developer",
-		"Web Developer",
-		"Frontend Developer",
-		"Backend Developer",
-		"Portfolio",
 		"wsalas",
 	],
 	authors: [{ name: "William Salas", url: "https://www.wsalas.com" }],
 	creator: "William Salas",
 	publisher: "William Salas",
+	alternates: { canonical: "/" },
 
 	openGraph: {
-		title: "William Salas | Full Stack Developer & Software Engineer",
-		description:
-			"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies. Explore the portfolio of William Salas featuring projects, experience, and technical expertise.",
+		title: TITLE,
+		description: DESCRIPTION,
 		url: "https://www.wsalas.com",
 		siteName: "William Salas Portfolio",
 		locale: "en_US",
 		type: "website",
-		images: [
-			{
-				url: "https://www.wsalas.com/og-image.png",
-				width: 1200,
-				height: 630,
-				alt: "William Salas - Full Stack Developer Portfolio",
-			},
-		],
+		// Sin `images`: la tarjeta la genera `src/app/opengraph-image.tsx`. Antes
+		// apuntaba a `/og-image.png`, que no existe en `public/`, así que toda
+		// tarjeta compartida salía sin imagen.
 	},
 
 	twitter: {
 		card: "summary_large_image",
-		title: "William Salas | Full Stack Developer & Software Engineer",
-		description:
-			"William Salas is a Full Stack Developer and Software Engineer specializing in React, TypeScript, Next.js, and modern web technologies. Explore the portfolio of William Salas featuring projects, experience, and technical expertise.",
-		images: ["https://www.wsalas.com/og-image.png"],
+		title: TITLE,
+		description: DESCRIPTION,
 		creator: "@wsalas19",
 		site: "@wsalas19",
 	},

@@ -4,7 +4,7 @@ import Link from "next/link";
 import DownloadResume from "./DownloadResume";
 import { Button } from "./ui/button";
 import { Video, Menu, X } from "lucide-react";
-import { paths as systemPaths } from "@/lib/constants";
+import { CALENDAR_URL, paths as systemPaths } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -145,7 +145,7 @@ function NavBar() {
 					<div className="flex flex-col text-[16px] w-full gap-4 pt-6 max-w-xs">
 						<DownloadResume />
 						<a
-							href="https://calendar.app.google/Yi51g1LEbcyJpoBb9"
+							href={CALENDAR_URL}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="w-full"

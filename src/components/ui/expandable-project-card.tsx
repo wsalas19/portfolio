@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/lib/types/globals';
 import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ExpandableProjectCardProps {
 	project: Project;
@@ -15,72 +16,64 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 
 	return (
 		<>
-			{/* Preview Card */}
-			{/* Preview Card */}
+			{/* Fila, no tarjeta: la referencia pone el trabajo como una lista editorial
+			    (miniatura, título, stack, flecha) en vez de una grilla de cajas. Los
+			    `layoutId` se mantienen, así que el morph hacia el modal sigue igual. */}
 			<motion.div
 				layoutId={layoutId}
 				onClick={() => setIsOpen(true)}
-				className="cursor-pointer relative flex min-h-[340px] w-full flex-col bg-[#121212]/60 overflow-hidden rounded-2xl border border-white/10 group"
-				whileHover={{ scale: 1.02 }}
-				transition={{ duration: 0.2 }}
+				className="group grid cursor-pointer grid-cols-[72px_1fr] items-center gap-x-4 gap-y-3 border-b border-white/10 py-5 transition-colors hover:bg-white/[0.04] md:grid-cols-[88px_1fr_auto_24px] md:gap-6"
 			>
 				<motion.div
 					layoutId={`image-container-${layoutId}`}
-					className="relative h-48 w-full shrink-0 overflow-hidden"
+					className="relative h-14 w-[72px] shrink-0 overflow-hidden rounded-lg md:h-16 md:w-[88px]"
 				>
 					<Image
 						src={project.imageUrl}
 						alt={project.title}
 						fill
-						// La tarjeta topa en 380px. Sin `sizes`, Next asume 100vw y el
-						// navegador pide una imagen del ancho del viewport para pintarla
-						// a 380.
-						sizes="(max-width: 768px) 100vw, 380px"
-						className="object-cover rounded-t-2xl"
+						// La miniatura topa en 88px. Sin `sizes`, Next asume 100vw y el
+						// navegador pide una imagen del ancho del viewport.
+						sizes="88px"
+						className="object-cover"
 					/>
 				</motion.div>
 
-				{/* En flujo, no `absolute bottom-0`: posicionado no aportaba altura, así
-				    que cuando las etiquetas ocupaban dos filas (p. ej. "Google Earth
-				    Engine") el bloque crecía hacia arriba y se montaba sobre la imagen. */}
-				<div className="p-5 flex-1">
-					<motion.div layoutId={`title-${layoutId}`} className="mb-2">
-						<h3 className="font-display text-lg uppercase font-bold text-gradient-pink text-[#fb8983]">
+				<div className="min-w-0">
+					<motion.div layoutId={`title-${layoutId}`}>
+						<h3 className="font-display text-lg uppercase font-bold text-palette-pink md:text-xl">
 							{project.title}
 						</h3>
 					</motion.div>
 
 					<motion.div
 						layoutId={`subtitle-${layoutId}`}
-						className="text-gray-300 text-sm line-clamp-2"
+						className="text-gray-400 text-sm mt-1 line-clamp-2 md:line-clamp-1"
 					>
 						{project.description}
-					</motion.div>
-
-					<motion.div
-						layoutId={`tech-${layoutId}`}
-						className="flex flex-wrap gap-1.5 mt-3"
-					>
-						{project.technologies.slice(0, 3).map((tech) => (
-							<span
-								key={tech}
-								className="px-2 py-0.5 glass-pink text-palette-pink  rounded-full text-xs border border-palette-pink/20"
-							>
-								{tech}
-							</span>
-						))}
-						{project.technologies.length > 3 && (
-							<span className="px-2 py-0.5 text-gray-300 text-xs">
-								+{project.technologies.length - 3}
-							</span>
-						)}
 					</motion.div>
 				</div>
 
 				<motion.div
-					className="absolute inset-0 border-2 border-palette-lime/0 rounded-2xl transition-colors"
-					whileHover={{ borderColor: 'rgba(212, 255, 77, 0.3)' }}
-				/>
+					layoutId={`tech-${layoutId}`}
+					className="col-span-2 flex flex-wrap gap-1.5 md:col-span-1 md:justify-end"
+				>
+					{project.technologies.slice(0, 3).map((tech) => (
+						<span
+							key={tech}
+							className="px-2 py-0.5 glass-pink text-palette-pink rounded-full text-xs border border-palette-pink/20"
+						>
+							{tech}
+						</span>
+					))}
+					{project.technologies.length > 3 && (
+						<span className="px-2 py-0.5 text-gray-400 text-xs">
+							+{project.technologies.length - 3}
+						</span>
+					)}
+				</motion.div>
+
+				<ArrowUpRight className="hidden h-5 w-5 text-gray-500 transition-colors group-hover:text-palette-lime md:block" />
 			</motion.div>
 
 			{/* Expanded Modal */}

@@ -1,9 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { Landmark, Newspaper, ArrowRight, Wrench } from "lucide-react";
-import { motion } from "motion/react";
-import { scrollRevealVariants } from "@/lib/animations";
 
 interface Tool {
 	name: string;
@@ -42,10 +38,8 @@ export function ToolGrid() {
 		<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{TOOLS.map((tool) => (
 				<Link key={tool.href} href={tool.href}>
-					<motion.article
-						variants={scrollRevealVariants}
-						whileHover={{ scale: 1.02 }}
-						className="glass flex h-[280px] flex-col justify-between rounded-lg p-6 transition-all duration-200 hover:glass-strong group"
+					<article
+						className="glass flex h-[280px] flex-col justify-between rounded-lg p-6 transition-all duration-200 hover:glass-strong hover:scale-[1.02] group"
 					>
 						<div className="flex flex-col gap-3">
 							<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-lime-300">
@@ -67,7 +61,7 @@ export function ToolGrid() {
 								/>
 							</div>
 						</div>
-					</motion.article>
+					</article>
 				</Link>
 			))}
 		</div>

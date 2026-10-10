@@ -3,8 +3,6 @@ import { BlogPost } from "@/lib/blog/types";
 import { TagBadge } from "./TagBadge";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
-import { scrollRevealVariants } from "@/lib/animations";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -31,10 +29,8 @@ export function BlogCard({ post, className }: BlogCardProps) {
       href={`/blog/${post.slug}`}
       className={cn("block", className)}
     >
-      <motion.article
-        variants={scrollRevealVariants}
-        whileHover={{ scale: 1.02 }}
-        className="glass flex flex-col justify-between h-[360px] p-6 rounded-lg transition-all duration-200 hover:glass-strong group"
+      <article
+        className="glass flex flex-col justify-between h-[360px] p-6 rounded-lg transition-all duration-200 hover:glass-strong hover:scale-[1.02] group"
 			>
 				<div className="flex flex-col gap-2">
 
@@ -75,7 +71,7 @@ export function BlogCard({ post, className }: BlogCardProps) {
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
         </div>
 				</div>
-      </motion.article>
+      </article>
     </Link>
   );
 }

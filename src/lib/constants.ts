@@ -1,10 +1,22 @@
-import { jobProps, PathType, Project } from "./types/globals";
+import {
+	FaqItem,
+	jobProps,
+	PathType,
+	Project,
+	ServiceTrack,
+	Testimonial,
+} from "./types/globals";
 
 export const paths: PathType[] = [
 	{
 		name: "about",
 		path: "#about",
 		description: "Learn more about my background and skills.",
+	},
+	{
+		name: "services",
+		path: "#services",
+		description: "What you can hire: product development and technical review.",
 	},
 	{
 		name: "experience",
@@ -24,7 +36,8 @@ export const paths: PathType[] = [
 	{
 		name: "blog",
 		path: "/blog",
-		description: "Technical articles about React, Next.js, and web development.",
+		description:
+			"Technical articles about React, Next.js, and web development.",
 		isRoute: true,
 	},
 	{
@@ -49,12 +62,53 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const CONTACT_EMAIL = "wa.salas1905@hotmail.com";
+
+// Estaba escrita a mano en `NavBar.tsx`. Ahora la usan la nav, el hero, la banda
+// de CTA y el footer: cuatro copias del mismo link era una errata esperando.
+export const CALENDAR_URL = "https://calendar.app.google/DY4tPQXi5Dn1gKZz9";
+
+/**
+ * Todo lo que se decía de la persona estaba hardcodeado dentro de `ProfileCard`:
+ * el nombre en un `<h1>`, la bio en un `<p>`, las skills en un array local. Al
+ * partir la home en secciones, esos datos los necesitan el hero, las stats, el
+ * footer y el JSON-LD, así que viven acá.
+ *
+ * El texto pasó por una revisión de inglés técnico simplificado (ASD-STE100):
+ * una idea por frase, voz activa, sin contracciones y sin frases de más de 20
+ * palabras. La excepción deliberada son los títulos y los CTA — "Build something
+ * that ships." funciona mejor en imperativo que en cualquier perífrasis.
+ */
+export const PROFILE = {
+	name: "William Salas Bolaño",
+	wordmark: "WSALAS",
+	eyebrow: "Available for freelance · Barranquilla, Colombia",
+	tagline:
+		"I build production web software — Next.js, React and TypeScript. I also review architecture before the wrong decisions get expensive.",
+	bio: "Full-stack developer with a background in architecture and graphic design. I build clear interfaces and the APIs behind them. I have worked with teams in Colombia and abroad.",
+	location: "Barranquilla, Colombia",
+	country: "CO",
+	skills: [
+		"React",
+		"TypeScript",
+		"Node.js",
+		"Next.js",
+		"Tailwind CSS",
+		"GraphQL",
+	],
+	// El año en que arranca la línea de tiempo de `jobs`, para derivar los años
+	// de experiencia en vez de escribir el número.
+	experienceStart: 2022,
+} as const;
+
+// Las descripciones mantienen el estilo impersonal del CV ("Built and scaled…",
+// sin sujeto) en vez de pasar a primera persona: son el registro de los cargos,
+// no el pitch. Lo que cambió es la longitud — cada frase queda por debajo de las
+// 20 palabras y cada párrafo dice una cosa sola.
 export const jobs: jobProps[] = [
 	{
 		role: "Full Stack Developer",
 		company: "Everus",
-		companyUrl:
-			"https://everuscares.com",
+		companyUrl: "https://everuscares.com",
 		startDate: "Oct 2025",
 		endDate: "Present",
 		technologies: [
@@ -66,7 +120,7 @@ export const jobs: jobProps[] = [
 			"AI integration",
 		],
 		description:
-			"Engineered and scaled the core full-stack web applications and robust backend APIs for an AI-powered smart-matching platform.",
+			"Built and scaled the main full-stack web applications and the backend APIs for an AI-powered smart-matching platform.",
 	},
 	{
 		role: "Front-End Developer",
@@ -84,7 +138,7 @@ export const jobs: jobProps[] = [
 			"GraphQL",
 		],
 		description:
-			"Collaborated with a cross-functional team of backend developers and UX/UI designers to develop and enhance features for PatientStudio's healthcare platform, serving medical professionals. Built responsive, user-friendly interfaces using React and TypeScript, while maintaining design consistency through Storybook components. Actively participated in agile development cycles using Jira for project management, and promptly addressed client issues to ensure optimal platform performance and user experience for healthcare providers.",
+			"Built and improved features for PatientStudio's healthcare platform, with a cross-functional team of backend developers and UX/UI designers. Built responsive interfaces in React and TypeScript and kept the components consistent in Storybook. Worked in agile sprints tracked in Jira and fixed client issues on the live platform.",
 	},
 	{
 		role: "Solutions Engineer",
@@ -93,7 +147,7 @@ export const jobs: jobProps[] = [
 		endDate: "March 2024",
 		technologies: ["Jira", "React", "REST API", "AI"],
 		description:
-			"Assisted API consumers by leveraging advanced workflow automation tools to optimize processes, while providing consultative support to enhance product functionality and drive continuous improvement.",
+			"Helped API consumers use workflow automation tools to simplify their processes. Gave consulting support to improve product features.",
 	},
 	{
 		role: "Technical Staff",
@@ -103,7 +157,7 @@ export const jobs: jobProps[] = [
 		endDate: "Jan 2025",
 
 		description:
-			"Provided in-depth debugging and technical assistance on portfolio projects, helping students overcome challenges and improve their code. Conducted office hours to clarify concepts and guide job seekers, fostering a supportive and educational environment.",
+			"Debugged student portfolio projects and gave technical help to improve their code. Ran office hours to explain concepts and to prepare job seekers for interviews.",
 	},
 
 	{
@@ -123,7 +177,7 @@ export const jobs: jobProps[] = [
 			"Docker",
 		],
 		description:
-			"Designed and implemented tailored software solutions for diverse clients, ensuring projects aligned with their specific requirements. Engaged in regular consultations to capture project details and maintain clear communication throughout the development process.",
+			"Designed and built custom software for clients and matched each project to their requirements. Ran regular consultation calls to capture the project details and to keep communication clear.",
 	},
 	{
 		role: "Programming Mentor",
@@ -132,7 +186,7 @@ export const jobs: jobProps[] = [
 		startDate: "Sep 2022",
 		endDate: "Feb 2023",
 		description:
-			"Supported students by guiding them through programming exercises, providing targeted help to build their confidence and skills. Focused on creating a learning experience that encouraged problem-solving and mastery of core concepts.",
+			"Guided students through programming exercises and gave targeted help to build their confidence. Designed exercises that encouraged problem-solving and the mastery of core concepts.",
 	},
 ];
 // El orden es el que ve el visitante: primero el trabajo propio y público (que se
@@ -215,8 +269,10 @@ export const projects: Project[] = [
 	{
 		title: "Doctor Portal",
 		slug: "doctor-portal",
+		// "improved the user experience" se fue: no hay forma de verificarlo en una
+		// aplicación privada, y la fila ya afirma lo que sí se puede comprobar.
 		description:
-			"Developed new features for the PatientStudio doctor portal, integrated new AI functionality and improved the user experience.",
+			"Built new features for the PatientStudio doctor portal and added AI functionality.",
 		technologies: [
 			"React",
 			"Vite",
@@ -259,4 +315,87 @@ export const projects: Project[] = [
 	},
 ];
 
-export const gradientColors = [ "#d4ff4d", "#a2a206", "#2e3320", "#fb8983",];
+export const gradientColors = ["#d4ff4d", "#a2a206", "#2e3320", "#fb8983"];
+
+// Los tres caminos que se pueden contratar. Cada afirmación sale de `jobs`: no
+// hay ningún servicio acá que no tenga un trabajo detrás que lo respalde.
+export const serviceTracks: ServiceTrack[] = [
+	{
+		id: "build",
+		eyebrow: "Build",
+		title: "Full-stack product development",
+		description:
+			"I ship features end to end: the interface, the API behind it and the deploy. I have done this on a healthcare platform, on client projects and on my own published tools.",
+		items: [
+			"Next.js, React and TypeScript",
+			"Node APIs with Postgres or Supabase",
+			"Deploys on Vercel and AWS",
+		],
+	},
+	{
+		id: "advise",
+		eyebrow: "Advise",
+		title: "Technical direction & review",
+		description:
+			"A second opinion before the expensive part. I tell you what to build first and what to cut. I also flag where the code will slow you down in six months.",
+		items: [
+			"Architecture and scope before you commit",
+			"Code review with written findings",
+			"Mentoring for a team picking up a new stack",
+		],
+	},
+	{
+		id: "process",
+		eyebrow: "How it works",
+		title: "Small, visible increments",
+		description:
+			"There are no black boxes and no month-long silence. You see the work while I build it.",
+		items: [
+			"A 30-minute call to scope it",
+			"A written scope and estimate",
+			"Something shippable every week",
+		],
+	},
+];
+
+// Respuestas apoyadas en datos del CV, no en promesas. Si una respuesta no se
+// puede respaldar con un trabajo, una fecha o un repo, no va acá.
+export const faq: FaqItem[] = [
+	{
+		question: "What kind of work do you take on?",
+		answer:
+			"Freelance work. I build a product or a feature end to end, and I advise on scope, architecture and code review. Most of it is web software in TypeScript.",
+	},
+	{
+		question: "Which parts of the stack do you own?",
+		answer:
+			"The front end, the API behind it and the deploy. My main tools are React, Next.js, TypeScript, Tailwind, Node, Postgres or Supabase, Vercel and AWS. I have also worked in existing GraphQL and Angular codebases, so I can join an existing codebase instead of starting again.",
+	},
+	{
+		question: "Have you worked inside an existing team?",
+		answer:
+			"Yes. At PatientStudio I worked with backend developers and UX/UI designers on a healthcare platform for medical staff. I built features in React and TypeScript, documented components in Storybook, used GraphQL and tracked sprints in Jira.",
+	},
+	{
+		question: "Can you build AI features?",
+		answer:
+			"Yes. At Everus I built and scaled the backend of an AI-powered smart-matching platform. At PatientStudio I added AI features to the doctor portal.",
+	},
+	{
+		question: "How do you work across time zones?",
+		answer:
+			"I am in Barranquilla, Colombia (UTC−5). That overlaps a full US workday. I have worked remotely with teams in the US and in other countries.",
+	},
+	{
+		question: "How does an engagement start?",
+		answer:
+			"First a 30-minute call to understand what you need. Then a written scope that lists what is included. If it is not a good match, I will tell you on the call.",
+	},
+];
+
+/**
+ * Vacío a propósito: hay dos permisos pendientes antes de poder mostrar nombres
+ * y citas. El componente devuelve `null` mientras el array esté vacío, así que
+ * cargar los objetos es todo lo que hace falta para que la sección aparezca.
+ */
+export const testimonials: Testimonial[] = [];
