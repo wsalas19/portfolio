@@ -49,7 +49,7 @@ function Hero() {
 						</p>
 
 						<div className="rise [--rise-delay:300ms] mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-							<Button variant="green" size="lg" asChild className="glow-lime-hover">
+							<Button variant="green" size="lg" asChild className="glow-lime-hover w-full sm:w-auto">
 								<a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
 									<Video className="mr-2 h-5 w-5" />
 									Book a call
