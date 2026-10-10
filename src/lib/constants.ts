@@ -144,7 +144,7 @@ export const jobs: jobProps[] = [
 		role: "Solutions Engineer",
 		company: "Gwocu Studio",
 		startDate: "Nov 2024",
-		endDate: "March 2024",
+		endDate: "March 2025",
 		technologies: ["Jira", "React", "REST API", "AI"],
 		description:
 			"Helped API consumers use workflow automation tools to simplify their processes. Gave consulting support to improve product features.",
@@ -397,5 +397,8 @@ export const faq: FaqItem[] = [
  * Vacío a propósito: hay dos permisos pendientes antes de poder mostrar nombres
  * y citas. El componente devuelve `null` mientras el array esté vacío, así que
  * cargar los objetos es todo lo que hace falta para que la sección aparezca.
+ *
+ * Hubo datos de relleno acá para ver la sección armada. Se quitaron: la sección
+ * está lista y esperando las citas reales, nada más.
  */
 export const testimonials: Testimonial[] = [];

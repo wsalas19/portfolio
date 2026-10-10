@@ -7,12 +7,17 @@ import { testimonials } from "@/lib/constants";
  * nombres y citas reales. Mientras `testimonials` esté vacío esto no renderiza
  * nada — nada de nombres de relleno ni de "coming soon". Cargar los objetos en
  * `constants.ts` es todo lo que hace falta para que la sección aparezca acá.
+ *
+ * El `id` es el ancla para el enlace profundo. Mientras el array esté vacío el
+ * componente devuelve `null` antes de renderizar, así que el ancla no existe y
+ * `paths` no lo lista: un enlace a `#testimonials` sería un salto a la nada.
+ * Cuando lleguen las citas, el `id` ya está puesto y solo falta la entrada.
  */
 function Testimonials() {
 	if (testimonials.length === 0) return null;
 
 	return (
-		<section className="py-20 md:py-32">
+		<section id="testimonials" className="py-20 md:py-32">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 				<SectionHeading eyebrow="Testimonials" title="What the people I worked with say" />
 
