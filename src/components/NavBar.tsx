@@ -133,11 +133,21 @@ function NavBar() {
 				// Cerrado sigue en el DOM (para poder animar la salida), así que sin
 				// esto el tabulador entra a links que están fuera de pantalla.
 				inert={!isOpen}
-				className={`fixed inset-0 glass-strong z-40 transform transition-transform duration-300 ease-in-out ${
+				// `overflow-y-auto` no es decorativo. El panel mide una pantalla
+				// (`inset-0`) y el contenido mide 688px fijos, así que en cualquier
+				// viewport más bajo el contenido se sale de la caja. Con
+				// `-translate-y-full` el panel sube una pantalla y esa sobra
+				// reaparece ARRIBA: los dos botones del final, cortados, encima del
+				// hero. Se veía en el teléfono (≈600px con la barra del navegador
+				// visible) y no en escritorio (≥700px). El overflow recorta la sobra
+				// y de paso deja el menú desplazable en pantallas cortas.
+				className={`fixed inset-0 glass-strong z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
 					isOpen ? "translate-y-0" : "-translate-y-full"
 				} lg:hidden`}
 			>
-				<div className="flex flex-col items-center pt-32 px-4 space-y-8">
+				{/* El `pb` deja el último botón por encima de la píldora de nav, que
+				    flota en `bottom-6` y tiene z mayor que este panel. */}
+				<div className="flex flex-col items-center pt-32 px-4 pb-24 space-y-8">
 					{paths.map((path) => (
 						<MobileNavItem key={path.name} path={path} />
 					))}

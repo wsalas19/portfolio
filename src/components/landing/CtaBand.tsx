@@ -18,7 +18,7 @@ function CtaBand() {
 						not, I will tell you on the call.
 					</p>
 					<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-						<Button variant="green" size="lg" asChild className="glow-lime-hover">
+						<Button variant="green" size="lg" asChild className="glow-lime-hover w-full sm:w-auto">
 							<a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
 								<Video className="mr-2 h-5 w-5" />
 								Book a call
