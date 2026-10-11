@@ -27,7 +27,10 @@ function Footer() {
 	const routes = paths.filter((path) => path.isRoute);
 
 	const socials = [
-		{ label: "GitHub", href: SOCIAL_LINKS.github },
+	// El `rel="me"` de abajo declara que los tres perfiles son de la misma persona
+	// que firma el sitio. No es factor de posicionamiento: es verificación de
+	// identidad (IndieAuth), que es justamente para lo que existen estos enlaces.
+	{ label: "GitHub", href: SOCIAL_LINKS.github },
 		{ label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
 		{ label: "Upwork", href: SOCIAL_LINKS.upwork },
 	];
@@ -97,7 +100,7 @@ function Footer() {
 									<a
 										href={social.href}
 										target="_blank"
-										rel="noopener noreferrer"
+										rel="noopener noreferrer me"
 										className={LINK}
 									>
 										{social.label}

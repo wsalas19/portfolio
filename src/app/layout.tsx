@@ -83,6 +83,17 @@ const jsonLd = {
 				},
 			],
 		},
+		// El `WebSite` es lo único que le dice a Google cómo se llama el sitio; con
+		// `name` + `url` habilita el nombre en los resultados en vez del dominio.
+		// Tiene que decir lo mismo que el `og:site_name` de `page.tsx`, o Google no
+		// lo consolida y sigue mostrando el dominio.
+		{
+			"@type": "WebSite",
+			"@id": `${SITE_URL}/#website`,
+			url: SITE_URL,
+			name: "William Salas Portfolio",
+			author: { "@id": `${SITE_URL}/#person` },
+		},
 		{
 			"@type": "ProfessionalService",
 			"@id": `${SITE_URL}/#service`,
