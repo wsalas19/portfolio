@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 	}[] = [
 		{ path: "", priority: 1, changeFrequency: "weekly" },
+		// La landing traducida. No lleva entry aparte con `alternates`: el `hreflang`
+		// ya lo emite la metadata de cada página y repetirlo acá no lo refuerza.
+		{ path: "/es", priority: 0.9, changeFrequency: "weekly" },
 		{ path: "/blog", priority: 0.9, changeFrequency: "weekly" },
 		{ path: "/visor-credito", priority: 0.9, changeFrequency: "monthly" },
 		{ path: "/tools", priority: 0.8, changeFrequency: "monthly" },

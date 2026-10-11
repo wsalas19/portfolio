@@ -12,21 +12,27 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { useToast } from "./ui/use-toast";
 
-const formSchema = z.object({
-	name: z.string().min(2, "Name must be at least 2 characters"),
-	email: z.string().email("Please enter a valid email"),
-	title: z.string().min(3, "Subject must be at least 3 characters"),
-	message: z.string().min(10, "Message must be at least 10 characters"),
-	// Ley 1581/2012 art. 9: la autorización debe ser previa y expresa, así que la
-	// casilla nunca va premarcada y el silencio no vale como consentimiento.
-	consent: z
-		.boolean()
-		.refine((v) => v, "Please accept the privacy policy to continue"),
-});
+import type { LandingCopy } from "@/lib/i18n";
 
-function ContactForm() {
+// Los mensajes de validación son prosa, así que el esquema se arma con el copy
+// del idioma en vez de ser una constante de módulo. El precio es reconstruirlo
+// en cada render, y son cinco `z.string()`: no vale la pena memoizarlo.
+function buildFormSchema(copy: LandingCopy) {
+	return z.object({
+		name: z.string().min(2, copy.contact.nameError),
+		email: z.string().email(copy.contact.emailError),
+		title: z.string().min(3, copy.contact.subjectError),
+		message: z.string().min(10, copy.contact.messageError),
+		// Ley 1581/2012 art. 9: la autorización debe ser previa y expresa, así que la
+		// casilla nunca va premarcada y el silencio no vale como consentimiento.
+		consent: z.boolean().refine((v) => v, copy.contact.consentError),
+	});
+}
+
+function ContactForm({ copy }: { copy: LandingCopy }) {
 	const { toast } = useToast();
-	const form = useForm<z.infer<typeof formSchema>>({
+	const formSchema = buildFormSchema(copy);
+	const form = useForm<z.infer<ReturnType<typeof buildFormSchema>>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
@@ -62,15 +68,15 @@ function ContactForm() {
 
 			form.reset();
 			toast({
-				title: `Thanks ${values.name}!`,
-				description: "I'll get back to you soon.",
+				title: copy.contact.thanks.replace("{name}", values.name),
+				description: copy.contact.thanksBody,
 				variant: "success",
 				duration: 2500,
 			});
 		} catch (error) {
 			toast({
-				title: "Error",
-				description: "Something went wrong. Please try again.",
+				title: copy.contact.errorTitle,
+				description: copy.contact.errorBody,
 				variant: "destructive",
 			});
 			console.error("Error sending email:", error);
@@ -93,7 +99,7 @@ function ContactForm() {
 	                         border-r border-white/10 lg:border-r lg:border-b-0 border-b"
 						>
 							<h3 className="font-display text-2xl font-bold mb-6 text-gradient-pink">
-								Get in Touch
+								{copy.contact.heading}
 							</h3>
 
 							<div className="space-y-6 mb-8">
@@ -102,7 +108,9 @@ function ContactForm() {
 										<Mail className="w-6 h-6 text-palette-pink" />
 									</div>
 									<div>
-										<p className="text-white font-bold text-sm">Email</p>
+										<p className="text-white font-bold text-sm">
+											{copy.contact.emailLabel}
+										</p>
 										<p className="text-white font-medium">
 											{CONTACT_EMAIL}
 										</p>
@@ -115,10 +123,10 @@ function ContactForm() {
 									</div>
 									<div>
 										<p className="text-white font-bold text-sm">
-											Response Time
+											{copy.contact.responseTimeLabel}
 										</p>
 										<p className="text-white font-medium">
-											Usually within 24 hours
+											{copy.contact.responseTimeValue}
 										</p>
 									</div>
 								</div>
@@ -126,12 +134,10 @@ function ContactForm() {
 
 							<div className="p-6 glass-pink rounded-xl border border-palette-pink/30">
 								<h4 className="text-white font-semibold mb-2">
-									Let&apos;s Build Something Amazing
+									{copy.contact.pitchTitle}
 								</h4>
 								<p className="text-gray-300 text-sm leading-relaxed">
-									Whether it&apos;s a web application, mobile app, or just a
-									conversation about technology, I&apos;m always excited to
-									collaborate on new projects.
+									{copy.contact.pitchBody}
 								</p>
 							</div>
 						</div>
@@ -149,11 +155,11 @@ function ContactForm() {
 											htmlFor="name"
 											className="flex items-center gap-2  mb-2 font-bold text-base"
 										>
-											Name
+											{copy.contact.nameLabel}
 										</Label>
 										<Input
 											id="name"
-											placeholder="John Doe"
+											placeholder={copy.contact.namePlaceholder}
 											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
 	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 											{...form.register("name")}
@@ -171,11 +177,11 @@ function ContactForm() {
 											htmlFor="email"
 											className="flex items-center gap-2  mb-2 font-bold text-base"
 										>
-											Email
+											{copy.contact.emailFieldLabel}
 										</Label>
 										<Input
 											id="email"
-											placeholder="john@example.com"
+											placeholder={copy.contact.emailPlaceholder}
 											type="email"
 											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
 	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
@@ -196,11 +202,11 @@ function ContactForm() {
 										htmlFor="title"
 										className="flex items-center gap-2  mb-2 font-bold text-base"
 									>
-										Subject
+										{copy.contact.subjectLabel}
 									</Label>
 									<Input
 										id="title"
-										placeholder="Let's discuss a project"
+										placeholder={copy.contact.subjectPlaceholder}
 										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
 	                                 transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 										{...form.register("title")}
@@ -219,11 +225,11 @@ function ContactForm() {
 										htmlFor="message"
 										className="flex items-center gap-2 mb-2 font-bold text-base"
 									>
-										Message
+										{copy.contact.messageLabel}
 									</Label>
 									<Textarea
 										id="message"
-										placeholder="Tell me about your project, ideas, or just say hello!"
+										placeholder={copy.contact.messagePlaceholder}
 										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
 	                                 transition-[border-color,box-shadow] duration-300 min-h-[120px] placeholder:text-gray-400
 	                                 resize-none rounded-lg"
@@ -250,14 +256,13 @@ function ContactForm() {
 											className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-palette-lime"
 										/>
 										<span className="text-xs leading-relaxed text-gray-400">
-											I agree to the processing of my personal data to respond
-											to this request, according to the{" "}
+											{copy.contact.consentPrefix}{" "}
 											<Link
 												href="/privacidad"
 												target="_blank"
 												className="text-palette-lime underline decoration-white/20 transition-colors hover:text-palette-olive"
 											>
-												Política de Tratamiento de Datos Personales
+												{copy.contact.consentLink}
 											</Link>
 											.
 										</span>
@@ -280,12 +285,12 @@ function ContactForm() {
 										{isSubmitting ? (
 											<>
 												<Loader2 className="mr-2 h-5 w-5 animate-spin" />
-												Sending Message...
+												{copy.contact.sending}
 											</>
 										) : (
 											<>
 												<Send className="mr-2 h-5 w-5" />
-												Send Message
+												{copy.contact.send}
 											</>
 										)}
 									</Button>

@@ -2,20 +2,18 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { ButtonControl, ButtonLabel } from "@/lib/types/globals";
 import { useToast } from "./ui/use-toast";
+import { getChromeCopy, localeFromPathname } from "@/lib/i18n/core";
+import { usePathname } from "next/navigation";
 
 function DownloadResume() {
-	const [buttonControl, setButtonControl] = useState<
-		ButtonControl<ButtonLabel>
-	>({
-		sent: false,
-		name: ButtonLabel.DOWNLOAD,
-	});
+	const [downloading, setDownloading] = useState(false);
 	const { toast } = useToast();
+	const pathname = usePathname();
+	const copy = getChromeCopy(localeFromPathname(pathname)).chrome;
 
 	const downloadResume = () => {
-		setButtonControl({ sent: true, name: ButtonLabel.DOWNLOADING });
+		setDownloading(true);
 
 		try {
 			const url = "/docs/resume.pdf";
@@ -35,19 +33,19 @@ function DownloadResume() {
 				variant: "destructive",
 			});
 		} finally {
-			setButtonControl({ sent: false, name: ButtonLabel.DOWNLOAD });
+			setDownloading(false);
 		}
 	};
 	return (
 		<Button
 			onClick={downloadResume}
-			disabled={buttonControl.sent}
+			disabled={downloading}
 			className=" w-full md:w-fit"
 			variant={"green"}
 			size={"sm"}
 		>
-			<Download aria-label="download icon" className="inline-block w-5 h-5 " />
-			{buttonControl.name}
+			<Download aria-label={copy.downloadIconLabel} className="inline-block w-5 h-5 " />
+			{downloading ? copy.downloading : copy.downloadCv}
 		</Button>
 	);
 }

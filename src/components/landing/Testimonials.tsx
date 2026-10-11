@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/SectionHeading";
 import { testimonials } from "@/lib/constants";
+import type { LandingCopy } from "@/lib/i18n";
 
 /**
  * Andamiaje, no contenido: hay dos permisos pendientes antes de poder publicar
@@ -13,13 +14,16 @@ import { testimonials } from "@/lib/constants";
  * `paths` no lo lista: un enlace a `#testimonials` sería un salto a la nada.
  * Cuando lleguen las citas, el `id` ya está puesto y solo falta la entrada.
  */
-function Testimonials() {
+function Testimonials({ copy }: { copy: LandingCopy }) {
 	if (testimonials.length === 0) return null;
 
 	return (
 		<section id="testimonials" className="py-20 md:py-32">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-				<SectionHeading eyebrow="Testimonials" title="What the people I worked with say" />
+				<SectionHeading
+					eyebrow={copy.testimonialsSection.eyebrow}
+					title={copy.testimonialsSection.title}
+				/>
 
 				<div className="grid gap-6 md:grid-cols-2">
 					{testimonials.map((testimonial) => (

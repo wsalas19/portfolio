@@ -2,15 +2,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/lib/types/globals';
+import type { LandingCopy } from '@/lib/i18n';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 
 interface ExpandableProjectCardProps {
 	project: Project;
 	index: number;
+	// `workSection` es prosa y vive en `i18n`; el componente es cliente, así que
+	// las etiquetas entran por prop y no por `usePathname`.
+	labels: LandingCopy['workSection'];
 }
 
-export function ExpandableProjectCard({ project, index }: ExpandableProjectCardProps) {
+export function ExpandableProjectCard({ project, index, labels }: ExpandableProjectCardProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const layoutId = `expandable-project-card-${index}`;
 
@@ -108,7 +112,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 								exit={{ opacity: 0, scale: 0.8 }}
 								onClick={() => setIsOpen(false)}
 								className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center bg-palette-card/80 hover:bg-palette-pink/20 rounded-full border border-white/10 text-white transition-all backdrop-blur-sm"
-								aria-label="Close"
+								aria-label={labels.close}
 							>
 								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 									<path d="M18 6 6 18" />
@@ -172,7 +176,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 									className="space-y-3"
 								>
 									<h4 className="text-sm font-semibold text-palette-lime uppercase tracking-wide">
-										Highlights
+										{labels.highlights}
 									</h4>
 									<div className="space-y-2">
 										{project.highlights.map((highlight) => (
@@ -200,7 +204,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 										className="mt-8"
 									>
 										<h4 className="text-sm font-semibold text-palette-lime uppercase tracking-wide mb-3">
-											Gallery
+											{labels.gallery}
 										</h4>
 										<div className="space-y-4">
 											{project.images.map((src) => (
@@ -212,7 +216,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 												>
 													<Image
 														src={src}
-														alt={`${project.title} — screenshot`}
+														alt={`${project.title} — ${labels.screenshotSuffix}`}
 														fill
 														sizes="(max-width: 1024px) 100vw, 1024px"
 														className="object-contain"
@@ -238,7 +242,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 											rel="noopener noreferrer"
 											className="px-5 py-2.5 bg-palette-pink/20 hover:bg-palette-pink/30 text-palette-pink rounded-lg border border-palette-pink/30 transition-all duration-300 font-medium glow-pink-hover"
 										>
-											View Live
+											{labels.viewLive}
 										</a>
 									)}
 									{project.githubUrl && (
@@ -248,7 +252,7 @@ export function ExpandableProjectCard({ project, index }: ExpandableProjectCardP
 											rel="noopener noreferrer"
 											className="px-5 py-2.5 glass-subtle hover:bg-white/10 text-gray-300 rounded-lg border border-white/20 transition-all duration-300 font-medium"
 										>
-											View Code
+											{labels.viewCode}
 										</a>
 									)}
 								</motion.div>

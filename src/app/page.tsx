@@ -28,7 +28,17 @@ export const metadata: Metadata = {
 	authors: [{ name: "William Salas", url: "https://www.wsalas.com" }],
 	creator: "William Salas",
 	publisher: "William Salas",
-	alternates: { canonical: "/" },
+	// El inglés vive en `/` y el español en `/es`: nada de `/en`. Mover la URL que
+	// ya posiciona para ganar simetría sería pagar el ranking con la moneda del
+	// ranking. `x-default` apunta a `/` porque ese es el idioma de partida.
+	alternates: {
+		canonical: "/",
+		languages: {
+			en: "/",
+			es: "/es",
+			"x-default": "/",
+		},
+	},
 
 	openGraph: {
 		title: TITLE,
@@ -36,6 +46,7 @@ export const metadata: Metadata = {
 		url: "https://www.wsalas.com",
 		siteName: "William Salas Portfolio",
 		locale: "en_US",
+		alternateLocale: ["es_CO"],
 		type: "website",
 		// Sin `images`: la tarjeta la genera `src/app/opengraph-image.tsx`. Antes
 		// apuntaba a `/og-image.png`, que no existe en `public/`, así que toda
@@ -70,5 +81,5 @@ export const metadata: Metadata = {
 };
 
 export default async function page() {
-	return <Home />;
+	return <Home locale="en" />;
 }

@@ -1,11 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ExperienceCard from "./ExperienceCard";
-import { jobs } from "@/lib/constants";
 import { Button } from "./ui/button";
+import { PROFILE } from "@/lib/constants";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import type { LandingCopy } from "@/lib/i18n";
+import type { jobProps } from "@/lib/types/globals";
 
-function Experience() {
+interface ExperienceProps {
+	copy: LandingCopy;
+	jobs: jobProps[];
+}
+
+function Experience({ copy, jobs }: ExperienceProps) {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -41,7 +48,11 @@ function Experience() {
 							{/* Starting Year Marker */}
 							{/* El origen del timeline, subordinado a los títulos de puesto: antes
 							    iba en text-2xl, el mismo tamaño que "Full Stack Developer". */}
-							<li className="ms-8 text-lg font-semibold text-gray-400">2022</li>
+							<li className="ms-8 text-lg font-semibold text-gray-400">
+								{/* Derivado y no escrito: es el mismo número que `Stats` usa
+								    para contar los años, y dos copias se desincronizan. */}
+								{PROFILE.experienceStart}
+							</li>
 						</ol>
 
 						{/* Show More/Less Button */}
@@ -56,12 +67,12 @@ function Experience() {
 								>
 									{isExpanded ? (
 										<>
-											Show Less
+											{copy.experienceSection.showLess}
 											<ChevronUp className="w-4 h-4 ml-2 group-hover:transform group-hover:scale-125 transition-transform" />
 										</>
 									) : (
 										<>
-											Show More
+											{copy.experienceSection.showMore}
 											<ChevronDown className="w-4 h-4 ml-2 group-hover:transform group-hover:scale-125 transition-transform" />
 										</>
 									)}

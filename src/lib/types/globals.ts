@@ -7,15 +7,6 @@ export type jobProps = {
 	technologies?: string[];
 	companyUrl?: string;
 };
-export type ButtonControl<T> = {
-	sent: boolean;
-	name: T;
-};
-
-export enum ButtonLabel {
-	DOWNLOAD = "Download CV",
-	DOWNLOADING = "Downloading",
-}
 // Un camino de servicio ("build", "advise"): lo que se puede contratar.
 export type ServiceTrack = {
 	id: string;
@@ -26,6 +17,9 @@ export type ServiceTrack = {
 };
 
 export type FaqItem = {
+	// Identificador estable para indexar la traducción por pregunta y no por
+	// posición: reordenar el array no puede intercambiar dos traducciones.
+	id: string;
 	question: string;
 	answer: string;
 };
@@ -40,9 +34,10 @@ export type Testimonial = {
 };
 
 export type PathType = {
+	// El `name` de la constante neutral es la clave de traducción; el merge de
+	// i18n lo reemplaza por la etiqueta del idioma.
 	name: string;
 	path: string;
-	description: string;
 	isRoute?: boolean; // If true, use Next.js Link instead of anchor tag
 };
 export interface Project {
@@ -61,6 +56,17 @@ export interface Project {
 	images?: string[];
 	highlights: string[];
 }
+/**
+ * Semillas neutrales: lo que queda en `constants.ts` después de sacar la prosa.
+ * El merge de `@/lib/i18n` las hidrata con el copy del idioma para producir los
+ * tipos de arriba (`jobProps`, `Project`, `ServiceTrack`, `FaqItem`). Cada
+ * `Omit`/`Pick` dice exactamente qué campos son prosa y cuáles son datos.
+ */
+export type JobSeed = Omit<jobProps, "role" | "description">;
+export type ProjectSeed = Omit<Project, "title" | "description" | "highlights">;
+export type ServiceTrackSeed = Pick<ServiceTrack, "id">;
+export type FaqSeed = Pick<FaqItem, "id">;
+
 // Types
 export interface ContributionDay {
 	date: string;

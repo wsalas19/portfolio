@@ -1,11 +1,17 @@
-import { projects } from "@/lib/constants";
 import { galleryFor } from "@/lib/project-images";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ExpandableProjectCard } from "@/components/ui/expandable-project-card";
+import type { LandingCopy } from "@/lib/i18n";
+import type { Project } from "@/lib/types/globals";
+
+interface ProjectShowcaseProps {
+	copy: LandingCopy;
+	projects: Project[];
+}
 
 // Sin "use client": necesita el sistema de archivos para listar las galerías y no
 // usa ningún hook. La tarjeta, que sí es cliente, recibe las rutas ya resueltas.
-function ProjectShowcase() {
+function ProjectShowcase({ copy, projects }: ProjectShowcaseProps) {
 	return (
 		<section id="projects" className="w-full py-20 md:py-32">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -14,9 +20,9 @@ function ProjectShowcase() {
 				    en alpha sin release y dos filas van a un post y a un PR. El título
 				    ahora dice lo que la fila sí hace: abrirse y contar el trabajo. */}
 				<SectionHeading
-					eyebrow="Selected work"
-					title="What I built, and how it works"
-					description="My own tools, client work and one open-source contribution. Each row shows what it does, the stack behind it and the highlights."
+					eyebrow={copy.workSection.eyebrow}
+					title={copy.workSection.title}
+					description={copy.workSection.description}
 				/>
 
 				{/* Lista editorial y no grilla: la referencia muestra el trabajo como
@@ -27,6 +33,7 @@ function ProjectShowcase() {
 					{projects.map((project, index) => (
 						<ExpandableProjectCard
 							key={project.slug}
+							labels={copy.workSection}
 							project={{
 								...project,
 								// La portada ya se ve en la miniatura; la galería es el resto.

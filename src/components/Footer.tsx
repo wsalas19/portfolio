@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DownloadResume from "./DownloadResume";
-import { CONTACT_EMAIL, PROFILE, SOCIAL_LINKS, paths } from "@/lib/constants";
+import { CONTACT_EMAIL, PROFILE, SOCIAL_LINKS } from "@/lib/constants";
+import { getChromeCopy, getNavPaths, localeFromPathname } from "@/lib/i18n/core";
 import { cn } from "@/lib/utils";
 
 const LINK =
@@ -23,8 +24,16 @@ function Footer() {
 	const pathname = usePathname();
 	if (pathname.startsWith("/admin")) return null;
 
+	const locale = localeFromPathname(pathname);
+	const copy = getChromeCopy(locale);
+	const paths = getNavPaths(locale);
 	const anchors = paths.filter((path) => !path.isRoute);
 	const routes = paths.filter((path) => path.isRoute);
+
+	// El idioma solo se puede cambiar donde hay dos versiones que ofrecer: la
+	// landing. En /blog o /tools un "Español" llevaría a la landing en español, que
+	// no es la página que se está leyendo.
+	const isLanding = pathname === "/" || pathname === "/es";
 
 	const socials = [
 	// El `rel="me"` de abajo declara que los tres perfiles son de la misma persona
@@ -44,14 +53,13 @@ function Footer() {
 					<div className="lg:col-span-1">
 						<p className="font-display text-lg font-bold text-white">{PROFILE.name}</p>
 						<p className="mt-3 max-w-xs text-sm leading-relaxed text-gray-400">
-							{PROFILE.location} · Full-stack product development and technical
-							review, for teams that need it shipped.
+							{PROFILE.location} · {copy.footer.about}
 						</p>
 					</div>
 
-					<nav aria-label="On this page">
+					<nav aria-label={copy.footer.onThisPage}>
 						<h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-palette-lime">
-							On this page
+							{copy.footer.onThisPage}
 						</h3>
 						<ul className="mt-4 space-y-2.5">
 							{anchors.map((path) => (
@@ -64,9 +72,9 @@ function Footer() {
 						</ul>
 					</nav>
 
-					<nav aria-label="More">
+					<nav aria-label={copy.footer.more}>
 						<h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-palette-lime">
-							More
+							{copy.footer.more}
 						</h3>
 						<ul className="mt-4 space-y-2.5">
 							{routes.map((path) => (
@@ -90,9 +98,9 @@ function Footer() {
 						</ul>
 					</nav>
 
-					<nav aria-label="Elsewhere">
+					<nav aria-label={copy.footer.elsewhere}>
 						<h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-palette-lime">
-							Elsewhere
+							{copy.footer.elsewhere}
 						</h3>
 						<ul className="mt-4 space-y-2.5">
 							{socials.map((social) => (
@@ -116,9 +124,21 @@ function Footer() {
 
 				<div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between">
 					<p>
-						© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
+						© {new Date().getFullYear()} {PROFILE.name}. {copy.footer.rights}
 					</p>
-					<p>Built with Next.js and Tailwind CSS.</p>
+					<p>{copy.footer.builtWith}</p>
+					{/* Los nombres de idioma son endónimos y no se traducen: quien no
+					    entiende el idioma actual necesita reconocer el suyo escrito como
+					    él lo escribe. `hrefLang` es para el navegador, no para el ojo. */}
+					{isLanding && (
+						<Link
+							href={locale === "en" ? "/es" : "/"}
+							hrefLang={locale === "en" ? "es" : "en"}
+							className={cn(LINK, "normal-case font-medium")}
+						>
+							{locale === "en" ? "Español" : "English"}
+						</Link>
+					)}
 				</div>
 			</div>
 		</footer>

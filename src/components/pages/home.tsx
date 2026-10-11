@@ -10,6 +10,8 @@ import Journal from "../landing/Journal";
 import Services from "../landing/Services";
 import Stats from "../landing/Stats";
 import Testimonials from "../landing/Testimonials";
+import { getLandingContent, getLandingCopy } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n/types";
 
 /**
  * El orden es el de la referencia: quién y qué se puede contratar, la prueba
@@ -19,8 +21,15 @@ import Testimonials from "../landing/Testimonials";
  *
  * `Testimonials` no renderiza nada mientras `testimonials` esté vacío en
  * `constants.ts`; el lugar en la página ya está reservado.
+ *
+ * El idioma entra por `locale`; acá se resuelve a `copy` (la prosa) y a los datos
+ * neutrales ya hidratados, y se reparte a cada sección.
  */
-export default function Home() {
+export default function Home({ locale }: { locale: Locale }) {
+	const copy = getLandingCopy(locale);
+	const { profile, jobs, projects, serviceTracks, faq } =
+		getLandingContent(locale);
+
 	return (
 		<ClickSpark
 			sparkColor="#d4ff4d"
@@ -55,16 +64,16 @@ export default function Home() {
 						brightness={0.18}
 					/>
 				</div>
-				<Hero />
-				<Stats />
-				<ProjectShowcase />
-				<Services />
-				<Experience />
-				<Journal />
-				<Testimonials />
-				<Faq />
-				<CtaBand />
-				<ContactForm />
+				<Hero copy={copy} profile={profile} projects={projects} />
+				<Stats copy={copy} profile={profile} projects={projects} />
+				<ProjectShowcase copy={copy} projects={projects} />
+				<Services copy={copy} serviceTracks={serviceTracks} />
+				<Experience copy={copy} jobs={jobs} />
+				<Journal copy={copy} />
+				<Testimonials copy={copy} />
+				<Faq copy={copy} faq={faq} />
+				<CtaBand copy={copy} />
+				<ContactForm copy={copy} />
 			</div>
 		</ClickSpark>
 	);

@@ -1,24 +1,27 @@
 import Image from "next/image";
 import { Mail, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-	CALENDAR_URL,
-	CONTACT_EMAIL,
-	PROFILE,
-	imgSize,
-	projects,
-} from "@/lib/constants";
+import { CALENDAR_URL, CONTACT_EMAIL, imgSize } from "@/lib/constants";
+import type { LandingCopy, LandingProfile } from "@/lib/i18n";
+import type { Project } from "@/lib/types/globals";
 
-// El panel destacado sale de `projects` por slug y no de un objeto propio: si el
-// proyecto cambia de descripción o de portada, el hero lo sigue solo.
-const featured =
-	projects.find((project) => project.slug === "barranquilla-verde") ?? projects[0];
+interface HeroProps {
+	copy: LandingCopy;
+	profile: LandingProfile;
+	projects: Project[];
+}
 
 // Sin "use client": las entradas son `.rise`/`.pop` con `[--rise-delay]`, que es
 // CSS. El HTML del servidor sale visible y el LCP no espera a la hidratación —
 // la misma razón por la que el `ProfileCard` que esto reemplaza no usaba
 // framer-motion.
-function Hero() {
+function Hero({ copy, profile, projects }: HeroProps) {
+	// El panel destacado sale de `projects` por slug y no de un objeto propio: si el
+	// proyecto cambia de descripción o de portada, el hero lo sigue solo.
+	const featured =
+		projects.find((project) => project.slug === "barranquilla-verde") ??
+		projects[0];
+
 	return (
 		<section id="about" className="py-20 md:py-32">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -28,7 +31,7 @@ function Hero() {
 						<div className="rise flex items-center gap-3">
 							<Image
 								src="/images/profile-img.png"
-								alt="William Salas"
+								alt={copy.hero.altText}
 								width={imgSize}
 								height={imgSize}
 								priority
@@ -36,29 +39,29 @@ function Hero() {
 								className="h-14 w-14 rounded-full object-cover ring-1 ring-white/15"
 							/>
 							<span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-palette-lime">
-								{PROFILE.eyebrow}
+								{profile.eyebrow}
 							</span>
 						</div>
 
 						<h1 className="rise [--rise-delay:100ms] mt-6 font-display text-4xl font-bold tracking-tight text-gradient-primary text-balance md:text-6xl lg:text-7xl">
-							{PROFILE.name}
+							{profile.name}
 						</h1>
 
 						<p className="rise [--rise-delay:200ms] mt-6 max-w-xl font-display text-xl font-semibold text-gradient-lime text-balance md:text-2xl">
-							{PROFILE.tagline}
+							{profile.tagline}
 						</p>
 
 						<div className="rise [--rise-delay:300ms] mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 							<Button variant="green" size="lg" asChild className="glow-lime-hover w-full sm:w-auto">
 								<a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
 									<Video className="mr-2 h-5 w-5" />
-									Book a call
+									{copy.hero.bookACall}
 								</a>
 							</Button>
 							<Button variant="glass" size="lg" asChild>
 								<a href={`mailto:${CONTACT_EMAIL}`}>
 									<Mail className="mr-2 h-5 w-5" />
-									Email me
+									{copy.hero.emailMe}
 								</a>
 							</Button>
 							<Button
@@ -67,12 +70,12 @@ function Hero() {
 								asChild
 								className="justify-center bg-[#495533]/40 font-semibold"
 							>
-								<a href="#projects">See the work</a>
+								<a href="#projects">{copy.hero.seeTheWork}</a>
 							</Button>
 						</div>
 
 						<p className="rise [--rise-delay:200ms] mt-6 text-lg leading-relaxed text-gray-300">
-							{PROFILE.bio}
+							{profile.bio}
 						</p>
 
 						{/* Las píldoras van en la columna de la persona, no encima de la
@@ -82,7 +85,7 @@ function Hero() {
 						    compiten con el H1, que es lo que pasaba con `text-sm` en la
 						    primera fila. */}
 						<div className="rise [--rise-delay:300ms] mt-6 flex flex-wrap gap-2">
-							{PROFILE.skills.map((skill) => (
+							{profile.skills.map((skill) => (
 								<span
 									key={skill}
 									className="rounded-full border border-palette-pink/20 glass-pink px-2.5 py-1 text-xs font-medium text-palette-pink"
@@ -116,7 +119,7 @@ function Hero() {
 							</div>
 							<div className="p-5">
 								<span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-palette-lime">
-									Featured work
+									{copy.hero.featuredWork}
 								</span>
 								<h2 className="mt-2 font-display text-xl font-bold text-white">
 									{featured.title}

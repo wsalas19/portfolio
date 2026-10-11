@@ -1,20 +1,27 @@
 import type { CSSProperties } from "react";
 import { Check } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { CALENDAR_URL, serviceTracks } from "@/lib/constants";
+import { CALENDAR_URL } from "@/lib/constants";
+import type { LandingCopy } from "@/lib/i18n";
+import type { ServiceTrack } from "@/lib/types/globals";
+
+interface ServicesProps {
+	copy: LandingCopy;
+	serviceTracks: ServiceTrack[];
+}
 
 /**
  * Lo que hoy no existía en ninguna parte del sitio: la oferta. Cada track sale de
  * `serviceTracks`, y cada afirmación de ahí sale de un trabajo en `jobs`.
  */
-function Services() {
+function Services({ copy, serviceTracks }: ServicesProps) {
 	return (
 		<section id="services" className="py-20 md:py-32">
 			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 				<SectionHeading
-					eyebrow="What you can hire"
-					title="Build it, or get a second opinion before you do."
-					description="Two ways to work together. I can take the feature end to end. Or I can review what you have and tell you what I would change."
+					eyebrow={copy.servicesSection.eyebrow}
+					title={copy.servicesSection.title}
+					description={copy.servicesSection.description}
 				/>
 
 				<div className="grid gap-6 lg:grid-cols-3">
@@ -51,7 +58,7 @@ function Services() {
 					rel="noopener noreferrer"
 					className="mt-10 inline-block text-sm font-medium text-palette-lime hover:underline"
 				>
-					Tell me what you want to build →
+					{copy.servicesSection.cta}
 				</a>
 			</div>
 		</section>

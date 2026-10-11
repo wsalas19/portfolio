@@ -3,10 +3,15 @@ import { BlogPost } from "@/lib/blog/types";
 import { TagBadge } from "./TagBadge";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { en } from "@/lib/i18n/en";
+import type { LandingCopy } from "@/lib/i18n/types";
 
 interface BlogCardProps {
   post: BlogPost;
   className?: string;
+  // La página `/blog` sigue en inglés y no pasa nada: el default es `en`. La
+  // landing traduce, así que `Journal` sí le pasa las etiquetas.
+  labels?: LandingCopy["blogCard"];
 }
 
 // Simple date formatter without external library
@@ -23,7 +28,7 @@ function formatDateShort(dateString: string): string {
   return date.toLocaleDateString("en-US", options);
 }
 
-export function BlogCard({ post, className }: BlogCardProps) {
+export function BlogCard({ post, className, labels = en.blogCard }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -45,7 +50,9 @@ export function BlogCard({ post, className }: BlogCardProps) {
           </div>
           <div className="flex items-center gap-1">
             <Clock size={14} />
-            <span>{post.readingTime} min</span>
+            <span>
+              {post.readingTime} {labels.minutesSuffix}
+            </span>
           </div>
         </div>
 				</div>
@@ -61,13 +68,13 @@ export function BlogCard({ post, className }: BlogCardProps) {
           ))}
           {post.tags.length > 3 && (
             <span className="text-xs text-gray-500">
-              +{post.tags.length - 3} more
+              +{post.tags.length - 3} {labels.moreSuffix}
             </span>
           )}
         </div>
 
         <div className="flex items-center gap-2 text-lime-400 group-hover:text-lime-300 transition-colors">
-          <span className="font-medium">Read more</span>
+          <span className="font-medium">{labels.readMore}</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
         </div>
 				</div>

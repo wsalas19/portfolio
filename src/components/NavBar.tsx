@@ -4,7 +4,8 @@ import Link from "next/link";
 import DownloadResume from "./DownloadResume";
 import { Button } from "./ui/button";
 import { Video, Menu, X } from "lucide-react";
-import { CALENDAR_URL, paths as systemPaths } from "@/lib/constants";
+import { CALENDAR_URL } from "@/lib/constants";
+import { getChromeCopy, getNavPaths, localeFromPathname } from "@/lib/i18n/core";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -23,8 +24,14 @@ function NavBar() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
+	const locale = localeFromPathname(pathname);
+	// El layout raíz no recibe `[locale]`, así que la nav —como el footer— saca el
+	// idioma de la ruta en vez de esperar una prop.
+	const copy = getChromeCopy(locale);
+	const systemPaths = getNavPaths(locale);
+
 	const paths = pathname.includes("blog")
-		? systemPaths.filter((p) => p.name === "blog")
+		? systemPaths.filter((p) => p.name === copy.nav.blog)
 		: systemPaths;
 
 	// El panel tiene su propia barra. La nav del sitio flota abajo al centro y le
@@ -120,7 +127,7 @@ function NavBar() {
 						onClick={() => setIsOpen(!isOpen)}
 						aria-expanded={isOpen}
 						aria-controls="mobile-menu"
-						aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+						aria-label={isOpen ? copy.chrome.menuClose : copy.chrome.menuOpen}
 					>
 						{isOpen ? <X size={24} /> : <Menu size={24} />}
 					</button>
@@ -165,7 +172,7 @@ function NavBar() {
 								size={"sm"}
 							>
 								<Video />
-								Book a Meeting
+								{copy.chrome.bookMeeting}
 							</Button>
 						</a>
 					</div>

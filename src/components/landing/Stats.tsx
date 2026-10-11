@@ -1,34 +1,41 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog/posts";
-import { PROFILE, projects } from "@/lib/constants";
+import type { LandingCopy, LandingProfile } from "@/lib/i18n";
+import type { Project } from "@/lib/types/globals";
 
 const ITEM =
 	"group flex flex-col gap-1 transition-colors";
+
+interface StatsProps {
+	copy: LandingCopy;
+	profile: LandingProfile;
+	projects: Project[];
+}
 
 /**
  * Tres números, y ninguno escrito a mano: si un post se publica o un proyecto se
  * agrega, el número cambia solo. Cada uno enlaza a su fuente, que es lo que hace
  * la afirmación verificable de un clic en vez de una cifra que hay que creer.
  */
-function Stats() {
-	const years = new Date().getFullYear() - PROFILE.experienceStart;
+function Stats({ copy, profile, projects }: StatsProps) {
+	const years = new Date().getFullYear() - profile.experienceStart;
 	const postCount = getAllPosts().length;
 
 	// Con menos de tres artículos la ranura se lee pobre. El estudio de
 	// Barranquilla tiene su propia cifra dura, ya publicada y enlazable.
 	// ponytail: umbral a ojo; si el blog pasa de tres posts, esta rama muere sola.
 	const stats = [
-		{ value: `${years}`, label: "Years building software", href: "#experience" },
+		{ value: `${years}`, label: copy.stats.years, href: "#experience" },
 		// "Projects and tools" y no "Public projects & tools": los seis incluyen una
 		// contribución a un repo ajeno y un portal privado, así que "public" no era
 		// cierto para todos. "Studies published" tampoco: un estudio es Barranquilla
 		// Verde; los otros cinco son artículos.
-		{ value: `${projects.length}`, label: "Projects and tools", href: "#projects" },
+		{ value: `${projects.length}`, label: copy.stats.projects, href: "#projects" },
 		postCount >= 3
-			? { value: `${postCount}`, label: "Articles published", href: "/blog" }
+			? { value: `${postCount}`, label: copy.stats.articles, href: "/blog" }
 			: {
-					value: "7,761",
-					label: "City blocks analysed",
+					value: copy.stats.blocksValue,
+					label: copy.stats.blocks,
 					href: "/blog/barranquilla-verde-desigualdad-2026",
 				},
 	];

@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
+import { getChromeCopy, localeFromPathname } from "@/lib/i18n/core";
 
 function ScrollButton() {
 	const [visible, setVisible] = useState(false);
 	const pathname = usePathname();
+	const copy = getChromeCopy(localeFromPathname(pathname));
 
 	const toggleVisible = () => {
 		const scrolled = document.documentElement.scrollTop;
@@ -45,7 +47,7 @@ function ScrollButton() {
 			style={{ display: visible ? "inline" : "none" }}
 		>
 			{/* <ChevronUp /> */}
-			Back to Top
+			{copy.chrome.backToTop}
 		</Button>
 	);
 }

@@ -9,7 +9,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { Carme, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { env } from "@/lib/env";
-import { PROFILE, SOCIAL_LINKS, serviceTracks } from "@/lib/constants";
+import { PROFILE, SOCIAL_LINKS } from "@/lib/constants";
+import { getLandingContent } from "@/lib/i18n";
 
 // metadataBase hace absolutas las `alternates.canonical` relativas de cada ruta.
 export const metadata: Metadata = {
@@ -108,7 +109,9 @@ const jsonLd = {
 				addressCountry: PROFILE.country,
 			},
 			provider: { "@id": `${SITE_URL}/#person` },
-			makesOffer: serviceTracks
+			// El JSON-LD es del sitio en inglés (la única versión indexable del
+			// `ProfessionalService`), así que se hidratan las semillas con `en`.
+			makesOffer: getLandingContent("en").serviceTracks
 				.filter((track) => track.id !== "process")
 				.map((track) => ({
 					"@type": "Offer",

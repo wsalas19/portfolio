@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { faq } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import type { LandingCopy } from "@/lib/i18n";
+import type { FaqItem } from "@/lib/types/globals";
 
 /**
  * Acordeón con estado propio; nada de librería. La apertura anima
@@ -12,13 +13,16 @@ import { cn } from "@/lib/utils";
  * desconocida sin medirla con JS ni fijar un `max-height` que se recorta cuando
  * la respuesta es más larga de lo previsto.
  */
-function Faq() {
+function Faq({ copy, faq }: { copy: LandingCopy; faq: FaqItem[] }) {
 	const [open, setOpen] = useState<number | null>(null);
 
 	return (
 		<section className="py-20 md:py-32">
 			<div className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8">
-				<SectionHeading eyebrow="FAQ" title="What people ask before the call" />
+				<SectionHeading
+					eyebrow={copy.faqSection.eyebrow}
+					title={copy.faqSection.title}
+				/>
 
 				<ul className="border-t border-white/10">
 					{faq.map((item, index) => {
