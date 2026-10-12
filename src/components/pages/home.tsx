@@ -19,8 +19,8 @@ import type { Locale } from "@/lib/i18n/types";
  * conversión. `Experience` va después de `Services` a propósito: primero la
  * oferta, después los nombres y las fechas que la respaldan.
  *
- * `Testimonials` no renderiza nada mientras `testimonials` esté vacío en
- * `constants.ts`; el lugar en la página ya está reservado.
+ * `Testimonials` va entre `Journal` y `Faq`; las citas viven en
+ * `constants.ts` y se publican como borradores hasta que cada persona apruebe.
  *
  * El idioma entra por `locale`; acá se resuelve a `copy` (la prosa) y a los datos
  * neutrales ya hidratados, y se reparte a cada sección.

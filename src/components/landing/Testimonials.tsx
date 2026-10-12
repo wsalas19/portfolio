@@ -4,15 +4,12 @@ import { testimonials } from "@/lib/constants";
 import type { LandingCopy } from "@/lib/i18n";
 
 /**
- * Andamiaje, no contenido: hay dos permisos pendientes antes de poder publicar
- * nombres y citas reales. Mientras `testimonials` esté vacío esto no renderiza
- * nada — nada de nombres de relleno ni de "coming soon". Cargar los objetos en
- * `constants.ts` es todo lo que hace falta para que la sección aparezca acá.
+ * Las citas de `constants.ts` se muestran tal cual; son borradores hasta que
+ * cada persona dé el visto bueno por escrito. El componente sigue devolviendo
+ * `null` si el array queda vacío.
  *
- * El `id` es el ancla para el enlace profundo. Mientras el array esté vacío el
- * componente devuelve `null` antes de renderizar, así que el ancla no existe y
- * `paths` no lo lista: un enlace a `#testimonials` sería un salto a la nada.
- * Cuando lleguen las citas, el `id` ya está puesto y solo falta la entrada.
+ * El `id` es el ancla para el enlace profundo, pero `paths` todavía no lo
+ * lista: un enlace a `#testimonials` existiría solo en esta página.
  */
 function Testimonials({ copy }: { copy: LandingCopy }) {
 	if (testimonials.length === 0) return null;

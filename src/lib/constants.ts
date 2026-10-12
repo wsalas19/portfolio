@@ -223,12 +223,26 @@ export const faq: FaqSeed[] = [
 	{ id: "start" },
 ];
 
-/**
- * Vacío a propósito: hay dos permisos pendientes antes de poder mostrar nombres
- * y citas. El componente devuelve `null` mientras el array esté vacío, así que
- * cargar los objetos es todo lo que hace falta para que la sección aparezca.
- *
- * Hubo datos de relleno acá para ver la sección armada. Se quitaron: la sección
- * está lista y esperando las citas reales, nada más.
- */
-export const testimonials: Testimonial[] = [];
+// Dos citas cargadas como borrador: Derek Sanborn pidió que se la redacte y Sam
+// Gaddis pidió revisarla antes de publicar. Las citas quedan en su idioma
+// original —una cita traducida deja de ser una cita—; lo que se traduce es el
+// marco de la sección, en `i18n`. Los retratos van en
+// `public/images/testimonials/` cuando llegue la foto autorizada.
+export const testimonials: Testimonial[] = [
+	{
+		quote:
+			"William became the engineer we trusted with our most sensitive screens. He built features for the doctor portal in React and TypeScript and kept our component library consistent in Storybook. He works well with designers and backend engineers, and he raises problems before they get expensive.",
+		name: "Derek Sanborn",
+		role: "CEO",
+		company: "PatientStudio",
+		portraitUrl: "/images/testimonials/derek-sanborn.jpg",
+	},
+	{
+		quote:
+			"William kept the Cottonwood work moving. He was honest about scope, shipped in small increments we could actually see, and left the code easier to work in than he found it. Communication stayed clear from kickoff to handoff.",
+		name: "Sam Gaddis",
+		role: "Co-founder",
+		company: "Runpoint Partners",
+		portraitUrl: "/images/testimonials/sam-gaddis.png",
+	},
+];
