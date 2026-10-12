@@ -144,7 +144,8 @@ export const projects: ProjectSeed[] = [
 	{
 		slug: "frieda-player",
 		technologies: ["Rust", "Tauri 2", "React", "TypeScript", "Windows SMTC"],
-		githubUrl: "https://frieda-player.wsalas.workers.dev/",
+		liveUrl: "https://frieda-player.wsalas.workers.dev/",
+		githubUrl: "https://github.com/wsalas19/frieda-player",
 		imageUrl: "/images/frieda-player.png",
 	},
 	{
