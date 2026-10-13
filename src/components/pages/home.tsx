@@ -27,7 +27,7 @@ import type { Locale } from "@/lib/i18n/types";
  */
 export default function Home({ locale }: { locale: Locale }) {
 	const copy = getLandingCopy(locale);
-	const { profile, jobs, projects, serviceTracks, faq } =
+	const { profile, jobs, projects, serviceTracks, faq, testimonials } =
 		getLandingContent(locale);
 
 	return (
@@ -70,7 +70,7 @@ export default function Home({ locale }: { locale: Locale }) {
 				<Services copy={copy} serviceTracks={serviceTracks} />
 				<Experience copy={copy} jobs={jobs} />
 				<Journal copy={copy} />
-				<Testimonials copy={copy} />
+				<Testimonials copy={copy} testimonials={testimonials} />
 				<Faq copy={copy} faq={faq} />
 				<CtaBand copy={copy} />
 				<ContactForm copy={copy} />

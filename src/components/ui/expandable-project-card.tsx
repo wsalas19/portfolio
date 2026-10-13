@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/lib/types/globals';
 import type { LandingCopy } from '@/lib/i18n';
@@ -16,17 +16,27 @@ interface ExpandableProjectCardProps {
 
 export function ExpandableProjectCard({ project, index, labels }: ExpandableProjectCardProps) {
 	const [isOpen, setIsOpen] = useState(false);
+	const dialogRef = useRef<HTMLDialogElement>(null);
 	const layoutId = `expandable-project-card-${index}`;
+
+	// `<dialog>` nativo y no un overlay `<div>`: da el focus trap y el cierre con
+	// Escape sin escribirlos a mano (mismo patrón que `ZoomImage`).
+	useEffect(() => {
+		const dialog = dialogRef.current;
+		if (!dialog) return;
+		if (isOpen && !dialog.open) dialog.showModal();
+	}, [isOpen]);
 
 	return (
 		<>
 			{/* Fila, no tarjeta: la referencia pone el trabajo como una lista editorial
 			    (miniatura, título, stack, flecha) en vez de una grilla de cajas. Los
 			    `layoutId` se mantienen, así que el morph hacia el modal sigue igual. */}
-			<motion.div
+			<motion.button
+				type="button"
 				layoutId={layoutId}
 				onClick={() => setIsOpen(true)}
-				className="group grid cursor-pointer grid-cols-[72px_1fr] items-center gap-x-4 gap-y-3 border-b border-white/10 py-5 transition-colors hover:bg-white/[0.04] md:grid-cols-[88px_1fr_auto_24px] md:gap-6"
+				className="focus-ring group grid w-full cursor-pointer grid-cols-[72px_1fr] items-center gap-x-4 gap-y-3 border-b border-white/10 py-5 text-left transition-colors hover:bg-white/[0.04] md:grid-cols-[88px_1fr_auto_24px] md:gap-6"
 			>
 				<motion.div
 					layoutId={`image-container-${layoutId}`}
@@ -78,27 +88,33 @@ export function ExpandableProjectCard({ project, index, labels }: ExpandableProj
 				</motion.div>
 
 				<ArrowUpRight className="hidden h-5 w-5 text-gray-500 transition-colors group-hover:text-palette-lime md:block" />
-			</motion.div>
+			</motion.button>
 
-			{/* Expanded Modal */}
-			<AnimatePresence>
-				{isOpen && (
-					<div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-						{/* Backdrop */}
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							onClick={() => setIsOpen(false)}
-							className="absolute inset-0 bg-black/80 backdrop-blur-md"
-							transition={{ duration: 0.2 }}
-						/>
-
-						{/* Modal Content */}
+			<dialog
+				ref={dialogRef}
+				aria-label={project.title}
+				onCancel={(event) => {
+					// Escape: dejamos que `AnimatePresence` corra la salida y recién
+					// después cerramos el `<dialog>` (en `onExitComplete`).
+					event.preventDefault();
+					setIsOpen(false);
+				}}
+				onClose={() => setIsOpen(false)}
+				onClick={(event) => {
+					// El click en el backdrop tiene como target el propio `<dialog>`.
+					if (event.target === dialogRef.current) setIsOpen(false);
+				}}
+				className="m-auto w-[90vw] max-w-5xl max-h-none bg-transparent p-0 text-inherit backdrop:bg-black/80 backdrop:backdrop-blur-md open:block"
+			>
+				<AnimatePresence
+					onExitComplete={() => {
+						if (dialogRef.current?.open) dialogRef.current.close();
+					}}
+				>
+					{isOpen && (
 						<motion.div
 							layoutId={layoutId}
-							className="relative w-full max-w-5xl max-h-[90vh] bg-palette-card rounded-2xl overflow-hidden border border-white/10 z-10 flex flex-col shadow-2xl"
-							initial={{ borderRadius: 16 }}
+							className="relative flex w-full max-h-[90vh] flex-col overflow-hidden rounded-2xl border border-white/10 bg-palette-card shadow-2xl"
 							transition={{
 								type: 'spring',
 								stiffness: 300,
@@ -142,7 +158,7 @@ export function ExpandableProjectCard({ project, index, labels }: ExpandableProj
 									layoutId={`title-${layoutId}`}
 									className="mb-3"
 								>
-									<h3 className="font-display text-2xl sm:text-3xl uppercase font-bold text-gradient-pink text-[#fb8983]">
+									<h3 className="font-display text-2xl sm:text-3xl uppercase font-bold text-gradient-pink">
 										{project.title}
 									</h3>
 								</motion.div>
@@ -258,9 +274,9 @@ export function ExpandableProjectCard({ project, index, labels }: ExpandableProj
 								</motion.div>
 							</div>
 						</motion.div>
-					</div>
-				)}
-			</AnimatePresence>
+					)}
+				</AnimatePresence>
+			</dialog>
 		</>
 	);
 }

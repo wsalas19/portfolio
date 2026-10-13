@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1760" viewBox="0 0 1200 1760" role="img" aria-label="wsalas.com design system sheet">
+  <defs>
+    <linearGradient id="band" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4ff4d" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#fb8983" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#a2a206" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="grad-primary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fb8983"/>
+      <stop offset="100%" stop-color="#bef728"/>
+    </linearGradient>
+    <linearGradient id="grad-lime" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bef728"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1760" fill="#1c1c1c"/>
+
+  <text x="60" y="72" font-family="Carme, Georgia, serif" font-size="40" font-weight="700" fill="#ffffff">wsalas.com — visual language</text>
+  <text x="60" y="106" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" fill="#9ca3af">dark canvas · glassmorphism · lime = action / path · pink = material / method · editorial, not boxy</text>
+  <line x1="60" y1="130" x2="1140" y2="130" stroke="#ffffff" stroke-opacity="0.12"/>
+
+  <!-- PALETTE -->
+  <text x="60" y="172" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">PALETTE</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <!-- row 1 -->
+    <g>
+      <rect x="60" y="190" width="150" height="110" rx="12" fill="#1c1c1c" stroke="#ffffff" stroke-opacity="0.15"/>
+      <text x="60" y="320" font-size="13" fill="#ffffff">#1c1c1c</text>
+      <text x="60" y="338" font-size="11" fill="#9ca3af">canvas / body</text>
+    </g>
+    <g>
+      <rect x="228" y="190" width="150" height="110" rx="12" fill="#121212" stroke="#ffffff" stroke-opacity="0.15"/>
+      <text x="228" y="320" font-size="13" fill="#ffffff">#121212</text>
+      <text x="228" y="338" font-size="11" fill="#9ca3af">panel / modal</text>
+    </g>
+    <g>
+      <rect x="396" y="190" width="150" height="110" rx="12" fill="#ffffff"/>
+      <text x="396" y="320" font-size="13" fill="#ffffff">#ffffff</text>
+      <text x="396" y="338" font-size="11" fill="#9ca3af">foreground / text</text>
+    </g>
+    <g>
+      <rect x="564" y="190" width="150" height="110" rx="12" fill="#d4ff4d"/>
+      <text x="564" y="320" font-size="13" fill="#ffffff">#d4ff4d</text>
+      <text x="564" y="338" font-size="11" fill="#9ca3af">lime · action/path</text>
+    </g>
+    <g>
+      <rect x="732" y="190" width="150" height="110" rx="12" fill="#a2a206"/>
+      <text x="732" y="320" font-size="13" fill="#ffffff">#a2a206</text>
+      <text x="732" y="338" font-size="11" fill="#9ca3af">olive · lime hover</text>
+    </g>
+    <g>
+      <rect x="900" y="190" width="150" height="110" rx="12" fill="#fb8983"/>
+      <text x="900" y="320" font-size="13" fill="#ffffff">#fb8983</text>
+      <text x="900" y="338" font-size="11" fill="#9ca3af">pink · material/method</text>
+    </g>
+    <!-- row 2 -->
+    <g>
+      <rect x="60" y="358" width="150" height="70" rx="12" fill="#2e3320"/>
+      <text x="60" y="448" font-size="13" fill="#ffffff">#2e3320</text>
+      <text x="60" y="466" font-size="11" fill="#9ca3af">alt · border/input</text>
+    </g>
+    <g>
+      <rect x="228" y="358" width="150" height="70" rx="12" fill="#9ca3af"/>
+      <text x="228" y="448" font-size="13" fill="#ffffff">#9ca3af</text>
+      <text x="228" y="466" font-size="11" fill="#9ca3af">muted text</text>
+    </g>
+    <g>
+      <rect x="396" y="358" width="150" height="70" rx="12" fill="#ff4343"/>
+      <text x="396" y="448" font-size="13" fill="#ffffff">#ff4343</text>
+      <text x="396" y="466" font-size="11" fill="#9ca3af">destructive</text>
+    </g>
+    <g>
+      <rect x="564" y="358" width="150" height="70" rx="12" fill="#1a3300"/>
+      <text x="564" y="448" font-size="13" fill="#ffffff">#1a3300</text>
+      <text x="564" y="466" font-size="11" fill="#9ca3af">ink on lime</text>
+    </g>
+  </g>
+
+  <!-- GLASS -->
+  <text x="60" y="540" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">SURFACES — GLASS (over a lime→pink band)</text>
+  <rect x="60" y="558" width="1080" height="120" rx="16" fill="url(#band)"/>
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="80" y="578" width="190" height="80" rx="14" fill="#121212" fill-opacity="0.7" stroke="#ffffff" stroke-opacity="0.15"/>
+    <text x="90" y="700" font-size="13" fill="#ffffff">.glass</text>
+    <text x="90" y="718" font-size="11" fill="#9ca3af">0.7 panel · blur 12</text>
+
+    <rect x="290" y="578" width="190" height="80" rx="14" fill="#121212" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.2"/>
+    <text x="300" y="700" font-size="13" fill="#ffffff">.glass-strong</text>
+    <text x="300" y="718" font-size="11" fill="#9ca3af">0.5 panel · blur 16</text>
+
+    <rect x="500" y="578" width="190" height="80" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="510" y="700" font-size="13" fill="#ffffff">.glass-subtle</text>
+    <text x="510" y="718" font-size="11" fill="#9ca3af">6% white · blur 8</text>
+
+    <rect x="710" y="578" width="190" height="80" rx="14" fill="#fb8983" fill-opacity="0.1" stroke="#fb8983" stroke-opacity="0.2"/>
+    <text x="720" y="700" font-size="13" fill="#ffffff">.glass-pink</text>
+    <text x="720" y="718" font-size="11" fill="#9ca3af">10% pink · blur 12</text>
+
+    <rect x="920" y="578" width="200" height="80" rx="14" fill="#d4ff4d" fill-opacity="0.12" stroke="#d4ff4d" stroke-opacity="0.3"/>
+    <text x="930" y="700" font-size="13" fill="#ffffff">.glass-lime</text>
+    <text x="930" y="718" font-size="11" fill="#9ca3af">12% lime · blur 12</text>
+  </g>
+  <text x="60" y="756" font-family="Inter, Arial, sans-serif" font-size="12" fill="#9ca3af">Rule: default card = .glass · emphasised / CTA band = .glass-strong · inputs &amp; quiet chips = .glass-subtle · pink/lime tints only to signal role.</text>
+
+  <!-- BUTTONS -->
+  <text x="60" y="820" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">BUTTONS — one source: ui/button.tsx</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600">
+    <rect x="60" y="840" width="170" height="48" rx="8" fill="#d4ff4d"/>
+    <text x="88" y="870" fill="#111827">Book a call</text>
+    <text x="60" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="green" (primary)</text>
+
+    <rect x="248" y="840" width="170" height="48" rx="8" fill="#121212" fill-opacity="0.7" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="300" y="870" fill="#ffffff">Email me</text>
+    <text x="248" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="glass" (secondary)</text>
+
+    <rect x="436" y="840" width="170" height="48" rx="8" fill="#121212" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.2"/>
+    <text x="492" y="870" fill="#ffffff">Outline</text>
+    <text x="436" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="outline"</text>
+
+    <rect x="624" y="840" width="170" height="48" rx="8" fill="none"/>
+    <text x="678" y="870" fill="#ffffff">Ghost</text>
+    <text x="624" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="ghost"</text>
+
+    <rect x="812" y="840" width="170" height="48" rx="8" fill="#fb8983"/>
+    <text x="858" y="870" fill="#111827">Delete</text>
+    <text x="812" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="pink" / destructive</text>
+
+    <text x="1010" y="870" fill="#ffffff" text-decoration="underline" text-decoration-color="#fb8983" text-decoration-thickness="2">Link</text>
+    <text x="1010" y="906" font-size="11" font-weight="400" fill="#9ca3af">variant="link"</text>
+  </g>
+  <text x="60" y="944" font-family="Inter, Arial, sans-serif" font-size="12" fill="#9ca3af">Rule: never re-encode the lime button by hand. NavBar, 404 and visor-credito currently duplicate it — migrate them to variant="green".</text>
+
+  <!-- PILLS + TYPE -->
+  <text x="60" y="1005" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">PILLS · EYEBROW · TYPE</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="60" y="1022" width="120" height="30" rx="15" fill="#fb8983" fill-opacity="0.1" stroke="#fb8983" stroke-opacity="0.2"/>
+    <text x="84" y="1042" font-size="13" font-weight="500" fill="#fb8983">React</text>
+    <text x="60" y="1072" font-size="11" fill="#9ca3af">tech pill (pink)</text>
+
+    <rect x="248" y="1022" width="120" height="30" rx="15" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="272" y="1042" font-size="13" font-weight="500" fill="#bef728">tag</text>
+    <text x="248" y="1072" font-size="11" fill="#9ca3af">tag badge (subtle)</text>
+
+    <text x="436" y="1044" font-size="12" font-weight="600" letter-spacing="3.2" fill="#d4ff4d">SELECTED WORK</text>
+    <text x="436" y="1072" font-size="11" fill="#9ca3af">SectionHeading eyebrow (lime)</text>
+
+    <text x="700" y="1044" font-size="12" font-weight="600" letter-spacing="3.2" fill="#fb8983">BUILD</text>
+    <text x="700" y="1072" font-size="11" fill="#9ca3af">card eyebrow (pink) — see contradiction #5</text>
+  </g>
+
+  <text x="60" y="1130" font-family="Carme, Georgia, serif" font-size="48" font-weight="700" fill="url(#grad-primary)">Aa — Carme display</text>
+  <text x="60" y="1172" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" fill="#e5e7eb">Aa — Inter body · the quick brown fox 0123</text>
+  <text x="60" y="1204" font-family="Inter, Arial, sans-serif" font-size="12" fill="#9ca3af">Display headings use font-display + font-bold. Inter is the body (font-sans). Gradient utilities: .text-gradient-primary / -lime / -pink.</text>
+  <text x="60" y="1226" font-family="Inter, Arial, sans-serif" font-size="12" fill="#fb8983">Warning: Carme is loaded at weight 400 only (layout.tsx) — font-bold on display headings is synthesised, not a real 700.</text>
+
+  <!-- RADIUS -->
+  <text x="60" y="1285" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">RADIUS SCALE</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="12" fill="#9ca3af">
+    <rect x="60" y="1305" width="90" height="70" rx="6" fill="none" stroke="#d4ff4d" stroke-opacity="0.7"/>
+    <text x="60" y="1395">md 6 · btn/input</text>
+    <rect x="180" y="1305" width="90" height="70" rx="8" fill="none" stroke="#d4ff4d" stroke-opacity="0.7"/>
+    <text x="180" y="1395">lg 8 · content card</text>
+    <rect x="300" y="1305" width="90" height="70" rx="16" fill="none" stroke="#d4ff4d" stroke-opacity="0.7"/>
+    <text x="300" y="1395">2xl 16 · landing card</text>
+    <rect x="420" y="1305" width="90" height="70" rx="24" fill="none" stroke="#d4ff4d" stroke-opacity="0.7"/>
+    <text x="420" y="1395">3xl 24 · CTA band</text>
+    <rect x="540" y="1305" width="70" height="70" rx="35" fill="none" stroke="#d4ff4d" stroke-opacity="0.7"/>
+    <text x="540" y="1395">full · pills/icons</text>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="12" fill="#9ca3af">
+    <text x="700" y="1325">Nav pill: rounded-2xl · modals: rounded-2xl</text>
+    <text x="700" y="1347">Blog / Tools / legal cards: rounded-lg</text>
+    <text x="700" y="1369">Decision: landing surfaces = 2xl, content surfaces = lg.</text>
+    <text x="700" y="1391">Don't mix radii inside one surface (inputs inheriting md while its card is 2xl).</text>
+  </g>
+
+  <!-- DECISIONS -->
+  <text x="60" y="1460" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d4ff4d">FIVE CONTRADICTIONS — RESOLVED</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="14" fill="#d1d5db">
+    <text x="60" y="1494"><tspan fill="#d4ff4d">1</tspan>  Two token systems: shadcn HSL vars (globals.css) are dead; tailwind.config.ts hardcodes hex. Use palette-*; treat the vars as unused.</text>
+    <text x="60" y="1520"><tspan fill="#d4ff4d">2</tspan>  Three near-blacks: canvas #1c1c1c · panel #121212 · glass rgba(18,18,18). Assign by layer, not by taste.</text>
+    <text x="60" y="1546"><tspan fill="#d4ff4d">3</tspan>  Button variants exist but several hand-rolled lime buttons copy them. Canonical = ui/button.tsx only.</text>
+    <text x="60" y="1572"><tspan fill="#d4ff4d">4</tspan>  Focus ring is pink in forms/buttons, lime in blog. Pick one (lime) and pass it once.</text>
+    <text x="60" y="1598"><tspan fill="#d4ff4d">5</tspan>  Eyebrow colour flips lime/pink. Eyebrow = path label → lime; card eyebrow = track label → pink.</text>
+  </g>
+  <text x="60" y="1650" font-family="Inter, Arial, sans-serif" font-size="12" fill="#6b7280">Source: tailwind.config.ts · src/app/globals.css · src/app/layout.tsx · src/components/ui/button.tsx · src/components/SectionHeading.tsx</text>
+  <text x="60" y="1672" font-family="Inter, Arial, sans-serif" font-size="12" fill="#6b7280">Companion to DESIGN.md — regenerate when the palette, surfaces or button set change.</text>
+</svg>

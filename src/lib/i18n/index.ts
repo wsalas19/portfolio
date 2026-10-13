@@ -4,6 +4,7 @@ import {
 	jobs as jobSeeds,
 	projects as projectSeeds,
 	serviceTracks as trackSeeds,
+	testimonials as testimonialSeeds,
 } from "@/lib/constants";
 import { getNavPaths } from "./core";
 import type {
@@ -78,7 +79,21 @@ export function getLandingContent(locale: Locale) {
 
 	const paths: PathType[] = getNavPaths(locale);
 
-	return { nav: copy.nav, profile, jobs, projects, serviceTracks, faq, paths };
+	// Las citas van verbatim (no se traducen), pero entran por acá igual que el
+	// resto: la sección las recibe como prop y no importa `constants` por su
+	// cuenta. Así una sola columna hidrata toda la página.
+	const testimonials = testimonialSeeds;
+
+	return {
+		nav: copy.nav,
+		profile,
+		jobs,
+		projects,
+		serviceTracks,
+		faq,
+		paths,
+		testimonials,
+	};
 }
 
 export type LandingContent = ReturnType<typeof getLandingContent>;

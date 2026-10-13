@@ -17,7 +17,7 @@ interface ServicesProps {
 function Services({ copy, serviceTracks }: ServicesProps) {
 	return (
 		<section id="services" className="py-20 md:py-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<SectionHeading
 					eyebrow={copy.servicesSection.eyebrow}
 					title={copy.servicesSection.title}
@@ -56,7 +56,7 @@ function Services({ copy, serviceTracks }: ServicesProps) {
 					href={CALENDAR_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="mt-10 inline-block text-sm font-medium text-palette-lime hover:underline"
+					className="focus-ring mt-10 inline-block text-sm font-medium text-palette-lime hover:underline"
 				>
 					{copy.servicesSection.cta}
 				</a>

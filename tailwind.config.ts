@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
@@ -22,20 +21,23 @@ const config = {
 				sans: ["var(--font-inter)", "sans-serif"],
 				display: ["var(--font-carme)", "sans-serif"],
 			},
-			fontSize: {
-				"display-xl": ["4.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-				"display-2xl": ["6rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-				"display-3xl": ["7.5rem", { lineHeight: "1", letterSpacing: "-0.02em" }],
+			zIndex: {
+				// Escala única; reemplaza los `z-40/z-50/z-[70]/z-[100]` sueltos.
+				dropdown: "40",
+				nav: "50",
+				overlay: "60",
+				modal: "70",
+				toast: "100",
 			},
 			colors: {
-				border: "#2e3320", // Using palette.alt for borders
-				input: "#1d1e2c", // Using palette.card for input backgrounds
-				ring: "#fb8983", // Using palette.pink for focus rings
-				background: "#1d1e2c", // Using palette.card for main background
-				foreground: "#ffffff", // White text for contrast
+				border: "#2e3320", // palette.alt
+				input: "#2e3320", // palette.alt
+				ring: "#d4ff4d", // palette.lime — anillo de foco (DESIGN.md C4)
+				background: "#1c1c1c", // canvas (DESIGN.md C2)
+				foreground: "#ffffff",
 				primary: {
 					DEFAULT: "#fb8983", // palette.pink as primary
-					foreground: "#1d1e2c", // palette.card for contrast
+					foreground: "#111827", // gray-900, same ink the lime/pink buttons use
 				},
 				secondary: {
 					DEFAULT: "#d4ff4d", // Lighter lime for better contrast on dark
@@ -47,18 +49,18 @@ const config = {
 				},
 				muted: {
 					DEFAULT: "#2e3320", // palette.alt for muted backgrounds
-					foreground: "#a1a1aa", // Subtle text color
+					foreground: "#9ca3af", // gray-400, the muted text used elsewhere
 				},
 				accent: {
 					DEFAULT: "#a2a206", // palette.olive as accent
 					foreground: "#ffffff",
 				},
 				popover: {
-					DEFAULT: "#1d1e2c", // palette.card for popovers
+					DEFAULT: "#121212", // palette.card (DESIGN.md C2)
 					foreground: "#ffffff",
 				},
 				card: {
-					DEFAULT: "#1d1e2c", // palette.card
+					DEFAULT: "#121212", // palette.card
 					foreground: "#ffffff",
 				},
 				alt: {
@@ -70,8 +72,11 @@ const config = {
 					lime: "#d4ff4d", // Improved for WCAG AA on dark backgrounds
 					olive: "#a2a206",
 					pink: "#fb8983",
+					canvas: "#1c1c1c", // page background (DESIGN.md C2)
 					card: "#121212",
 					alt: "#2e3320",
+					elevated: "#1a1a1a", // tool panels (twitter/threads)
+					code: "#0d1117", // code block surface
 				},
 			},
 			borderRadius: {

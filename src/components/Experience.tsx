@@ -27,7 +27,7 @@ function Experience({ copy, jobs }: ExperienceProps) {
 
 	return (
 		<div id="experience" className="py-20 md:py-32">
-			<div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				{/* Timeline */}
 				<div className="flex justify-center">
 					<div className="w-[80%] md:w-full max-w-4xl">

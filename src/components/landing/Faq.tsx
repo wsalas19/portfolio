@@ -29,13 +29,13 @@ function Faq({ copy, faq }: { copy: LandingCopy; faq: FaqItem[] }) {
 						const isOpen = open === index;
 
 						return (
-							<li key={item.question} className="border-b border-white/10">
+							<li key={item.id} className="border-b border-white/10">
 								<button
 									type="button"
 									onClick={() => setOpen(isOpen ? null : index)}
 									aria-expanded={isOpen}
 									aria-controls={`faq-panel-${index}`}
-									className="group flex w-full items-center justify-between gap-4 py-5 text-left"
+									className="focus-ring group flex w-full items-center justify-between gap-4 py-5 text-left"
 								>
 									<span
 										className={cn(

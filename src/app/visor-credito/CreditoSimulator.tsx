@@ -21,6 +21,7 @@ import {
 	fmt,
 } from "./data";
 import { descargarPesos, descargarUVR, pesosParamsFrom, uvrParamsFrom } from "./logic";
+import { Button } from "@/components/ui/button";
 import { COLS_PESOS, COLS_UVR, FormFields, Resultados, Stat } from "./ui";
 
 export default function CreditoSimulator() {
@@ -61,7 +62,7 @@ export default function CreditoSimulator() {
 
 				{/* Inputs a la izquierda (sticky, con tabs dentro) · chart + tabla a la derecha */}
 				<div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[380px_minmax(0,1fr)]">
-					<aside className="lg:flex lg:flex-col lg:min-h-0 lg:overflow-y-auto rounded-lg border border-white/10 bg-[#121212]/50 p-5">
+					<aside className="lg:flex lg:flex-col lg:min-h-0 lg:overflow-y-auto rounded-lg border border-white/10 bg-palette-card/50 p-5">
 						{/* Tabs dentro de la tarjeta de inputs */}
 						<div className="mb-5 flex gap-4 border-b border-white/10">
 							{(["UVR", "Pesos"] as const).map((t) => (
@@ -101,13 +102,14 @@ export default function CreditoSimulator() {
 						</div>
 
 						<div className="mt-5 flex gap-2 *:flex-1">
-							<button
+							<Button
+								variant="green"
 								onClick={calcular}
-								className="flex justify-center items-center gap-2 rounded-md bg-palette-lime px-4 py-2 text-sm font-bold text-gray-900 transition-colors hover:bg-palette-olive hover:text-white"
+								className="justify-center"
 							>
 								<Calculator size={16} />
 								Calcular
-							</button>
+							</Button>
 							{r && (
 								<button
 									onClick={() => {

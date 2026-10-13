@@ -23,9 +23,9 @@ function ThreadPreview() {
     '3. Build in public — attention compounds.',
   ];
   return (
-    <div className="rounded-xl border border-white/10 bg-[#1a1a1a] p-4 text-left">
+    <div className="rounded-xl border border-white/10 bg-palette-elevated p-4 text-left">
       <div className="mb-3 flex items-center gap-2.5">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-lime-400 to-pink-400 text-sm font-bold text-gray-900">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-palette-lime to-palette-pink text-sm font-bold text-gray-900">
           B
         </div>
         <div>
@@ -56,12 +56,12 @@ function ArticlePreview() {
     'Building in public compounds attention over time.',
   ];
   return (
-    <div className="rounded-xl border border-white/10 bg-[#1a1a1a] p-5 text-left">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-lime-400">
+    <div className="rounded-xl border border-white/10 bg-palette-elevated p-5 text-left">
+      <div className="text-[10px] font-bold uppercase tracking-widest text-palette-lime">
         X Thread Unrolled · 4 min read
       </div>
       <h3 className="mt-2 text-lg font-bold leading-tight">
-        What I Learned <span className="text-pink-400">Building in Public</span>
+        What I Learned <span className="text-palette-pink">Building in Public</span>
       </h3>
       <ul className="mt-3 space-y-2 text-sm leading-relaxed text-gray-300">
         {points.map((p, i) => (
@@ -80,7 +80,7 @@ function Demo() {
       </div>
       <div
         aria-hidden
-        className="rotate-90 self-center text-2xl font-bold text-lime-400 md:rotate-0"
+        className="rotate-90 self-center text-2xl font-bold text-palette-lime md:rotate-0"
       >
         →
       </div>
@@ -130,14 +130,14 @@ export default function TwitterThreadsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#121212] text-white pb-10">
+    <main className="min-h-screen bg-palette-card text-white pb-10">
       <section className="mx-auto max-w-3xl px-4 py-14 md:py-20">
         {/* Hero */}
         <div className="text-center">
-          <span className="inline-block rounded-full border border-lime-400/30 bg-lime-400/10 px-3 py-1 text-xs font-semibold tracking-wide text-lime-400">
+          <span className="inline-block rounded-full border border-palette-lime/30 bg-palette-lime/10 px-3 py-1 text-xs font-semibold tracking-wide text-palette-lime">
             Free Tool · No Signup Required
           </span>
-          <h1 className="mt-5 text-3xl font-bold leading-tight text-transparent bg-gradient-to-r from-lime-400 to-pink-400 bg-clip-text md:text-5xl">
+          <h1 className="mt-5 text-3xl font-bold leading-tight text-transparent bg-gradient-to-r from-palette-lime to-palette-pink bg-clip-text md:text-5xl">
             Turn X Threads into Readable Articles in One Click
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-gray-400 md:text-lg">
@@ -153,7 +153,7 @@ export default function TwitterThreadsPage() {
         <form
           onSubmit={handleSubmit}
           aria-label="Convert a thread"
-          className="mt-12 space-y-4 rounded-2xl border border-white/10 bg-[#1a1a1a] p-6 md:p-8"
+          className="mt-12 space-y-4 rounded-2xl border border-white/10 bg-palette-elevated p-6 md:p-8"
         >
           <label
             htmlFor="thread-url"
@@ -200,7 +200,7 @@ export default function TwitterThreadsPage() {
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-400">
           {perks.map(({ icon: Icon, label }) => (
             <li key={label} className="inline-flex items-center gap-1.5">
-              <Icon className="h-4 w-4 shrink-0 text-lime-400" strokeWidth={2.25} aria-hidden />
+              <Icon className="h-4 w-4 shrink-0 text-palette-lime" strokeWidth={2.25} aria-hidden />
               {label}
             </li>
           ))}
@@ -216,12 +216,12 @@ export default function TwitterThreadsPage() {
               {i < steps.length - 1 && (
                 <span
                   aria-hidden
-                  className="absolute left-[calc(50%+1.75rem)] top-7 hidden h-px w-[calc(100%-1.5rem)] bg-gradient-to-r from-lime-400/50 via-white/10 to-pink-400/50 md:block"
+                  className="absolute left-[calc(50%+1.75rem)] top-7 hidden h-px w-[calc(100%-1.5rem)] bg-gradient-to-r from-palette-lime/50 via-white/10 to-palette-pink/50 md:block"
                 />
               )}
               <div className="relative inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent">
-                <Icon className="h-6 w-6 text-lime-400" strokeWidth={1.75} aria-hidden />
-                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-pink-400 text-[11px] font-bold text-gray-900">
+                <Icon className="h-6 w-6 text-palette-lime" strokeWidth={1.75} aria-hidden />
+                <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-palette-pink text-[11px] font-bold text-gray-900">
                   {i + 1}
                 </span>
               </div>

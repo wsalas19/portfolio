@@ -34,7 +34,7 @@ function ExperienceCard({
 					isActive ? "transform scale-[1.02]" : ""
 				}`}
 			>
-				<div className="glass p-4 rounded-lg hover:bg-gray/15 transition-all duration-300 border border-white/10">
+				<div className="glass p-4 rounded-lg transition-all duration-300 border border-white/10">
 					<div className="flex flex-wrap items-center justify-between mb-2">
 						<h3 className="flex items-center gap-3 font-display text-2xl font-bold text-gradient-pink">
 							{role}

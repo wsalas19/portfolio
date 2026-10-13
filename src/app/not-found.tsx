@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, Compass, SearchX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -94,13 +95,17 @@ export default function NotFound() {
 				</p>
 
 				<div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-					<Link
-						href="/"
-						className="glow-lime-hover flex w-full items-center justify-center gap-2 rounded-md bg-palette-lime px-6 py-3 text-sm font-bold text-gray-900 transition-colors hover:bg-palette-olive hover:text-white sm:w-auto"
+					<Button
+						variant="green"
+						size="lg"
+						asChild
+						className="glow-lime-hover w-full sm:w-auto"
 					>
-						<ArrowLeft size={16} />
-						Back home
-					</Link>
+						<Link href="/">
+							<ArrowLeft size={16} />
+							Back home
+						</Link>
+					</Button>
 					<Link
 						href="/tools"
 						className="flex w-full items-center justify-center gap-2 rounded-md border border-white/15 px-6 py-3 text-sm font-medium text-gray-300 transition-colors hover:border-palette-lime hover:text-white sm:w-auto"

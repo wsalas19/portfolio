@@ -9,75 +9,17 @@
 		   los controles nativos (checkbox, scrollbars, <select>, date pickers) en
 		   modo claro. Evita tener que re-estilizar a mano cada uno. */
 		color-scheme: dark;
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
-
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 222.2 84% 4.9%;
-
+		/* El único token shadcn que sigue vivo: `borderRadius` de Tailwind sale
+		   de acá (`calc(var(--radius) - 2px)`). El resto del set HSL se quitó: no
+		   lo leía nadie —`tailwind.config.ts` usa hex— y `.dark` nunca se
+		   aplicaba porque el sitio es oscuro fijo. Ver DESIGN.md C1. */
 		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
-
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
-
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
-
-		--primary: 210 40% 98%;
-		--primary-foreground: 222.2 47.4% 11.2%;
-
-		--secondary: 217.2 32.6% 17.5%;
-		--secondary-foreground: 210 40% 98%;
-
-		--muted: 217.2 32.6% 17.5%;
-		--muted-foreground: 215 20.2% 65.1%;
-
-		--accent: 217.2 32.6% 17.5%;
-		--accent-foreground: 210 40% 98%;
-
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--ring: 212.7 26.8% 83.9%;
 	}
 }
 
 @layer base {
-	/** {
-		@apply border-border;
-	}
-	*/
 	body {
-		@apply bg-[#1c1c1c] text-white;
+		@apply bg-palette-canvas text-white;
 	}
 }
 
@@ -100,12 +42,15 @@
 		animation-delay: var(--rise-delay, 0ms);
 	}
 
-	.global-p {
-		@apply md:px-32;
+	/* El ancho de la landing en un solo sitio: antes la cadena
+	   `mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8` se repetía en cada sección. */
+	.container-page {
+		@apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
 	}
-
-	.gray-white-scheme {
-		@apply bg-gray-900 text-white;
+	/* Anillo de foco único: lima es el color de interacción (DESIGN.md C4). Se
+	   usa en los interactivos que no pasan por `Button`. */
+	.focus-ring {
+		@apply rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-palette-lime focus-visible:ring-offset-2 focus-visible:ring-offset-palette-canvas;
 	}
 	.text-glow-lime {
 		text-shadow: rgba(212, 255, 77, 0.9) 0px 0px 39px;
@@ -113,10 +58,6 @@
 	.icon-glow-lime {
 		filter: drop-shadow(0px 0px 39px rgb(212 255 77/ 0.9));
 	}
-	.show {
-		@apply border-2 border-palette-lime;
-	}
-
 	/* Glassmorphism utility classes.
 	   Los canales van en decimal: `rgba(#121212, 0.7)` no es CSS válido —rgba()
 	   quiere números, no un token hex— así que la declaración se descartaba al
@@ -188,7 +129,7 @@
 
 	/* Gradient text utilities */
 	.text-gradient-primary {
-		background: linear-gradient(135deg, #ffffff 0%, #fb8983 50%, #bef728 100%);
+		background: linear-gradient(135deg, #ffffff 0%, #fb8983 50%, #d4ff4d 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
@@ -202,27 +143,10 @@
 	}
 
 	.text-gradient-lime {
-		background: linear-gradient(135deg, #ffffff 0%, #bef728 100%);
+		background: linear-gradient(135deg, #ffffff 0%, #d4ff4d 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-	}
-
-	/* Typography utilities */
-	.prose-content {
-		@apply text-base leading-relaxed md:text-lg;
-	}
-
-	.heading-display {
-		@apply text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight;
-	}
-
-	.heading-xl {
-		@apply text-2xl md:text-4xl font-display font-bold;
-	}
-
-	.heading-lg {
-		@apply text-xl md:text-2xl font-display font-semibold;
 	}
 
 	.text-balance {

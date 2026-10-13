@@ -89,7 +89,7 @@ function ContactForm({ copy }: { copy: LandingCopy }) {
 			id="contact"
 			className="py-20 md:py-32"
 		>
-			<div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				{/* Single Unified Card */}
 				<div className="glass-strong rise [--rise-delay:200ms] rounded-2xl border border-white/10 shadow-2xl overflow-hidden glow-pink-hover">
 					<div className="grid lg:grid-cols-2">
@@ -160,7 +160,7 @@ function ContactForm({ copy }: { copy: LandingCopy }) {
 										<Input
 											id="name"
 											placeholder={copy.contact.namePlaceholder}
-											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+											className="glass-subtle border-white/10 focus:border-palette-lime focus:ring-1 focus:ring-palette-lime
 	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 											{...form.register("name")}
 											aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined}
@@ -183,7 +183,7 @@ function ContactForm({ copy }: { copy: LandingCopy }) {
 											id="email"
 											placeholder={copy.contact.emailPlaceholder}
 											type="email"
-											className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+											className="glass-subtle border-white/10 focus:border-palette-lime focus:ring-1 focus:ring-palette-lime
 	                                     transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 											{...form.register("email")}
 											aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined}
@@ -207,7 +207,7 @@ function ContactForm({ copy }: { copy: LandingCopy }) {
 									<Input
 										id="title"
 										placeholder={copy.contact.subjectPlaceholder}
-										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+										className="glass-subtle border-white/10 focus:border-palette-lime focus:ring-1 focus:ring-palette-lime
 	                                 transition-[border-color,box-shadow] duration-300  placeholder:text-gray-400 rounded-lg"
 										{...form.register("title")}
 										aria-invalid={!!errors.title} aria-describedby={errors.title ? "title-error" : undefined}
@@ -230,7 +230,7 @@ function ContactForm({ copy }: { copy: LandingCopy }) {
 									<Textarea
 										id="message"
 										placeholder={copy.contact.messagePlaceholder}
-										className="glass-subtle border-white/10 focus:border-palette-pink focus:ring-1 focus:ring-palette-pink
+										className="glass-subtle border-white/10 focus:border-palette-lime focus:ring-1 focus:ring-palette-lime
 	                                 transition-[border-color,box-shadow] duration-300 min-h-[120px] placeholder:text-gray-400
 	                                 resize-none rounded-lg"
 										{...form.register("message")}

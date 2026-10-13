@@ -1,22 +1,29 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/SectionHeading";
-import { testimonials } from "@/lib/constants";
 import type { LandingCopy } from "@/lib/i18n";
+import type { Testimonial } from "@/lib/types/globals";
 
 /**
- * Las citas de `constants.ts` se muestran tal cual; son borradores hasta que
- * cada persona dé el visto bueno por escrito. El componente sigue devolviendo
- * `null` si el array queda vacío.
+ * Las citas de `constants.ts` llegan hidratadas por prop (no se traducen: una
+ * cita traducida deja de ser una cita) y se muestran tal cual; son borradores
+ * hasta que cada persona dé el visto bueno por escrito. El componente sigue
+ * devolviendo `null` si el array queda vacío.
  *
  * El `id` es el ancla para el enlace profundo, pero `paths` todavía no lo
  * lista: un enlace a `#testimonials` existiría solo en esta página.
  */
-function Testimonials({ copy }: { copy: LandingCopy }) {
+function Testimonials({
+	copy,
+	testimonials,
+}: {
+	copy: LandingCopy;
+	testimonials: Testimonial[];
+}) {
 	if (testimonials.length === 0) return null;
 
 	return (
 		<section id="testimonials" className="py-20 md:py-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<SectionHeading
 					eyebrow={copy.testimonialsSection.eyebrow}
 					title={copy.testimonialsSection.title}

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Boundary for the thread route. Without it an operational failure (TwtAPI down,
 // quota exhausted, key missing) surfaced as a blank crash instead of something a
@@ -13,7 +14,7 @@ export default function ThreadError({
   reset: () => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#121212] px-4 py-20 text-white">
+    <main className="min-h-screen bg-palette-card px-4 py-20 text-white">
       <div className="mx-auto max-w-md text-center">
         <h1 className="text-2xl font-bold">We couldn&apos;t unroll that thread</h1>
         <p className="mt-3 text-sm leading-relaxed text-gray-400">
@@ -25,13 +26,13 @@ export default function ThreadError({
           {error.digest ? ` · ${error.digest}` : ''}
         </p>
         <div className="mt-8 flex items-center justify-center gap-3">
-          <button
+          <Button
             type="button"
+            variant="green"
             onClick={reset}
-            className="rounded-lg bg-lime-400 px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:bg-lime-300"
           >
             Try again
-          </button>
+          </Button>
           <Link
             href="/twitter-threads"
             className="rounded-lg border border-white/15 px-5 py-2.5 text-sm text-gray-300 transition-colors hover:border-white/30 hover:text-white"

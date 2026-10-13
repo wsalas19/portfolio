@@ -8,7 +8,7 @@ import { getChromeCopy, getNavPaths, localeFromPathname } from "@/lib/i18n/core"
 import { cn } from "@/lib/utils";
 
 const LINK =
-	"text-sm capitalize text-gray-400 transition-colors hover:text-palette-lime";
+	"focus-ring text-sm capitalize text-gray-400 transition-colors hover:text-palette-lime";
 
 /**
  * No había footer en ningún lado: el layout terminaba en `{children}` y las
@@ -48,7 +48,7 @@ function Footer() {
 		// El pb deja libre la píldora de navegación, que flota fija abajo al centro
 		// y taparía el crédito y el wordmark.
 		<footer className="relative mt-10 border-t border-white/10 pb-28 md:pb-32">
-			<div className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 lg:px-8">
+			<div className="container-page pt-14">
 				<div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
 					<div className="lg:col-span-1">
 						<p className="font-display text-lg font-bold text-white">{PROFILE.name}</p>

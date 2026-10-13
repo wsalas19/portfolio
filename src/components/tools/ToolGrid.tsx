@@ -42,17 +42,17 @@ export function ToolGrid() {
 						className="glass flex h-[280px] flex-col justify-between rounded-lg p-6 transition-all duration-200 hover:glass-strong hover:scale-[1.02] group"
 					>
 						<div className="flex flex-col gap-3">
-							<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-lime-300">
+							<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-palette-lime">
 								<tool.icon size={20} />
 							</div>
-							<h2 className="font-display text-2xl font-bold text-gradient-primary transition-colors group-hover:text-lime-300">
+							<h2 className="font-display text-2xl font-bold text-gradient-primary">
 								{tool.name}
 							</h2>
 						</div>
 
 						<div className="flex flex-col gap-4">
 							<p className="line-clamp-3 text-gray-300">{tool.description}</p>
-							<div className="flex items-center gap-2 text-lime-400 transition-colors group-hover:text-lime-300">
+							<div className="flex items-center gap-2 text-palette-lime transition-colors group-hover:text-palette-lime">
 								<Wrench size={15} />
 								<span className="font-medium">Open tool</span>
 								<ArrowRight

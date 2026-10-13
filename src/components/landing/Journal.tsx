@@ -15,7 +15,7 @@ function Journal({ copy }: { copy: LandingCopy }) {
 
 	return (
 		<section className="py-20 md:py-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<SectionHeading
 					eyebrow={copy.journalSection.eyebrow}
 					title={copy.journalSection.title}
@@ -30,7 +30,7 @@ function Journal({ copy }: { copy: LandingCopy }) {
 
 				<Link
 					href="/blog"
-					className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-palette-lime hover:underline"
+					className="focus-ring group mt-8 inline-flex items-center gap-2 text-sm font-medium text-palette-lime hover:underline"
 				>
 					{copy.journalSection.allArticles}
 					<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

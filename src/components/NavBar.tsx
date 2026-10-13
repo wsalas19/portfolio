@@ -44,7 +44,7 @@ function NavBar() {
 		if (path.isRoute) {
 			return (
 				<Link
-					className="font-medium hover:text-palette-lime transition-colors duration-300"
+					className="focus-ring font-medium hover:text-palette-lime transition-colors duration-300"
 					href={path.path}
 				>
 					{path.name}
@@ -53,8 +53,8 @@ function NavBar() {
 		}
 
 		return (
-			<a
-				className={`font-medium transition-colors duration-300 ${
+				<a
+				className={`focus-ring font-medium transition-colors duration-300 ${
 					isActive ? "text-palette-lime" : "hover:text-palette-lime"
 				}`}
 				href={path.path}
@@ -70,7 +70,7 @@ function NavBar() {
 				<Link
 					key={path.name}
 					href={path.path}
-					className="text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
+					className="focus-ring text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
 					onClick={() => setIsOpen(false)}
 				>
 					{path.name}
@@ -82,7 +82,7 @@ function NavBar() {
 			<a
 				key={path.name}
 				href={path.path}
-				className="text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
+				className="focus-ring text-2xl font-semibold text-gray-300 hover:text-palette-lime transition-colors"
 				onClick={() => setIsOpen(false)}
 			>
 				{path.name}
@@ -93,7 +93,7 @@ function NavBar() {
 	return (
 		<>
 			<nav
-				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
+				className={`fixed font-display font-bold bottom-6 py-3 left-1/2 -translate-x-1/2 w-[90%] md:w-[50%] rounded-2xl z-nav transition-[background-color,box-shadow,border-color] duration-300 ${
 					isScrolled
 						? "glass-strong shadow-2xl glow-lime-hover"
 						: "glass shadow-lg "
@@ -148,7 +148,7 @@ function NavBar() {
 				// hero. Se veía en el teléfono (≈600px con la barra del navegador
 				// visible) y no en escritorio (≥700px). El overflow recorta la sobra
 				// y de paso deja el menú desplazable en pantallas cortas.
-				className={`fixed inset-0 glass-strong z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
+				className={`fixed inset-0 glass-strong z-dropdown transform transition-transform duration-300 ease-in-out overflow-y-auto ${
 					isOpen ? "translate-y-0" : "-translate-y-full"
 				} lg:hidden`}
 			>
@@ -168,8 +168,9 @@ function NavBar() {
 							className="w-full"
 						>
 							<Button
-								className="w-full  font-bold bg-palette-lime text-gray-900 hover:bg-palette-olive hover:text-white flex gap-2 justify-center"
-								size={"sm"}
+								variant="green"
+								className="w-full"
+								size="sm"
 							>
 								<Video />
 								{copy.chrome.bookMeeting}

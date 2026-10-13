@@ -24,7 +24,7 @@ function Hero({ copy, profile, projects }: HeroProps) {
 
 	return (
 		<section id="about" className="py-20 md:py-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
 					{/* Izquierda: quién es y qué se puede contratar. */}
 					<div className="flex flex-col justify-center">
@@ -115,7 +115,7 @@ function Hero({ copy, profile, projects }: HeroProps) {
 									sizes="(max-width: 1024px) 100vw, 520px"
 									className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
 								/>
-								<div className="absolute inset-0 bg-gradient-to-t from-[#1c1c1c] via-[#1c1c1c]/30 to-transparent" />
+								<div className="absolute inset-0 bg-gradient-to-t from-palette-canvas via-palette-canvas/30 to-transparent" />
 							</div>
 							<div className="p-5">
 								<span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-palette-lime">

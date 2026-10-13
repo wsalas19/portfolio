@@ -343,7 +343,7 @@ export function DocEditor({
 						    el destino obvio de una captura es el documento que se está
 						    escribiendo. */}
 						{dragging && (
-							<div className="pointer-events-none absolute inset-x-0 bottom-0 top-6 flex items-center justify-center rounded-md border-2 border-dashed border-palette-lime bg-[#1c1c1c]/80 text-sm text-palette-lime">
+							<div className="pointer-events-none absolute inset-x-0 bottom-0 top-6 flex items-center justify-center rounded-md border-2 border-dashed border-palette-lime bg-palette-canvas/80 text-sm text-palette-lime">
 								Drop to upload the image
 							</div>
 						)}
@@ -353,7 +353,7 @@ export function DocEditor({
 				{mode !== "editor" && (
 					<div className="flex h-[58vh] flex-col lg:h-[68vh]">
 						<PaneLabel>Preview</PaneLabel>
-						<div className="custom-scrollbar flex-1 overflow-y-auto rounded-md border border-white/10 bg-[#121212]/60 p-5">
+						<div className="custom-scrollbar flex-1 overflow-y-auto rounded-md border border-white/10 bg-palette-card/60 p-5">
 							<BlogPost content={body} />
 						</div>
 					</div>

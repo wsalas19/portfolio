@@ -4,7 +4,7 @@ import type { LandingCopy, LandingProfile } from "@/lib/i18n";
 import type { Project } from "@/lib/types/globals";
 
 const ITEM =
-	"group flex flex-col gap-1 transition-colors";
+	"focus-ring group flex flex-col gap-1 transition-colors";
 
 interface StatsProps {
 	copy: LandingCopy;
@@ -42,7 +42,7 @@ function Stats({ copy, profile, projects }: StatsProps) {
 
 	return (
 		<section className="pb-4 md:pb-8">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<div className="grid grid-cols-1 gap-8 border-y border-white/10 py-10 sm:grid-cols-3 md:gap-4">
 					{stats.map((stat) => {
 						const inner = (

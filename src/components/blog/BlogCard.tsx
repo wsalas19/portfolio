@@ -39,7 +39,7 @@ export function BlogCard({ post, className, labels = en.blogCard }: BlogCardProp
 			>
 				<div className="flex flex-col gap-2">
 
-        <h2 className="font-display text-2xl font-bold text-gradient-primary  group-hover:text-lime-300 transition-colors">
+        <h2 className="font-display text-2xl font-bold text-gradient-primary">
           {post.title}
         </h2>
 
@@ -73,7 +73,7 @@ export function BlogCard({ post, className, labels = en.blogCard }: BlogCardProp
           )}
         </div>
 
-        <div className="flex items-center gap-2 text-lime-400 group-hover:text-lime-300 transition-colors">
+        <div className="flex items-center gap-2 text-palette-lime group-hover:text-palette-lime transition-colors">
           <span className="font-medium">{labels.readMore}</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
         </div>

@@ -23,7 +23,7 @@ const MEASURE = "max-w-[68ch]";
 // One accent per job: lime is structure and interaction, pink is the method
 // apparatus. Nothing encodes heading level by hue any more.
 const FOCUS =
-	"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1c1c1c]";
+	"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-palette-lime focus-visible:ring-offset-2 focus-visible:ring-offset-palette-canvas";
 
 // Custom renderers with proper TypeScript types
 const components: Partial<Components> = {
@@ -45,7 +45,7 @@ const components: Partial<Components> = {
 		<h2
 			className={cn(
 				"text-3xl font-bold text-white mt-14 mb-6 tracking-tight text-balance",
-				"before:block before:h-1 before:w-12 before:rounded-full before:bg-lime-500 before:mb-4",
+				"before:block before:h-1 before:w-12 before:rounded-full before:bg-palette-lime before:mb-4",
 				MEASURE,
 			)}
 		>
@@ -95,7 +95,7 @@ const components: Partial<Components> = {
 					// había antes impedía partir el enlace entre líneas y el texto
 					// largo se salía del párrafo en móvil.
 					className={cn(
-						"inline box-decoration-clone text-lime-400 font-medium border border-lime-500/30 bg-lime-950/20 px-1.5 py-0.5 rounded-md no-underline transition-colors duration-200 hover:bg-lime-950/40 hover:border-lime-500/60",
+						"inline box-decoration-clone text-palette-lime font-medium border border-palette-lime/30 bg-palette-lime/10 px-1.5 py-0.5 rounded-md no-underline transition-colors duration-200 hover:bg-palette-lime/20 hover:border-palette-lime/60",
 						FOCUS,
 					)}
 				>
@@ -108,7 +108,7 @@ const components: Partial<Components> = {
 			<a
 				href={href}
 				className={cn(
-					"text-lime-400 font-medium underline underline-offset-4 decoration-lime-400/50 decoration-2 transition-colors duration-200 hover:text-lime-300 hover:decoration-lime-300",
+					"text-palette-lime font-medium underline underline-offset-4 decoration-palette-lime/50 decoration-2 transition-colors duration-200 hover:text-palette-lime hover:decoration-palette-lime",
 					FOCUS,
 				)}
 			>
@@ -167,7 +167,7 @@ const components: Partial<Components> = {
 
 	// Code blocks
 	pre: ({ children }) => (
-		<pre className="bg-[#0d1117] border border-gray-600 rounded-lg shadow-xl mt-6 mb-6 overflow-x-auto">
+		<pre className="bg-palette-code border border-gray-600 rounded-lg shadow-xl mt-6 mb-6 overflow-x-auto">
 			{children}
 		</pre>
 	),
@@ -177,7 +177,7 @@ const components: Partial<Components> = {
 	blockquote: ({ children }) => (
 		<aside
 			className={cn(
-				"my-8 rounded-r-lg border-l-4 border-pink-400 bg-pink-400/[0.06] py-4 pl-6 text-gray-300",
+				"my-8 rounded-r-lg border-l-4 border-palette-pink bg-palette-pink/[0.06] py-4 pl-6 text-gray-300",
 				// El orden importa: twMerge resuelve el conflicto tamaño/interlínea
 				// quedándose con el último, y `text-[0.95rem]` borraría el leading si
 				// fuera después. Va último.

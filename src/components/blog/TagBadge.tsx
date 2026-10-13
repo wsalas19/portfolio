@@ -15,7 +15,7 @@ export function TagBadge({ tag, className }: TagBadgeProps) {
         // variante. Mismo realce que el botón "View Code", que va sobre el mismo
         // vidrio.
         "hover:bg-white/10 transition-colors duration-200",
-        "text-lime-300",
+        "text-palette-lime",
         className
       )}
     >

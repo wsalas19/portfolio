@@ -48,7 +48,7 @@ export function Tip({
 							width: 250,
 							transform: placement === "bottom" ? undefined : "translateY(-100%)",
 						}}
-						className="z-[70] rounded-md border border-white/10 bg-[#2e3320] px-2.5 py-1.5 text-xs leading-relaxed text-gray-200 shadow-xl"
+						className="z-modal rounded-md border border-white/10 bg-palette-alt px-2.5 py-1.5 text-xs leading-relaxed text-gray-200 shadow-xl"
 					>
 						{text}
 					</div>,
@@ -76,7 +76,7 @@ export function Stat({
 }) {
 	return (
 		<div
-			className={`rounded-md border border-white/10 border-l-[3px] bg-[#121212]/60 px-3 py-2 ${accent}`}
+			className={`rounded-md border border-white/10 border-l-[3px] bg-palette-card/60 px-3 py-2 ${accent}`}
 		>
 			<span className="block text-[10px] font-medium uppercase tracking-wider text-gray-500">
 				{label}
@@ -123,7 +123,7 @@ export function FormFields({
 					{f.options ? (
 						<select
 							id={f.id}
-							className={`w-full rounded-md border border-white/10 bg-[#121212] px-3 py-2.5 text-sm text-white outline-none transition-colors focus:border-palette-lime ${MONO}`}
+							className={`w-full rounded-md border border-white/10 bg-palette-card px-3 py-2.5 text-sm text-white outline-none transition-colors focus:border-palette-lime ${MONO}`}
 							value={values[f.id]}
 							onChange={(e) => onChangeAction(f.id, e.target.value)}
 						>
@@ -139,7 +139,7 @@ export function FormFields({
 							id={f.id}
 							step={f.step}
 							min={f.min}
-							className={`hide-spinners h-10 w-full border-white/10 bg-[#121212] text-sm text-white focus-visible:ring-palette-lime ${MONO}`}
+							className={`hide-spinners h-10 w-full border-white/10 bg-palette-card text-sm text-white focus-visible:ring-palette-lime ${MONO}`}
 							value={values[f.id]}
 							onChange={(e) => onChangeAction(f.id, e.target.value)}
 						/>
@@ -217,7 +217,7 @@ export function Resultados<F>({ filas, cols }: { filas: F[]; cols: Col<F>[] }) {
 						{cols.map((c, i) => (
 							<th
 								key={c.h}
-								className={`sticky top-0 z-[1] whitespace-nowrap border-b border-white/10 bg-[#121212] px-2 py-2 text-[11px] font-medium uppercase tracking-wider text-gray-300 ${
+								className={`sticky top-0 z-[1] whitespace-nowrap border-b border-white/10 bg-palette-card px-2 py-2 text-[11px] font-medium uppercase tracking-wider text-gray-300 ${
 									c.num ? "text-right" : "text-left"
 								} ${i === 0 ? "pl-4" : ""} ${c.mo ? "" : "hidden sm:table-cell"}`}
 							>

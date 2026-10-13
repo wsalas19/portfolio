@@ -13,6 +13,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
+		"test": "node --test \"tests/*.test.mjs\"",
 		"clean:git": "git reset --hard HEAD && git clean -fd",
 		"clean:build": "rm -rf .next node_modules/.cache",
 		"clean:all": "pnpm run clean:git && pnpm run clean:build"

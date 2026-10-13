@@ -6,7 +6,7 @@ import type { LandingCopy } from "@/lib/i18n";
 function CtaBand({ copy }: { copy: LandingCopy }) {
 	return (
 		<section className="pb-20 md:pb-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				<div className="glass-strong glow-lime-hover rounded-3xl px-6 py-14 text-center md:px-16 md:py-20">
 					<span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-palette-lime">
 						{copy.ctaBand.eyebrow}

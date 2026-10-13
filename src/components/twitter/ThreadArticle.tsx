@@ -23,13 +23,13 @@ const components: Partial<Components> = {
   ),
 
   h2: ({ children }) => (
-    <h2 className="text-3xl font-bold text-lime-400 mt-12 mb-6 tracking-tight">
+    <h2 className="text-3xl font-bold text-palette-lime mt-12 mb-6 tracking-tight">
       {children}
     </h2>
   ),
 
   h3: ({ children }) => (
-    <h3 className="text-2xl font-semibold text-pink-400 mt-8 mb-4 tracking-tight">
+    <h3 className="text-2xl font-semibold text-palette-pink mt-8 mb-4 tracking-tight">
       {children}
     </h3>
   ),
@@ -54,7 +54,7 @@ const components: Partial<Components> = {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-lime-400 font-medium border border-lime-500/30 bg-lime-950/20 px-2.5 py-1.5 rounded-md text-sm hover:bg-lime-950/40 hover:border-lime-500/60 transition-all duration-200 no-underline"
+          className="inline-flex items-center gap-1.5 text-palette-lime font-medium border border-palette-lime/30 bg-palette-lime/10 px-2.5 py-1.5 rounded-md text-sm hover:bg-palette-lime/20 hover:border-palette-lime/60 transition-all duration-200 no-underline"
         >
           {children}
         </a>
@@ -63,7 +63,7 @@ const components: Partial<Components> = {
     return (
       <a
         href={href}
-        className="text-lime-400 font-medium underline underline-offset-4 decoration-lime-400/50 decoration-2 hover:text-lime-300 hover:decoration-lime-300 transition-all duration-200"
+        className="text-palette-lime font-medium underline underline-offset-4 decoration-palette-lime/50 decoration-2 hover:text-palette-lime hover:decoration-palette-lime transition-all duration-200"
       >
         {children}
       </a>
@@ -89,7 +89,7 @@ const components: Partial<Components> = {
     if (!isCodeBlock) {
       return (
         <code
-          className="text-lime-300 bg-lime-950/40 px-2 py-1 rounded font-mono text-sm border border-lime-500/20"
+          className="text-palette-lime bg-palette-lime/20 px-2 py-1 rounded font-mono text-sm border border-palette-lime/20"
           {...props}
         >
           {children}
@@ -105,14 +105,14 @@ const components: Partial<Components> = {
 
   // Code blocks
   pre: ({ children }) => (
-    <pre className="bg-[#0d1117] border border-gray-700 rounded-lg shadow-xl mt-6 mb-6 overflow-x-auto">
+    <pre className="bg-palette-code border border-gray-700 rounded-lg shadow-xl mt-6 mb-6 overflow-x-auto">
       {children}
     </pre>
   ),
 
   // Blockquotes with visual distinction
   blockquote: ({ children }) => (
-    <blockquote className="border-l-4 border-lime-500 bg-lime-950/10 pl-6 py-4 my-6 rounded-r-lg text-gray-300">
+    <blockquote className="border-l-4 border-palette-lime bg-palette-lime/10 pl-6 py-4 my-6 rounded-r-lg text-gray-300">
       {children}
     </blockquote>
   ),
@@ -161,14 +161,14 @@ const components: Partial<Components> = {
 
 export function ThreadArticle({ thread }: { thread: UnrolledThread }) {
   return (
-    <main className="min-h-screen bg-[#121212] pt-12 pb-28 px-4 ">
+    <main className="min-h-screen bg-palette-card pt-12 pb-28 px-4 ">
       <article className="max-w-4xl mx-auto">
 
         {/* Content */}
-        <div className="bg-[#1a1a1a] rounded-xl overflow-hidden">
+        <div className="bg-palette-elevated rounded-xl overflow-hidden">
           {/* Header */}
           <header className="p-8 border-b border-white/10">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-lime-400 mb-3">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-palette-lime mb-3">
               <span>X Thread Unrolled</span>
               <span>•</span>
               <span>{thread.estimatedReadTime} min read</span>
@@ -204,7 +204,7 @@ export function ThreadArticle({ thread }: { thread: UnrolledThread }) {
             </div>
           </header>
           {/* Markdown Content: each tweet's text and, below it, its photos */}
-          <section className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-lime-400 prose-strong:text-white">
+          <section className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-palette-lime prose-strong:text-white">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={components}>
               {thread.markdownContent}
             </ReactMarkdown>
@@ -220,7 +220,7 @@ export function ThreadArticle({ thread }: { thread: UnrolledThread }) {
                 href={`https://x.com/i/status/${thread.tweetId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 underline decoration-gray-600 underline-offset-2 transition-colors hover:text-lime-400"
+                className="text-gray-400 underline decoration-gray-600 underline-offset-2 transition-colors hover:text-palette-lime"
               >
                 View the original on X
               </a>

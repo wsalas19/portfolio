@@ -14,7 +14,7 @@ interface ProjectShowcaseProps {
 function ProjectShowcase({ copy, projects }: ProjectShowcaseProps) {
 	return (
 		<section id="projects" className="w-full py-20 md:py-32">
-			<div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div className="container-page">
 				{/* "Things I built, that you can open" prometía software usable y el
 				    enlace no lo cumple: el portal médico es privado, Frieda Player está
 				    en alpha sin release y dos filas van a un post y a un PR. El título
