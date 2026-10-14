@@ -3,6 +3,7 @@ import "server-only"; // usa fs: el contenido se lee en el servidor, no se bundl
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { Logger } from "@/lib/logger";
 import { BlogPost, BlogPostFrontmatter } from "./types";
 
 const contentDirectory = path.join(process.cwd(), "content", "blog");
@@ -55,7 +56,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       readingTime,
     };
   } catch (error) {
-    console.error(`Error reading post ${slug}:`, error);
+    Logger.error(error instanceof Error ? error : new Error(String(error)), { slug });
     return null;
   }
 }

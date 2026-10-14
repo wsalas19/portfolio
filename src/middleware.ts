@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export function middleware() {
+export function middleware(): NextResponse {
 	const response = NextResponse.next();
 
 	// Content Security Policy - relaxed for WebGL and development

@@ -3,6 +3,7 @@
 import 'server-only';
 
 import { z } from 'zod';
+import { Logger } from '@/lib/logger';
 
 const envSchema = z.object({
   // Server-side variables
@@ -42,7 +43,10 @@ if (process.env.NODE_ENV === 'development') {
   try {
     envSchema.parse(process.env);
   } catch (error) {
-    console.error('❌ Invalid environment variables:', error);
+    Logger.error(
+      error instanceof Error ? error : new Error(String(error)),
+      { context: 'Environment validation failed in development' },
+    );
     throw error;
   }
 }

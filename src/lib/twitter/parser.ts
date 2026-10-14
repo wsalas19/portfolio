@@ -4,6 +4,7 @@
 import 'server-only';
 
 import { unstable_cache } from 'next/cache';
+import { Logger } from "@/lib/logger";
 import { UnrolledThread, TweetDetailConversationResponse, TwtAPIRawResponse, TimelineInstruction, TimelineEntry, TweetNode, ThreadItem, TweetMedia } from '@/lib/twitter/types';
 import crypto from 'crypto';
 
@@ -87,7 +88,7 @@ async function fetchAndUnrollUncached(tweetId: string): Promise<UnrolledThread> 
   if (!apiKey) {
     // Operational, not a missing thread: without the key nothing can be served,
     // so this must surface as a real error rather than a 404.
-    console.error('TWTAPI_KEY is not configured — the thread viewer cannot fetch.');
+    Logger.error(new Error('TWTAPI_KEY is not configured'), { hint: 'The thread viewer cannot fetch without it.' });
     throw new Error('Thread service is not configured.');
   }
 
@@ -216,7 +217,7 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
     if (!rootTweetNode) {
       // Shape only, never content: tweet bodies are third-party personal data and
       // this lands in Vercel's logs. The old full dump contradicted /privacidad.
-      console.error('🚨 FAILED TO FIND ROOT TWEET. Top-level keys:', {
+      Logger.error(new Error('Failed to find root tweet'), {
         envelope: Object.keys(rawData ?? {}),
         data: Object.keys(rawData?.data ?? {}),
       });
@@ -298,7 +299,7 @@ export function parseThreadToArticle(rawData: TwtAPIRawResponse): UnrolledThread
       estimatedReadTime: Math.max(1, Math.ceil(markdownContent.split(' ').length / 200)),
     };
   } catch (error) {
-    console.error('Error parsing Twitter payload:', error);
+    Logger.error(error instanceof Error ? error : new Error(String(error)), { phase: 'twitter-parse' });
     throw error;
   }
 }
