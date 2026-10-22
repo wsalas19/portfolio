@@ -67,9 +67,12 @@ export function getLandingContent(locale: Locale) {
 		return { ...project, ...prose };
 	});
 
+	// `...track` primero y la prosa encima: la semilla trae el precio y el CTA,
+	// y `prose` trae eyebrow/title/description/items. Con `{ id, ...prose }` el
+	// precio se caía acá sin error de tipos, porque `price` es opcional.
 	const serviceTracks: ServiceTrack[] = trackSeeds.map((track) => {
 		const prose = copy.serviceTracks[track.id] ?? en.serviceTracks[track.id];
-		return { id: track.id, ...prose };
+		return { ...track, ...prose };
 	});
 
 	const faq: FaqItem[] = faqSeeds.map((item) => {

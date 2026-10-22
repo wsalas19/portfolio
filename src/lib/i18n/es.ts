@@ -124,37 +124,40 @@ export const es: LandingCopy = {
 		},
 	},
 	serviceTracks: {
+		landing: {
+			eyebrow: "Empezar",
+			title: "Landing page con SEO",
+			description:
+				"Una página que carga rápido, se lee claro y se puede encontrar. Construida desde cero en Next.js, no armada con un maquetador.",
+			items: [
+				"Una página responsive, construida y desplegada",
+				"Título, descripción, Open Graph y sitemap",
+				"Core Web Vitals revisados antes de entregar",
+				"Formulario de contacto conectado a tu correo",
+			],
+		},
 		build: {
 			eyebrow: "Construir",
-			title: "Desarrollo de producto full-stack",
+			title: "Producto y consultoría",
 			description:
-				"Llevo funcionalidades de principio a fin: la interfaz, la API detrás y el despliegue. Lo he hecho en una plataforma de salud, en proyectos de clientes y en mis propias herramientas publicadas.",
+				"Un sprint de implementación con alcance definido: la interfaz, la API detrás y el despliegue. Lo he hecho en una plataforma de salud y en proyectos de clientes, y señalo las decisiones de arquitectura antes de que salgan caras.",
 			items: [
+				"Revisión de arquitectura y alcance antes de empezar",
 				"Next.js, React y TypeScript",
 				"APIs en Node con Postgres o Supabase",
-				"Despliegues en Vercel y AWS",
+				"Hallazgos por escrito y una entrega limpia",
 			],
 		},
-		advise: {
-			eyebrow: "Asesorar",
-			title: "Dirección técnica y revisión",
+		partner: {
+			eyebrow: "Continuo",
+			title: "Tu ingeniero en retainer",
 			description:
-				"Una segunda opinión antes de la parte cara. Te digo qué construir primero y qué quitar. También te señalo dónde el código te va a frenar en seis meses.",
+				"Un número fijo de días al mes para lo que el producto necesite después: funcionalidades nuevas, arreglos o la revisión que nadie tiene tiempo de hacer. Incrementos pequeños y visibles, sin meses de silencio.",
 			items: [
-				"Arquitectura y alcance antes de comprometerte",
-				"Revisión de código con hallazgos por escrito",
-				"Acompañamiento a un equipo que adopta un stack nuevo",
-			],
-		},
-		process: {
-			eyebrow: "Cómo funciona",
-			title: "Incrementos pequeños y visibles",
-			description:
-				"No hay cajas negras ni meses de silencio. Ves el trabajo mientras lo construyo.",
-			items: [
-				"Una llamada de 30 minutos para acotar el alcance",
-				"Alcance y estimación por escrito",
-				"Algo entregable cada semana",
+				"Días reservados cada mes",
+				"Prioridad sobre trabajo nuevo",
+				"Alcance mensual acordado por escrito",
+				"Se cancela con aviso, sin contrato largo",
 			],
 		},
 	},
@@ -206,10 +209,17 @@ export const es: LandingCopy = {
 	},
 	servicesSection: {
 		eyebrow: "Qué puedes contratar",
-		title: "Constrúyelo, o pide una segunda opinión antes.",
+		title: "Tres formas de trabajar juntos, con precio por delante.",
 		description:
-			"Dos formas de trabajar juntos. Puedo tomar la funcionalidad de principio a fin. O puedo revisar lo que tienes y decirte qué cambiaría.",
-		cta: "Cuéntame qué quieres construir →",
+			"Empieza con una página, tráeme a construir, o déjame en retainer. El precio está en la tarjeta, así decides antes de hablar conmigo.",
+		cta: "¿No sabes cuál te sirve? Agenda una llamada de 30 minutos →",
+		priceFrom: "desde",
+		priceOnce: "pago único",
+		pricePerMonth: "/mes",
+		askWhatsApp: "Preguntar por WhatsApp",
+		bookCall: "Agendar llamada",
+		whatsappMessage:
+			"Hola William, me interesa {service} ({price}). ¿Podemos hablar del alcance?",
 	},
 	workSection: {
 		eyebrow: "Trabajo seleccionado",
@@ -237,6 +247,7 @@ export const es: LandingCopy = {
 	testimonialsSection: {
 		eyebrow: "Testimonios",
 		title: "Lo que dicen las personas con las que trabajé",
+		visitSite: "Ver sitio",
 	},
 	faqSection: {
 		eyebrow: "Preguntas",

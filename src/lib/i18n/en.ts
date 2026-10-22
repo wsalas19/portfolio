@@ -119,37 +119,40 @@ export const en: LandingCopy = {
 		},
 	},
 	serviceTracks: {
+		landing: {
+			eyebrow: "Start",
+			title: "Landing page with SEO setup",
+			description:
+				"One page that loads fast, reads clearly and can be found. Built from scratch in Next.js, not assembled from a page builder.",
+			items: [
+				"One responsive page, built and deployed",
+				"Title, description, Open Graph and sitemap",
+				"Core Web Vitals checked before handoff",
+				"Contact form wired to your inbox",
+			],
+		},
 		build: {
 			eyebrow: "Build",
-			title: "Full-stack product development",
+			title: "Product build & consulting",
 			description:
-				"I ship features end to end: the interface, the API behind it and the deploy. I have done this on a healthcare platform, on client projects and on my own published tools.",
+				"A scoped implementation sprint: the interface, the API behind it and the deploy. I have done this on a healthcare platform and on client projects, and I flag the architecture decisions before they get expensive.",
 			items: [
+				"Architecture and scope review first",
 				"Next.js, React and TypeScript",
 				"Node APIs with Postgres or Supabase",
-				"Deploys on Vercel and AWS",
+				"Written findings and a clean handoff",
 			],
 		},
-		advise: {
-			eyebrow: "Advise",
-			title: "Technical direction & review",
+		partner: {
+			eyebrow: "Ongoing",
+			title: "Your engineer on retainer",
 			description:
-				"A second opinion before the expensive part. I tell you what to build first and what to cut. I also flag where the code will slow you down in six months.",
+				"A set number of days each month for whatever the product needs next: new features, fixes, or the review nobody has time for. Small, visible increments, no month-long silence.",
 			items: [
-				"Architecture and scope before you commit",
-				"Code review with written findings",
-				"Mentoring for a team picking up a new stack",
-			],
-		},
-		process: {
-			eyebrow: "How it works",
-			title: "Small, visible increments",
-			description:
-				"There are no black boxes and no month-long silence. You see the work while I build it.",
-			items: [
-				"A 30-minute call to scope it",
-				"A written scope and estimate",
-				"Something shippable every week",
+				"Reserved days every month",
+				"Priority over new project work",
+				"Monthly scope agreed in writing",
+				"Cancel with notice, no long contract",
 			],
 		},
 	},
@@ -201,10 +204,17 @@ export const en: LandingCopy = {
 	},
 	servicesSection: {
 		eyebrow: "What you can hire",
-		title: "Build it, or get a second opinion before you do.",
+		title: "Three ways to work together, priced up front.",
 		description:
-			"Two ways to work together. I can take the feature end to end. Or I can review what you have and tell you what I would change.",
-		cta: "Tell me what you want to build →",
+			"Start with a page, bring me in to build, or keep me on retainer. The price is on the card, so you can decide before we talk.",
+		cta: "Not sure which one fits? Book a 30-minute call →",
+		priceFrom: "from",
+		priceOnce: "one-time",
+		pricePerMonth: "/mo",
+		askWhatsApp: "Ask on WhatsApp",
+		bookCall: "Book a call",
+		whatsappMessage:
+			"Hi William, I am interested in {service} ({price}). Can we talk about scope?",
 	},
 	workSection: {
 		eyebrow: "Selected work",
@@ -232,6 +242,7 @@ export const en: LandingCopy = {
 	testimonialsSection: {
 		eyebrow: "Testimonials",
 		title: "What the people I worked with say",
+		visitSite: "Visit site",
 	},
 	faqSection: {
 		eyebrow: "FAQ",

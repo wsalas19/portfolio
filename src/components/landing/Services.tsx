@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CALENDAR_URL } from "@/lib/constants";
 import type { LandingCopy } from "@/lib/i18n";
 import type { ServiceTrack } from "@/lib/types/globals";
+import ServicePrice from "./ServicePrice";
 
 interface ServicesProps {
 	copy: LandingCopy;
@@ -48,6 +49,17 @@ function Services({ copy, serviceTracks }: ServicesProps) {
 									</li>
 								))}
 							</ul>
+
+							{track.price && (
+								<ServicePrice
+									price={track.price}
+									title={track.title}
+									priceFrom={track.priceFrom}
+									pricePeriod={track.pricePeriod}
+									cta={track.cta}
+									copy={copy.servicesSection}
+								/>
+							)}
 						</div>
 					))}
 				</div>

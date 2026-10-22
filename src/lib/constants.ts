@@ -39,6 +39,16 @@ export const CONTACT_EMAIL = "wa.salas1905@hotmail.com";
 // de CTA y el footer: cuatro copias del mismo link era una errata esperando.
 export const CALENDAR_URL = "https://calendar.app.google/DY4tPQXi5Dn1gKZz9";
 
+// Número de los botones de precio, en formato internacional sin "+" (lo que
+// pide wa.me). Es el mismo que ya está publicado en `content/legal/privacidad.md`
+// como teléfono de contacto, así que no es un dato nuevo en el sitio.
+//
+// Vive acá y no en una variable de entorno a propósito: `/` es estática, así que
+// un `WHATSAPP_NUMBER` en Vercel igual se hornea en el HTML en cada build. Una
+// variable no compraba nada y agregaba un modo de fallo (sin número configurado
+// los botones caían al calendario sin avisar).
+export const WHATSAPP_NUMBER = "573002233444";
+
 /**
  * Lo neutral del perfil. La bio, el eyebrow y el tagline son prosa y viven en
  * `i18n`. El nombre, el wordmark, las skills, la ubicación y el país no se
@@ -205,10 +215,20 @@ export const gradientColors = ["#d4ff4d", "#a2a206", "#2e3320", "#fb8983"];
 // Los tres caminos que se pueden contratar. Cada afirmación sale de `jobs`: no
 // hay ningún servicio acá que no tenga un trabajo detrás que lo respalde.
 // Toda la prosa (eyebrow, title, description, items) vive en `i18n`, por `id`.
+//
+// El precio en pesos NO es la conversión del de dólares: es un precio distinto,
+// ajustado al mercado local. Por eso están escritos a mano y no calculados. El
+// retainer es el único con `cta: "calendar"`: se acota en una llamada.
 export const serviceTracks: ServiceTrackSeed[] = [
-	{ id: "build" },
-	{ id: "advise" },
-	{ id: "process" },
+	{ id: "landing", price: { usd: 500, cop: 1_500_000 } },
+	{ id: "build", price: { usd: 2_500, cop: 7_500_000 }, priceFrom: true },
+	{
+		id: "partner",
+		price: { usd: 2_400, cop: 6_500_000 },
+		priceFrom: true,
+		pricePeriod: "month",
+		cta: "calendar",
+	},
 ];
 
 // Respuestas apoyadas en datos del CV, no en promesas. Si una respuesta no se
@@ -237,6 +257,7 @@ export const testimonials: Testimonial[] = [
 		role: "CEO",
 		company: "PatientStudio",
 		portraitUrl: "/images/testimonials/derek-sanborn.jpg",
+		url: "https://patientstudio.com",
 	},
 	{
 		quote:
@@ -245,5 +266,6 @@ export const testimonials: Testimonial[] = [
 		role: "Co-founder",
 		company: "Runpoint Partners",
 		portraitUrl: "/images/testimonials/sam-gaddis.png",
+		url: "https://samgaddis.com",
 	},
 ];

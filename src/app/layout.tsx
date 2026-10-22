@@ -111,10 +111,28 @@ const jsonLd = {
 			provider: { "@id": `${SITE_URL}/#person` },
 			// El JSON-LD es del sitio en inglés (la única versión indexable del
 			// `ProfessionalService`), así que se hidratan las semillas con `en`.
+			// Se filtra por `price` y no por id: antes decía `id !== "process"`,
+			// un id escrito a mano que dejaba de excluir nada en cuanto se
+			// renombraba un track. Los precios van en USD (la moneda de
+			// referencia); el precio en pesos depende del visitante y no puede
+			// vivir en un JSON-LD estático.
 			makesOffer: getLandingContent("en").serviceTracks
-				.filter((track) => track.id !== "process")
+				.filter((track) => track.price)
 				.map((track) => ({
 					"@type": "Offer",
+					...(track.pricePeriod === "month"
+						? {
+								priceSpecification: {
+									"@type": "UnitPriceSpecification",
+									price: track.price?.usd,
+									priceCurrency: "USD",
+									unitCode: "MON",
+								},
+							}
+						: {
+								price: track.price?.usd,
+								priceCurrency: "USD",
+							}),
 					itemOffered: {
 						"@type": "Service",
 						name: track.title,

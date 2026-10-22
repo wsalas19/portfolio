@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import type { LandingCopy } from "@/lib/i18n";
 import type { Testimonial } from "@/lib/types/globals";
@@ -50,7 +51,29 @@ function Testimonials({
 									/>
 								)}
 								<div className="text-sm">
-									<p className="font-semibold text-white">{testimonial.name}</p>
+									{/* El nombre es el enlace cuando la persona tiene sitio: la
+									    cita gana credibilidad si se puede verificar a quién
+									    pertenece. El `aria-label` dice que sale del sitio,
+									    porque el texto visible solo es el nombre. */}
+									<p className="font-semibold text-white">
+										{testimonial.url ? (
+											<a
+												href={testimonial.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												aria-label={`${testimonial.name} — ${copy.testimonialsSection.visitSite}`}
+												className="focus-ring inline-flex items-center gap-1.5 rounded-sm hover:text-palette-lime hover:underline"
+											>
+												{testimonial.name}
+												<ExternalLink
+													className="h-3.5 w-3.5 text-gray-500"
+													aria-hidden="true"
+												/>
+											</a>
+										) : (
+											testimonial.name
+										)}
+									</p>
 									<p className="text-gray-400">
 										{testimonial.role}
 										{testimonial.company ? `, ${testimonial.company}` : ""}

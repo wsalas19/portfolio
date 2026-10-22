@@ -1,3 +1,5 @@
+import type { ServiceTrackId } from "@/lib/types/globals";
+
 // Los idiomas que el sitio sabe renderizar. La landing es la única superficie
 // traducida por ahora; el resto del sitio sigue en inglés.
 export type Locale = "en" | "es";
@@ -18,8 +20,10 @@ export interface LandingCopy {
 		string,
 		{ title: string; description: string; highlights: string[] }
 	>;
+	// Indexado por la unión cerrada y no por `string`: así falta una entrada en
+	// `es.ts` y el build falla, en vez de mostrar inglés sin avisar.
 	serviceTracks: Record<
-		string,
+		ServiceTrackId,
 		{ eyebrow: string; title: string; description: string; items: string[] }
 	>;
 	faq: Record<string, { question: string; answer: string }>;
@@ -42,6 +46,14 @@ export interface LandingCopy {
 		title: string;
 		description: string;
 		cta: string;
+		// Prefijo y sufijos del precio: "from $2,500" / "$2,400 /mo".
+		priceFrom: string;
+		priceOnce: string;
+		pricePerMonth: string;
+		askWhatsApp: string;
+		bookCall: string;
+		// `{service}` y `{price}` los rellena `fillTemplate`.
+		whatsappMessage: string;
 	};
 	workSection: {
 		eyebrow: string;
@@ -65,7 +77,7 @@ export interface LandingCopy {
 		allArticles: string;
 	};
 	// Testimonials y Faq renderizan eyebrow + título y nada más (sin descripción).
-	testimonialsSection: { eyebrow: string; title: string };
+	testimonialsSection: { eyebrow: string; title: string; visitSite: string };
 	faqSection: { eyebrow: string; title: string };
 	ctaBand: {
 		eyebrow: string;

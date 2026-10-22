@@ -1,7 +1,25 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
-export function middleware(): NextResponse {
+export function middleware(request: NextRequest): NextResponse {
 	const response = NextResponse.next();
+
+	// País del visitante para elegir la moneda del precio. Vercel pone
+	// `x-vercel-ip-country` en el edge; en local no existe y el componente
+	// cliente cae a la zona horaria.
+	//
+	// Se escribe solo si la cookie falta, a propósito: mandar `Set-Cookie` en
+	// cada respuesta le quita al HTML estático la posibilidad de servirse desde
+	// caché compartida. A partir de la segunda visita no se toca nada.
+	if (!request.cookies.has('geo')) {
+		const country = request.headers.get('x-vercel-ip-country');
+		if (country) {
+			response.cookies.set('geo', country.toUpperCase(), {
+				path: '/',
+				sameSite: 'lax',
+				maxAge: 60 * 60 * 24 * 30,
+			});
+		}
+	}
 
 	// Content Security Policy - relaxed for WebGL and development
 	response.headers.set(
