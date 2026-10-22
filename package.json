@@ -37,7 +37,7 @@
 		"gray-matter": "^4.0.3",
 		"lucide-react": "^0.323.0",
 		"motion": "^12.40.0",
-		"next": "^15.1.0",
+		"next": "^15.5.28",
 		"ogl": "^1.0.11",
 		"react": "^18",
 		"react-dom": "^18",

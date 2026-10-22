@@ -1,3 +1,17 @@
 allowBuilds:
   sharp: true
   unrs-resolver: true
+
+# next pins postcss to an exact vulnerable version and sharp is an
+# optional dep that resolves low, so neither is fixed by bumping next.
+overrides:
+  postcss: ^8.5.26
+  sharp: ^0.35.5
+  source-map-js: ^1.2.2
+  "js-yaml@^3": ^3.15.2
+  "js-yaml@^4": ^4.3.2
+  # build-time only (eslint 8). patch-level, safe.
+  # braces and sprintf-js are deliberately absent: their advisories name
+  # patched versions (3.0.4, 1.1.4) that were never published upstream.
+  "brace-expansion@^1": ^1.1.21
+  "brace-expansion@^2": ^2.1.7
