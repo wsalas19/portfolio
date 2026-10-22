@@ -102,9 +102,12 @@ function ServicePrice({
 				<span className="font-display text-2xl font-bold tracking-tight text-palette-lime">
 					{priceLabel}
 				</span>
+				{/* "from $2,500 one-time" dice dos veces lo mismo: un precio con
+				    "desde" ya es un proyecto, no una suscripción. El sufijo solo
+				    aparece cuando agrega información. */}
 				{pricePeriod === "month" ? (
 					<span className="text-sm text-gray-400">{copy.pricePerMonth}</span>
-				) : (
+				) : priceFrom ? null : (
 					<span className="text-sm text-gray-500">{copy.priceOnce}</span>
 				)}
 			</div>

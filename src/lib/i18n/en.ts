@@ -120,39 +120,41 @@ export const en: LandingCopy = {
 	},
 	serviceTracks: {
 		landing: {
-			eyebrow: "Start",
-			title: "Landing page with SEO setup",
+			eyebrow: "No website yet",
+			title: "One-page website, ready for search",
 			description:
-				"One page that loads fast, reads clearly and can be found. Built from scratch in Next.js, not assembled from a page builder.",
+				"A single page that presents your business, explains what you sell and lets visitors contact you. I build it with the simplest tool that fits the job, so it stays fast and cheap to host.",
 			items: [
-				"One responsive page, built and deployed",
-				"Title, description, Open Graph and sitemap",
-				"Core Web Vitals checked before handoff",
-				"Contact form wired to your inbox",
+				"One page with the offer, the proof and the contact details",
+				"Section structure and page hierarchy",
+				"Search setup: titles, descriptions and sitemap",
+				"Load speed and mobile layout checked before delivery",
+				"Contact form connected to your inbox",
 			],
 		},
 		build: {
-			eyebrow: "Build",
-			title: "Product build & consulting",
+			eyebrow: "Established business",
+			title: "Custom tool or technical review",
 			description:
-				"A scoped implementation sprint: the interface, the API behind it and the deploy. I have done this on a healthcare platform and on client projects, and I flag the architecture decisions before they get expensive.",
+				"For work that needs software: a portal, an internal tool, an API, or a new feature on a product you already run. We agree the scope in writing before the work starts.",
 			items: [
-				"Architecture and scope review first",
-				"Next.js, React and TypeScript",
-				"Node APIs with Postgres or Supabase",
-				"Written findings and a clean handoff",
+				"Written scope and estimate before the build",
+				"Front end, API and database",
+				"React, Next.js and TypeScript",
+				"Architecture and code review, on request",
 			],
 		},
 		partner: {
 			eyebrow: "Ongoing",
-			title: "Your engineer on retainer",
+			title: "Monthly development retainer",
 			description:
-				"A set number of days each month for whatever the product needs next: new features, fixes, or the review nobody has time for. Small, visible increments, no month-long silence.",
+				"A fixed number of development days each month for continued work on your product. We agree the priorities at the start of each month.",
 			items: [
-				"Reserved days every month",
+				"Fixed days reserved each month",
+				"New features, fixes and maintenance",
 				"Priority over new project work",
 				"Monthly scope agreed in writing",
-				"Cancel with notice, no long contract",
+				"Cancel with notice",
 			],
 		},
 	},
@@ -203,11 +205,14 @@ export const en: LandingCopy = {
 		altText: "William Salas",
 	},
 	servicesSection: {
-		eyebrow: "What you can hire",
-		title: "Three ways to work together, priced up front.",
+		eyebrow: "Services",
+		title: "What you can hire, and what it costs.",
+		// El valor de diseño va acá y no en una tarjeta propia: no es un producto,
+		// es una condición de los tres. Una cuarta tarjeta contradecía el "tres
+		// servicios" del título y no se podía comprar.
 		description:
-			"Start with a page, bring me in to build, or keep me on retainer. The price is on the card, so you can decide before we talk.",
-		cta: "Not sure which one fits? Book a 30-minute call →",
+			"Each service lists the deliverables and the price. Design is part of all three: type, spacing, color and layout are decisions, not defaults.",
+		cta: "Not sure which one you need? Book a 30-minute call →",
 		priceFrom: "from",
 		priceOnce: "one-time",
 		pricePerMonth: "/mo",
