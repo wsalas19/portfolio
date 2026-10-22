@@ -47,7 +47,7 @@ export const CALENDAR_URL = "https://calendar.app.google/DY4tPQXi5Dn1gKZz9";
 // un `WHATSAPP_NUMBER` en Vercel igual se hornea en el HTML en cada build. Una
 // variable no compraba nada y agregaba un modo de fallo (sin número configurado
 // los botones caían al calendario sin avisar).
-export const WHATSAPP_NUMBER = "573002233444";
+export const WHATSAPP_NUMBER = "573229367867";
 
 /**
  * Lo neutral del perfil. La bio, el eyebrow y el tagline son prosa y viven en
